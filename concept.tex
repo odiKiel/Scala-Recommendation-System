@@ -1,0 +1,136 @@
+%% LyX 2.0.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[ngerman,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\usepackage{todonotes}
+\bibliographystyle{gerplain}
+\begin{document}
+
+\title{A Contribution to Rating and Recommendation Systems: Concepts, Development
+and Evaluation}
+
+\maketitle
+
+\section*{Concepts}
+
+\subsection*{Taggen}
+\todo{this is a test}
+Mithilfe eines part of speech tagger (POS Tagger) alle begriffe eines
+Satzes taggen und ein minimales subset der Wörter eines Satzes gegen
+die Begriffe des ZBW Thesaurus Matchen und den Deskriptoren zuordnen.
+Somit kann man später den 20000 Synonymen die den 6000 Deskriptoren
+zugeordnet sind die Informationen aus der Datenbank zuordnen.
+\missingfigure{this is a test}<++>
+
+
+\subsection*{Rating}
+\begin{itemize}
+\item Seiten Aufruf
+\item aktive Aufenthaltsdauer
+\item Scrollverhalten
+\item benutzerdefinierte Tasks
+\end{itemize}
+Ein Rating ist ein Wert zwischen 0 und 10. Null bedeutet nicht vorhanden,
+10 bedeutet max rating wird in der Regel nur durch benutzerdefinierte
+tasks erreicht.
+
+Jeder standard task hat einen standard Wert welcher beim Einbinden
+des skripts abgeändert werden kann.
+
+
+\subsection*{Recommendation}
+
+
+\subsubsection*{Collaborative recommendation}
+
+
+\subsubsection{User-Based (Usually memory based)}
+
+Finde Benutzer die ähnliche Bewertungen in der Vergangenheit abgegeben
+haben. Anschließend berechne für jedes Produkt p welches der Benutzer
+noch nicht gesehen hat einen Wert in Abhängigkeit der Bewertungen
+der ähnlichen Benutzer.
+
+
+\subsubsection{Item-Based (Usually model based )}
+
+Finde Objekte die ähnliche Bewertungen haben wie ein noch nicht gesehenes
+Produkt. Betrachte die Bewertungen des Benutzers für diese ähnlichen
+Produkte berechne den Durchschnitt.
+
+
+\subsubsection{Matrix factorization ( Usually model based )}
+
+SVD Matrizen Zerlegung. Zerlege eine Bewertungstabelle so, dass M=
+U{*}Sigma{*}V\textasciicircum{}T Betrachte nur die obersten Spalten
+von U und V und approximiere mit diesen die Benutzer sowie die Items.
+
+
+\subsubsection{Probabilistic Approach ( Usually model based)}
+
+
+\subsubsection{Slope One ( Usually model based )}
+
+Problem: Viele Daten viele Benutzer und vorraussichlich viele neue
+Informationen/Benutzer pro Tag. Daher ist ein rein model basierter
+Ansatz nicht aktuell genug. Ein rein memory basierter Ansatz ist mit
+einer normalen Serverauslastung nicht möglich daher muss ein hybrider
+Ansanz gewählt werden.
+
+
+\subsection*{Allgemeiner Aufbau}
+
+
+\subsubsection*{Fragen Taggen }
+
+Plugin mit python mithilfe des Natural language toolkits. Eine Frage
+bekommt eine many to many connection zu einem Datenbankeintrag mit
+einem Deskriptor.
+
+Jedem Deskriptor sind n Synonyme/nicht Deskriptoren zugeordnet. 
+
+
+\subsubsection*{Javascript Server und Client seitig}
+
+Javascript script in website einbinden angaben rating:
+\begin{itemize}
+\item id des objekts
+\item css selector für rating (Beispiel button wird geklickt starkes Rating
+von 0-10)
+\item standard Ratings können aktiviert/deaktiviert werden
+\item standard Rating Werte können verändert werden
+\end{itemize}
+Standard Ratings sind: 
+\begin{itemize}
+\item Seiten Aufruf
+\item aktive Aufenthaltsdauer
+\item scrollverhalten
+\end{itemize}
+beim Verlassen der Seite werden die Daten an das recommendation system
+übertragen
+
+Angaben Ausstreuen der Informationen:
+\begin{itemize}
+\item Angabe eines css selectors mit divboxen in denen die Information eingebettet
+werden soll.
+\selectlanguage{ngerman}%
+\item Angabe\foreignlanguage{english}{ des }thematischen\foreignlanguage{english}{
+Bezuges damit thematisch passende Informationen eingeblendet werden
+können.}
+\end{itemize}
+
+\subsection*{Ideen}
+
+Cronjob der automatisch ueberprueft ob neue datenbank eintraege bestehen
+wenn dieses zutrifft, tagge diese
+
+
+\subsubsection*{String match}
+
+http://en.wikipedia.org/wiki/Levenshtein\_distance bei distance groesser
+4 abbrechen
+
+Bitap algorithm
+\end{document}
