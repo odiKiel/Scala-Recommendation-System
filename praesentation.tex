@@ -1,0 +1,201 @@
+\documentclass{beamer}
+\usepackage{lmodern}% http://ctan.org/pkg/lm
+\usepackage{amsmath}
+\begin{document}
+\title{A Contribution to Rating and Recommendation Systems: Concepts, Development and Evaluation}   
+\author{Oliver Diestel} 
+\date{\today} 
+
+\frame{\titlepage} 
+
+%\frame{\frametitle{Inhaltsverzeichnis}\tableofcontents} 
+
+
+\section{Overview} 
+\frame{\frametitle{Overview} 
+%Picture of Website / QA with ratings information
+Website and Rating
+page 1 general overview what do we display on which page?
+image qa / website we display questions on website
+}
+
+\frame{\frametitle{Rating}
+\begin{itemize}
+\item Click 
+\item active time on page 
+\end{itemize}
+
+If a user stays shorter or longer on a page than the average user -  
+it is a high or low rating.\\
+We rate QA pages and webpages, however we only recommend qa pages.
+
+}
+
+\frame{\frametitle{Tagging}
+\begin{itemize}
+\item Standard-Thesaurus Wirtschaft, tripple store
+\item Stemming: Compute the root of a word.
+\item Computing Levenshtein distance: Calculate the distance between two words.
+\end{itemize}
+\begin{block}{Principle}
+Every question will be tagged with a prefered label from the ZBW Thesaurus.
+For every word in the question find the root of the word and match it against the thesaurus. If we find a matching prefered label, Done. If we find a matching synonym take the preferd label as tag, Done.
+\end{block}
+
+}
+
+\section{Recommendation}
+\frame{\frametitle{Recommendation}
+Three part recommendation. Pipeline architecture
+\begin{itemize}
+\item Calculate similarity between items
+\item Add similar ratings to a user/rating vector.
+\item Calculate singular value decomposition
+\item Find similar users 
+\end{itemize}
+}
+\frame{\frametitle{Input/Output}
+Input: $\langle$user\_id, item\_id, rating$\rangle$, [List of tags], number of recommendations\\
+Output: Sorted list of Items with avg. rating that correspond with the pref. input label
+\begin{itemize}
+\item Item: id, name, tag
+\item User: id, name
+\end{itemize}
+}
+
+
+\frame{\frametitle{Item-Based Algorithm}
+Find items that have similar ratings.
+Calculate the similarity values for every item.
+\begin{block}{Cosinus Similarity}
+\begin{math}
+  sim(\overrightarrow{a}, \overrightarrow{b}) = {\overrightarrow{a} * \overrightarrow{b} \over |\overrightarrow{a}|*|\overrightarrow{b}|}
+\end{math}
+\end{block}
+
+Take the differences of the average rating behaviour of the user into account.
+
+\begin{block}{Advanced Cosinus Similarity}
+\begin{math}
+  sim(a, b) = {\sum_{u \in U}(r_{u, a} - \overline{r_u})(r_{u,b} - \overline{r_u}) \over \sqrt{\sum_{u \in U}(r_{u,a} - \overline{r_u})^2} \sqrt{\sum_{u \in U}(r_{u,b} - \overline{r_u})^2 }}
+\end{math}
+\end{block}
+
+Calculate predictions for similar items.
+
+User u, Product p
+\begin{math}
+  pred(u, p) = {\sum_{i \in ratedItems(u)} sim(i, p) * r_{u, i} \over \sum_{i \in ratedItems(u)} sim(i, p)}
+\end{math}
+
+Fill recommendation vector of each user with similar item ratings 
+}
+
+\frame{\frametitle{Singular Value Decomposition}
+Create a SVD with the matrix 
+\begin{math}
+  M = U * \Sigma * V^t
+ \end{math}
+ %explanations for u sigma and v
+\begin{itemize}
+  \item U dimension m x m, orthogonal matrix, spans the column space of matrix m
+  \item $\Sigma$ dimension m x n, diagonal matrix having only r nonzero entries
+  \item V dimension n x n, orthogonal matrix, spans the row space of matrix m
+\end{itemize}
+\begin{block}{$\Sigma$ Properties}
+  Diagonal entries of $\Sigma$ have the property, that $\sigma > 0$ and $\sigma_i \geq \sigma_{i+1}$
+\end{block}
+ 
+ Calculate cosinus similarity between users
+}
+
+\frame{\frametitle{Find Questions}
+Find questions that are hightly rated by similar users that match the current topic
+}
+
+\frame{\frametitle{Display Questions}
+Add a tag and  a div-placeholder on every webpage. Display top questions for the current user on the webpage.
+
+}
+
+% \section{Abschnitt Nr. 2} 
+% \subsection{Listen I}
+% \frame{\frametitle{Aufz\"ahlung}
+% \begin{itemize}
+% \item Einf\"uhrungskurs in \LaTeX  
+% \item Kurs 2  
+% \item Seminararbeiten und Pr\"asentationen mit \LaTeX 
+% \item Die Beamerclass 
+% \end{itemize} 
+% }
+
+% \frame{\frametitle{Aufz\"ahlung mit Pausen}
+% \begin{itemize}
+% \item  Einf\"uhrungskurs in \LaTeX \pause 
+% \item  Kurs 2 \pause 
+% \item  Seminararbeiten und Pr\"asentationen mit \LaTeX \pause 
+% \item  Die Beamerclass
+% \end{itemize} 
+% }
+
+% \subsection{Listen II}
+% \frame{\frametitle{Numerierte Liste}
+% \begin{enumerate}
+% \item  Einf\"uhrungskurs in \LaTeX 
+% \item  Kurs 2
+% \item  Seminararbeiten und Pr\"asentationen mit \LaTeX 
+% \item  Die Beamerclass
+% \end{enumerate}
+% }
+% \frame{\frametitle{Numerierte Liste mit Pausen}
+% \begin{enumerate}
+% \item  Einf\"uhrungskurs in \LaTeX \pause 
+% \item  Kurs 2 \pause 
+% \item  Seminararbeiten und Pr\"asentationen mit \LaTeX \pause 
+% \item  Die Beamerclass
+% \end{enumerate}
+% }
+
+% \section{Abschnitt Nr.3} 
+% \subsection{Tabellen}
+% \frame{\frametitle{Tabellen}
+% \begin{tabular}{|c|c|c|}
+% \hline
+% \textbf{Zeitpunkt} & \textbf{Kursleiter} & \textbf{Titel} \\
+% \hline
+% WS 04/05 & Sascha Frank &  Erste Schritte mit \LaTeX  \\
+% \hline
+% SS 05 & Sascha Frank & \LaTeX \ Kursreihe \\
+% \hline
+% \end{tabular}}
+
+
+% \frame{\frametitle{Tabellen mit Pause}
+% \begin{tabular}{c c c}
+% A & B & C \\ 
+% \pause 
+% 1 & 2 & 3 \\  
+% \pause 
+% A & B & C \\ 
+% \end{tabular} }
+
+
+% \section{Abschnitt Nr. 4}
+% \subsection{Bl\"ocke}
+% \frame{\frametitle{Bl\"ocke}
+
+% \begin{block}{Blocktitel}
+% Blocktext 
+% \end{block}
+
+% \begin{exampleblock}{Blocktitel}
+% Blocktext 
+% \end{exampleblock}
+
+
+% \begin{alertblock}{Blocktitel}
+% Blocktext 
+% \end{alertblock}
+% }
+\end{document}
+

@@ -16,14 +16,13 @@ and Evaluation}
 \section*{Concepts}
 
 \subsection*{Taggen}
-\todo{this is a test}
+Deprecated!
 Mithilfe eines part of speech tagger (POS Tagger) alle begriffe eines
 Satzes taggen und ein minimales subset der Wörter eines Satzes gegen
 die Begriffe des ZBW Thesaurus Matchen und den Deskriptoren zuordnen.
 Somit kann man später den 20000 Synonymen die den 6000 Deskriptoren
 zugeordnet sind die Informationen aus der Datenbank zuordnen.
-\missingfigure{this is a test}<++>
-
+Taggen: Triple store database mit thesaurus. All Woerter werden gegen den thesaurus gematched. Wenn treffer dann wird das prefered Label als tag verwendet.
 
 \subsection*{Rating}
 \begin{itemize}
@@ -85,14 +84,16 @@ Ansanz gewählt werden.
 
 \subsubsection*{Fragen Taggen }
 
+Deprecated
 Plugin mit python mithilfe des Natural language toolkits. Eine Frage
 bekommt eine many to many connection zu einem Datenbankeintrag mit
 einem Deskriptor.
 
-Jedem Deskriptor sind n Synonyme/nicht Deskriptoren zugeordnet. 
+Jedem prefered label sind n Synonyme zugeordnet. 
+Cronjob, der alle 30min die Datenbank nach neuen eintraegen ueberprueft. Wenn ein neuer Eintrag vorhanden ist matcht er alle Woerter des Eintrags gegen die Woerter des thesaurus. Die prefered label der gematchten Woerter werden als tag verwendet.
 
 
-\subsubsection*{Javascript Server und Client seitig}
+\subsubsection*{Javascript Clientseitig}
 
 Javascript script in website einbinden angaben rating:
 \begin{itemize}
@@ -123,14 +124,17 @@ können.}
 
 \subsection*{Ideen}
 
-Cronjob der automatisch ueberprueft ob neue datenbank eintraege bestehen
-wenn dieses zutrifft, tagge diese
-
-
 \subsubsection*{String match}
 
 http://en.wikipedia.org/wiki/Levenshtein\_distance bei distance groesser
 4 abbrechen
 
 Bitap algorithm
+\subsubsection{Summaries}<++>
+\bold{SCENE : A Scalable Two-Stage Personalized News Recommendation System}<++>
+Difference betwenn news recommendation and qa-recommendation: for news recommendation the publishing date is very important therefore there are many new articles for every user. With this in mind it is important to know the subject that the user is interested in. However at qa-recommendation it is important to know similiar users but the overall interest of the user is not that important because the subject of the recommended item is based upon the theme of the currently visited website.
+Quote: 'What differentiates our work from prior methods is that we model personalized news recommendation as a budgeted maximum coverage problem, i.e., the selection of one news item will influence the selection of the following news items.'
+Two-stage procedure at first the news articles are clustered
+\bold{Personalized News Recommendation Based on Click Behavior}<++>
+Idee: Fragen die haeufig betrachtet werden erhalten ein hoeheres ranking.
 \end{document}
