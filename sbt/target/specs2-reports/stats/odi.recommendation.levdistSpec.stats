@@ -1,0 +1,4 @@
+<odi.recommendation.levdistSpec-stats timestamp="1360516351199"><stats expectations="1" examples="1" successes="1" time="58"></stats></odi.recommendation.levdistSpec-stats>
+<odi.recommendation.levdistSpec-stats timestamp="1360516478108"><stats expectations="1" examples="1" successes="1" time="22"></stats></odi.recommendation.levdistSpec-stats>
+<odi.recommendation.levdistSpec-stats timestamp="1360516522052"><stats expectations="1" examples="1" successes="1" time="26"></stats></odi.recommendation.levdistSpec-stats>
+<odi.recommendation.levdistSpec-stats timestamp="1360516698889"><stats expectations="4" examples="4" successes="4" time="36"><trend><stats expectations="3" examples="3" successes="3" time="36"></stats></trend></stats></odi.recommendation.levdistSpec-stats>
