@@ -30,3 +30,5 @@
 *.vrb
 *.xdy
 *.tdo
+sbt/target/
+sbt/project/target/

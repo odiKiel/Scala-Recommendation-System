@@ -2,7 +2,7 @@ package odi.recommendation
 
 import org.specs2.mutable._
 
-object levdistSpec extends Specification {
+object LevdistSpec extends Specification {
   "Levdist with two strings" should {
     "reduction test, test1" in {
       Levdist("test", "test1") mustEqual 1
