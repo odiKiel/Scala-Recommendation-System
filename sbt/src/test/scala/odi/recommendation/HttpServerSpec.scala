@@ -1,5 +1,6 @@
 package odi.recommendation
 
+import com.twitter.util.Duration
 import org.specs2.mutable._
 import org.jboss.netty.handler.codec.http.{HttpResponseStatus, DefaultHttpResponse, DefaultHttpRequest, HttpRequest, HttpResponse, HttpVersion, HttpMethod, HttpHeaders}
 import com.twitter.finagle.Service
@@ -12,53 +13,23 @@ import java.nio.charset.Charset
 
 object HttpServerSpec extends Specification {
   "A running httpServer" should {
-    val server = HttpServer()
-    val client: Service[HttpRequest, HttpResponse] = ClientBuilder()
-      .codec(Http())
-      .hosts("localhost:10000") // If >1 host, client does simple load-balancing
-      .hostConnectionLimit(1)
-      .build()
-
     
+
+    val server = HttpServer()
+    val client = new HttpClient("localhost:10000")
+    val ret1 = client.get("/")
+    val ret2 = client.post("/", "echo->world")
+    val ret3 = Future.collect(Seq(ret1, ret2))
+    val value = ret3.get()
+    server.close()
     "return OK after a get request" in {
-
-      val req = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/")
-
-      val f = client(req) // Client, send the request
-      
-      var status = new Promise[String]
-      f onSuccess { res =>
-        status.setValue(res.getStatus().toString())
-      } onFailure { exc =>
-        status.setException(exc)
-      }
-
-      status.get() must startWith ("200 OK")
+      value(0) mustEqual ("Hello World")
     }
 
-    "should return a desciptor after a post request" in {
-
-      var httpReq = new DefaultHttpRequest(HttpVersion.HTTP_1_1,HttpMethod.POST,"/")
-      //httpReq.setHeader(HttpHeaders.Names.HOST,"localhost:10000")
-      //httpReq.setHeader(HttpHeaders.Names.CONNECTION,HttpHeaders.Values.KEEP_ALIVE)
-      //httpReq.setHeader(HttpHeaders.Names.ACCEPT_ENCODING,HttpHeaders.Values.GZIP)
-      //httpReq.setHeader(HttpHeaders.Names.CONTENT_TYPE,"application/x-www-form-urlencoded")
-      val params="tag=Hanf"
-      val cb = ChannelBuffers.copiedBuffer(params,Charset.defaultCharset())
-      httpReq.setHeader(HttpHeaders.Names.CONTENT_LENGTH,cb.readableBytes())
-      httpReq.setContent(cb)
-      
-      val f = client(httpReq)
-      
-      var status = Promise[String]
-      f onSuccess { res =>
-        status.setValue(res.getStatus.toString())
-      } onFailure { exc =>
-        status.setException(exc)
-      }
-      server.close()
-      status.get() mustEqual ("19017-2")
+    "return echo after a post request" in {
+      value(1) must startWith ("world")
     }
+
 
   }
 

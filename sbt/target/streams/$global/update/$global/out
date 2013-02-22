@@ -3827,7 +3827,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-codec_2.9.2;6.2.0!util-codec_2.9.2.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-lang#commons-lang;2.6!commons-lang.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-codec#commons-codec;1.5!commons-codec.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 5020ms :: artifacts dl 329ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 3881ms :: artifacts dl 188ms[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 26[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.9.2 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.9.2[0m
@@ -4458,5 +4458,5 @@
 [0m[[0mdebug[0m] [0m	report for default#default-94c0cb_2.9.2;0.1-SNAPSHOT docs produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/default-default-94c0cb_2.9.2/docs-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for default#default-94c0cb_2.9.2;0.1-SNAPSHOT pom produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/default-default-94c0cb_2.9.2/pom-resolved.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (5020ms resolve - 329ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (3881ms resolve - 188ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

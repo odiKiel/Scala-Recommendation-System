@@ -1,11 +1,11 @@
-[0m[[0mdebug[0m] [0mRunning Test odi.recommendation.QueryStwSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
 [0m[[0mdebug[0m] [0mRunning Test odi.recommendation.LevdistSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
+[0m[[0mdebug[0m] [0mRunning Test odi.recommendation.QueryStwSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
 [0m[[0mdebug[0m] [0mRunning Test odi.recommendation.HttpServerSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
-[0m[[31merror[0m] [0mError: Total 8, Failed 0, Errors 2, Passed 6, Skipped 0[0m
+[0m[[31merror[0m] [0mFailed: : Total 8, Failed 1, Errors 0, Passed 7, Skipped 0[0m
 [0m[[0mdebug[0m] [0mPassed tests:[0m
-[0m[[0mdebug[0m] [0m	odi.recommendation.LevdistSpec[0m
 [0m[[0mdebug[0m] [0m	odi.recommendation.QueryStwSpec[0m
-[0m[[31merror[0m] [0mError during tests:[0m
+[0m[[0mdebug[0m] [0m	odi.recommendation.LevdistSpec[0m
+[0m[[31merror[0m] [0mFailed tests:[0m
 [0m[[31merror[0m] [0m	odi.recommendation.HttpServerSpec[0m
 java.lang.RuntimeException: Tests unsuccessful
 	at scala.sys.package$.error(package.scala:27)

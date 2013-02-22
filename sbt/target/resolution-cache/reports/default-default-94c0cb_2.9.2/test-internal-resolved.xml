@@ -7,7 +7,7 @@
 		revision="0.1-SNAPSHOT"
 		conf="test-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom"
-		date="20130218150638"/>
+		date="20130221150809"/>
 	<dependencies>
 		<module organisation="com.twitter" name="finagle-http_2.9.2">
 			<revision name="6.2.0" status="release" pubdate="20130213204719" resolver="public" artresolver="public" homepage="https://github.com/twitter/util" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="21">

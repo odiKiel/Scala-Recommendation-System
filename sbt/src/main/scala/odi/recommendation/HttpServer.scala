@@ -9,15 +9,24 @@ import com.twitter.finagle.builder.{Server, ServerBuilder}
 import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.builder.ServerBuilder
 import com.twitter.finagle.http.Method
+import org.jboss.netty.buffer.ChannelBuffers
+import org.jboss.netty.buffer.ChannelBuffer
+import java.nio.charset.Charset
+
 
 object HttpServer {
   val rootService = new Service[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest) = {
+      val cb = ChannelBuffers.copiedBuffer("Hello World",Charset.defaultCharset())
       val r = request.getUri match {
         case "/" => new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
         case _ => new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
       }
       //val service = routing(request)
+
+      //r.setContent(copiedBuffer("hello world", UTF_8))
+      r.setHeader(HttpHeaders.Names.CONTENT_LENGTH, cb.readableBytes())
+      r.setContent(cb)
       Future.value(r)
     }
   }
