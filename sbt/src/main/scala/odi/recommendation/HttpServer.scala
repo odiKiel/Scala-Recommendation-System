@@ -14,33 +14,21 @@ import org.jboss.netty.buffer.ChannelBuffer
 import java.nio.charset.Charset
 
 
-object HttpServer {
-  val rootService = new Service[HttpRequest, HttpResponse] {
-    def apply(request: HttpRequest) = {
-      val cb = ChannelBuffers.copiedBuffer("Hello World",Charset.defaultCharset())
-      val r = request.getUri match {
-        case "/" => new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
-        case _ => new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
-      }
-      //val service = routing(request)
+trait HttpServer {
 
-      //r.setContent(copiedBuffer("hello world", UTF_8))
-      r.setHeader(HttpHeaders.Names.CONTENT_LENGTH, cb.readableBytes())
-      r.setContent(cb)
-      Future.value(r)
-    }
-  }
 
-  def apply(): Server = {
-    val address: SocketAddress = new InetSocketAddress(10000)
+  def getService(): Service[HttpRequest, HttpResponse]
+
+  def apply(port: Int, name: String): Server = {
+    val address: SocketAddress = new InetSocketAddress(port)
     val server: Server = ServerBuilder()
       .codec(Http())
       .bindTo(address)
-      .name("HttpServer")
-      .build(rootService)
+      .name(name)
+      .build(getService())
     server
   }
-
+/*
   val hosts = Map("updateService" -> "localhost:11000", "requestService" -> "localhost:12000")
   def routing(request: HttpRequest): Service[HttpRequest, HttpResponse] = {
     request.getMethod() match {
@@ -57,6 +45,7 @@ object HttpServer {
       .hostConnectionLimit(1)
       .build()
   }
+  */
 }
 
 

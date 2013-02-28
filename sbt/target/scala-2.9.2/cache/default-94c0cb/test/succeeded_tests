@@ -1,5 +1,6 @@
 #Successful Tests
-#Fri Feb 22 16:56:41 CET 2013
-odi.recommendation.LevdistSpec=1361548600329
+#Sat Feb 23 19:29:25 CET 2013
+odi.recommendation.LevdistSpec=1361644164116
 odi.recommendation.levdistSpec=1360516698931
-odi.recommendation.QueryStwSpec=1361548600330
+odi.recommendation.HttpServerSpec=1361644165205
+odi.recommendation.QueryStwSpec=1361644164116

@@ -15,10 +15,10 @@ object HttpServerSpec extends Specification {
   "A running httpServer" should {
     
 
-    val server = HttpServer()
+    val server = TestService(10000, "Test")
     val client = new HttpClient("localhost:10000")
     val ret1 = client.get("/")
-    val ret2 = client.post("/", "echo->world")
+    val ret2 = client.post("/", "?echo=world&test=true")
     val ret3 = Future.collect(Seq(ret1, ret2))
     val value = ret3.get()
     server.close()
