@@ -7,7 +7,7 @@
 		revision="0.1-SNAPSHOT"
 		conf="runtime"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom"
-		date="20130221150809"/>
+		date="20130310183728"/>
 	<dependencies>
 		<module organisation="com.twitter" name="finagle-http_2.9.2">
 			<revision name="6.2.0" status="release" pubdate="20130213204719" resolver="public" artresolver="public" homepage="https://github.com/twitter/util" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="21">
@@ -323,6 +323,13 @@
 				<caller organisation="com.twitter" name="util-app_2.9.2" conf="compile, runtime" rev="2.9.2" rev-constraint-default="2.9.2" rev-constraint-dynamic="2.9.2" callerrev="6.2.0"/>
 				<caller organisation="default" name="default-94c0cb_2.9.2" conf="compile, runtime" rev="2.9.2" rev-constraint-default="2.9.2" rev-constraint-dynamic="2.9.2" callerrev="0.1-SNAPSHOT"/>
 				<caller organisation="com.twitter" name="util-collection_2.9.2" conf="compile, runtime" rev="2.9.2" rev-constraint-default="2.9.2" rev-constraint-dynamic="2.9.2" callerrev="6.2.0"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="com.typesafe.slick" name="slick_2.9.2">
+			<revision name="1.0.0" error="not found" downloaded="false" searched="false" conf="default(compile)" position="-1">
+				<caller organisation="default" name="default-94c0cb_2.9.2" conf="compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="0.1-SNAPSHOT"/>
 				<artifacts>
 				</artifacts>
 			</revision>

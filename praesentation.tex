@@ -71,7 +71,7 @@ Questions, users and the information, which user likes which question
 Find words that describe the question.
 \pause
 \begin{itemize}
-\item Standard-Thesaurus Wirtschaft %, tripple store
+\item STW Thesaurus for Economics %, tripple store
   \pause
 \item Stemming: Compute the stem of a word.\\ %(included in 4-Store)
   \pause
@@ -323,7 +323,7 @@ Information about which user likes which question and one or more preferred labe
   \begin{block}{}
     \begin{itemize}
     \item Derive from $\Sigma$ the matrix $\Sigma_k$ (with k new rank of M) formed by replacing $\sigma_{ii}$ with $i > k$ by zeros.
-      \item Compute and output $M_k = U \cdot \Sigma \cdot V^T$  as the rank-k approximation to M.
+      \item Compute and output $M_k = U \cdot \Sigma_k \cdot V^T$  as the rank-k approximation to M.
     \end{itemize}
   \end{block}
   
@@ -359,7 +359,7 @@ Information about which user likes which question and one or more preferred labe
   \begin{block}{}
     \begin{itemize}
     \item Derive from $\Sigma$ the matrix $\Sigma_k$ (with k new rank of M) formed by replacing $\sigma_{ii}$ with $i > k$ by zeros.
-      \item Compute and output $M_k = U \cdot \Sigma \cdot V^T$  as the rank-k approximation to M.
+      \item Compute and output $M_k = U \cdot \Sigma_k \cdot V^T$  as the rank-k approximation to M.
     \end{itemize}
   \end{block}
   
@@ -482,13 +482,14 @@ Information about which user likes which question and one or more preferred labe
     User4 & 3 & 3 & 1 & 5 & 4\\ 
     User5 & 1 & 5 & 5 & 2 & 1\\ 
   \end{tabular} = 
+  \pause
 
   \begin{pmatrix}
     0.544178 & 0.0875457 & 0.303701 & -0.598262 & -0.496039 \\ 0.330582 & 0.270665 & 0.155794 & -0.281254 & 0.845033 \\ 0.517601 & 0.04377 & 0.429477 & 0.737011 & -0.0503875 \\ 0.438285 & 0.373564 & -0.800903 & 0.129864 & -0.100232 \\ 0.366854 & -0.881822 & -0.239996 & -0.0541261 & 0.165165
-  \end{pmatrix} \cdot 
+  \end{pmatrix} \cdot \\
   \begin{pmatrix}
     16.499 & 0 & 0 & 0 & 0 \\ 0 & 4.93905 & 0 & 0 & 0 \\ 0 & 0 & 2.58239 & 0 & 0 \\ 0 & 0 & 0 & 1.20841 & 0 \\ 0 & 0 & 0 & 0 & 0.511218
-  \end{pmatrix} \cdot 
+  \end{pmatrix} \cdot \\
   \begin{pmatrix} 
     0.452438 & 0.336841 & 0.410894 & -0.456436 & -0.55197 \\ 0.403968 & -0.531238 & -0.483027 & 0.210155 & -0.526419 \\ 0.43523 & -0.601119 & 0.481498 & -0.122706 & 0.449817 \\ 0.463447 & 0.282982 & -0.586236 & -0.401113 & 0.447854 \\ 0.477391 & 0.403612 & 0.149459 &  0.756011 &  0.12371
   \end{pmatrix}^T
@@ -578,8 +579,11 @@ Recommendations for User
 \frame{\frametitle{Is this a good approach?}
 \begin{itemize}
   \item We could have calculated the SVD directly out of the original matrix. Would we get a similar result?
+    \pause
   \item Is it better if we use the V matrix from the SVD to calculate the item similarity and update the SVD afterwards?
+    \pause
   \item Is it better if we just recommend similar items from the items the user already likes?
+    \pause
   \item Should we use cosinus similarity between the users in the first place.
 \end{itemize}
 }
@@ -588,7 +592,7 @@ Recommendations for User
   The test data: I use real data from the zbw econdesk. However, we do not have real user ratings for this data.
   \begin{itemize}
     \item Every data gets a random quality value from 1 (rather negative rating) to 5 (rather positive rating). %if a user would rather rate it positive or negative.
-    \item Furthermore I generate 1000 test users these users will have a rating preferation, so a user might be a person that rates an item more positive or more negative.
+    \item Furthermore, I generate 1000 test users. These users will have a rating preferation. So a user might be a person that rates an item more positive or more negative.
     \item I will try to evaluate the algorithms with this test data. I might use a movie db as well for this.
   \end{itemize}
 
@@ -616,7 +620,7 @@ The tagger, the rating algorithm and the recommendation algorithms can be used a
 \section{Timtable}
 \frame{\frametitle{Timetable}
 Start: 18.12.2012\\
-End: 18.06.2012\\
+End: 18.06.2013\\
 
 1st month(18.01): Theory\\
 2nd month(18.02): Theory + Technology\\ 
@@ -624,8 +628,8 @@ End: 18.06.2012\\
 4th month(18.04): Implementation + First writings\\
 5th month(18.05): Final thesis\\
 Personal Goal\\
-Technology implemented: 31.03.2012 \\
-Diplom Thesis ready: 01.05.2012
+Technology implemented: 31.03.2013 \\
+Diplom Thesis ready: 01.05.2013
 }
 
 % \section{Abschnitt Nr. 2} 

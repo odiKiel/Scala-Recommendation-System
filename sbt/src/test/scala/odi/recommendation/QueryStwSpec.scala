@@ -10,5 +10,9 @@ object QueryStwSpec extends Specification {
     "return None if it doesn't exist" in {
       QueryStw.findDescriptor("N/A") mustEqual None
     }
+
+    "return every word from stw" in {
+      QueryStw.getAllStw.length mustEqual 32683
+    }
   }
 }
