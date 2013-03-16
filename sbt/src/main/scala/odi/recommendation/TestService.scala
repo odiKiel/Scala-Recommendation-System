@@ -15,39 +15,33 @@ import com.twitter.finagle.Service
 
 object TestService extends HttpServer {
 
-  override def apply(port: Int, name: String): Server = {
-    super.apply(port, name)
+  def apply(port: Int): Int = {
+    super.apply(port, "testServer")
+  }
+  def callPostMethod(path: Array[String], value: String): HttpResponse = {
+    path.head match {
+      case "hello" => postHello(path.tail, value)
+    }
   }
 
-  def getService(): Service[HttpRequest, HttpResponse] = {
-    val service = new Service[HttpRequest, HttpResponse] {
-      def apply(request: HttpRequest) = {
-        val r = new Promise[HttpResponse]
-        val postregex = """[\?|&](\w+=\w+)""".r
-        request.getMethod() match {
-          case Method.Post => {
-            val response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
-            val value = request.getContent().toString("UTF-8").substring(1).split("&")
-            val cb = ChannelBuffers.copiedBuffer(value(0).split("=")(1),Charset.defaultCharset())
-            response.setHeader(HttpHeaders.Names.CONTENT_LENGTH, cb.readableBytes())
-            response.setContent(cb)
-            r.setValue(response)
-            }
-          case Method.Get => { 
-            val response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
-            val cb = ChannelBuffers.copiedBuffer("Hello World",Charset.defaultCharset())
-            response.setHeader(HttpHeaders.Names.CONTENT_LENGTH, cb.readableBytes())
-            response.setContent(cb)
-            r.setValue(response)
-          }
-        }
-        //val service = routing(request)
-
-        //r.setContent(copiedBuffer("hello world", UTF_8))
-        r
-      }
+  def callGetMethod(path: Array[String]): HttpResponse = {
+    path.head match {
+      case "hello" => getHello(path.tail)
+      case "close" => getClose(path.tail)
     }
-    service
+  }
+
+  def postHello(path: Array[String], value: String): HttpResponse = {
+    createHttpResponse(value)
+  }
+
+  def getHello(path: Array[String]): HttpResponse = {
+    createHttpResponse(path(0))
+  }
+
+  def getClose(path: Array[String]): HttpResponse = {
+    super.close()
+    createHttpResponse("Server is shutting down")
   }
 
 }

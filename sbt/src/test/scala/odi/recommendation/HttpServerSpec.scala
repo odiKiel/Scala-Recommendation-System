@@ -15,15 +15,16 @@ object HttpServerSpec extends Specification {
   "A running httpServer" should {
     
 
+    sequential
     val server = TestService(10000, "Test")
     val client = new HttpClient("localhost:10000")
-    val ret1 = client.get("/")
-    val ret2 = client.post("/", "?echo=world&test=true")
+    val ret1 = client.get("/hello/world")
+    val ret2 = client.post("/hello", "world")
     val ret3 = Future.collect(Seq(ret1, ret2))
     val value = ret3.get()
-    server.close()
+    client.get("/close/1")
     "return OK after a get request" in {
-      value(0) mustEqual ("Hello World")
+      value(0) mustEqual ("world")
     }
 
     "return echo after a post request" in {

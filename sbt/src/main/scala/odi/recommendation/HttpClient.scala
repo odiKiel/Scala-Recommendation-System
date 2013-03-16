@@ -15,10 +15,10 @@ class HttpClient(hosts: String) {
   val client: Service[HttpRequest, HttpResponse] = ClientBuilder()
      .codec(Http())
      .hosts(hosts) // If >1 host, client does simple load-balancing
-     .tcpConnectTimeout(2.seconds)
+     .tcpConnectTimeout(5.seconds)
      .requestTimeout(10.seconds)
      .hostConnectionLimit(1)
-     .retries(2)
+     .retries(3)
      .build()
 
   def post(path: String, params: String): Promise[String] = {
@@ -41,6 +41,10 @@ class HttpClient(hosts: String) {
 
   def get(path: String): Promise[String] = {
     val req = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, path)
+    req.setHeader(HttpHeaders.Names.HOST, hosts)
+    req.setHeader(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.CLOSE)
+    req.setHeader(HttpHeaders.Names.ACCEPT_ENCODING, HttpHeaders.Values.GZIP)
+    
     val f = client(req) // Client, send the request
     var status = new Promise[String]
     f onSuccess { res =>
@@ -49,6 +53,10 @@ class HttpClient(hosts: String) {
       status.setException(exc)
     }
     status
+  }
+
+  def close() = {
+    client.close()
   }
  
 }

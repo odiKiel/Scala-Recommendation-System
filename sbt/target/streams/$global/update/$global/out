@@ -15,8 +15,6 @@
 [0m[[0mdebug[0m] [0msbt-chain: no namespace defined: using system[0m
 [0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-library/ivy-2.10.0.xml[0m
 [0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
-[0m[[0mdebug[0m] [0m	resolver not found: Maven Central => trying to use the one configured for org.scala-lang#scala-library;2.10.0[0m
-[0m[[0mdebug[0m] [0m	configured resolver found for org.scala-lang#scala-library;2.10.0: sbt-chain: saving this data[0m
 [0m[[0mdebug[0m] [0m	found ivy file in cache for org.scala-lang#scala-library;2.10.0 (resolved by sbt-chain): /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-library/ivy-2.10.0.xml[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0msbt-chain: no latest strategy defined: using default[0m
@@ -38,36 +36,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
 [0m[[0minfo[0m] [0mResolving net.databinder.dispatch#dispatch-core_2.10;0.9.5 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: net.databinder.dispatch#dispatch-core_2.10;0.9.5 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.databinder.dispatch#dispatch-core_2.10;0.9.5: tried /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.databinder.dispatch#dispatch-core_2.10;0.9.5: tried /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.databinder.dispatch/dispatch-core_2.10/0.9.5/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.databinder.dispatch/dispatch-core_2.10/0.9.5/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for net.databinder.dispatch#dispatch-core_2.10;0.9.5: res=/Users/oliver_diestel/.ivy2/local/net.databinder.dispatch/dispatch-core_2.10/0.9.5/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
-[0m[[0mdebug[0m] [0mpublic: no namespace defined: using system[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.databinder.dispatch#dispatch-core_2.10;0.9.5: tried /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom (0.9.5)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.databinder.dispatch#dispatch-core_2.10;0.9.5: tried /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp2190955631351922313sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] net.databinder.dispatch#dispatch-core_2.10;0.9.5!dispatch-core_2.10.pom(pom.original) (293ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.databinder.dispatch/dispatch-core_2.10/0.9.5/jars/dispatch-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.databinder.dispatch/dispatch-core_2.10/0.9.5/jars/dispatch-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for net.databinder.dispatch#dispatch-core_2.10;0.9.5: res=/Users/oliver_diestel/.ivy2/local/net.databinder.dispatch/dispatch-core_2.10/0.9.5/jars/dispatch-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for net.databinder.dispatch#dispatch-core_2.10;0.9.5; parsed=net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for net.databinder.dispatch#dispatch-core_2.10;0.9.5 (resolved by public): /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for net.databinder.dispatch#dispatch-core_2.10;0.9.5 (resolved by public): /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/ivy-0.9.5.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: net.databinder.dispatch#dispatch-core_2.10;0.9.5[0m
 [0m[[0mdebug[0m] [0m	checking net.databinder.dispatch#dispatch-core_2.10;0.9.5 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: net.databinder.dispatch#dispatch-core_2.10;0.9.5 from public[0m
 [0m[[0mdebug[0m] [0m	found net.databinder.dispatch#dispatch-core_2.10;0.9.5 in public[0m
@@ -160,35 +135,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve net.liftweb#lift-json_2.10;2.5-M4[0m
 [0m[[0minfo[0m] [0mResolving net.liftweb#lift-json_2.10;2.5-M4 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: net.liftweb#lift-json_2.10;2.5-M4 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.liftweb#lift-json_2.10;2.5-M4: tried /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.liftweb#lift-json_2.10;2.5-M4: tried /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.liftweb/lift-json_2.10/2.5-M4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.liftweb/lift-json_2.10/2.5-M4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for net.liftweb#lift-json_2.10;2.5-M4: res=/Users/oliver_diestel/.ivy2/local/net.liftweb/lift-json_2.10/2.5-M4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for net.liftweb#lift-json_2.10;2.5-M4[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.liftweb#lift-json_2.10;2.5-M4: tried /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for net.liftweb#lift-json_2.10;2.5-M4[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom (2.5-M4)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.liftweb#lift-json_2.10;2.5-M4: tried /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp5361880360670905753sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] net.liftweb#lift-json_2.10;2.5-M4!lift-json_2.10.pom(pom.original) (583ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.liftweb/lift-json_2.10/2.5-M4/jars/lift-json_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.liftweb/lift-json_2.10/2.5-M4/jars/lift-json_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for net.liftweb#lift-json_2.10;2.5-M4: res=/Users/oliver_diestel/.ivy2/local/net.liftweb/lift-json_2.10/2.5-M4/jars/lift-json_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for net.liftweb#lift-json_2.10;2.5-M4[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for net.liftweb#lift-json_2.10;2.5-M4[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for net.liftweb#lift-json_2.10;2.5-M4; parsed=net.liftweb#lift-json_2.10;2.5-M4[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for net.liftweb#lift-json_2.10;2.5-M4 (resolved by public): /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: net.liftweb#lift-json_2.10;2.5-M4[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for net.liftweb#lift-json_2.10;2.5-M4 (resolved by public): /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/ivy-2.5-M4.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: net.liftweb#lift-json_2.10;2.5-M4[0m
 [0m[[0mdebug[0m] [0m	checking net.liftweb#lift-json_2.10;2.5-M4 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: net.liftweb#lift-json_2.10;2.5-M4 from public[0m
 [0m[[0mdebug[0m] [0m	found net.liftweb#lift-json_2.10;2.5-M4 in public[0m
@@ -201,35 +154,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve org.specs2#specs2_2.10;1.12.3[0m
 [0m[[0minfo[0m] [0mResolving org.specs2#specs2_2.10;1.12.3 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.specs2#specs2_2.10;1.12.3 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2_2.10;1.12.3: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2_2.10;1.12.3: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.specs2/specs2_2.10/1.12.3/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.specs2/specs2_2.10/1.12.3/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.specs2#specs2_2.10;1.12.3: res=/Users/oliver_diestel/.ivy2/local/org.specs2/specs2_2.10/1.12.3/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.specs2#specs2_2.10;1.12.3[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2_2.10;1.12.3: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.specs2#specs2_2.10;1.12.3[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom (1.12.3)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2_2.10;1.12.3: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6536358779003751859sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.specs2#specs2_2.10;1.12.3!specs2_2.10.pom(pom.original) (221ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.specs2/specs2_2.10/1.12.3/jars/specs2_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.specs2/specs2_2.10/1.12.3/jars/specs2_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.specs2#specs2_2.10;1.12.3: res=/Users/oliver_diestel/.ivy2/local/org.specs2/specs2_2.10/1.12.3/jars/specs2_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for org.specs2#specs2_2.10;1.12.3[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for org.specs2#specs2_2.10;1.12.3[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for org.specs2#specs2_2.10;1.12.3; parsed=org.specs2#specs2_2.10;1.12.3[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.specs2#specs2_2.10;1.12.3 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.specs2#specs2_2.10;1.12.3[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.specs2#specs2_2.10;1.12.3 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/ivy-1.12.3.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.specs2#specs2_2.10;1.12.3[0m
 [0m[[0mdebug[0m] [0m	checking org.specs2#specs2_2.10;1.12.3 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: org.specs2#specs2_2.10;1.12.3 from public[0m
 [0m[[0mdebug[0m] [0m	found org.specs2#specs2_2.10;1.12.3 in public[0m
@@ -243,35 +174,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
 [0m[[0minfo[0m] [0mResolving org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1: res=/Users/oliver_diestel/.ivy2/local/org.specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom (6.0.1)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1: tried /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp1973597451920518670sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1!specs2-scalaz-core_2.10.0-RC3.pom(pom.original) (232ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/jars/specs2-scalaz-core_2.10.0-RC3.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/jars/specs2-scalaz-core_2.10.0-RC3.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1: res=/Users/oliver_diestel/.ivy2/local/org.specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/jars/specs2-scalaz-core_2.10.0-RC3.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1; parsed=org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/ivy-6.0.1.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1[0m
 [0m[[0mdebug[0m] [0m	checking org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1 from public[0m
 [0m[[0mdebug[0m] [0m	found org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1 in public[0m
@@ -318,35 +227,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve org.scala-lang#scalap;2.10.0[0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scalap;2.10.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang#scalap;2.10.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.scala-lang#scalap;2.10.0: tried /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.scala-lang#scalap;2.10.0: tried /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.scala-lang/scalap/2.10.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.scala-lang/scalap/2.10.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.scala-lang#scalap;2.10.0: res=/Users/oliver_diestel/.ivy2/local/org.scala-lang/scalap/2.10.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.scala-lang#scalap;2.10.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.scala-lang#scalap;2.10.0: tried /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.scala-lang#scalap;2.10.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom (2.10.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.scala-lang#scalap;2.10.0: tried /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp8358750804910540211sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.scala-lang#scalap;2.10.0!scalap.pom(pom.original) (291ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.scala-lang/scalap/2.10.0/jars/scalap.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.scala-lang/scalap/2.10.0/jars/scalap.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.scala-lang#scalap;2.10.0: res=/Users/oliver_diestel/.ivy2/local/org.scala-lang/scalap/2.10.0/jars/scalap.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for org.scala-lang#scalap;2.10.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for org.scala-lang#scalap;2.10.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for org.scala-lang#scalap;2.10.0; parsed=org.scala-lang#scalap;2.10.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.scala-lang#scalap;2.10.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scalap;2.10.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.scala-lang#scalap;2.10.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/ivy-2.10.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.scala-lang#scalap;2.10.0[0m
 [0m[[0mdebug[0m] [0m	checking org.scala-lang#scalap;2.10.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: org.scala-lang#scalap;2.10.0 from public[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scalap;2.10.0 in public[0m
@@ -359,8 +246,6 @@
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang#scala-compiler;2.10.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
 [0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.10.0.xml[0m
 [0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
-[0m[[0mdebug[0m] [0m	resolver not found: Maven Central => trying to use the one configured for org.scala-lang#scala-compiler;2.10.0[0m
-[0m[[0mdebug[0m] [0m	configured resolver found for org.scala-lang#scala-compiler;2.10.0: sbt-chain: saving this data[0m
 [0m[[0mdebug[0m] [0m	found ivy file in cache for org.scala-lang#scala-compiler;2.10.0 (resolved by sbt-chain): /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.10.0.xml[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.10.0.xml[0m
@@ -384,8 +269,6 @@
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang#scala-reflect;2.10.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
 [0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-reflect/ivy-2.10.0.xml[0m
 [0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
-[0m[[0mdebug[0m] [0m	resolver not found: Maven Central => trying to use the one configured for org.scala-lang#scala-reflect;2.10.0[0m
-[0m[[0mdebug[0m] [0m	configured resolver found for org.scala-lang#scala-reflect;2.10.0: sbt-chain: saving this data[0m
 [0m[[0mdebug[0m] [0m	found ivy file in cache for org.scala-lang#scala-reflect;2.10.0 (resolved by sbt-chain): /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-reflect/ivy-2.10.0.xml[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.10.0[0m
 [0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scala-reflect/ivy-2.10.0.xml[0m
@@ -478,35 +361,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#finagle-core_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#finagle-core_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#finagle-core_2.10;6.2.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-core_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-core_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#finagle-core_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/finagle-core_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#finagle-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#finagle-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp1706293562760866794sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#finagle-core_2.10;6.2.0!finagle-core_2.10.pom(pom.original) (434ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-core_2.10/6.2.0/jars/finagle-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-core_2.10/6.2.0/jars/finagle-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#finagle-core_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/finagle-core_2.10/6.2.0/jars/finagle-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#finagle-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#finagle-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#finagle-core_2.10;6.2.0; parsed=com.twitter#finagle-core_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#finagle-core_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#finagle-core_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#finagle-core_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#finagle-core_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#finagle-core_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#finagle-core_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#finagle-core_2.10;6.2.0 in public[0m
@@ -546,35 +407,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#util-core_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#util-core_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#util-core_2.10;6.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-core_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-core_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-core_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-core_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#util-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#util-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-core_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6284565060617157080sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#util-core_2.10;6.2.0!util-core_2.10.pom(pom.original) (438ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-core_2.10/6.2.0/jars/util-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-core_2.10/6.2.0/jars/util-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-core_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-core_2.10/6.2.0/jars/util-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#util-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#util-core_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#util-core_2.10;6.2.0; parsed=com.twitter#util-core_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-core_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#util-core_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-core_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#util-core_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#util-core_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#util-core_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#util-core_2.10;6.2.0 in public[0m
@@ -591,35 +430,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#util-collection_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#util-collection_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#util-collection_2.10;6.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-collection_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-collection_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-collection_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-collection_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-collection_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-collection_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#util-collection_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-collection_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#util-collection_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-collection_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp2642259686836126399sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#util-collection_2.10;6.2.0!util-collection_2.10.pom(pom.original) (419ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-collection_2.10/6.2.0/jars/util-collection_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-collection_2.10/6.2.0/jars/util-collection_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-collection_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-collection_2.10/6.2.0/jars/util-collection_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#util-collection_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#util-collection_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#util-collection_2.10;6.2.0; parsed=com.twitter#util-collection_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-collection_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#util-collection_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-collection_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#util-collection_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#util-collection_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#util-collection_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#util-collection_2.10;6.2.0 in public[0m
@@ -725,35 +542,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#util-hashing_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#util-hashing_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#util-hashing_2.10;6.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-hashing_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-hashing_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-hashing_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-hashing_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-hashing_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-hashing_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#util-hashing_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-hashing_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#util-hashing_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-hashing_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp689719205974032618sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#util-hashing_2.10;6.2.0!util-hashing_2.10.pom(pom.original) (427ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-hashing_2.10/6.2.0/jars/util-hashing_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-hashing_2.10/6.2.0/jars/util-hashing_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-hashing_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-hashing_2.10/6.2.0/jars/util-hashing_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#util-hashing_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#util-hashing_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#util-hashing_2.10;6.2.0; parsed=com.twitter#util-hashing_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-hashing_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#util-hashing_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-hashing_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#util-hashing_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#util-hashing_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#util-hashing_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#util-hashing_2.10;6.2.0 in public[0m
@@ -792,35 +587,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#util-jvm_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#util-jvm_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#util-jvm_2.10;6.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-jvm_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-jvm_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-jvm_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-jvm_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-jvm_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-jvm_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#util-jvm_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-jvm_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#util-jvm_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-jvm_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp5425203770385531048sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#util-jvm_2.10;6.2.0!util-jvm_2.10.pom(pom.original) (390ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-jvm_2.10/6.2.0/jars/util-jvm_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-jvm_2.10/6.2.0/jars/util-jvm_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-jvm_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-jvm_2.10/6.2.0/jars/util-jvm_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#util-jvm_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#util-jvm_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#util-jvm_2.10;6.2.0; parsed=com.twitter#util-jvm_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-jvm_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#util-jvm_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-jvm_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#util-jvm_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#util-jvm_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#util-jvm_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#util-jvm_2.10;6.2.0 in public[0m
@@ -859,35 +632,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#util-logging_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#util-logging_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#util-logging_2.10;6.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-logging_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-logging_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-logging_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-logging_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-logging_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-logging_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#util-logging_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-logging_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#util-logging_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-logging_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp7850291499683645644sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#util-logging_2.10;6.2.0!util-logging_2.10.pom(pom.original) (418ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-logging_2.10/6.2.0/jars/util-logging_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-logging_2.10/6.2.0/jars/util-logging_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-logging_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-logging_2.10/6.2.0/jars/util-logging_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#util-logging_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#util-logging_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#util-logging_2.10;6.2.0; parsed=com.twitter#util-logging_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-logging_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#util-logging_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-logging_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#util-logging_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#util-logging_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#util-logging_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#util-logging_2.10;6.2.0 in public[0m
@@ -904,35 +655,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#util-app_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#util-app_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#util-app_2.10;6.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-app_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-app_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-app_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-app_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-app_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-app_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#util-app_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-app_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#util-app_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-app_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp11772672598062728sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#util-app_2.10;6.2.0!util-app_2.10.pom(pom.original) (400ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-app_2.10/6.2.0/jars/util-app_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-app_2.10/6.2.0/jars/util-app_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-app_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-app_2.10/6.2.0/jars/util-app_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#util-app_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#util-app_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#util-app_2.10;6.2.0; parsed=com.twitter#util-app_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-app_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#util-app_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-app_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#util-app_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#util-app_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#util-app_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#util-app_2.10;6.2.0 in public[0m
@@ -1037,35 +766,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#finagle-http_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#finagle-http_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#finagle-http_2.10;6.2.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-http_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-http_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-http_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-http_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#finagle-http_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/finagle-http_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#finagle-http_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-http_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#finagle-http_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#finagle-http_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp2123861835942491850sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#finagle-http_2.10;6.2.0!finagle-http_2.10.pom(pom.original) (515ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-http_2.10/6.2.0/jars/finagle-http_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/finagle-http_2.10/6.2.0/jars/finagle-http_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#finagle-http_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/finagle-http_2.10/6.2.0/jars/finagle-http_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#finagle-http_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#finagle-http_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#finagle-http_2.10;6.2.0; parsed=com.twitter#finagle-http_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#finagle-http_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#finagle-http_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#finagle-http_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#finagle-http_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#finagle-http_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#finagle-http_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#finagle-http_2.10;6.2.0 in public[0m
@@ -1088,35 +795,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.twitter#util-codec_2.10;6.2.0[0m
 [0m[[0minfo[0m] [0mResolving com.twitter#util-codec_2.10;6.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.twitter#util-codec_2.10;6.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-codec_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-codec_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-codec_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-codec_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-codec_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-codec_2.10/6.2.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.twitter#util-codec_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-codec_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.twitter#util-codec_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom (6.2.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.twitter#util-codec_2.10;6.2.0: tried /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6857593810459783587sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.twitter#util-codec_2.10;6.2.0!util-codec_2.10.pom(pom.original) (419ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.twitter/util-codec_2.10/6.2.0/jars/util-codec_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.twitter/util-codec_2.10/6.2.0/jars/util-codec_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.twitter#util-codec_2.10;6.2.0: res=/Users/oliver_diestel/.ivy2/local/com.twitter/util-codec_2.10/6.2.0/jars/util-codec_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.twitter#util-codec_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.twitter#util-codec_2.10;6.2.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.twitter#util-codec_2.10;6.2.0; parsed=com.twitter#util-codec_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-codec_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.twitter#util-codec_2.10;6.2.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.twitter#util-codec_2.10;6.2.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/ivy-6.2.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.twitter#util-codec_2.10;6.2.0[0m
 [0m[[0mdebug[0m] [0m	checking com.twitter#util-codec_2.10;6.2.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.twitter#util-codec_2.10;6.2.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.twitter#util-codec_2.10;6.2.0 in public[0m
@@ -1234,35 +919,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0minfo[0m] [0mResolving com.typesafe.slick#slick_2.10;1.0.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.typesafe.slick#slick_2.10;1.0.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.typesafe.slick#slick_2.10;1.0.0: tried /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.typesafe.slick#slick_2.10;1.0.0: tried /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.typesafe.slick/slick_2.10/1.0.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.typesafe.slick/slick_2.10/1.0.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.typesafe.slick#slick_2.10;1.0.0: res=/Users/oliver_diestel/.ivy2/local/com.typesafe.slick/slick_2.10/1.0.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.typesafe.slick#slick_2.10;1.0.0[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.typesafe.slick#slick_2.10;1.0.0: tried /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.typesafe.slick#slick_2.10;1.0.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom (1.0.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.typesafe.slick#slick_2.10;1.0.0: tried /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp7507135355895026368sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.typesafe.slick#slick_2.10;1.0.0!slick_2.10.pom(pom.original) (255ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.typesafe.slick/slick_2.10/1.0.0/jars/slick_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.typesafe.slick/slick_2.10/1.0.0/jars/slick_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.typesafe.slick#slick_2.10;1.0.0: res=/Users/oliver_diestel/.ivy2/local/com.typesafe.slick/slick_2.10/1.0.0/jars/slick_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.typesafe.slick#slick_2.10;1.0.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.typesafe.slick#slick_2.10;1.0.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.typesafe.slick#slick_2.10;1.0.0; parsed=com.typesafe.slick#slick_2.10;1.0.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.typesafe.slick#slick_2.10;1.0.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.typesafe.slick#slick_2.10;1.0.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.typesafe.slick#slick_2.10;1.0.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/ivy-1.0.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0mdebug[0m] [0m	checking com.typesafe.slick#slick_2.10;1.0.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.typesafe.slick#slick_2.10;1.0.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.typesafe.slick#slick_2.10;1.0.0 in public[0m
@@ -1281,69 +944,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve org.slf4j#slf4j-api;1.6.4[0m
 [0m[[0minfo[0m] [0mResolving org.slf4j#slf4j-api;1.6.4 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.slf4j#slf4j-api;1.6.4 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-api;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-api;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-api/1.6.4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-api/1.6.4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.slf4j#slf4j-api;1.6.4: res=/Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-api/1.6.4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.slf4j#slf4j-api;1.6.4[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-api;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.slf4j#slf4j-api;1.6.4[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom (1.6.4)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-api;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp1592769819961192379sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.slf4j#slf4j-api;1.6.4!slf4j-api.pom(pom.original) (235ms)[0m
-[0m[[0minfo[0m] [0mResolving org.slf4j#slf4j-parent;1.6.4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.slf4j#slf4j-parent;1.6.4 {}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-parent;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-parent;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-parent/1.6.4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-parent/1.6.4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.slf4j#slf4j-parent;1.6.4: res=/Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-parent/1.6.4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.slf4j#slf4j-parent;1.6.4[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-parent;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.slf4j#slf4j-parent;1.6.4[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom (1.6.4)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@1583c12d[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for org.slf4j#slf4j-parent;1.6.4: tried /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp1524255159235490650sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.slf4j#slf4j-parent;1.6.4!slf4j-parent.pom(pom.original) (254ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-parent/1.6.4/jars/slf4j-parent.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-parent/1.6.4/jars/slf4j-parent.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.slf4j#slf4j-parent;1.6.4: res=/Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-parent/1.6.4/jars/slf4j-parent.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0mHTTP response status: 404 url=http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0m	public: resource not reachable for org/slf4j#slf4j-parent;1.6.4: res=http://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for org.slf4j#slf4j-parent;1.6.4; parsed=org.slf4j#slf4j-parent;1.6.4[0m
-[0m[[0mdebug[0m] [0m	checking org.slf4j#slf4j-parent;1.6.4 from public against [none][0m
-[0m[[0mdebug[0m] [0m	module revision kept as first found: org.slf4j#slf4j-parent;1.6.4 from public[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-api/1.6.4/jars/slf4j-api.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-api/1.6.4/jars/slf4j-api.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for org.slf4j#slf4j-api;1.6.4: res=/Users/oliver_diestel/.ivy2/local/org.slf4j/slf4j-api/1.6.4/jars/slf4j-api.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for org.slf4j#slf4j-api;1.6.4[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for org.slf4j#slf4j-api;1.6.4[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for org.slf4j#slf4j-api;1.6.4; parsed=org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.slf4j#slf4j-api;1.6.4 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.slf4j#slf4j-api;1.6.4 (resolved by public): /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.slf4j#slf4j-api;1.6.4[0m
 [0m[[0mdebug[0m] [0m	checking org.slf4j#slf4j-api;1.6.4 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: org.slf4j#slf4j-api;1.6.4 from public[0m
 [0m[[0mdebug[0m] [0m	found org.slf4j#slf4j-api;1.6.4 in public[0m
@@ -1367,6 +974,116 @@
 [0m[[0mdebug[0m] [0mcompile is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.typesafe.slick#slick_2.10;1.0.0 [compile->master][0m
 [0m[[0mdebug[0m] [0mloadData of com.typesafe.slick#slick_2.10;1.0.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0minfo[0m] [0mResolving com.github.tototoshi#scala-csv_2.10;0.7.0 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.github.tototoshi#scala-csv_2.10;0.7.0 {compile=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: resource not reachable for com.github.tototoshi#scala-csv_2.10;0.7.0: res=/Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: no ivy file found for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mpublic: no namespace defined: using system[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
+[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
+[0m[[0mdebug[0m] [0m	public: found md file for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom (0.7.0)[0m
+[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@5178efd5[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
+[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml.original.part[0m
+[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom: checking...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom.sha1[0m
+[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6912842515904407859sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.github.tototoshi#scala-csv_2.10;0.7.0!scala-csv_2.10.pom(pom.original) (371ms)[0m
+[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/jars/scala-csv_2.10.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/jars/scala-csv_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	local: resource not reachable for com.github.tototoshi#scala-csv_2.10;0.7.0: res=/Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/jars/scala-csv_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
+[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
+[0m[[0mdebug[0m] [0mno source artifact found for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mno javadoc artifact found for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.github.tototoshi#scala-csv_2.10;0.7.0; parsed=com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0m	checking com.github.tototoshi#scala-csv_2.10;0.7.0 from public against [none][0m
+[0m[[0mdebug[0m] [0m	module revision kept as first found: com.github.tototoshi#scala-csv_2.10;0.7.0 from public[0m
+[0m[[0mdebug[0m] [0m	found com.github.tototoshi#scala-csv_2.10;0.7.0 in public[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->runtime][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->compile][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0mcompile is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0mcompile is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m	using sbt-chain to resolve net.sf.opencsv#opencsv;2.3[0m
+[0m[[0minfo[0m] [0mResolving net.sf.opencsv#opencsv;2.3 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: net.sf.opencsv#opencsv;2.3 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
+[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: resource not reachable for net.sf.opencsv#opencsv;2.3: res=/Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: no ivy file found for net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
+[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
+[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
+[0m[[0mdebug[0m] [0m	public: found md file for net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom (2.3)[0m
+[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@5178efd5[0m
+[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
+[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
+[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml.original.part[0m
+[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom: checking...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom.sha1[0m
+[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6672951472532601621sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] net.sf.opencsv#opencsv;2.3!opencsv.pom(pom.original) (223ms)[0m
+[0m[[0minfo[0m] [0mResolving org.sonatype.oss#oss-parent;7 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.sonatype.oss#oss-parent;7 {}[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.sonatype.oss#oss-parent;7 (resolved by sbt-chain): /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.sonatype.oss#oss-parent;7[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for org.sonatype.oss#oss-parent;7 (resolved by sbt-chain): /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.sonatype.oss#oss-parent;7[0m
+[0m[[0mdebug[0m] [0m	checking org.sonatype.oss#oss-parent;7 from sbt-chain against [none][0m
+[0m[[0mdebug[0m] [0m	module revision kept as first found: org.sonatype.oss#oss-parent;7 from sbt-chain[0m
+[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/jars/opencsv.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/jars/opencsv.jar[0m
+[0m[[0mdebug[0m] [0m	local: resource not reachable for net.sf.opencsv#opencsv;2.3: res=/Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/jars/opencsv.jar[0m
+[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
+[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
+[0m[[0mdebug[0m] [0mno source artifact found for net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mno javadoc artifact found for net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for net.sf.opencsv#opencsv;2.3; parsed=net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0m	checking net.sf.opencsv#opencsv;2.3 from public against [none][0m
+[0m[[0mdebug[0m] [0m	module revision kept as first found: net.sf.opencsv#opencsv;2.3 from public[0m
+[0m[[0mdebug[0m] [0m	found net.sf.opencsv#opencsv;2.3 in public[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0mcompile is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0mcompile is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->master][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile[0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'runtime'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for recommendation#recommendation_2.10;1.0 [runtime][0m
 [0m[[0mdebug[0m] [0mloadData of recommendation#recommendation_2.10;1.0 of rootConf=runtime[0m
@@ -1980,6 +1697,40 @@
 [0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.typesafe.slick#slick_2.10;1.0.0 [compile->master][0m
 [0m[[0mdebug[0m] [0mloadData of com.typesafe.slick#slick_2.10;1.0.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->runtime][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->compile][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime[0m
+[0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->master][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime[0m
 [0m[[0mdebug[0m] [0mruntime is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'test'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for recommendation#recommendation_2.10;1.0 [test][0m
@@ -2606,6 +2357,40 @@
 [0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.typesafe.slick#slick_2.10;1.0.0 [compile->master][0m
 [0m[[0mdebug[0m] [0mloadData of com.typesafe.slick#slick_2.10;1.0.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->runtime][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->compile][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test[0m
+[0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->master][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test[0m
 [0m[[0mdebug[0m] [0mtest is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->org.specs2#specs2_2.10;1.12.3 [test->default(compile)][0m
 [0m[[0mdebug[0m] [0mloadData of org.specs2#specs2_2.10;1.12.3 of rootConf=test[0m
@@ -3239,6 +3024,40 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.typesafe.slick#slick_2.10;1.0.0 [compile->master][0m
 [0m[[0mdebug[0m] [0mloadData of com.typesafe.slick#slick_2.10;1.0.0 of rootConf=compile-internal[0m
 [0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->runtime][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->compile][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->master][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=compile-internal[0m
+[0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for recommendation#recommendation_2.10;1.0 [optional][0m
 [0m[[0mdebug[0m] [0mloadData of recommendation#recommendation_2.10;1.0 of rootConf=compile-internal[0m
 [0m[[0mdebug[0m] [0mcompile-internal is loaded and no conf to load.  Skip loading[0m
@@ -3861,6 +3680,40 @@
 [0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.typesafe.slick#slick_2.10;1.0.0 [compile->master][0m
 [0m[[0mdebug[0m] [0mloadData of com.typesafe.slick#slick_2.10;1.0.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->runtime][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->compile][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=runtime-internal[0m
+[0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->master][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=runtime-internal[0m
 [0m[[0mdebug[0m] [0mruntime-internal is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for recommendation#recommendation_2.10;1.0 [optional][0m
 [0m[[0mdebug[0m] [0mloadData of recommendation#recommendation_2.10;1.0 of rootConf=runtime-internal[0m
@@ -4486,6 +4339,40 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.typesafe.slick#slick_2.10;1.0.0 [compile->master][0m
 [0m[[0mdebug[0m] [0mloadData of com.typesafe.slick#slick_2.10;1.0.0 of rootConf=test-internal[0m
 [0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->runtime][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->compile][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->master(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->org.scala-lang#scala-library;2.10.0 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of org.scala-lang#scala-library;2.10.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.github.tototoshi#scala-csv_2.10;0.7.0->net.sf.opencsv#opencsv;2.3 [runtime->compile][0m
+[0m[[0mdebug[0m] [0mloadData of net.sf.opencsv#opencsv;2.3 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->com.github.tototoshi#scala-csv_2.10;0.7.0 [compile->master][0m
+[0m[[0mdebug[0m] [0mloadData of com.github.tototoshi#scala-csv_2.10;0.7.0 of rootConf=test-internal[0m
+[0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies recommendation#recommendation_2.10;1.0->org.specs2#specs2_2.10;1.12.3 [test->default(compile)][0m
 [0m[[0mdebug[0m] [0mloadData of org.specs2#specs2_2.10;1.12.3 of rootConf=test-internal[0m
 [0m[[0mdebug[0m] [0mtest-internal is loaded and no conf to load.  Skip loading[0m
@@ -4517,7 +4404,7 @@
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'pom'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for recommendation#recommendation_2.10;1.0 [pom][0m
 [0m[[0mdebug[0m] [0mloadData of recommendation#recommendation_2.10;1.0 of rootConf=pom[0m
-[0m[[0mdebug[0m] [0mNbr of module to sort : 29[0m
+[0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : net.databinder.dispatch#dispatch-core_2.10;0.9.5 / Number of dependencies = 2[0m
@@ -4609,6 +4496,11 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort done for : com.typesafe.slick#slick_2.10;1.0.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : com.github.tototoshi#scala-csv_2.10;0.7.0 / Number of dependencies = 3[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-library;2.10.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : net.sf.opencsv#opencsv;2.3 / Number of dependencies = 1[0m
+[0m[[0mdebug[0m] [0mSort done for : net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mSort done for : com.github.tototoshi#scala-csv_2.10;0.7.0[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : com.ning#async-http-client;1.7.5[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : io.netty#netty;3.4.4.Final[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.2[0m
@@ -4632,6 +4524,7 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : commons-lang#commons-lang;2.6[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : commons-codec#commons-codec;1.5[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.10.0 in test-internal: excluding org.scala-lang#scala-library;2.10.0!scala-library.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.10.0 in test: excluding org.scala-lang#scala-library;2.10.0!scala-library.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.10.0 in compile: excluding org.scala-lang#scala-library;2.10.0!scala-library.jar[0m
@@ -4658,88 +4551,26 @@
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.10.0 in runtime: excluding org.scala-lang#scala-library;2.10.0!scala-library.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.10.0 in runtime-internal: excluding org.scala-lang#scala-library;2.10.0!scala-library.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.10.0 in compile-internal: excluding org.scala-lang#scala-library;2.10.0!scala-library.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.databinder.dispatch/dispatch-core_2.10/jars/dispatch-core_2.10-0.9.5.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6155699659358698649sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.10/0.9.5/dispatch-core_2.10-0.9.5.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] net.databinder.dispatch#dispatch-core_2.10;0.9.5!dispatch-core_2.10.jar (895ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.liftweb/lift-json_2.10/jars/lift-json_2.10-2.5-M4.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp5876612523472486613sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/liftweb/lift-json_2.10/2.5-M4/lift-json_2.10-2.5-M4.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] net.liftweb#lift-json_2.10;2.5-M4!lift-json_2.10.jar (1071ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-core_2.10/jars/finagle-core_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp7290956074644214054sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/finagle-core_2.10/6.2.0/finagle-core_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#finagle-core_2.10;6.2.0!finagle-core_2.10.jar (2667ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/finagle-http_2.10/jars/finagle-http_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp2881603497080459411sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/finagle-http_2.10/6.2.0/finagle-http_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#finagle-http_2.10;6.2.0!finagle-http_2.10.jar (986ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.typesafe.slick/slick_2.10/jars/slick_2.10-1.0.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp2800915440171665554sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/typesafe/slick/slick_2.10/1.0.0/slick_2.10-1.0.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.typesafe.slick#slick_2.10;1.0.0!slick_2.10.jar (5052ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] net.databinder.dispatch#dispatch-core_2.10;0.9.5!dispatch-core_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] net.liftweb#lift-json_2.10;2.5-M4!lift-json_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#finagle-core_2.10;6.2.0!finagle-core_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#finagle-http_2.10;6.2.0!finagle-http_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.slick#slick_2.10;1.0.0!slick_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
+[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
+[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
+[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/jars/scala-csv_2.10-0.7.0.jar.part[0m
+[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar: checking...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar.sha1[0m
+[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp1380316449307026792sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.github.tototoshi#scala-csv_2.10;0.7.0!scala-csv_2.10.jar (441ms)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.ning#async-http-client;1.7.5!async-http-client.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2_2.10/jars/specs2_2.10-1.12.3.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp7420148502523671766sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/specs2/specs2_2.10/1.12.3/specs2_2.10-1.12.3.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.specs2#specs2_2.10;1.12.3!specs2_2.10.jar (15246ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.scala-lang/scalap/jars/scalap-2.10.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp3088801113623031735sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/scala-lang/scalap/2.10.0/scalap-2.10.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scalap;2.10.0!scalap.jar (2012ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.specs2#specs2_2.10;1.12.3!specs2_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scalap;2.10.0!scalap.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.thoughtworks.paranamer#paranamer;2.4.1!paranamer.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.specs2/specs2-scalaz-core_2.10.0-RC3/jars/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp8535285435522499027sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/specs2/specs2-scalaz-core_2.10.0-RC3/6.0.1/specs2-scalaz-core_2.10.0-RC3-6.0.1.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1!specs2-scalaz-core_2.10.0-RC3.jar (10261ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.specs2#specs2-scalaz-core_2.10.0-RC3;6.0.1!specs2-scalaz-core_2.10.0-RC3.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-compiler;2.10.0 in test-internal: excluding org.scala-lang#scala-compiler;2.10.0!scala-compiler.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-compiler;2.10.0 in test: excluding org.scala-lang#scala-compiler;2.10.0!scala-compiler.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-compiler;2.10.0 in compile: excluding org.scala-lang#scala-compiler;2.10.0!scala-compiler.jar[0m
@@ -4754,93 +4585,31 @@
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-compiler;2.10.0 in compile-internal: excluding org.scala-lang#scala-compiler;2.10.0!scala-compiler.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.10.0!scala-reflect.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] io.netty#netty;3.5.5.Final!netty.jar(bundle)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-core_2.10/jars/util-core_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6584026158686652211sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-core_2.10/6.2.0/util-core_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#util-core_2.10;6.2.0!util-core_2.10.jar (2237ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-collection_2.10/jars/util-collection_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6584671995480491196sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-collection_2.10/6.2.0/util-collection_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#util-collection_2.10;6.2.0!util-collection_2.10.jar (519ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-hashing_2.10/jars/util-hashing_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp5962012337665534486sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-hashing_2.10/6.2.0/util-hashing_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#util-hashing_2.10;6.2.0!util-hashing_2.10.jar (553ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-jvm_2.10/jars/util-jvm_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6467349702322839009sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-jvm_2.10/6.2.0/util-jvm_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#util-jvm_2.10;6.2.0!util-jvm_2.10.jar (823ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-logging_2.10/jars/util-logging_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp8015807473425773049sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-logging_2.10/6.2.0/util-logging_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#util-logging_2.10;6.2.0!util-logging_2.10.jar (948ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-core_2.10;6.2.0!util-core_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-collection_2.10;6.2.0!util-collection_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-hashing_2.10;6.2.0!util-hashing_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-jvm_2.10;6.2.0!util-jvm_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-logging_2.10;6.2.0!util-logging_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.google.guava#guava;11.0.2!guava.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-collections#commons-collections;3.2.1!commons-collections.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.google.code.findbugs#jsr305;1.3.9!jsr305.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-app_2.10/jars/util-app_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp1732826723716174410sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-app_2.10/6.2.0/util-app_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#util-app_2.10;6.2.0!util-app_2.10.jar (572ms)[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.twitter/util-codec_2.10/jars/util-codec_2.10-6.2.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp389294257277278343sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/twitter/util-codec_2.10/6.2.0/util-codec_2.10-6.2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.twitter#util-codec_2.10;6.2.0!util-codec_2.10.jar (407ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-app_2.10;6.2.0!util-app_2.10.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#util-codec_2.10;6.2.0!util-codec_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-lang#commons-lang;2.6!commons-lang.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-codec#commons-codec;1.5!commons-codec.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.6.4.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp7463747264491589104sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.slf4j#slf4j-api;1.6.4!slf4j-api.jar (302ms)[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 16001ms :: artifacts dl 44682ms[0m
-[0m[[0mdebug[0m] [0mNbr of module to sort : 29[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.6.4!slf4j-api.jar[0m
+[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
+[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
+[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
+[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/jars/opencsv-2.3.jar.part[0m
+[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar: checking...[0m
+[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar.sha1[0m
+[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp4264132115056276380sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] net.sf.opencsv#opencsv;2.3!opencsv.jar (278ms)[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 5227ms :: artifacts dl 1035ms[0m
+[0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : net.databinder.dispatch#dispatch-core_2.10;0.9.5 / Number of dependencies = 2[0m
@@ -4955,8 +4724,14 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort done for : com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : com.github.tototoshi#scala-csv_2.10;0.7.0 / Number of dependencies = 3[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-library;2.10.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : net.sf.opencsv#opencsv;2.3 / Number of dependencies = 1[0m
+[0m[[0mdebug[0m] [0mSort done for : net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mSort done for : com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 compile produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/compile-resolved.xml[0m
-[0m[[0mdebug[0m] [0mNbr of module to sort : 29[0m
+[0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : net.databinder.dispatch#dispatch-core_2.10;0.9.5 / Number of dependencies = 2[0m
@@ -5071,8 +4846,14 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort done for : com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : com.github.tototoshi#scala-csv_2.10;0.7.0 / Number of dependencies = 3[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-library;2.10.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : net.sf.opencsv#opencsv;2.3 / Number of dependencies = 1[0m
+[0m[[0mdebug[0m] [0mSort done for : net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mSort done for : com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 runtime produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/runtime-resolved.xml[0m
-[0m[[0mdebug[0m] [0mNbr of module to sort : 29[0m
+[0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : net.databinder.dispatch#dispatch-core_2.10;0.9.5 / Number of dependencies = 2[0m
@@ -5187,12 +4968,18 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort done for : com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : com.github.tototoshi#scala-csv_2.10;0.7.0 / Number of dependencies = 3[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-library;2.10.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : net.sf.opencsv#opencsv;2.3 / Number of dependencies = 1[0m
+[0m[[0mdebug[0m] [0mSort done for : net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mSort done for : com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 test produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/test-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 provided produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/provided-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 optional produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/optional-resolved.xml[0m
-[0m[[0mdebug[0m] [0mNbr of module to sort : 29[0m
+[0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : net.databinder.dispatch#dispatch-core_2.10;0.9.5 / Number of dependencies = 2[0m
@@ -5307,8 +5094,14 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort done for : com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : com.github.tototoshi#scala-csv_2.10;0.7.0 / Number of dependencies = 3[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-library;2.10.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : net.sf.opencsv#opencsv;2.3 / Number of dependencies = 1[0m
+[0m[[0mdebug[0m] [0mSort done for : net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mSort done for : com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 compile-internal produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/compile-internal-resolved.xml[0m
-[0m[[0mdebug[0m] [0mNbr of module to sort : 29[0m
+[0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : net.databinder.dispatch#dispatch-core_2.10;0.9.5 / Number of dependencies = 2[0m
@@ -5423,8 +5216,14 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort done for : com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : com.github.tototoshi#scala-csv_2.10;0.7.0 / Number of dependencies = 3[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-library;2.10.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : net.sf.opencsv#opencsv;2.3 / Number of dependencies = 1[0m
+[0m[[0mdebug[0m] [0mSort done for : net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mSort done for : com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 runtime-internal produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/runtime-internal-resolved.xml[0m
-[0m[[0mdebug[0m] [0mNbr of module to sort : 29[0m
+[0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : net.databinder.dispatch#dispatch-core_2.10;0.9.5 / Number of dependencies = 2[0m
@@ -5539,6 +5338,12 @@
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-compiler;2.10.0[0m
 [0m[[0mdebug[0m] [0mSort done for : com.typesafe.slick#slick_2.10;1.0.0[0m
 [0m[[0mdebug[0m] [0mModule descriptor is processed : org.slf4j#slf4j-api;1.6.4[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : com.github.tototoshi#scala-csv_2.10;0.7.0 / Number of dependencies = 3[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : org.scala-lang#scala-library;2.10.0[0m
+[0m[[0mdebug[0m] [0mSort dependencies of : net.sf.opencsv#opencsv;2.3 / Number of dependencies = 1[0m
+[0m[[0mdebug[0m] [0mSort done for : net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mSort done for : com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mModule descriptor is processed : net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 test-internal produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/test-internal-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 plugin produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/plugin-resolved.xml[0m
@@ -5548,5 +5353,5 @@
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 docs produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/docs-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 pom produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/pom-resolved.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (16001ms resolve - 44682ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (5227ms resolve - 1035ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

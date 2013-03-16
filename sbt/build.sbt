@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   "net.liftweb" %% "lift-json" % "2.5-M4",
   "com.twitter" %% "finagle-core" % "6.2.0",
   "com.twitter" %% "finagle-http" % "6.2.0",
-  "com.typesafe.slick" %% "slick" % "1.0.0"
+  "com.typesafe.slick" %% "slick" % "1.0.0",
+  "com.github.tototoshi" %% "scala-csv" % "0.7.0"
 )
