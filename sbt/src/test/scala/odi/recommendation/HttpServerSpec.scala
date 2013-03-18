@@ -16,7 +16,7 @@ object HttpServerSpec extends Specification {
     
 
     sequential
-    val server = TestService(10000, "Test")
+    val server = TestService(10000)
     val client = new HttpClient("localhost:10000")
     val ret1 = client.get("/hello/world")
     val ret2 = client.post("/hello", "world")

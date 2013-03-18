@@ -53,13 +53,8 @@ object QueryStwServer extends HttpServer {
     result
   }
 
-  def getValueFromJson(query: String): List[String] = {
-    val json = parse(query)
-    for {JField("value", JString(value)) <- json} yield value
-  }
-
   def getDescriptor(query: String): Option[String] = {
-    val resultList = getValueFromJson(query)
+    val resultList = Json.jsonToValue4Store(query)
     resultList.map(useRegex(_)).headOption getOrElse None
   }
 
