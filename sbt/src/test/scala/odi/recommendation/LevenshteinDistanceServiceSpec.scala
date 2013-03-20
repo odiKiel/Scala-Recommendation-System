@@ -9,10 +9,13 @@ object LevenshteinDistanceServiceSpec extends Specification {
     val ret1 = levClient.post("/labelForText/hello", Json.listToJson(List("test", "test2", "helloda", "whup")))
     val ret2 = levClient.post("/labelForText/hello", Json.listToJson(List("test", "test2", "hellodabidu", "whup")))
     "labelForText should return the Label if it has a match" in {
-      Json.jsonToValue(ret1.get()).head mustEqual ("hello")
+      ret1.get() mustEqual ("hello")
     }
     "labelForText should return an empty String otherwise" in {
-      Json.jsonToValue(ret2.get()).length mustEqual 0
+      ret2.get() mustEqual ""
+    }
+    "should create a final state machine" in {
+      LevenshteinDistanceService.levenshteinFinalStateMachine("test", 2) mustEqual "k"
     }
     /*
     "substitude test, rest" in {

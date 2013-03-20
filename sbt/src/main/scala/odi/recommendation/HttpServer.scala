@@ -3,6 +3,7 @@ package odi.recommendation
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.Http
 import com.twitter.util.{Promise, Future}
+import com.twitter.ostrich._
 import org.jboss.netty.handler.codec.http.{HttpResponseStatus, DefaultHttpResponse, DefaultHttpRequest, HttpRequest, HttpResponse, HttpVersion, HttpMethod, HttpHeaders}
 import java.net.{SocketAddress, InetSocketAddress}
 import com.twitter.finagle.builder.{Server, ServerBuilder}
@@ -23,7 +24,10 @@ trait HttpServer {
     new Service[HttpRequest, HttpResponse] {
       def apply(request: HttpRequest): Future[HttpResponse] = {
         val r = new Promise[HttpResponse]
-        r.setValue(routing(request))
+        val responseFuture: Future[HttpResponse] = routing(request) 
+        responseFuture onSuccess { response => 
+          r.setValue(response)
+        }
         r
       }
     }
@@ -56,7 +60,7 @@ trait HttpServer {
     port
   }
   //val hosts = Map("updateService" -> "localhost:11000", "requestService" -> "localhost:12000")
-  def routing(request: HttpRequest): HttpResponse = {
+  def routing(request: HttpRequest): Future[HttpResponse] = {
     val path = request.getUri().substring(1).split("/") // remove leading / and split
     request.getMethod() match {
       case Method.Post => callPostMethod(path, request.getContent().toString("UTF-8"))
@@ -74,8 +78,8 @@ trait HttpServer {
   }
 
 
-  def callPostMethod(path: Array[String], value: String): HttpResponse 
-  def callGetMethod(path: Array[String]): HttpResponse 
+  def callPostMethod(path: Array[String], value: String): Future[HttpResponse] 
+  def callGetMethod(path: Array[String]): Future[HttpResponse] 
 /*
   def getService(host: String): Service[HttpRequest, HttpResponse] = {
     ClientBuilder()

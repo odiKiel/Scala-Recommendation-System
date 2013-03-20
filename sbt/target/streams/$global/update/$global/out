@@ -979,36 +979,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve com.github.tototoshi#scala-csv_2.10;0.7.0[0m
 [0m[[0minfo[0m] [0mResolving com.github.tototoshi#scala-csv_2.10;0.7.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.github.tototoshi#scala-csv_2.10;0.7.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.github.tototoshi#scala-csv_2.10;0.7.0: res=/Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
-[0m[[0mdebug[0m] [0mpublic: no namespace defined: using system[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom (0.7.0)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@5178efd5[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0: tried /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6912842515904407859sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.github.tototoshi#scala-csv_2.10;0.7.0!scala-csv_2.10.pom(pom.original) (371ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/jars/scala-csv_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/jars/scala-csv_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for com.github.tototoshi#scala-csv_2.10;0.7.0: res=/Users/oliver_diestel/.ivy2/local/com.github.tototoshi/scala-csv_2.10/0.7.0/jars/scala-csv_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for com.github.tototoshi#scala-csv_2.10;0.7.0[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for com.github.tototoshi#scala-csv_2.10;0.7.0; parsed=com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.github.tototoshi#scala-csv_2.10;0.7.0[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for com.github.tototoshi#scala-csv_2.10;0.7.0 (resolved by public): /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/ivy-0.7.0.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.github.tototoshi#scala-csv_2.10;0.7.0[0m
 [0m[[0mdebug[0m] [0m	checking com.github.tototoshi#scala-csv_2.10;0.7.0 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: com.github.tototoshi#scala-csv_2.10;0.7.0 from public[0m
 [0m[[0mdebug[0m] [0m	found com.github.tototoshi#scala-csv_2.10;0.7.0 in public[0m
@@ -1027,46 +1004,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve net.sf.opencsv#opencsv;2.3[0m
 [0m[[0minfo[0m] [0mResolving net.sf.opencsv#opencsv;2.3 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: net.sf.opencsv#opencsv;2.3 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for net.sf.opencsv#opencsv;2.3: res=/Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for net.sf.opencsv#opencsv;2.3[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for net.sf.opencsv#opencsv;2.3[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom (2.3)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@5178efd5[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for net.sf.opencsv#opencsv;2.3: tried /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp6672951472532601621sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] net.sf.opencsv#opencsv;2.3!opencsv.pom(pom.original) (223ms)[0m
-[0m[[0minfo[0m] [0mResolving org.sonatype.oss#oss-parent;7 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.sonatype.oss#oss-parent;7 {}[0m
-[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
 [0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
-[0m[[0mdebug[0m] [0m	found ivy file in cache for org.sonatype.oss#oss-parent;7 (resolved by sbt-chain): /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.sonatype.oss#oss-parent;7[0m
-[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
-[0m[[0mdebug[0m] [0m	found ivy file in cache for org.sonatype.oss#oss-parent;7 (resolved by sbt-chain): /Users/oliver_diestel/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml[0m
-[0m[[0mdebug[0m] [0m	local: revision in cache: org.sonatype.oss#oss-parent;7[0m
-[0m[[0mdebug[0m] [0m	checking org.sonatype.oss#oss-parent;7 from sbt-chain against [none][0m
-[0m[[0mdebug[0m] [0m	module revision kept as first found: org.sonatype.oss#oss-parent;7 from sbt-chain[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/jars/opencsv.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/jars/opencsv.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for net.sf.opencsv#opencsv;2.3: res=/Users/oliver_diestel/.ivy2/local/net.sf.opencsv/opencsv/2.3/jars/opencsv.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for net.sf.opencsv#opencsv;2.3[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for net.sf.opencsv#opencsv;2.3[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for net.sf.opencsv#opencsv;2.3; parsed=net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for net.sf.opencsv#opencsv;2.3 (resolved by public): /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: net.sf.opencsv#opencsv;2.3[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for net.sf.opencsv#opencsv;2.3 (resolved by public): /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/ivy-2.3.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: net.sf.opencsv#opencsv;2.3[0m
 [0m[[0mdebug[0m] [0m	checking net.sf.opencsv#opencsv;2.3 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: net.sf.opencsv#opencsv;2.3 from public[0m
 [0m[[0mdebug[0m] [0m	found net.sf.opencsv#opencsv;2.3 in public[0m
@@ -4556,16 +4500,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#finagle-core_2.10;6.2.0!finagle-core_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#finagle-http_2.10;6.2.0!finagle-http_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.slick#slick_2.10;1.0.0!slick_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/com.github.tototoshi/scala-csv_2.10/jars/scala-csv_2.10-0.7.0.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp1380316449307026792sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/com/github/tototoshi/scala-csv_2.10/0.7.0/scala-csv_2.10-0.7.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.github.tototoshi#scala-csv_2.10;0.7.0!scala-csv_2.10.jar (441ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.github.tototoshi#scala-csv_2.10;0.7.0!scala-csv_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.ning#async-http-client;1.7.5!async-http-client.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.specs2#specs2_2.10;1.12.3!specs2_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scalap;2.10.0!scalap.jar[0m
@@ -4598,17 +4533,8 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-lang#commons-lang;2.6!commons-lang.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-codec#commons-codec;1.5!commons-codec.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.6.4!slf4j-api.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/net.sf.opencsv/opencsv/jars/opencsv-2.3.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp4264132115056276380sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] net.sf.opencsv#opencsv;2.3!opencsv.jar (278ms)[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 5227ms :: artifacts dl 1035ms[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] net.sf.opencsv#opencsv;2.3!opencsv.jar[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 3575ms :: artifacts dl 192ms[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 31[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
@@ -5353,5 +5279,5 @@
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 docs produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/docs-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 pom produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/pom-resolved.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (5227ms resolve - 1035ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (3575ms resolve - 192ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

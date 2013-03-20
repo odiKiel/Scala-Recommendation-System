@@ -174,3 +174,39 @@ console
 exit
 console
 exit
+console
+exit
+test-only org.spec2.TaggerServiceSpec
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+console
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit

@@ -16,9 +16,10 @@ class HttpClient(hosts: String) {
      .codec(Http())
      .hosts(hosts) // If >1 host, client does simple load-balancing
      .tcpConnectTimeout(5.seconds)
-     .requestTimeout(10.seconds)
+     .requestTimeout(30.seconds)
      .hostConnectionLimit(1)
      .retries(3)
+     .logger(java.util.logging.Logger.getLogger("debug"))
      .build()
 
   def post(path: String, params: String): Promise[String] = {

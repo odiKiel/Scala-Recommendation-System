@@ -18,17 +18,21 @@ object TestService extends HttpServer {
   def apply(port: Int): Int = {
     super.apply(port, "testServer")
   }
-  def callPostMethod(path: Array[String], value: String): HttpResponse = {
-    path.head match {
-      case "hello" => postHello(path.tail, value)
-    }
+  def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
+    Future.value(
+      path.head match {
+        case "hello" => postHello(path.tail, value)
+      }
+    )
   }
 
-  def callGetMethod(path: Array[String]): HttpResponse = {
-    path.head match {
-      case "hello" => getHello(path.tail)
-      case "close" => getClose(path.tail)
-    }
+  def callGetMethod(path: Array[String]): Future[HttpResponse] = {
+    Future.value(
+      path.head match {
+        case "hello" => getHello(path.tail)
+        case "close" => getClose(path.tail)
+      }
+    )
   }
 
   def postHello(path: Array[String], value: String): HttpResponse = {

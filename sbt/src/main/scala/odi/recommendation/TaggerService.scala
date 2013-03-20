@@ -17,36 +17,41 @@ object TaggerService extends HttpServer {
     super.apply(port, name)
   }
 
-  def callPostMethod(path: Array[String], value: String): HttpResponse = {
+  def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case "tagText" => postTagText(path.tail, value)
-      case _ => createHttpResponse("No such method")
+      case _ => Future.value(createHttpResponse("No such method"))
     }
   }
 
-  def callGetMethod(path: Array[String]): HttpResponse = {
+  def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
       case "tagWord" => getTagWord(path(0).toString)
-      case _ => createHttpResponse("No such method")
+      case _ => Future.value(createHttpResponse("No such method"))
     }
   }
 
-  def postTagText(args: Array[String], value: String): HttpResponse = {
-    queryStwClient.get("/prefLabel/"+value)
-    createHttpResponse("json")
+  //attention used .get() here todo improve this!
+  def postTagText(args: Array[String], value: String): Future[HttpResponse] = {
+    val r = new Promise[HttpResponse]
+    tagText(Json.jsonToList(value)) onSuccess { tags => 
+      r.setValue(createHttpResponse(Json.listToJson(tags.toList)))
+    }
+    r
   }
 
-  def getTagWord(value: String): HttpResponse = {
+  def getTagWord(value: String): Future[HttpResponse] = {
     //run levenshtein distance algorithm with the word and all stw thesaurus words
-    createHttpResponse("string")
+    Future.value(createHttpResponse("string"))
   }
 
   //only use runQueryWithPagination query with ORDER BY
 
   //Im working with Json strings!
   val query = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT ?q WHERE { ?s ?p ?q FILTER(?p = skos:prefLabel || ?p = skos:altLabel)} ORDER BY ?p"
+  val pagination = 1000
 
-  def tagText(pagination: Int, text: List[String]): Future[Seq[String]] = {
+  def tagText(text: List[String]): Future[Seq[String]] = {
     if(!(query contains "ORDER BY")) {
      throw new IllegalArgumentException("query needs to use ORDER BY")
     }
@@ -59,18 +64,19 @@ object TaggerService extends HttpServer {
       return Future.value(Seq(""))
     }
 
-    queryStwClient.post("/runQuery/", query + " LIMIT " + pagination + " OFFSET "+offset) flatMap {labelsJson =>
-      val seqFutureString = Json.jsonToValue4Store(labelsJson) map {label => labelsForText(label, text)}
-      val futureSeqString1 = Future.collect(seqFutureString) map {_.flatten}
+    val test = queryStwClient.post("/runQuery/", query + " LIMIT " + pagination + " OFFSET "+offset) flatMap {labelsJson =>
+      val seqFutureString = Json.jsonToValue4Store(labelsJson) map {label => labelForText(label, text)}
+      val futureSeqString1 = Future.collect(seqFutureString) 
       val futureSeqString = tagTextRec(text, pagination, offset+1000)
       val seqFuture = Seq(futureSeqString1, futureSeqString)
       Future.collect(seqFuture) map {_.flatten}
     }
+    test
   }
 
 
   def labelForText(label: String, text: List[String]): Future[String] = {
-    levenshteinDistanceClient.post("labelForText/"+label, Json.listToJson(text)) flatMap {jsonLabel => Json.jsonToList(jsonLabel)}
+    levenshteinDistanceClient.post("/labelForText/"+label, Json.listToJson(text))
   }
 
 }

@@ -184,7 +184,7 @@
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.9.2 in runtime: excluding org.scala-lang#scala-library;2.9.2!scala-library.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.9.2 in runtime-internal: excluding org.scala-lang#scala-library;2.9.2!scala-library.jar[0m
 [0m[[0mdebug[0m] [0morg.scala-lang#scala-library;2.9.2 in compile-internal: excluding org.scala-lang#scala-library;2.9.2!scala-library.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 292ms :: artifacts dl 9ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 295ms :: artifacts dl 22ms[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 1[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.9.2 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.9.2[0m
@@ -221,5 +221,5 @@
 [0m[[0mdebug[0m] [0m	report for default#default-3885c8_2.9.2;0.1-SNAPSHOT docs produced in /Users/oliver_diestel/workspace/diplom/diplom/target/resolution-cache/reports/default-default-3885c8_2.9.2/docs-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for default#default-3885c8_2.9.2;0.1-SNAPSHOT pom produced in /Users/oliver_diestel/workspace/diplom/diplom/target/resolution-cache/reports/default-default-3885c8_2.9.2/pom-resolved.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (292ms resolve - 9ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (295ms resolve - 22ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

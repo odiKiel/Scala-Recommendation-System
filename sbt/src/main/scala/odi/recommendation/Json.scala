@@ -9,7 +9,7 @@ object Json {
     for {JField("value", JString(value)) <- json} yield value
   }
 
-  def jsonToValue(query: String): List[String] = {
+  def jsonToList(query: String): List[String] = {
     val json = parse(query)
     for {JString(value) <- json} yield value
   }

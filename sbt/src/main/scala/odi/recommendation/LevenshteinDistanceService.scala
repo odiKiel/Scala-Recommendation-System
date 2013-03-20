@@ -13,26 +13,26 @@ object LevenshteinDistanceService extends HttpServer {
     super.apply(port, name)
   }
 
-  def callPostMethod(path: Array[String], value: String): HttpResponse = {
-    path.head match {
-      case "labelForText" => postLabelForText(path.tail(0), Json.jsonToValue(value))
+  def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
+    Future.value(path.head match {
+      case "labelForText" => postLabelForText(path.tail(0), Json.jsonToList(value))
       case _ => createHttpResponse("No such method")
-    }
+    })
   }
 
-  def callGetMethod(path: Array[String]): HttpResponse = {
-    path.head match {
+  def callGetMethod(path: Array[String]): Future[HttpResponse] = {
+    Future.value(path.head match {
       case "distanceForWords" => getDistanceForWords(path(0).toString, path(1).toString)
       case _ => createHttpResponse("No such method")
-    }
+    })
   }
 
   def postLabelForText(label: String, text: List[String]): HttpResponse = {
-    var hasMatch = None
+    var hasMatch: Option[String] = None
     var currentList = text
-    while(hasMatch == None) {
+    while(hasMatch == None && currentList.length > 0) {
       hasMatch = checkForMatch(label, currentList.head)
-      currentList = curruntList.tail
+      currentList = currentList.tail
     }
     createHttpResponse(hasMatch.getOrElse(""))
   }
@@ -66,8 +66,36 @@ object LevenshteinDistanceService extends HttpServer {
       cost = 1
     }
 
-
     math.min(calcLevDist(s, t.substring(0, t.length()-1))+1, math.min(calcLevDist(s.substring(0, s.length()-1), t)+1, calcLevDist(s.substring(0, s.length()-1), t.substring(0, t.length()-1))+cost))
+  }
+
+  def levenshtein_automato(term: String, k: int): FiniteStateMachine = {
+    val fsm = new FiniteStateMachine((0,0))
+    term.zipWithIndex.foreach((e: (Char, Int)) => {
+      (0 to k+1).foreach((i: Int) => {
+        val current_state = (e_2, i)
+        //correct character
+        fsm.addTransition(current_state, e_1, (e_2+1, i))
+        if(e_2 < k) {
+          //Deletion
+          fsm.addTransition(current_state, `Any, (e_2, i+1))
+          //Insertion
+          fsm.addTransition(current_state, `Epsilon, (e_2+1, i+1))
+          //Substitution
+          fsm.addTransition(current_state, `Any, (e_2+1, i+1))
+        } 
+      })
+      
+    })
+    (0 to k+1).foreach((e: Int) => {
+      if(e<k) {
+        //Deletion for last State
+        fsm.addTransition((term.size+1, e), `Any, (term.size+1, e+1))
+      }
+      //add final states
+      fsm.addFinalState((term.size + 1, e))
+    })
+    fsm
   }
 
 }

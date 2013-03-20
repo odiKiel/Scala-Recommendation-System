@@ -65,18 +65,18 @@ object QueryStwServer extends HttpServer {
 
   //http Methods and their called methods
 
-  def callPostMethod(path: Array[String], value: String): HttpResponse = {
-    path.head match {
+  def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
+    Future.value(path.head match {
       case "runQuery" => postRunQueryOn4Store(path.tail, value)
       case _ => createHttpResponse("Method "+path.head+" not found")
-    }
+    })
   }
 
-  def callGetMethod(path: Array[String]): HttpResponse = {
-    path.head match {
+  def callGetMethod(path: Array[String]): Future[HttpResponse] = {
+    Future.value(path.head match {
       case "prefLabel" => getPrefLabel(path.tail)
       case _ => createHttpResponse("Method "+path.head+" not found")
-    }
+    })
   }
 
   def getPrefLabel(value: Array[String]): HttpResponse = {
