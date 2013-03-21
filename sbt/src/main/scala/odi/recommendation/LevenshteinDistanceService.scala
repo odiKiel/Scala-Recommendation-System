@@ -6,6 +6,7 @@ import com.twitter.util.{Promise, Future}
 import net.liftweb.json._
 
 
+//distance small words max 1 medium words 2 large words 3
 object LevenshteinDistanceService extends HttpServer {
 
   val name = "LevenshteinDistanceService"
@@ -69,34 +70,6 @@ object LevenshteinDistanceService extends HttpServer {
     math.min(calcLevDist(s, t.substring(0, t.length()-1))+1, math.min(calcLevDist(s.substring(0, s.length()-1), t)+1, calcLevDist(s.substring(0, s.length()-1), t.substring(0, t.length()-1))+cost))
   }
 
-  def levenshtein_automato(term: String, k: int): FiniteStateMachine = {
-    val fsm = new FiniteStateMachine((0,0))
-    term.zipWithIndex.foreach((e: (Char, Int)) => {
-      (0 to k+1).foreach((i: Int) => {
-        val current_state = (e_2, i)
-        //correct character
-        fsm.addTransition(current_state, e_1, (e_2+1, i))
-        if(e_2 < k) {
-          //Deletion
-          fsm.addTransition(current_state, `Any, (e_2, i+1))
-          //Insertion
-          fsm.addTransition(current_state, `Epsilon, (e_2+1, i+1))
-          //Substitution
-          fsm.addTransition(current_state, `Any, (e_2+1, i+1))
-        } 
-      })
-      
-    })
-    (0 to k+1).foreach((e: Int) => {
-      if(e<k) {
-        //Deletion for last State
-        fsm.addTransition((term.size+1, e), `Any, (term.size+1, e+1))
-      }
-      //add final states
-      fsm.addFinalState((term.size + 1, e))
-    })
-    fsm
-  }
 
 }
 
