@@ -63,7 +63,7 @@ class FiniteStateMachine {
   }
 
 
-  def toDfa() = {
+  def toDfsm() = {
     val dfa = new DeterministicFiniteStateMachine()
     val currentStates = new Stack[State]()
     currentStates.push(firstState)
@@ -97,9 +97,10 @@ class FiniteStateMachine {
     dfa
   }
 
+  //words will be lowercased
   def levenshteinFiniteStateMachine(term: String, k: Int): FiniteStateMachine = {
-    val fsm = new FiniteStateMachine()
-    term.zipWithIndex.foreach((e: (Char, Int)) => {
+    val fsm = this
+    term.toLowerCase.zipWithIndex.foreach((e: (Char, Int)) => {
       (0 to k+1).foreach((i: Int) => {
         val current_state = (e._2, i)
         //correct character

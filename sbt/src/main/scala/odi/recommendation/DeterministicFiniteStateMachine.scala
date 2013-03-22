@@ -13,7 +13,6 @@ class DeterministicFiniteStateMachine {
     if(transition.contains(src)){
       if(transition(src).contains(input)){
         transition(src)(input) ++= dst
-        println("create transition for existing input: "+input)
       }
       else {
         transition(src) += (input -> dst)
@@ -52,14 +51,19 @@ class DeterministicFiniteStateMachine {
     srcs.flatMap((src: State) => nextState(src, input))
   }
 
+  //break if currentStates is empty
   def isInDistance(term: String): Boolean = {
     var currentStates = collection.mutable.Set[State](firstState)
-    term.foreach((c: Char) => {
-      println("from: "+currentStates+" with: "+c)
+    var c: Char = 'F'
+    var i: Int = 0
+
+    while(currentStates.size > 0 && i < term.length) {
+      c = term(i).toLower
+      println("current c: "+c)
       currentStates = nextStateSet(currentStates, c)
-      println("to: "+currentStates)
-    })
-    println("final States: "+currentStates)
+      println("current States: "+currentStates)
+      i += 1
+    }
     currentStates.exists((state: State) => isFinal(state))
   }
 

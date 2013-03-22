@@ -56,27 +56,47 @@ object TaggerService extends HttpServer {
      throw new IllegalArgumentException("query needs to use ORDER BY")
     }
 
-    tagTextRec(text, pagination, 0)
+    val dfsmList = createDfsm(text)
+
+    tagTextRec(dfsmList, pagination, 0)
   }
 
-  def tagTextRec(text: List[String], pagination: Int, offset: Int): Future[Seq[String]] = {
+  def tagTextRec(dfsmList: List[DeterministicFiniteStateMachine], pagination: Int, offset: Int): Future[Seq[String]] = {
     if(offset > 4000) {
       return Future.value(Seq(""))
     }
 
     val test = queryStwClient.post("/runQuery/", query + " LIMIT " + pagination + " OFFSET "+offset) flatMap {labelsJson =>
-      val seqFutureString = Json.jsonToValue4Store(labelsJson) map {label => labelForText(label, text)}
-      val futureSeqString1 = Future.collect(seqFutureString) 
-      val futureSeqString = tagTextRec(text, pagination, offset+1000)
+      val seqString = Json.jsonToValue4Store(labelsJson) map {label => {
+          var ret: Option[String] = None
+          if(labelForText(label, dfsmList)) {
+            println("return label: "+label)
+            ret = Some(label)
+          }
+          ret
+        } 
+      }
+      val futureSeqString1 = Future.value(seqString.flatten) 
+      val futureSeqString = tagTextRec(dfsmList, pagination, offset+1000)
       val seqFuture = Seq(futureSeqString1, futureSeqString)
       Future.collect(seqFuture) map {_.flatten}
     }
     test
   }
 
+  def createDfsm(text: List[String]): List[DeterministicFiniteStateMachine] = {
+    text.map((word: String) => {
+      val fsm = new FiniteStateMachine()
+      fsm.levenshteinFiniteStateMachine(word, 2).toDfsm()
+    })
+  }
 
-  def labelForText(label: String, text: List[String]): Future[String] = {
-    levenshteinDistanceClient.post("/labelForText/"+label, Json.listToJson(text))
+
+
+  def labelForText(label: String, dfsmList: List[DeterministicFiniteStateMachine]): Boolean = {
+    println("----->Testing: "+label)
+    dfsmList.exists((dfsm: DeterministicFiniteStateMachine) => dfsm.isInDistance(label))
+    //levenshteinDistanceClient.post("/labelForText/"+label, Json.listToJson(text))
   }
 
 }

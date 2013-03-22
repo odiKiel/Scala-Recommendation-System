@@ -38,6 +38,8 @@ object LevenshteinDistanceService extends HttpServer {
     createHttpResponse(hasMatch.getOrElse(""))
   }
 
+
+  //old levenshtein distance calculation
   def checkForMatch(label: String, word: String): Option[String] = {
     if(calcLevDist(label, word) < 4) {
       Some(label)

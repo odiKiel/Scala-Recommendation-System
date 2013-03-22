@@ -254,3 +254,43 @@ exit
 test-only odi.recommendation.LevenshteinDistanceServiceSpec
 exit
 test-only odi.recommendation.LevenshteinDistanceServiceSpec
+exit
+test-only odi.recommendation.FiniteStateMachineSpec
+test-only odi.recommendation.DeterministicFiniteStateMachineSpec
+exit
+console
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.DeterministicFiniteStateMachineSpec
+exit
+test-only odi.recommendation.DeterministicFiniteStateMachineSpec
+exit
+test-only odi.recommendation.DeterministicFiniteStateMachineSpec
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+test-only odi.recommendation.DeterministicFiniteStateMachineSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
