@@ -4,6 +4,7 @@ import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
 
 
+//might get trouble with 'umlaute'
 object TaggerService extends HttpServer {
   QueryStwServer(Services("queryStwServer").toInt)
   LevenshteinDistanceService(Services("levenshteinDistanceService").toInt)
@@ -34,7 +35,7 @@ object TaggerService extends HttpServer {
   //attention used .get() here todo improve this!
   def postTagText(args: Array[String], value: String): Future[HttpResponse] = {
     val r = new Promise[HttpResponse]
-    tagText(Json.jsonToList(value)) onSuccess { tags => 
+    tagText(value) onSuccess { tags => 
       r.setValue(createHttpResponse(Json.listToJson(tags.toList)))
     }
     r
@@ -51,19 +52,20 @@ object TaggerService extends HttpServer {
   val query = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT ?q WHERE { ?s ?p ?q FILTER(?p = skos:prefLabel || ?p = skos:altLabel)} ORDER BY ?p"
   val pagination = 1000
 
-  def tagText(text: List[String]): Future[Seq[String]] = {
+  def tagText(text: String): Future[Seq[String]] = {
+    val textList = text.split("\\W").toList
     if(!(query contains "ORDER BY")) {
      throw new IllegalArgumentException("query needs to use ORDER BY")
     }
 
-    val dfsmList = createDfsm(text)
+    val dfsmList = createDfsm(textList)
 
     tagTextRec(dfsmList, pagination, 0)
   }
 
   def tagTextRec(dfsmList: List[DeterministicFiniteStateMachine], pagination: Int, offset: Int): Future[Seq[String]] = {
     if(offset > 4000) {
-      return Future.value(Seq(""))
+      return Future.value(Seq())
     }
 
     val test = queryStwClient.post("/runQuery/", query + " LIMIT " + pagination + " OFFSET "+offset) flatMap {labelsJson =>

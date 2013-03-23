@@ -5,10 +5,12 @@ object TaggerServiceSpec extends Specification {
   "Tagger Service " should {
     TaggerService(Services("taggerService").toInt)
     val tagClient = new HttpClient("localhost:"+Services("taggerService"))
-    val ret = tagClient.post("/tagText", Json.listToJson(List("Marketingplanung" , "Statistics")))
+    val ret = tagClient.post("/tagText", "This is a text about marketingplanung and statistics have fun with it.")
     //ret onSuccess {response => println("RESPONSE ===> "+response)}
     "tagText should return all STW labels for a text" in {
-      Json.jsonToList(ret.get()) mustEqual List("Marketingplanung", "Statistics")
+      val returnList = Json.jsonToList(ret.get())
+      returnList.contains("Marketingplanung") mustEqual true
+      returnList.contains("Statistics") mustEqual true
     }
 
     val dfsmList = TaggerService.createDfsm(List("this", "is", "a", "test"))

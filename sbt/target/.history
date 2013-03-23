@@ -294,3 +294,14 @@ test-only odi.recommendation.TaggerServiceSpec
 test-only odi.recommendation.DeterministicFiniteStateMachineSpec
 exit
 test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+console
+exit
+console
+exit

@@ -11,5 +11,6 @@ libraryDependencies ++= Seq(
   "com.twitter" %% "finagle-core" % "6.2.0",
   "com.twitter" %% "finagle-http" % "6.2.0",
   "com.typesafe.slick" %% "slick" % "1.0.0",
-  "com.github.tototoshi" %% "scala-csv" % "0.7.0"
+  "com.github.tototoshi" %% "scala-csv" % "0.7.0",
+  "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )

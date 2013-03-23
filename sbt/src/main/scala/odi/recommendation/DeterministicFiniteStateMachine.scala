@@ -51,7 +51,6 @@ class DeterministicFiniteStateMachine {
     srcs.flatMap((src: State) => nextState(src, input))
   }
 
-  //break if currentStates is empty
   def isInDistance(term: String): Boolean = {
     var currentStates = collection.mutable.Set[State](firstState)
     var c: Char = 'F'
