@@ -38,9 +38,28 @@ object Users extends Table[User]("users") {
     	  case _ :: tail => inter.first
     	  case Nil => None
     	}
+      result
     }
+  }
 
-    // return the found bid
+  def usersForItem(item: Item) : Option[List[User]] = {
+    var result:Option[List[User]] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (r <-Ratings if r.itemId === item.id;
+                       u <- Users if u.id === r.userId) yield u.id ~ u.name
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, name) => Option(User(Option(id), name))
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      if(inter.list.length > 0) {
+        result = Option(inter.list.flatten)
+      }
+    }
     result
   }
 

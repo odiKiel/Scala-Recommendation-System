@@ -43,6 +43,51 @@ object Items extends Table[Item]("items") {
     result
   }
 
+  def getAll() : Option[List[Item]] = {
+    var result:Option[List[Item]] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (i <-Items ) yield i.id ~ i.title 
+
+    	val inter = query mapResult {
+    	  case(id, title) => Option(Item(Option(id), title))
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      if(inter.list.length > 0) {
+        result = Option(inter.list.flatten)
+      }
+    }
+
+    // return the found bid
+    result
+  }
+
+
+  //get all items from a specific user
+  def allItemsUser(user: User) : Option[List[Item]] = {
+    var result:Option[List[Item]] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (r <-Ratings if r.userId === user.id;
+                       i <- Items if i.id === r.itemId) yield i.id ~ i.title
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, title) => Option(Item(Option(id), title))
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      if(inter.list.length > 0) {
+        result = Option(inter.list.flatten)
+      }
+    }
+    result
+  }
+
+
 
   /**
    * Create a bid using scala query. This will always create a new bid

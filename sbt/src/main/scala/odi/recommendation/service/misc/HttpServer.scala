@@ -3,7 +3,6 @@ package odi.recommendation
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.Http
 import com.twitter.util.{Promise, Future}
-import com.twitter.ostrich._
 import org.jboss.netty.handler.codec.http.{HttpResponseStatus, DefaultHttpResponse, DefaultHttpRequest, HttpRequest, HttpResponse, HttpVersion, HttpMethod, HttpHeaders}
 import java.net.{SocketAddress, InetSocketAddress}
 import com.twitter.finagle.builder.{Server, ServerBuilder}
