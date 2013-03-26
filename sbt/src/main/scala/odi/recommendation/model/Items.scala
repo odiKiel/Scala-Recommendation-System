@@ -124,5 +124,9 @@ object Items extends Table[Item]("items") {
     // return deleted bid
     result
   }
+
+  def deleteAll() = {
+    getAll().get.foreach((u: Item) => delete(u.id.get))
+  }
 }
 

@@ -38,8 +38,8 @@ object Ratings extends Table[Rating]("ratings") {
 
   }
 
-  def getByUser(uid: Int) : Option[Rating] = {
-    var result:Option[Rating] = None;
+  def getByUser(uid: Int) : Option[List[Rating]] = {
+    var result:Option[List[Rating]] = None;
 
     db withSession {
         // define the query and what we want as result
@@ -51,15 +51,40 @@ object Ratings extends Table[Rating]("ratings") {
     	}
 
     	// check if there is one in the list and return it, or None otherwise
-    	result = inter.list match {
-    	  case _ :: tail => inter.first
-    	  case Nil => None
-    	}
+      if(inter.list != Nil){
+        result = Some(inter.list.flatten) 
+      }
+      result
     }
 
     // return the found bid
     result
   }
+
+  def getByItemUser(iid: Int, uid: Int) : Option[Rating] = {
+    var result:Option[Rating] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (r <-Ratings if r.userId === uid && r.itemId === iid) yield r.id ~ r.itemId ~ r.userId ~ r.rating 
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, itemId, userId, rating) => Option(Rating(Option(id), itemId, userId, rating));
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+    	result = inter.list match {
+    	  case _ :: tail => inter.first
+    	  case Nil => None
+    	}
+
+    }
+
+    // return the found bid
+    result
+  }
+
  
   def get(rid: Int) : Option[Rating] = {
     var result:Option[Rating] = None;
@@ -119,6 +144,32 @@ object Ratings extends Table[Rating]("ratings") {
     // return deleted bid
     result
   }
+  def deleteAll() = {
+    getAll().get.foreach((u: Rating) => delete(u.id.get))
+  }
+
+  def getAll() : Option[List[Rating]] = {
+    var result:Option[List[Rating]] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (i <-Ratings ) yield i.id ~ i.itemId ~ i.userId ~ i.rating 
+
+    	val inter = query mapResult {
+    	  case(id, itemId, userId, rating) => Option(Rating(Option(id), itemId, userId, rating))
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      if(inter.list.length > 0) {
+        result = Option(inter.list.flatten)
+      }
+    }
+
+    // return the found bid
+    result
+  }
+
+
 
 
 }

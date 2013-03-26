@@ -1,6 +1,7 @@
 package odi.recommendation
 import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
+import scala.slick.driver.BasicInvokerComponent
 
 // Definition of the USERS table
 case class User(id: Option[Int] = None, name: String)
@@ -98,6 +99,32 @@ object Users extends Table[User]("users") {
 
     // return deleted bid
     result
+  }
+
+  def getAll() : Option[List[User]] = {
+    var result:Option[List[User]] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (i <-Users ) yield i.id ~ i.name 
+
+    	val inter = query mapResult {
+    	  case(id, name) => Option(User(Option(id), name))
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      if(inter.list.length > 0) {
+        result = Option(inter.list.flatten)
+      }
+    }
+
+    // return the found bid
+    result
+  }
+
+
+  def deleteAll() = {
+    getAll().get.foreach((u: User) => delete(u.id.get))
   }
 
 }

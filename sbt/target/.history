@@ -307,3 +307,17 @@ console
 exit
 console
 exit
+console
+2.55
+val t = 2.55
+console
+exit
+console
+sbt test
+test-only odi.recommendation.SimilarItemsSpec
+exit
+test-only odi.recommendation.SimilarItemsSpec
+test-only odi.recommendation.DeterministicFiniteStateMachineSpec
+test-only odi.recommendation.SimilarItemsSpec
+last test:test-only
+test-only odi.recommendation.SimilarItemsSpec

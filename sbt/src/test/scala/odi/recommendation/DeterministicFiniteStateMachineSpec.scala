@@ -2,6 +2,7 @@ package odi.recommendation
 import org.specs2.mutable._
 
 object DeterministicFiniteStateMachineSpec extends Specification {
+  "DeterministicFiniteStateMachine " should {
     val fst = new FiniteStateMachine()
     fst.levenshteinFiniteStateMachine("test", 2)
     val dfsm = fst.toDfsm()
@@ -58,6 +59,7 @@ object DeterministicFiniteStateMachineSpec extends Specification {
     "returns false if string is not in distance (end)" in {
       dfsm.isInDistance("test123") mustEqual false
     }
+  }
 
 
 }

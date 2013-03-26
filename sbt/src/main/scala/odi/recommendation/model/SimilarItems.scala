@@ -61,6 +61,28 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
     result
   }
 
+  def getAll() : Option[List[SimilarItem]] = {
+    var result:Option[List[SimilarItem]] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (i <-SimilarItems ) yield i.id ~ i.itemOneId ~ i.itemTwoId ~ similarity
+
+    	val inter = query mapResult {
+    	  case(id, itemOneId, itemTwoId, similarity) => Option(SimilarItem(Option(id), itemOneId, itemTwoId, similarity))
+
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      if(inter.list.length > 0) {
+        result = Option(inter.list.flatten)
+      }
+    }
+
+    // return the found bid
+    result
+  }
+
 
   /**
    * Create a bid using scala query. This will always create a new bid
@@ -97,9 +119,48 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
     result
   }
 
-  def calculateSimilarity(item: Item, similar: collection.mutable.HashMap[Item, collection.mutable.LinkedList[User]]): Double = {
-    //create all the rating vectors for the item / userItem tupel
-    0.447
+  def calculateSimilarity(item: Item, similar: collection.mutable.HashMap[Item, collection.mutable.LinkedList[User]]) = {
+    similar.foreach((t: (Item, collection.mutable.LinkedList[User])) => 
+      SimilarItems.create(
+        SimilarItem(
+          None, 
+          item.id.get, 
+          t._1.id.get, 
+          calculateItemSimilarityUsers(t._2.toList, item, t._1)
+        )
+      )
+    )
+  }
+
+  //calculate the similarity between two items with the users that rated both items
+  def calculateItemSimilarityUsers(userList: List[User], item1: Item, item2: Item): Float = {
+    cosinusSimilarity(createRatingVector(item1, userList), createRatingVector(item2, userList))
+  }
+
+  def createRatingVector(item: Item, userList: List[User]): Vector[Int] = {
+    userList match{
+      case Nil => Vector[Int]()
+      case head::Nil => Vector[Int](Ratings.getByItemUser(item.id.get, head.id.get).get.rating)
+      case head::tail => createRatingVector(item, tail) :+ Ratings.getByItemUser(item.id.get, head.id.get).get.rating
+    }
+  }
+
+  def cosinusSimilarity(itemVector1: Vector[Int], itemVector2: Vector[Int]): Float = {
+    require(itemVector1.length == itemVector2.length, "Item Vector must be of same length")
+    val numerator = vectorProduct(itemVector1, itemVector2)
+    val denominator = vectorLength(itemVector1) * vectorLength(itemVector2)
+    numerator / denominator
+  }
+
+  def vectorProduct(vector1: Vector[Int], vector2: Vector[Int]): Float = {
+    vector1.zip(vector2).foldLeft(0)((result: Int, current: (Int, Int)) => result + current._1*current._2)
+  }
+
+  def vectorLength(vector: Vector[Int]): Float = {
+    Math.sqrt(vector.map(Math.pow(_, 2)).sum).toFloat
+  }
+  def deleteAll() = {
+    getAll().get.foreach((u: SimilarItem) => delete(u.id.get))
   }
 
 
