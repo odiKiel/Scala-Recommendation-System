@@ -111,8 +111,6 @@ object Users extends Table[User]("users") {
 
 
   def all : List[User] = {
-    var result:Option[List[User]] = None;
-
     db withSession {
       val q = Users.map{u => u}
       q.list
@@ -121,7 +119,7 @@ object Users extends Table[User]("users") {
 
 
   def deleteAll = {
-    getAll().foreach((u: User) => delete(u.id.get))
+    all.foreach((u: User) => delete(u.id.get))
   }
 
 }

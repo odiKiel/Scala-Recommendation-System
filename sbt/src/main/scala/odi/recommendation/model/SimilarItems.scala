@@ -61,38 +61,19 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
     result
   }
 
-  def getFirst() : Option[SimilarItem] = {
-    var result: Option[SimilarItem] = None
+  def first : Option[SimilarItem] = {
     db withSession {
-      val query = tableToQuery(SimilarItems)
-      result = query.first() match {
-    	  case(id:Int, itemOneId:Int, itemTwoId:Int, similarity:Float) => Option(SimilarItem(Option(id), itemOneId, itemTwoId, similarity))
-      }
+      val q = SimilarItems.map{ u => u}.take(1)
+      q.list.headOption
     }
-    result
   }
 
 
-  def getAll() : Option[List[SimilarItem]] = {
-    var result:Option[List[SimilarItem]] = None;
-
+  def all : List[SimilarItem] = {
     db withSession {
-        // define the query and what we want as result
-    	val query = for (i <-SimilarItems ) yield i.id ~ i.itemOneId ~ i.itemTwoId ~ similarity
-
-    	val inter = query mapResult {
-    	  case(id, itemOneId, itemTwoId, similarity) => Option(SimilarItem(Option(id), itemOneId, itemTwoId, similarity))
-
-    	}
-
-    	// check if there is one in the list and return it, or None otherwise
-      if(inter.list.length > 0) {
-        result = Option(inter.list.flatten)
-      }
+      val q = SimilarItems.map{u => u}
+      q.list
     }
-
-    // return the found bid
-    result
   }
 
 
@@ -171,8 +152,8 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
   def vectorLength(vector: Vector[Int]): Float = {
     Math.sqrt(vector.map(Math.pow(_, 2)).sum).toFloat
   }
-  def deleteAll() = {
-    getAll().get.foreach((u: SimilarItem) => delete(u.id.get))
+  def deleteAll = {
+    all.foreach((u: SimilarItem) => delete(u.id.get))
   }
 
 

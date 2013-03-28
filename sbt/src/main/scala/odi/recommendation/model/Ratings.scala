@@ -144,31 +144,23 @@ object Ratings extends Table[Rating]("ratings") {
     // return deleted bid
     result
   }
-  def deleteAll() = {
-    getAll().get.foreach((u: Rating) => delete(u.id.get))
+  def deleteAll = {
+    all.foreach((u: Rating) => delete(u.id.get))
   }
 
-  def getAll() : Option[List[Rating]] = {
-    var result:Option[List[Rating]] = None;
-
+  def first : Option[Rating] = {
     db withSession {
-        // define the query and what we want as result
-    	val query = for (i <-Ratings ) yield i.id ~ i.itemId ~ i.userId ~ i.rating 
-
-    	val inter = query mapResult {
-    	  case(id, itemId, userId, rating) => Option(Rating(Option(id), itemId, userId, rating))
-    	}
-
-    	// check if there is one in the list and return it, or None otherwise
-      if(inter.list.length > 0) {
-        result = Option(inter.list.flatten)
-      }
+      val q = Ratings.map{ u => u}.take(1)
+      q.list.headOption
     }
-
-    // return the found bid
-    result
   }
 
+  def all : List[Rating] = {
+    db withSession {
+      val q = Ratings.map{u => u}
+      q.list
+    }
+  }
 
 
 

@@ -26,7 +26,7 @@ object ItemBasedService extends HttpServer {
   //for each item that is connectet with a user find all items from the user and calculate the similarity with the original item
   //should work with a futurepool
   def getCalculateSimilarItems(path: Array[String]): Future[HttpResponse] = {
-    val items: List[Item] = Items.getAll().getOrElse(List[Item]())
+    val items: List[Item] = Items.all
     val purchasedTogether = collection.mutable.Set[(Item, Item)]() // purchasedTogether(x, _) || purchasedTogether(_, x)
     for(item: Item <- items) {
       val itemUserHash = collection.mutable.HashMap[Item, collection.mutable.LinkedList[User]]()

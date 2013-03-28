@@ -43,27 +43,12 @@ object Items extends Table[Item]("items") {
     result
   }
 
-  def getAll() : Option[List[Item]] = {
-    var result:Option[List[Item]] = None;
-
+  def all : List[Item] = {
     db withSession {
-        // define the query and what we want as result
-    	val query = for (i <-Items ) yield i.id ~ i.title 
-
-    	val inter = query mapResult {
-    	  case(id, title) => Option(Item(Option(id), title))
-    	}
-
-    	// check if there is one in the list and return it, or None otherwise
-      if(inter.list.length > 0) {
-        result = Option(inter.list.flatten)
-      }
+      val q = Items.map{u => u}
+      q.list
     }
-
-    // return the found bid
-    result
   }
-
 
   //get all items from a specific user
   def allItemsUser(user: User) : Option[List[Item]] = {
@@ -125,8 +110,8 @@ object Items extends Table[Item]("items") {
     result
   }
 
-  def deleteAll() = {
-    getAll().get.foreach((u: Item) => delete(u.id.get))
+  def deleteAll = {
+    all.foreach((u: Item) => delete(u.id.get))
   }
 }
 

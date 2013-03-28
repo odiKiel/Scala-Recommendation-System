@@ -323,3 +323,5 @@ last test:test-only
 test-only odi.recommendation.SimilarItemsSpec
 console
 exit
+console
+exit
