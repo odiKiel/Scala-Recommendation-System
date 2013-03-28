@@ -1,14 +1,20 @@
-[0m[[0mdebug[0m] [0mRunning Test odi.recommendation.QueryStwServerSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
 [0m[[0mdebug[0m] [0mRunning Test odi.recommendation.LevenshteinDistanceServiceSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
+[0m[[0mdebug[0m] [0mRunning Test odi.recommendation.FiniteStateMachineSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
 [0m[[0mdebug[0m] [0mRunning Test odi.recommendation.HttpServerSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
 [0m[[0mdebug[0m] [0mRunning Test odi.recommendation.TaggerServiceSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
-[0m[[31merror[0m] [0mError: Total 7, Failed 0, Errors 1, Passed 6, Skipped 0[0m
+[0m[[0mdebug[0m] [0mRunning Test odi.recommendation.QueryStwServerSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
+[0m[[0mdebug[0m] [0mRunning Test odi.recommendation.SimilarItemsSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
+[0m[[0mdebug[0m] [0mRunning Test odi.recommendation.DeterministicFiniteStateMachineSpec : subclass(true, org.specs2.specification.SpecificationStructure) with arguments [0m
+[0m[[31merror[0m] [0mError: Total 32, Failed 2, Errors 2, Passed 28, Skipped 0[0m
 [0m[[0mdebug[0m] [0mPassed tests:[0m
-[0m[[0mdebug[0m] [0m	odi.recommendation.QueryStwServerSpec[0m
+[0m[[0mdebug[0m] [0m	odi.recommendation.FiniteStateMachineSpec[0m
 [0m[[0mdebug[0m] [0m	odi.recommendation.HttpServerSpec[0m
+[0m[[0mdebug[0m] [0m	odi.recommendation.TaggerServiceSpec[0m
 [0m[[0mdebug[0m] [0m	odi.recommendation.LevenshteinDistanceServiceSpec[0m
+[0m[[0mdebug[0m] [0m	odi.recommendation.QueryStwServerSpec[0m
+[0m[[0mdebug[0m] [0m	odi.recommendation.DeterministicFiniteStateMachineSpec[0m
 [0m[[31merror[0m] [0mError during tests:[0m
-[0m[[31merror[0m] [0m	odi.recommendation.TaggerServiceSpec[0m
+[0m[[31merror[0m] [0m	odi.recommendation.SimilarItemsSpec[0m
 java.lang.RuntimeException: Tests unsuccessful
 	at scala.sys.package$.error(package.scala:27)
 	at scala.Predef$.error(Predef.scala:123)

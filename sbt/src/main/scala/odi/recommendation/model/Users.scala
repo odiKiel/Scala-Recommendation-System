@@ -101,30 +101,27 @@ object Users extends Table[User]("users") {
     result
   }
 
-  def getAll() : Option[List[User]] = {
-    var result:Option[List[User]] = None;
-
+  def first : Option[User] = {
     db withSession {
-        // define the query and what we want as result
-    	val query = for (i <-Users ) yield i.id ~ i.name 
-
-    	val inter = query mapResult {
-    	  case(id, name) => Option(User(Option(id), name))
-    	}
-
-    	// check if there is one in the list and return it, or None otherwise
-      if(inter.list.length > 0) {
-        result = Option(inter.list.flatten)
-      }
+      val q = Users.map{ u => u}.take(1)
+      q.list.headOption
     }
-
-    // return the found bid
-    result
   }
 
 
-  def deleteAll() = {
-    getAll().get.foreach((u: User) => delete(u.id.get))
+
+  def all : List[User] = {
+    var result:Option[List[User]] = None;
+
+    db withSession {
+      val q = Users.map{u => u}
+      q.list
+    }
+  }
+
+
+  def deleteAll = {
+    getAll().foreach((u: User) => delete(u.id.get))
   }
 
 }

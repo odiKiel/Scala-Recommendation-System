@@ -61,6 +61,18 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
     result
   }
 
+  def getFirst() : Option[SimilarItem] = {
+    var result: Option[SimilarItem] = None
+    db withSession {
+      val query = tableToQuery(SimilarItems)
+      result = query.first() match {
+    	  case(id:Int, itemOneId:Int, itemTwoId:Int, similarity:Float) => Option(SimilarItem(Option(id), itemOneId, itemTwoId, similarity))
+      }
+    }
+    result
+  }
+
+
   def getAll() : Option[List[SimilarItem]] = {
     var result:Option[List[SimilarItem]] = None;
 

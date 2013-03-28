@@ -321,3 +321,5 @@ test-only odi.recommendation.DeterministicFiniteStateMachineSpec
 test-only odi.recommendation.SimilarItemsSpec
 last test:test-only
 test-only odi.recommendation.SimilarItemsSpec
+console
+exit
