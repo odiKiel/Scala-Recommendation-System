@@ -16,12 +16,10 @@ class DeterministicFiniteStateMachine {
       }
       else {
         transition(src) += (input -> dst)
-        println("create transition for not existing input: "+input)
       }
     }
     else {
       transition += (src -> HashMap(input -> dst))
-      println("create transition for not existing src: "+input+" "+dst)
     }
   }
 
@@ -58,9 +56,7 @@ class DeterministicFiniteStateMachine {
 
     while(currentStates.size > 0 && i < term.length) {
       c = term(i).toLower
-      println("current c: "+c)
       currentStates = nextStateSet(currentStates, c)
-      println("current States: "+currentStates)
       i += 1
     }
     currentStates.exists((state: State) => isFinal(state))

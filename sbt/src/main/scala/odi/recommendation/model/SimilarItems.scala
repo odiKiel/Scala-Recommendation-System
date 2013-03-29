@@ -68,6 +68,28 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
     }
   }
 
+  def getByItemItem(item1: Item, item2: Item) : Option[SimilarItem] = {
+    var result:Option[SimilarItem] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (s <-SimilarItems if s.itemOneId === item1.id && s.itemTwoId === item2.id || s.itemOneId === item2.id && s.itemTwoId === item1.id) yield s.id ~ s.itemOneId ~ s.itemTwoId ~ s.similarity 
+
+    	
+    	val inter = query mapResult {
+    	  case(id, itemOneId, itemTwoId, similarity) => Option(SimilarItem(Option(id), itemOneId, itemTwoId, similarity))
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+    	result = inter.list match {
+    	  case _ :: tail => inter.first
+    	  case Nil => None
+    	}
+    }
+
+    // return the found bid
+    result
+  }
 
   def all : List[SimilarItem] = {
     db withSession {
@@ -131,10 +153,11 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
   }
 
   def createRatingVector(item: Item, userList: List[User]): Vector[Int] = {
+    val itemId = item.id.get
     userList match{
       case Nil => Vector[Int]()
-      case head::Nil => Vector[Int](Ratings.getByItemUser(item.id.get, head.id.get).get.rating)
-      case head::tail => createRatingVector(item, tail) :+ Ratings.getByItemUser(item.id.get, head.id.get).get.rating
+      case head::Nil => Vector[Int](Ratings.getByItemUser(itemId, head.id.get).get.rating)
+      case head::tail => Ratings.getByItemUser(itemId, head.id.get).get.rating +: createRatingVector(item, tail)
     }
   }
 

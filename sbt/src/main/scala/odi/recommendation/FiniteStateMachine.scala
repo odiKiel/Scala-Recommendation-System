@@ -76,7 +76,6 @@ class FiniteStateMachine {
         if(input != '_') {
           val newStates = nextState(current, input)
           newStates.foreach((newState: State) => {
-              println("new State: "+newState)
             if(!seen(newState)) {
               currentStates.push(newState)
               seen += newState
@@ -106,7 +105,6 @@ class FiniteStateMachine {
         //correct character
         fsm.addTransition(current_state, e._1, (e._2+1, i))
         if(i < k) {
-          println("max normal: "+(e._2+1, i+1))
           //Deletion
           fsm.addTransition(current_state, '*', (e._2, i+1))
           //Insertion

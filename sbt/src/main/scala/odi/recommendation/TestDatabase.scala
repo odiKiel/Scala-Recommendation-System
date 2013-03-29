@@ -2,12 +2,10 @@ package odi.recommendation
 
 object TestDatabase {
   def setup() = {
-    /*
-    Ratings.deleteAll()
-    SimilarItems.deleteAll()
-    Items.deleteAll()
-    Users.deleteAll()
-    */
+    Ratings.deleteAll
+    SimilarItems.deleteAll
+    Items.deleteAll
+    Users.deleteAll
     val item1 = Items.create(Item(None, "Item1"))
     val item2 = Items.create(Item(None, "Item2"))
     val item3 = Items.create(Item(None, "Item3"))

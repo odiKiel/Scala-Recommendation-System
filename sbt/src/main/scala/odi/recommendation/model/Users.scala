@@ -43,8 +43,8 @@ object Users extends Table[User]("users") {
     }
   }
 
-  def usersForItem(item: Item) : Option[List[User]] = {
-    var result:Option[List[User]] = None;
+  def usersForItem(item: Item) : List[User] = {
+    var result:List[User] = List[User]()
 
     db withSession {
         // define the query and what we want as result
@@ -58,7 +58,7 @@ object Users extends Table[User]("users") {
 
     	// check if there is one in the list and return it, or None otherwise
       if(inter.list.length > 0) {
-        result = Option(inter.list.flatten)
+        result = inter.list.flatten
       }
     }
     result
@@ -92,7 +92,7 @@ object Users extends Table[User]("users") {
     val result = get(uid);
 
     // delete the bid
-    val toDelete = Ratings where (_.id === uid)
+    val toDelete = Users where (_.id === uid)
     db withSession {
       toDelete.delete
     }

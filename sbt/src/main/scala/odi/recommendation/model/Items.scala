@@ -51,8 +51,8 @@ object Items extends Table[Item]("items") {
   }
 
   //get all items from a specific user
-  def allItemsUser(user: User) : Option[List[Item]] = {
-    var result:Option[List[Item]] = None;
+  def allItemsUser(user: User) : List[Item] = {
+    var result:List[Item] = List[Item]()
 
     db withSession {
         // define the query and what we want as result
@@ -66,13 +66,18 @@ object Items extends Table[Item]("items") {
 
     	// check if there is one in the list and return it, or None otherwise
       if(inter.list.length > 0) {
-        result = Option(inter.list.flatten)
+        result = inter.list.flatten
       }
     }
     result
   }
 
-
+  def first : Option[Item] = {
+    db withSession {
+      val q = Items.map{ u => u}.take(1)
+      q.list.headOption
+    }
+  }
 
   /**
    * Create a bid using scala query. This will always create a new bid

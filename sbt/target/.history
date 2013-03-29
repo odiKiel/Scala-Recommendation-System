@@ -325,3 +325,22 @@ console
 exit
 console
 exit
+test-only odi.recommendation.SimilarItemsSpec
+console
+test-only odi.recommendation.SimilarItemsSpec
+test-only odi.recommendation.SimilarItemsSpe
+test-only odi.recommendation.SimilarItemsSpec
+console
+test-only odi.recommendation.SimilarItemsSpec
+console
+test-only odi.recommendation.SimilarItemsSpec
+test
+test-only odi.recommendation.ItemBasedServiceSpec
+console
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.SimilarItemsSpec
+test-only odi.recommendation.ItemBasedServiceSpec

@@ -38,8 +38,8 @@ object Ratings extends Table[Rating]("ratings") {
 
   }
 
-  def getByUser(uid: Int) : Option[List[Rating]] = {
-    var result:Option[List[Rating]] = None;
+  def getByUser(uid: Int) : List[Rating] = {
+    var result:List[Rating] = List[Rating]()
 
     db withSession {
         // define the query and what we want as result
@@ -52,7 +52,7 @@ object Ratings extends Table[Rating]("ratings") {
 
     	// check if there is one in the list and return it, or None otherwise
       if(inter.list != Nil){
-        result = Some(inter.list.flatten) 
+        result = inter.list.flatten
       }
       result
     }

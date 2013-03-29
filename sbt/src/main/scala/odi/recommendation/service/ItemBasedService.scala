@@ -19,6 +19,7 @@ object ItemBasedService extends HttpServer {
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
       case "calculateSimilarItems" => getCalculateSimilarItems(path)
+      case "calculateUserPredictions" => getCalculateUserPredictions(path.head.toInt, path.tail)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -27,13 +28,11 @@ object ItemBasedService extends HttpServer {
   //should work with a futurepool
   def getCalculateSimilarItems(path: Array[String]): Future[HttpResponse] = {
     val items: List[Item] = Items.all
-    val purchasedTogether = collection.mutable.Set[(Item, Item)]() // purchasedTogether(x, _) || purchasedTogether(_, x)
+    val purchasedTogether = collection.mutable.Set[(Item, Item)]() 
     for(item: Item <- items) {
       val itemUserHash = collection.mutable.HashMap[Item, collection.mutable.LinkedList[User]]()
-      for(users: List[User] <- Users.usersForItem(item);
-        user: User <- users;
-        itemsUser: List[Item] <- Items.allItemsUser(user);
-        itemUser: Item <- itemsUser) 
+      for(user: User <- Users.usersForItem(item);
+          itemUser: Item <- Items.allItemsUser(user))
       {
         if(!(purchasedTogether(item, itemUser) || purchasedTogether(itemUser, item))) {//do I get all connection with this?
           if(itemUserHash.contains(itemUser)) {
@@ -44,10 +43,14 @@ object ItemBasedService extends HttpServer {
           }
         }
       }
-      SimilarItems.calculateSimilarity(item, itemUserHash) //need the rating id
+      SimilarItems.calculateSimilarity(item, itemUserHash) 
     }
 
     Future.value(createHttpResponse("done"))
+  }
+
+  def getCalculateUserPredictions(userId: Int, path: Array[String]) = {
+
   }
 
 }

@@ -72,7 +72,6 @@ object TaggerService extends HttpServer {
       val seqString = Json.jsonToValue4Store(labelsJson) map {label => {
           var ret: Option[String] = None
           if(labelForText(label, dfsmList)) {
-            println("return label: "+label)
             ret = Some(label)
           }
           ret
@@ -96,7 +95,6 @@ object TaggerService extends HttpServer {
 
 
   def labelForText(label: String, dfsmList: List[DeterministicFiniteStateMachine]): Boolean = {
-    println("----->Testing: "+label)
     dfsmList.exists((dfsm: DeterministicFiniteStateMachine) => dfsm.isInDistance(label))
     //levenshteinDistanceClient.post("/labelForText/"+label, Json.listToJson(text))
   }

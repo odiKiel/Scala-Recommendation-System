@@ -6,6 +6,7 @@ object Services {
       case "queryStwServer" => "11500"
       case "taggerService" => "11000"
       case "levenshteinDistanceService" => "11600"
+      case "itemBasedService" => "12000"
     }
   }
 }
