@@ -26,25 +26,31 @@ object ItemBasedService extends HttpServer {
 
   //for each item that is connectet with a user find all items from the user and calculate the similarity with the original item
   //should work with a futurepool
-  //dont calculate similarity between same item
+  //I need purchased together otherwise all similarities are doubled because item1 -> item2 and item2 -> item1
   def getCalculateSimilarItems(path: Array[String]): Future[HttpResponse] = {
     val items: List[Item] = Items.all
-    //val purchasedTogether = collection.mutable.Set[(Item, Item)]() 
+    val purchasedTogether = collection.mutable.Set[(Item, Item)]() //all items that where purchased together by one or more users
 
     for(item: Item <- items) {
       val itemUserHash = collection.mutable.HashMap[Item, List[User]]()
+      val localPurchasedTogether = collection.mutable.Set[(Item, Item)]() //all items that where purchased together with the current item use this for easy creation of purchasedTogether
       for(user: User <- Users.usersForItem(item);
           itemUser: Item <- Items.allItemsUser(user.id.get))
       {
-        itemUserHash += itemUser -> addUserToPurchasedTogether(itemUserHash.get(itemUser), user)
+        if(item != itemUser && !(purchasedTogether.contains((item, itemUser)) || purchasedTogether.contains((itemUser, item)))) {
+          localPurchasedTogether += ((item, itemUser))
+          itemUserHash += itemUser -> addToList(itemUserHash.get(itemUser), user)
+        }
       }
+
+      purchasedTogether ++= localPurchasedTogether
       SimilarItems.calculateSimilarity(item, itemUserHash) 
     }
 
     Future.value(createHttpResponse("done"))
   }
 
-  def addUserToPurchasedTogether(userList: Option[List[User]], user: User): List[User] = {
+  def addToList(userList: Option[List[User]], user: User): List[User] = {
     if(userList != None) {
       userList.get :+ user
     }

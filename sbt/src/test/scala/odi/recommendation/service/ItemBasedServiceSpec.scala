@@ -11,14 +11,14 @@ object ItemBasedServiceSpec extends Specification {
 
     "should calculate the similarItem values" in {
       ret1.get()
-      SimilarItems.all.length mustEqual 25 
+      SimilarItems.all.length mustEqual 10 //Sum_{0-(n-1)} n-i with n=4 
       val items = Items.all
-      SimilarItems.getByItemItem(items(2), items(4)).get.similarity mustEqual 0.7226101.toFloat
+      SimilarItems.getByItemItem(items(2).id.get, items(4).id.get).get.similarity mustEqual 0.7226101.toFloat
     }
 
     "should not calculate the similarity for the same item" in {
       ret1.get()
-      SimilarItems.getByItemItem(Items.first.get, Items.first.get) mustEqual None
+      SimilarItems.getByItemItem(Items.first.get.id.get, Items.first.get.id.get) mustEqual None
     }
 
     "should calculate predictions for all users for the items that they haven't rated yet with the items they already rated" in {

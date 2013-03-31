@@ -353,3 +353,22 @@ test-only odi.recommendation.ItemBasedServiceSpec
 console
 exit
 test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+console
+test-only odi.recommendation.ItemBasedServiceSpec
+console
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.SimilarItemSpec
+test-only odi.recommendation.SimilarItemsSpec
+exit
