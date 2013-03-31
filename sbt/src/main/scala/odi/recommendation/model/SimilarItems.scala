@@ -4,7 +4,21 @@ import Database.threadLocalSession
 
 
  // Definition of the USER_ITEMS table
-case class SimilarItem(id: Option[Int] = None, itemOneId: Int, itemTwoId: Int, similarity: Float)
+case class SimilarItem(id: Option[Int] = None, itemOneId: Int, itemTwoId: Int, similarity: Float) {
+  def similarityByItemId(itemId: Int): Option[(Item, Float)] = {
+    if(itemId == itemOneId) {
+      Some((Items.get(itemTwoId).get, similarity))
+    }
+    else {
+      if(itemId == itemTwoId) {
+        Some((Items.get(itemOneId).get, similarity))
+      }
+      else {
+        None
+      }
+    }
+  }
+}
 object SimilarItems extends Table[SimilarItem]("similar_items") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def itemOneId = column[Int]("item_one_id") 
@@ -67,6 +81,24 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
       q.list.headOption
     }
   }
+
+  def byItemId(itemId: Int) : List[SimilarItem] = {
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (s <-SimilarItems if s.itemOneId === itemId || s.itemTwoId === itemId) yield s.id ~ s.itemOneId ~ s.itemTwoId ~ s.similarity 
+
+    	
+    	val inter = query mapResult {
+    	  case(id, itemOneId, itemTwoId, similarity) => SimilarItem(Option(id), itemOneId, itemTwoId, similarity)
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+    	inter.list 
+    }
+
+  }
+
 
   def getByItemItem(item1: Item, item2: Item) : Option[SimilarItem] = {
     var result:Option[SimilarItem] = None;
@@ -134,14 +166,14 @@ object SimilarItems extends Table[SimilarItem]("similar_items") {
     result
   }
 
-  def calculateSimilarity(item: Item, similar: collection.mutable.HashMap[Item, collection.mutable.LinkedList[User]]) = {
-    similar.foreach((t: (Item, collection.mutable.LinkedList[User])) => 
+  def calculateSimilarity(item: Item, similar: collection.mutable.HashMap[Item, List[User]]) = {
+    similar.foreach((t: (Item, List[User])) => 
       SimilarItems.create(
         SimilarItem(
           None, 
           item.id.get, 
           t._1.id.get, 
-          calculateItemSimilarityUsers(t._2.toList, item, t._1)
+          calculateItemSimilarityUsers(t._2, item, t._1)
         )
       )
     )

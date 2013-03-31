@@ -3,7 +3,12 @@ import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
 
 // Definition of the ITEMS table
-case class Item(id: Option[Int] = None, title: String)
+case class Item(id: Option[Int] = None, title: String) {
+  def similarItems: List[(Item, Float)] = {
+    SimilarItems.byItemId(this.id.get).map((si: SimilarItem) => si.similarityByItemId(this.id.get).get)
+  }
+
+}
 object Items extends Table[Item]("items") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def title = column[String]("title")
@@ -51,12 +56,12 @@ object Items extends Table[Item]("items") {
   }
 
   //get all items from a specific user
-  def allItemsUser(user: User) : List[Item] = {
+  def allItemsUser(userId: Int) : List[Item] = {
     var result:List[Item] = List[Item]()
 
     db withSession {
         // define the query and what we want as result
-    	val query = for (r <-Ratings if r.userId === user.id;
+    	val query = for (r <-Ratings if r.userId === userId;
                        i <- Items if i.id === r.itemId) yield i.id ~ i.title
 
     	// map the results to a Bid object

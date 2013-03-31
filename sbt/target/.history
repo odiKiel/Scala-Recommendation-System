@@ -344,3 +344,12 @@ test-only odi.recommendation.ItemBasedServiceSpec
 exit
 test-only odi.recommendation.SimilarItemsSpec
 test-only odi.recommendation.ItemBasedServiceSpec
+exit
+console
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+console
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
