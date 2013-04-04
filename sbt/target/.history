@@ -372,3 +372,24 @@ exit
 test-only odi.recommendation.SimilarItemSpec
 test-only odi.recommendation.SimilarItemsSpec
 exit
+console
+exit
+console
+exit
+console
+exit
+console
+import scala.slick.driver.PostgresDriver.simple._
+import scala.slick.jdbc.{ GetResult, StaticQuery => Q }
+import Q.interpolation
+import Database.threadLocalSession
+console
+test
+exit
+test
+exit
+test-only odi.recommendation.SimilarItemsSpec
+test-only odi.recommendation.ItemBasedServiceSpec
+exit
+test-only odi.recommendation.ItemBasedServiceSpec
+exit

@@ -4,7 +4,7 @@ import Database.threadLocalSession
 
 // Definition of the ITEMS table
 case class Item(id: Option[Int] = None, title: String) {
-  def similarItems: List[(Item, Float)] = {
+  def similarItems: List[(Item, Double)] = {
     SimilarItems.byItemId(this.id.get).map((si: SimilarItem) => si.similarityByItemId(this.id.get).get)
   }
 
@@ -50,7 +50,7 @@ object Items extends Table[Item]("items") {
 
   def all : List[Item] = {
     db withSession {
-      val q = Items.map{u => u}
+      val q = Items.map({u => u}).sortBy(_.id)
       q.list
     }
   }

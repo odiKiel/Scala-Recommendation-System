@@ -23,8 +23,7 @@ object ItemBasedServiceSpec extends Specification {
 
     "should calculate predictions for all users for the items that they haven't rated yet with the items they already rated" in {
       val prediction = Json.jsonToList(ret2.get()).head
-      prediction mustEqual Items.all.last.id.get+"#"+4
-      //Ratings.getByItemUser(Items.all.last.id.get, Users.first.get.id.get).prediction mustEqual true
+      prediction mustEqual Items.all.last.id.get+"#"+4.075181355016793
     }
   }
 

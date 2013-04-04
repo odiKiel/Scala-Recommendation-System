@@ -5,9 +5,9 @@ import org.specs2.mutable._
 object SimilarItemsSpec extends Specification {
   "SimilarItems " should {
     TestDatabase.setup()
-    val vec = Vector[Int](1,2,3)
+    val vec = Vector[Double](1.0,2.0,3.0)
     "calculate vector length" in {
-      SimilarItems.vectorLength(vec) mustEqual 3.7416575.toFloat
+      SimilarItems.vectorLength(vec) mustEqual 3.7416573867739413
     }
     "calculate the product of two vectors" in {
       SimilarItems.vectorProduct(vec, vec) mustEqual 14
@@ -15,7 +15,7 @@ object SimilarItemsSpec extends Specification {
 
     "calculate the cosinus similarity of two vectors" in {
       //should be 1 but because of floating point numbers
-      SimilarItems.cosinusSimilarity(vec, vec) mustEqual 0.99999994.toFloat
+      SimilarItems.cosinusSimilarity(vec, vec) mustEqual 1.0
     }
 
     "create a RatingVector for an Item and all User that rated the item" in {
@@ -24,7 +24,7 @@ object SimilarItemsSpec extends Specification {
 
     "calculate the similarity of two items with the ratings of all users that rated this items" in {
 
-      SimilarItems.calculateItemSimilarityUsers(Users.all.drop(1), Items.first.get, Items.all.last) mustEqual 0.99410015.toFloat
+      SimilarItems.calculateItemSimilarityUsers(Users.all.drop(1), Items.first.get, Items.all.last) mustEqual 0.9941002434954168
     }
 
   }

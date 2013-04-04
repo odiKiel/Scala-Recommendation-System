@@ -4,6 +4,7 @@ object TestDatabase {
   def setup() = {
     Ratings.deleteAll
     SimilarItems.deleteAll
+    SimilarUsers.deleteAll
     Items.deleteAll
     Users.deleteAll
     val item1 = Items.create(Item(None, "Item1"))

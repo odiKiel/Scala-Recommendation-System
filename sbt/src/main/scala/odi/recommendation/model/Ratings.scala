@@ -1,16 +1,19 @@
 package odi.recommendation
 import scala.slick.driver.PostgresDriver.simple._
+import scala.slick.jdbc.{ GetResult, StaticQuery => Q }
+import Q.interpolation
 import Database.threadLocalSession
 
 
  // Definition of the USER_ITEMS table
+ //todo prediction!
 case class Rating(id: Option[Int] = None, itemId: Int, userId: Int, rating: Int, prediction: Boolean)
 object Ratings extends Table[Rating]("ratings") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def itemId = column[Int]("item_id") 
   def userId = column[Int]("user_id")
   def rating = column[Int]("rating")
-  def prediction = column[Boolean]("prodiction", O.Default(false))
+  def prediction = column[Boolean]("prediction", O.Default(false))
   def * = id.? ~ itemId ~ userId ~ rating ~ prediction <>(Rating, Rating.unapply _)
   def noID = itemId ~ userId ~ rating ~ prediction
 
@@ -44,7 +47,7 @@ object Ratings extends Table[Rating]("ratings") {
 
     db withSession {
         // define the query and what we want as result
-    	val query = for (u <-Ratings if u.userId === uid) yield u.id ~ u.itemId ~ u.userId ~ u.rating ~ u.prediction
+    	val query = (for {u <-Ratings if u.userId === uid} yield u.id ~ u.itemId ~ u.userId ~ u.rating ~ u.prediction).sortBy(_._2)
 
     	// map the results to a Bid object
     	val inter = query mapResult {
@@ -60,6 +63,20 @@ object Ratings extends Table[Rating]("ratings") {
 
     // return the found bid
     result
+  }
+
+  /*
+   find ratings from one user for items that are unknown to another user
+   */
+  def getUnknownItemsForUserByUser(uid1: Int, uid2: Int): List[Rating] = {
+    db withSession {
+      val q = Q.query[(Int, Int), (Int, Int, Int, Int, Boolean)]("select * from ratings where user_id = ? AND item_id NOT IN (select item_id from ratings where user_id = ?)")
+      val inter = q mapResult {
+    	  case(id, itemId, userId, rating, prediction) => Rating(Option(id), itemId, userId, rating, prediction);
+      }
+      inter.list(uid2, uid1)
+    }
+
   }
 
   def getByItemUser(iid: Int, uid: Int) : Option[Rating] = {

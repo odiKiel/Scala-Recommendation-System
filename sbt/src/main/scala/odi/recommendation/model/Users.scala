@@ -112,7 +112,7 @@ object Users extends Table[User]("users") {
 
   def all : List[User] = {
     db withSession {
-      val q = Users.map{u => u}
+      val q = Users.map({u => u}).sortBy(_.id)
       q.list
     }
   }
