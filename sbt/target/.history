@@ -393,3 +393,20 @@ test-only odi.recommendation.ItemBasedServiceSpec
 exit
 test-only odi.recommendation.ItemBasedServiceSpec
 exit
+console
+test-only odi.recommendation.SVDBasedServiceSpec
+exit
+test-only odi.recommendation.SVDBasedServiceSpec
+console
+test-only odi.recommendation.SVDBasedServiceSpec
+exit
+test-only odi.recommendation.SVDBasedServiceSpec
+console
+test-only odi.recommendation.RecommendationServiceSpec
+console
+exit
+test-only odi.recommendation.RecommendationServiceSpec
+exit
+test-only odi.recommendation.RecommendationServiceSpec
+exit
+test-only odi.recommendation.RecommendationServiceSpec

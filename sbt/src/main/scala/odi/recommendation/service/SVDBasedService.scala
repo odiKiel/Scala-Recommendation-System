@@ -5,7 +5,7 @@ import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
 import org.apache.commons.math3.linear._
 
-object SVDBasedService extends HttpServer {
+object SVDBasedService extends HttpServer with ListOperation {
   val name = "SVDBasedService"
 
   def apply(port: Int): Int = {
@@ -40,10 +40,23 @@ object SVDBasedService extends HttpServer {
   /*
    take all similar users, get their best rated items that are unknown to the user, sort them by rating
    */
+  //use only ratings that aren't predictions!
   def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
-    SimilarUsers.byUserId(userId)
-    Future.value(createHttpResponse("done"))
+    val predictions = collection.mutable.HashMap[Int, List[(Int, Double)]]()
+    for(s <- SimilarUsers.byUserId(userId, 5)){
+      val (similarUser, similarity) = s.similarityByUserId(userId).get
+      for(rating <- Ratings.getUnknownItemsForUserByUser(userId, similarUser.id.get))
+      {
+        predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (rating.rating, similarity))
+      }
+    }
+    val predictionList = predictions.map((i: (Int, List[(Int, Double)])) => ""+i._1+"#"+calculatePrediction(i._2)).toList
+    Future.value(createHttpResponse(Json.listToJson(predictionList)))
+  }
 
+  def calculatePrediction(topItems: List[(Int, Double)]): Double = {
+    val numerator = topItems.map((i: (Int, Double)) => i._1 * i._2).sum
+    (numerator / topItems.map(_._2).sum)
   }
   /*
 

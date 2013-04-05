@@ -67,10 +67,11 @@ object Ratings extends Table[Rating]("ratings") {
 
   /*
    find ratings from one user for items that are unknown to another user
+   use only ratings that aren't predictions!
    */
   def getUnknownItemsForUserByUser(uid1: Int, uid2: Int): List[Rating] = {
     db withSession {
-      val q = Q.query[(Int, Int), (Int, Int, Int, Int, Boolean)]("select * from ratings where user_id = ? AND item_id NOT IN (select item_id from ratings where user_id = ?)")
+      val q = Q.query[(Int, Int), (Int, Int, Int, Int, Boolean)]("select * from ratings where user_id = ? AND prediction = FALSE AND item_id NOT IN (select item_id from ratings where user_id = ? and prediction = false) order by rating")
       val inter = q mapResult {
     	  case(id, itemId, userId, rating, prediction) => Rating(Option(id), itemId, userId, rating, prediction);
       }

@@ -3,7 +3,7 @@ import org.jboss.netty.handler.codec.http.{HttpResponse}
 import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
 
-object ItemBasedService extends HttpServer {
+object ItemBasedService extends HttpServer with ListOperation {
   val name = "ItemBasedService"
 
   def apply(port: Int): Int = {
@@ -38,7 +38,7 @@ object ItemBasedService extends HttpServer {
       {
         if(item != itemUser && !(purchasedTogether.contains((item, itemUser)) || purchasedTogether.contains((itemUser, item)))) {
           localPurchasedTogether += ((item, itemUser))
-          itemUserHash += itemUser -> addToList(itemUserHash.get(itemUser), user)
+          itemUserHash += itemUser -> addToList[User](itemUserHash.get(itemUser), user)
         }
       }
 
@@ -49,14 +49,6 @@ object ItemBasedService extends HttpServer {
     Future.value(createHttpResponse("done"))
   }
 
-  def addToList(userList: Option[List[User]], user: User): List[User] = {
-    if(userList != None) {
-      userList.get :+ user
-    }
-    else {
-      List(user)
-    }
-  }
 
 
   // userItems -> SimilarItems - userItems -> calculate predictions
@@ -64,19 +56,16 @@ object ItemBasedService extends HttpServer {
   def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
 
     //save the items that are unknown together with the item that are known and their similarity values
-    val similarItems = collection.mutable.HashMap[Item, collection.mutable.LinkedList[(Item, Double)]]()
+    val similarItems = collection.mutable.HashMap[Item, List[(Item, Double)]]()
     val allItemsUser = Items.allItemsUser(userId)
 
     for(userItem: Item <- allItemsUser;
         similarItem: (Item, Double) <- userItem.similarItems) 
     {
-      if(!allItemsUser.contains(similarItem._1)) //item is unknown to the user
-          if(similarItems.contains(similarItem._1)) {
-            similarItems(similarItem._1).append(collection.mutable.LinkedList[(Item, Double)]((userItem, similarItem._2)))
-          }
-          else {
-            similarItems += (similarItem._1 -> collection.mutable.LinkedList[(Item, Double)]((userItem, similarItem._2))) 
-          }
+      if(!allItemsUser.contains(similarItem._1)) {//item is unknown to the user
+        similarItems += similarItem._1 -> addToList[(Item, Double)](similarItems.get(similarItem._1), (userItem, similarItem._2))
+
+      }
     }
 
     val recommendations = similarItems.map({case (item, similarList) => (""+item.id.get +"#" +calculatePrediction(userId, similarList.toList))})

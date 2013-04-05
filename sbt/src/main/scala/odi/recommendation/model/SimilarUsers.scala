@@ -4,9 +4,8 @@ import Database.threadLocalSession
 
 
 case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, similarity: Double) 
-/*
 {
-  def similarityByUserId(userId: Int): Option[(User, Float)] = {
+  def similarityByUserId(userId: Int): Option[(User, Double)] = {
     if(userId == userOneId) {
       Some((Users.get(userTwoId).get, similarity))
     }
@@ -20,7 +19,6 @@ case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, s
     }
   }
 }
-*/
 
 object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalculation {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
@@ -85,14 +83,14 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
     }
   }
 
-  def byUserId(userId: Int) : List[SimilarUser] = {
+  def byUserId(userId: Int, amount: Int) : List[SimilarUser] = {
 
     db withSession {
         // define the query and what we want as result
     	val query = for (s <-SimilarUsers if s.userOneId === userId || s.userTwoId === userId) yield s.id ~ s.userOneId ~ s.userTwoId ~ s.similarity 
 
     	
-    	val inter = query mapResult {
+    	val inter = query.take(amount) mapResult {
     	  case(id, userOneId, userTwoId, similarity) => SimilarUser(Option(id), userOneId, userTwoId, similarity)
     	}
 
