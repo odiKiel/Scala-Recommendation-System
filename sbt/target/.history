@@ -410,3 +410,5 @@ exit
 test-only odi.recommendation.RecommendationServiceSpec
 exit
 test-only odi.recommendation.RecommendationServiceSpec
+console
+exit
