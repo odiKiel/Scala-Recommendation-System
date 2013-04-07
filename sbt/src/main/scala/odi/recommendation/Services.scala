@@ -9,6 +9,7 @@ object Services {
       case "recommendationService" => "13000"
       case "itemBasedService" => "13100"
       case "svdBasedService" => "13200"
+      case "webService" => "10000"
     }
   }
 }
