@@ -2,10 +2,17 @@ package odi.recommendation
 import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
 
+import net.liftweb.json._
+import net.liftweb.json.Serialization.{read, write}
+import net.liftweb.json.JsonDSL._
 // Definition of the ITEMS table
-case class Item(id: Option[Int] = None, title: String) {
+case class Item(id: Option[Int] = None, title: String) extends ToJson{
   def similarItems: List[(Item, Double)] = {
     SimilarItems.byItemId(this.id.get).map((si: SimilarItem) => si.similarityByItemId(this.id.get).get)
+  }
+  def toJson = {
+    val json = ("id"->id.get)~("title"->title)
+    compact(render(json))
   }
 
 }
@@ -121,7 +128,13 @@ object Items extends Table[Item]("items") {
   }
 
   def deleteAll = {
-    all.foreach((u: Item) => delete(u.id.get))
+    db withSession {
+      val q = for { 
+        t <- Items 
+      } yield t 
+
+      q.mutate(_.delete) // deletes rows corresponding to query result 
+    }
   }
 }
 

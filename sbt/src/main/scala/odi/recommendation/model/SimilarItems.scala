@@ -202,8 +202,13 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
 
   def deleteAll = {
-    all.foreach((u: SimilarItem) => delete(u.id.get))
-  }
+    db withSession {
+      val q = for { 
+        t <- SimilarItems 
+      } yield t 
 
+      q.mutate(_.delete) // deletes rows corresponding to query result 
+    }
+  }
 
 }

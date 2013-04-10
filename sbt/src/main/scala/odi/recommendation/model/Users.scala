@@ -3,8 +3,17 @@ import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
 import scala.slick.driver.BasicInvokerComponent
 
+import net.liftweb.json._
+import net.liftweb.json.Serialization.{read, write}
+import net.liftweb.json.JsonDSL._
 // Definition of the USERS table
-case class User(id: Option[Int] = None, name: String)
+case class User(id: Option[Int] = None, name: String) extends ToJson {
+  def toJson = {
+    val json = ("id"->id.get)~("name"->name)
+    compact(render(json))
+  }
+
+}
 object Users extends Table[User]("users") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
@@ -119,7 +128,14 @@ object Users extends Table[User]("users") {
 
 
   def deleteAll = {
-    all.foreach((u: User) => delete(u.id.get))
+    db withSession {
+      val q = for { 
+        t <- Users 
+      } yield t 
+
+      q.mutate(_.delete) // deletes rows corresponding to query result 
+    }
   }
+
 
 }

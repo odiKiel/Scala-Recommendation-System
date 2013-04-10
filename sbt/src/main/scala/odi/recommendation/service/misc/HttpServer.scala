@@ -59,21 +59,30 @@ trait HttpServer {
     port
   }
   //val hosts = Map("updateService" -> "localhost:11000", "requestService" -> "localhost:12000")
+  //use put like post
   def routing(request: HttpRequest): Future[HttpResponse] = {
+    println("new request: "+request)
     val path = request.getUri().substring(1).split("/") // remove leading / and split
-    request.getMethod() match {
+    val response = request.getMethod() match {
       case Method.Post => callPostMethod(path, request.getContent().toString("UTF-8"))
+      case Method.Put => callPostMethod(path, request.getContent().toString("UTF-8"))
       case Method.Get => callGetMethod(path)
     }
+    println("response: "+response)
+    response
 
   }
 
   def createHttpResponse(value: String): HttpResponse = {
-    val response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
+    val response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
     val cb = ChannelBuffers.copiedBuffer(value,Charset.defaultCharset())
     response.setHeader(HttpHeaders.Names.CONTENT_LENGTH, cb.readableBytes())
     response.setContent(cb)
     response
+  }
+
+  def createErrorHttpResponse: HttpResponse = {
+    new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
   }
 
 

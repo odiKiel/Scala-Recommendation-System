@@ -1,22 +1,57 @@
 <html>
   <head>
+    <script src="/file/js/jquery-min.js"></script>
+    <script src="/file/js/underscore-min.js"></script>
+    <script src="/file/js/backbone-min.js"></script>
+    <script src="/file/js/application.js"></script>
+    <script src="/file/js/controllers/ratings.js"></script>
+    <script src="/file/js/models/rating.js"></script>
+    <script src="/file/js/models/item.js"></script>
+    <script src="/file/js/models/user.js"></script>
+    <script src="/file/js/collections/ratings.js"></script>
+    <script src="/file/js/collections/items.js"></script>
+    <script src="/file/js/collections/users.js"></script>
+    <script src="/file/js/views/index.js"></script>
+    <script src="/file/js/views/rating.js"></script>
   </head>
   <body>
-    test whup
-    <h1><a href="#">CloudEdit</a></h1>
-    <h2>A Backbone.js Rails Example by James Yu</h2>
+    <h1>Recommendation Test Website</h1>
 
     <div id="notice"></div>
     <div id="app"></div>
 
-    <script type="text/javascript">
-        $(function() {
-            App.init();
-        });
+    <script>
+
+    $(document).ready(function() {
+      $(function() {
+          App.init();
+      });
+    
+    })
     </script>
-    
-    <script src="/file/js/underscore-min.js"></script>
-    <script src="/file/js/backbone-min.js"></script>
-    
+
+    <!- views->   
+    <script type="text/html" id='rating'>
+      <input type ="text" id="ratingInput<%=rating.attributes.id%>" value="<%=rating.attributes.rating%>">
+    </script>
+    <script type="text/html" id='ratingTable'>
+<table cellspacing='0' cellpadding='0' border='1' >
+        <thead>
+            <tr>
+              <th></th>
+              <% _.each(items, function(item, key, list){ %>
+                <th><%=item.attributes.title%></th>
+                <%})%>
+
+            </tr>
+        </thead>
+        <tbody id='ratingInputs'>
+          
+    </tbody>
+</table>
+</script>
+
+           
+
   </body>
 </html>
