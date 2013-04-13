@@ -158,6 +158,18 @@ Information about which user likes which question and one or more preferred labe
 % Item5 & ? & 3 & 5 & 4 & 1\\ 
 % \end{tabular}
 
+  only use cosinus similarity if you have two or more ratings for an item
+  not enough ratings => no statement possible => save similarity of 0 (independence)
+
+  for each itemA
+    for each user that rated itemA
+      for each itemB that was rated by user
+        if not ratedTogether contains itemA and itemB 
+          add itemB to a hash that points to all users that rated this item
+    calculate item similarity with rating vector of itemA and all itemB
+    mark itemA as rated together with all itemB
+  
+
 
 %Find items that have similar ratings.
 %Calculate the similarity values for every item.

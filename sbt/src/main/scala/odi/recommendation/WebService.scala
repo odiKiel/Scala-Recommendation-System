@@ -1,5 +1,6 @@
 package odi.recommendation
-import org.jboss.netty.handler.codec.http.{HttpResponse}
+import org.jboss.netty.handler.codec.http.{HttpRequest, HttpResponse}
+import com.twitter.finagle.http.Method
 import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
 import java.io._
@@ -12,6 +13,8 @@ object WebService extends HttpServer {
   val name = "WebService"
   //for json parsing
   implicit val formats = DefaultFormats 
+  val recommendationServer = RecommendationService(Services("recommendationService").toInt)
+  val recommendationClient = new HttpClient("localhost:"+Services("recommendationService"))
 
   def apply(port: Int): Int = {
     super.apply(port, name)
@@ -54,7 +57,35 @@ object WebService extends HttpServer {
       case "" => getFile(Array("index.html"))
       case "data" => getData(path.tail)
       case "file" => getFile(path.tail)
+      case "calculate" => getCalculation(path.tail)
       case _ => Future.value(createHttpResponse("No such method"))
+    }
+  }
+
+  def getCalculation(path: Array[String]): Future[HttpResponse] = {
+    path.head match {
+      case "similarities" => {
+        var ret = new Promise[HttpResponse]
+        recommendationClient.get("/calculateSimilarities/") onSuccess { v =>
+          ret.setValue(createHttpResponse(v))
+        }
+        ret
+      }
+      case "recommendations" => {
+        var ret = new Promise[HttpResponse]
+        recommendationClient.get("/calculateUserPredictions/"+path.tail.head) onSuccess { v =>
+          ret.setValue(createHttpResponse(v))
+        }
+        ret
+      }
+      case "recommendationsItemBased" => {
+        var ret = new Promise[HttpResponse]
+        recommendationClient.get("/calculateUserPredictionsItemBased/"+path.tail.head) onSuccess { v =>
+          ret.setValue(createHttpResponse(v))
+        }
+        ret
+      }
+      case _ => Future.value(createHttpResponse("No such method WebService"))
     }
   }
 
@@ -86,6 +117,8 @@ object WebService extends HttpServer {
       case "ratings" => Ratings.all.map(_.toJson)
       case "items" => Items.all.map(_.toJson)
       case "users" => Users.all.map(_.toJson)
+      case "similarItems" => SimilarItems.all.map(_.toJson)
+      case "similarUsers" => SimilarUsers.all.map(_.toJson)
     }
     Future.value(createHttpResponse("["+response.mkString(", ")+"]"))
   }
@@ -96,6 +129,8 @@ object WebService extends HttpServer {
       case "ratings" => createHttpResponseForOption(Ratings.get(id))
       case "items" => createHttpResponseForOption(Items.get(id))
       case "users" => createHttpResponseForOption(Users.get(id))
+      case "similarItems" => createHttpResponseForOption(SimilarItems.get(id))
+      case "similarUsers" => createHttpResponseForOption(SimilarUsers.get(id))
     }
   }
 
@@ -108,6 +143,44 @@ object WebService extends HttpServer {
     }
   }
 
+  override def routing(request: HttpRequest): Future[HttpResponse] = {
+    println("new request: "+request)
+    val path = request.getUri().substring(1).split("/") // remove leading / and split
+    request.getMethod() match {
+      case Method.Post => callPostMethod(path, request.getContent().toString("UTF-8"))
+      case Method.Put => callPostMethod(path, request.getContent().toString("UTF-8"))
+      case Method.Get => callGetMethod(path)
+      case Method.Delete => callDeleteMethod(path, request.getContent().toString("UTF-8"))
+    }
+
+  }
+ 
+  def callDeleteMethod(path: Array[String], content: String): Future[HttpResponse] = {
+    if(path.head == "data") {
+      val model = path(1)
+      val id = path(2).toInt
+      val response = model match {
+        case "ratings" => {
+          Ratings.delete(id)
+          createHttpResponse("ok")
+        }
+        case "items" => {
+          Items.delete(id)
+          createHttpResponse("ok")
+        }
+        case "users" => {
+          Users.delete(id)
+          createHttpResponse("ok")
+        }
+        case _ => createHttpResponse("model not found")
+      }
+      Future.value(response)
+    }
+    else {
+      Future.value(createErrorHttpResponse)
+    }
+
+  }
 
 }
 

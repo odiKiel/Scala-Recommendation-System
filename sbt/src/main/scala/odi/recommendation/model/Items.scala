@@ -114,16 +114,17 @@ object Items extends Table[Item]("items") {
    * Delete a bid
    */
   def delete(id: Int) : Option[Item] = {
-    // get the bid we're deleting
     val result = get(id);
 
-    // delete the bid
+    //delete ratings and similaritems with this id
+    Ratings.deleteByItemId(id)
+    SimilarItems.deleteByItemId(id)
+
     val toDelete = Items where (_.id === id)
     db withSession {
       toDelete.delete
     }
 
-    // return deleted bid
     result
   }
 

@@ -25,7 +25,8 @@ object RecommendationService extends HttpServer {
     path.head match {
       case "calculateSimilarities" => getCalculateSimilarities(path)
       case "calculateUserPredictions" => getCalculateUserPredictions(path.tail.head.toInt, path.tail)
-      case _ => Future.value(createHttpResponse("No such method"))
+      case "calculateUserPredictionsItemBased" => getCalculateUserPredictionsItemBased(path.tail.head.toInt, path.tail)
+      case _ => Future.value(createHttpResponse("No such method RecommendationService"))
     }
   }
 
@@ -50,6 +51,14 @@ object RecommendationService extends HttpServer {
   def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
     svdClient.get("/calculateUserPredictions/"+userId) onSuccess { v =>
+      ret.setValue(createHttpResponse(v))
+    }
+    ret
+  }
+
+  def getCalculateUserPredictionsItemBased(userId: Int, path: Array[String]): Future[HttpResponse] = {
+    val ret = new Promise[HttpResponse]
+    itemClient.get("/calculateUserPredictions/"+userId) onSuccess { v =>
       ret.setValue(createHttpResponse(v))
     }
     ret

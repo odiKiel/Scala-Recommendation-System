@@ -63,13 +63,10 @@ trait HttpServer {
   def routing(request: HttpRequest): Future[HttpResponse] = {
     println("new request: "+request)
     val path = request.getUri().substring(1).split("/") // remove leading / and split
-    val response = request.getMethod() match {
+    request.getMethod() match {
       case Method.Post => callPostMethod(path, request.getContent().toString("UTF-8"))
-      case Method.Put => callPostMethod(path, request.getContent().toString("UTF-8"))
       case Method.Get => callGetMethod(path)
     }
-    println("response: "+response)
-    response
 
   }
 

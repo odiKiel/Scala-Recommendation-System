@@ -34,7 +34,7 @@ object SVDBasedService extends HttpServer with ListOperation {
     val svd = calculateSVD(userItemMatrix)
     val users2D = u2d(svd)
     SimilarUsers.calculateSimilarity(users2D)
-    Future.value(createHttpResponse("done"))
+    Future.value(createHttpResponse(Json.toJson(users2D)))
   }
 
   /*
@@ -50,13 +50,14 @@ object SVDBasedService extends HttpServer with ListOperation {
         predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (rating.rating, similarity))
       }
     }
-    val predictionList = predictions.map((i: (Int, List[(Int, Double)])) => ""+i._1+"#"+calculatePrediction(i._2)).toList
-    Future.value(createHttpResponse(Json.listToJson(predictionList)))
+    val predictionMap = predictions.flatMap((i: (Int, List[(Int, Double)])) => Map(i._1.toString->calculatePrediction(i._2).toString))
+    Future.value(createHttpResponse(Json.toJson(predictionMap)))
   }
 
   def calculatePrediction(topItems: List[(Int, Double)]): Double = {
     val numerator = topItems.map((i: (Int, Double)) => i._1 * i._2).sum
-    (numerator / topItems.map(_._2).sum)
+    var value = (numerator / topItems.map(_._2).sum)
+    if(value < 0) 0 else value
   }
   /*
 

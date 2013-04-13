@@ -8,8 +8,13 @@ App.Views.Rating = Backbone.View.extend({
     },
     save: function(event){ 
          var value = $(event.currentTarget).val()
-         this.model.set({'rating': parseInt(value)}) 
-         this.model.save()
+         if(value == "") {
+           this.model.destroy()
+         }
+         else {
+           this.model.set({'rating': parseInt(value)}) 
+           this.model.save()
+         }
     },
     render: function() {
       var template = $("#rating").html();

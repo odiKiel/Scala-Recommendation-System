@@ -3,49 +3,86 @@
     <script src="/file/js/jquery-min.js"></script>
     <script src="/file/js/underscore-min.js"></script>
     <script src="/file/js/backbone-min.js"></script>
+    <script src="/file/js/jquery-flot-min.js">
+    <!-[if lte IE 8]->
+      <script language="javascript" type="text/javascript" src="/file/js/excanvas.min.js"></script>
+    <!-[endif]->
     <script src="/file/js/application.js"></script>
     <script src="/file/js/controllers/ratings.js"></script>
     <script src="/file/js/models/rating.js"></script>
     <script src="/file/js/models/item.js"></script>
     <script src="/file/js/models/user.js"></script>
+    <script src="/file/js/models/similarUser.js"></script>
+    <script src="/file/js/models/similarItem.js"></script>
     <script src="/file/js/collections/ratings.js"></script>
     <script src="/file/js/collections/items.js"></script>
     <script src="/file/js/collections/users.js"></script>
-    <script src="/file/js/views/index.js"></script>
+    <script src="/file/js/collections/similarUsers.js"></script>
+    <script src="/file/js/collections/similarItems.js"></script>
+    <script src="/file/js/views/table.js"></script>
     <script src="/file/js/views/rating.js"></script>
+    <script src="/file/js/views/similar.js"></script>
+    <script src="/file/js/views/recommendation.js"></script>
+    <script src="/file/js/views/recommendationIndex.js"></script>
   </head>
   <body>
     <h1>Recommendation Test Website</h1>
 
-    <div id="notice"></div>
-    <div id="app"></div>
+    <div id="app">
+
+    </div>
 
     <script>
 
     $(document).ready(function() {
-      $(function() {
-          App.init();
-      });
-    
+      App.init();
     })
     </script>
 
     <!- views->   
+    <script type="text/html" id='ratingTableApp'>
+      <div id="tableControls">
+        <input type="submit" value="Add User" id="addUser">
+        <input type="submit" value="Delete Last User" id="deleteUser">
+        <input type="submit" value="Add Item" id="addItem">
+        <input type="submit" value="Delete Last Item" id="deleteItem">
+      </div>
+      <a href="#" id="calculateSimilarities">Calculate Similar Items/Users</a>
+      <img src="/file/ajax-loader.gif" id="loading" style="display: none;">
+      <div id="placeholder" style="width:600px;height:300px"></div>
+      <div id="results"></div>
+      <div id="controls"></div>
+    </script>
+
+
+    <script type="text/html" id='recommendationInput'>
+      <select name="recommend">
+        <%_.each(users.models, function(user, key, list){%>
+          <option value="<%=user.id%>"><%=user.attributes.name%></option>
+        <%})%>
+      </select>
+      <input type ="submit" value="Get Recommendations">
+    </script>
+    <script type="text/html" id='tableTd'>
+      <%=value%>
+    </script>
     <script type="text/html" id='rating'>
       <input type ="text" id="ratingInput<%=rating.attributes.id%>" value="<%=rating.attributes.rating%>">
     </script>
-    <script type="text/html" id='ratingTable'>
-<table cellspacing='0' cellpadding='0' border='1' >
+    <script type="text/html" id='tableWithHeader'>
+      <table cellspacing='0' cellpadding='0' border='1' >
         <thead>
             <tr>
-              <th></th>
-              <% _.each(items, function(item, key, list){ %>
-                <th><%=item.attributes.title%></th>
+              <%if(emptyCorner == undefined){%>
+                <th></th>
+              <%}%>
+              <% _.each(headers, function(header, key, list){ %>
+                <th><%=header%></th>
                 <%})%>
 
             </tr>
         </thead>
-        <tbody id='ratingInputs'>
+        <tbody id=<%=tbodyId%>>
           
     </tbody>
 </table>

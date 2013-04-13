@@ -96,18 +96,15 @@ object Users extends Table[User]("users") {
   /**
    * Delete a bid
    */
-  def delete(uid: Int) : Option[User] = {
-    // get the bid we're deleting
-    val result = get(uid);
+  def delete(uid: Int) = {
+    Ratings.deleteByUserId(uid)
+    SimilarUsers.deleteByUserId(uid)
 
-    // delete the bid
     val toDelete = Users where (_.id === uid)
     db withSession {
       toDelete.delete
     }
 
-    // return deleted bid
-    result
   }
 
   def first : Option[User] = {

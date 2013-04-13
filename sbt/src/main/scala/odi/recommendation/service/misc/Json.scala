@@ -14,9 +14,9 @@ object Json {
     for {JString(value) <- json} yield value
   }
 
-  def listToJson(list: List[String]): String = {
-    implicit val formats = Serialization.formats(NoTypeHints)
-    write(list)
+  def toJson[A <: AnyRef](element: A): String = {
+    implicit val formats = net.liftweb.json.DefaultFormats
+    write(element)
   }
 
 }

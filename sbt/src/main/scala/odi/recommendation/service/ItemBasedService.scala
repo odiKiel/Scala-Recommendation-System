@@ -20,7 +20,7 @@ object ItemBasedService extends HttpServer with ListOperation {
     path.head match {
       case "calculateSimilarItems" => getCalculateSimilarItems(path)
       case "calculateUserPredictions" => getCalculateUserPredictions(path.tail.head.toInt, path.tail)
-      case _ => Future.value(createHttpResponse("No such method"))
+      case _ => Future.value(createHttpResponse("No such method ItemBasedService"))
     }
   }
 
@@ -62,23 +62,28 @@ object ItemBasedService extends HttpServer with ListOperation {
     for(userItem: Item <- allItemsUser;
         similarItem: (Item, Double) <- userItem.similarItems) 
     {
-      if(!allItemsUser.contains(similarItem._1)) {//item is unknown to the user
+      if(!allItemsUser.contains(similarItem._1) && similarItem._2 != 0) {//item is unknown to the user and similarity is not independence
         similarItems += similarItem._1 -> addToList[(Item, Double)](similarItems.get(similarItem._1), (userItem, similarItem._2))
 
       }
     }
 
-    val recommendations = similarItems.map({case (item, similarList) => (""+item.id.get +"#" +calculatePrediction(userId, similarList.toList))})
+    val recommendations = similarItems.flatMap({case (item, similarList) => Map(item.id.get.toString -> calculatePrediction(userId, similarList.toList).toString)})
 
-    Future.value(createHttpResponse(Json.listToJson(recommendations.toList)))
+    Future.value(createHttpResponse(Json.toJson(recommendations)))
   }
 
   //calculate the prediction for one item from one User by the items that he already rated
   def calculatePrediction(userId: Int, similarItems: List[(Item, Double)]): Double = {
-    val numerator = similarItems.map({case (item, similarity) => {
-        Ratings.getByItemUser(item.id.get, userId).get.rating * similarity
-      }}).sum 
-    (numerator / similarItems.map(_._2).sum)
+    similarItems.length match {
+      case 0 => 0
+      case _ => {
+        val numerator = similarItems.map({case (item, similarity) => {
+          Ratings.getByItemUser(item.id.get, userId).get.rating * similarity
+        }}).sum 
+        (numerator / similarItems.map(_._2).sum)
+      }
+    }
   }
 
 }

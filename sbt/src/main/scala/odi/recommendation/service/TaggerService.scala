@@ -36,7 +36,7 @@ object TaggerService extends HttpServer {
   def postTagText(args: Array[String], value: String): Future[HttpResponse] = {
     val r = new Promise[HttpResponse]
     tagText(value) onSuccess { tags => 
-      r.setValue(createHttpResponse(Json.listToJson(tags.toList)))
+      r.setValue(createHttpResponse(Json.toJson(tags.toList)))
     }
     r
   }

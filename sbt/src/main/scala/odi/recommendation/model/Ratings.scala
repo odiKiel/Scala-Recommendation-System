@@ -182,6 +182,25 @@ object Ratings extends Table[Rating]("ratings") {
     // return deleted bid
     result
   }
+
+  def deleteByUserId(uid: Int) = {
+
+    val toDelete = Ratings where (_.userId === uid)
+    db withSession {
+      toDelete.delete
+    }
+
+  }
+
+  def deleteByItemId(iid: Int) = {
+    val toDelete = Ratings where (_.itemId === iid)
+    db withSession {
+      toDelete.delete
+    }
+
+    // return deleted bid
+  }
+
   def deleteAll = {
     db withSession {
       val q = for { 

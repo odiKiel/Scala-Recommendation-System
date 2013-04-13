@@ -2,9 +2,16 @@ package odi.recommendation
 import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
 
+import net.liftweb.json._
+import net.liftweb.json.Serialization.{read, write}
+import net.liftweb.json.JsonDSL._
 
-case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, similarity: Double) 
-{
+case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, similarity: Double) extends ToJson {
+  def toJson = {
+    val json = ("id"->id.get)~("userOneId"->userOneId)~("userTwoId"->userTwoId)~("similarity"->similarity)
+    compact(render(json))
+  }
+
   def similarityByUserId(userId: Int): Option[(User, Double)] = {
     if(userId == userOneId) {
       Some((Users.get(userTwoId).get, similarity))
@@ -126,7 +133,7 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
 
   def all : List[SimilarUser] = {
     db withSession {
-      val q = SimilarUsers.map{u => u}
+      val q = SimilarUsers.map{u => u}.sortBy(_.userTwoId).sortBy(_.userOneId)
       q.list
     }
   }
@@ -138,7 +145,7 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
    */
   def createOrUpdate(similarUser: SimilarUser): SimilarUser = {
     val oldSimilarUser: Option[SimilarUser] = getByUserUser(similarUser.userOneId, similarUser.userTwoId)
-    if(oldSimilarUser == None || Math.abs(oldSimilarUser.get.similarity - similarUser.similarity) > 0.01) {
+    if(oldSimilarUser == None ) {
       var id: Int = -1;
 
       // start a db session
@@ -153,7 +160,16 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
       new SimilarUser(Option(id), similarUser.userOneId, similarUser.userTwoId, similarUser.similarity)
     }
     else {
-      oldSimilarUser.get
+      if(Math.abs(oldSimilarUser.get.similarity - similarUser.similarity) > 0.01) {
+        db withSession {
+          val query = for (s <-SimilarUsers if s.userOneId === similarUser.userOneId && s.userTwoId === similarUser.userTwoId) yield s.userOneId ~ s.userTwoId ~ s.similarity
+          query.update((similarUser.userOneId, similarUser.userTwoId, similarUser.similarity))
+        }
+        similarUser
+      }
+      else {
+        oldSimilarUser.get
+      }
     }
   }
 
@@ -198,6 +214,16 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
 
       q.mutate(_.delete) // deletes rows corresponding to query result 
     }
+  }
+
+  def deleteByUserId(iid: Int) = {
+    db withSession {
+      val q = for (t <- SimilarUsers if t.userOneId === iid || t.userTwoId === iid) yield t 
+
+      q.mutate(_.delete) // deletes rows corresponding to query result 
+    }
+
+
   }
 
 }
