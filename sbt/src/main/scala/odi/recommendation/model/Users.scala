@@ -68,25 +68,19 @@ object Users extends Table[User]("users") {
     }
   }
 
-  def usersForItemId(itemId: Int) : List[User] = {
-    var result:List[User] = List[User]()
-
+  def userIdsForItemId(itemId: Int) : List[Int] = {
     db withSession {
         // define the query and what we want as result
     	val query = for (r <-Ratings if r.itemId === itemId;
-                       u <- Users if u.id === r.userId) yield u.id ~ u.name ~ u.averageRating
+                       u <- Users if u.id === r.userId) yield u.id 
 
     	// map the results to a Bid object
     	val inter = query mapResult {
-    	  case(id, name, averageRating) => Option(User(Option(id), name, averageRating))
+    	  case(id) => id
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
-      //if(inter.list.length > 0) {
-        result = inter.list.flatten
-      //}
+      inter.list
     }
-    result
   }
 
 

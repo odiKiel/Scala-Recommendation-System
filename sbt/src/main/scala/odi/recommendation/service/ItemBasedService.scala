@@ -26,28 +26,29 @@ object ItemBasedService extends HttpServer with ListOperation {
 
   //for each item that is connectet with a user find all items from the user and calculate the similarity with the original item
   //should work with a futurepool
+  //create itemIdUserId hash as itemId -> (Rating, Rating) even better create two vectors itemVector++currentUserRating, itemUserIdVector++curentUserRatnig
   def getCalculateSimilarItems(path: Array[String]): Future[HttpResponse] = {
-    val items: List[Item] = Items.all
-    val purchasedTogether = collection.mutable.Set[(Item, Item)]() //all items that where purchased together by one or more users
+    val items: List[Int] = Items.allIds
+    val purchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together by one or more users
 
-    // log fortestting
+    // log for testing
     var i = 1
-    for(item: Item <- items) {
+    for(itemId: Int <- items) {
       println("working on item: "+i)
       i+=1
-      val itemUserHash = collection.mutable.HashMap[Item, List[User]]()
-      val localPurchasedTogether = collection.mutable.Set[(Item, Item)]() //all items that where purchased together with the current item use this for easy creation of purchasedTogether
-      for(user: User <- Users.usersForItemId(item.id.get);
-          itemUser: Item <- Items.allItemsUser(user.id.get))
+      val itemIdUserIdHash = collection.mutable.HashMap[Int, List[Int]]()
+      val localPurchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together with the current item use this for easy creation of purchasedTogether
+      for(userId: Int <- Users.userIdsForItemId(itemId);
+          itemUserId: Int <- Items.allItemIdsUserId(userId))
       {
-        if(item != itemUser && !(purchasedTogether.contains((item, itemUser)) || purchasedTogether.contains((itemUser, item)))) {
-          localPurchasedTogether += ((item, itemUser))
-          itemUserHash += itemUser -> addToList[User](itemUserHash.get(itemUser), user)
+        if(itemId != itemUserId && !(purchasedTogether.contains((itemId, itemUserId)) || purchasedTogether.contains((itemUserId, itemId)))) {
+          localPurchasedTogether += ((itemId, itemUserId))
+          itemIdUserIdHash += itemUserId -> addToList[Int](itemIdUserIdHash.get(itemUserId), userId)
         }
       }
 
       purchasedTogether ++= localPurchasedTogether
-      SimilarItems.calculateSimilarity(item, itemUserHash) 
+      SimilarItems.calculateSimilarity(itemId, itemIdUserIdHash) 
     }
 
     Future.value(createHttpResponse("done"))
@@ -60,31 +61,31 @@ object ItemBasedService extends HttpServer with ListOperation {
   def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
 
     //save the items that are unknown together with the item that are known and their similarity values
-    val similarItems = collection.mutable.HashMap[Item, List[(Item, Double)]]()
-    val allItemsUser = Items.allItemsUser(userId)
+    val similarItems = collection.mutable.HashMap[Int, List[(Int, Double)]]()
+    val allItemsUser = Items.allItemIdsUserId(userId)
 
-    for(userItem: Item <- allItemsUser;
-        (similarItem, similarity) <- userItem.similarItems) 
+    for(userItemId: Int <- allItemsUser;
+        (similarItemId, similarity) <- SimilarItems.byItemId(userItemId)) 
     {
-      if(!allItemsUser.contains(similarItem) && similarity > 0) {//item is unknown to the user and similarity is not independence
-        similarItems += similarItem -> addToList[(Item, Double)](similarItems.get(similarItem), (userItem, similarity))
+      if(!allItemsUser.contains(similarItemId) && similarity > 0) {//item is unknown to the user and similarity is not independence
+        similarItems += similarItemId -> addToList[(Int, Double)](similarItems.get(similarItemId), (userItemId, similarity))
 
       }
     }
 
-    val recommendations = similarItems.flatMap({case (item, similarList) => Map(item.id.get.toString -> calculatePrediction(userId, similarList.toList).toString)})
+    val recommendations = similarItems.flatMap({case (itemId: Int, similarItemList: List[(Int, Double)]) => Map(itemId.toString -> calculatePrediction(userId, similarItemList).toString)})
 
     Future.value(createHttpResponse(Json.toJson(recommendations)))
   }
 
   //calculate the prediction for one item from one User by the items that he already rated
   //integrate the average rating
-  def calculatePrediction(userId: Int, similarItems: List[(Item, Double)]): Double = {
+  def calculatePrediction(userId: Int, similarItems: List[(Int, Double)]): Double = {
     similarItems.length match {
       case 0 => 0
       case _ => {
-        val numerator = similarItems.map({case (item, similarity) => {
-          Ratings.byItemIdUserId(item.id.get, userId).get.rating * similarity
+        val numerator = similarItems.map({case (itemId, similarity) => {
+          Ratings.byItemIdUserId(itemId, userId).get.rating * similarity
         }}).sum 
         (numerator / similarItems.map(_._2).sum)
       }

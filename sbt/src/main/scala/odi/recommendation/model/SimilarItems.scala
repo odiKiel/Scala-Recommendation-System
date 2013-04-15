@@ -13,13 +13,13 @@ case class SimilarItem(id: Option[Int] = None, itemOneId: Int, itemTwoId: Int, s
     compact(render(json))
   }
 
-  def similarityByItemId(itemId: Int): Option[(Item, Double)] = {
+  def similarityByItemId(itemId: Int): Option[(Int, Double)] = {
     if(itemId == itemOneId) {
-      Some((Items.get(itemTwoId).get, similarity))
+      Some((itemTwoId, similarity))
     }
     else {
       if(itemId == itemTwoId) {
-        Some((Items.get(itemOneId).get, similarity))
+        Some((itemOneId, similarity))
       }
       else {
         None
@@ -90,19 +90,26 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     }
   }
 
-  def byItemId(itemId: Int) : List[SimilarItem] = {
+  //returns a list of ItemId, Similarity
+  def byItemId(itemId: Int) : List[(Int, Double)] = {
 
     db withSession {
         // define the query and what we want as result
-    	val query = for (s <-SimilarItems if s.itemOneId === itemId || s.itemTwoId === itemId) yield s.id ~ s.itemOneId ~ s.itemTwoId ~ s.similarity 
-
+    	val queryItemOne = for (s <-SimilarItems if s.itemOneId === itemId ) yield s.itemOneId ~ s.similarity 
+      val queryItemTwo = for (s <-SimilarItems if s.itemTwoId === itemId ) yield s.itemTwoId ~ s.similarity
     	
-    	val inter = query mapResult {
-    	  case(id, itemOneId, itemTwoId, similarity) => SimilarItem(Option(id), itemOneId, itemTwoId, similarity)
+    	val listOne = queryItemOne mapResult {
+    	  case(itemOneId, similarity) => (itemOneId, similarity)
     	}
+      val listTwo = queryItemTwo mapResult {
+        case(itemTwoId, similarity) => (itemTwoId, similarity)
+      }
+
 
     	// check if there is one in the list and return it, or None otherwise
-    	inter.list 
+    	val listOneResult = listOne.list 
+      val listTwoResult = listTwo.list
+      listOneResult++listTwoResult
     }
 
   }
@@ -203,15 +210,19 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
   }
 
-  def calculateSimilarity(item: Item, similar: collection.mutable.HashMap[Item, List[User]]) = {
-    similar.foreach((t: (Item, List[User])) => 
-      if(t._2.length < 2) {
+  def calculateSimilarity(itemId: Int, itemIdUserIdHash: collection.mutable.HashMap[Int, List[Int]]) = {
+    println("calculate similarity")
+    var i=1
+    itemIdUserIdHash.foreach{case(currentItemId: Int, userIdList: List[Int]) => 
+      println("calculate similarity number: "+i)
+      i+=1
+      if(userIdList.length < 2) {
         //not enough ratings => no statement possible => save similarity of 0 (independence)
         SimilarItems.createOrUpdate(
           SimilarItem(
             None,
-            item.id.get,
-            t._1.id.get,
+            itemId,
+            currentItemId,
             0
           )
         )
@@ -220,27 +231,29 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
         SimilarItems.createOrUpdate(
           SimilarItem(
             None, 
-            item.id.get, 
-            t._1.id.get, 
-            calculateItemSimilarityUsers(t._2, item, t._1)
+            itemId, 
+            currentItemId, 
+            calculateItemSimilarityUsers(userIdList, itemId, currentItemId)
           )
         )
       }
-    )
+    }
   }
 
   //calculate the similarity between two items with the users that rated both items
-  def calculateItemSimilarityUsers(userList: List[User], item1: Item, item2: Item): Double = {
-    cosinusSimilarity(createRatingVector(item1, userList), createRatingVector(item2, userList))
+  def calculateItemSimilarityUsers(userIdList: List[Int], item1Id: Int, item2Id: Int): Double = {
+    cosinusSimilarity(createRatingVector(item1Id, userIdList), createRatingVector(item2Id, userIdList))
   }
 
-  def createRatingVector(item: Item, userList: List[User]): Vector[Double] = {
-    val itemId = item.id.get
-    userList match{
+  def createRatingVector(itemId: Int, userIdList: List[Int]): Vector[Double] = {
+    println("create rating vector")
+    val result = userIdList match{
       case Nil => Vector[Double]()
-      case head::Nil => Vector[Double](Ratings.byItemIdUserId(itemId, head.id.get).get.rating.toDouble)
-      case head::tail => Ratings.byItemIdUserId(itemId, head.id.get).get.rating.toDouble +: createRatingVector(item, tail)
+      case head::Nil => Vector[Double](Ratings.byItemIdUserId(itemId, head).get.rating.toDouble)
+      case head::tail => Ratings.byItemIdUserId(itemId, head).get.rating.toDouble +: createRatingVector(itemId, tail)
     }
+    println("done creating rating vector")
+    result
   }
 
 

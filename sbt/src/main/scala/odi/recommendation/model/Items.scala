@@ -7,10 +7,8 @@ import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
 // Definition of the ITEMS table
 case class Item(id: Option[Int] = None, title: String) extends ToJson{
-  def similarItems: List[(Item, Double)] = {
-    SimilarItems.byItemId(this.id.get).map((si: SimilarItem) => {
-        si.similarityByItemId(this.id.get).get
-    })
+  def similarItems: List[(Int, Double)] = {
+    SimilarItems.byItemId(this.id.get)
   }
   def toJson = {
     val json = ("id"->id.get)~("title"->title)
@@ -64,26 +62,36 @@ object Items extends Table[Item]("items") {
     }
   }
 
-  //get all items from a specific user
-  def allItemsUser(userId: Int) : List[Item] = {
-    var result:List[Item] = List[Item]()
-
+  def allIds : List[Int] = {
     db withSession {
         // define the query and what we want as result
-    	val query = for (r <-Ratings if r.userId === userId;
-                       i <- Items if i.id === r.itemId) yield i.id ~ i.title
+    	val query = for (r <-Items) yield r.id
 
     	// map the results to a Bid object
-    	val inter = query mapResult {
-    	  case(id, title) => Option(Item(Option(id), title))
+      val inter = query mapResult {
+    	  case(id) => id
     	}
 
     	// check if there is one in the list and return it, or None otherwise
-      if(inter.list.length > 0) {
-        result = inter.list.flatten
-      }
+      inter.list
     }
-    result
+  }
+
+  //get all items from a specific user
+  def allItemIdsUserId(userId: Int) : List[Int] = {
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (r <-Ratings if r.userId === userId;
+                       i <- Items if i.id === r.itemId) yield i.id 
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id) => id
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      inter.list
+    }
   }
 
   def first : Option[Item] = {
