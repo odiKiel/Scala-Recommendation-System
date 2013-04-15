@@ -7,18 +7,34 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
 // Definition of the USERS table
-case class User(id: Option[Int] = None, name: String) extends ToJson {
+case class User(id: Option[Int] = None, name: String, averageRating: Option[Double]) extends ToJson {
+  lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
+                         driver="org.postgresql.Driver",
+                         user="oliver_diestel",
+                         password="")
+
   def toJson = {
     val json = ("id"->id.get)~("name"->name)
     compact(render(json))
+  }
+
+  def calculateAverageRating = {
+    val ratings = Ratings.byUserId(id.get)
+    val averageRating = ratings.map(_.rating).sum / ratings.length.toDouble
+    db withSession {
+      val query = for (u <-Users if u.id === id ) yield u.averageRating 
+      query.update((Some(averageRating)))
+    }
+    averageRating
   }
 
 }
 object Users extends Table[User]("users") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
+  def averageRating = column[Option[Double]]("average_rating", O.Nullable)
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name <>(User, User.unapply _)
+  def * = id.? ~ name ~ averageRating <> (User, User.unapply _)
   def noID = name 
 
   lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
@@ -36,11 +52,11 @@ object Users extends Table[User]("users") {
 
     db withSession {
         // define the query and what we want as result
-    	val query = for (u <-Users if u.id === uid) yield u.id ~ u.name 
+    	val query = for (u <-Users if u.id === uid) yield u.id ~ u.name ~ u.averageRating
 
     	// map the results to a Bid object
     	val inter = query mapResult {
-    	  case(id, name) => Option(User(Option(id), name))
+    	  case(id, name, averageRating) => Option(User(Option(id), name, averageRating))
     	}
 
     	// check if there is one in the list and return it, or None otherwise
@@ -52,23 +68,23 @@ object Users extends Table[User]("users") {
     }
   }
 
-  def usersForItem(item: Item) : List[User] = {
+  def usersForItemId(itemId: Int) : List[User] = {
     var result:List[User] = List[User]()
 
     db withSession {
         // define the query and what we want as result
-    	val query = for (r <-Ratings if r.itemId === item.id;
-                       u <- Users if u.id === r.userId) yield u.id ~ u.name
+    	val query = for (r <-Ratings if r.itemId === itemId;
+                       u <- Users if u.id === r.userId) yield u.id ~ u.name ~ u.averageRating
 
     	// map the results to a Bid object
     	val inter = query mapResult {
-    	  case(id, name) => Option(User(Option(id), name))
+    	  case(id, name, averageRating) => Option(User(Option(id), name, averageRating))
     	}
 
     	// check if there is one in the list and return it, or None otherwise
-      if(inter.list.length > 0) {
+      //if(inter.list.length > 0) {
         result = inter.list.flatten
-      }
+      //}
     }
     result
   }
@@ -89,7 +105,7 @@ object Users extends Table[User]("users") {
       id = idQuery.list().head
     }
     // create a bid to return
-    new User(Option(id), user.name)
+    new User(Option(id), user.name, None)
   }
 
 
@@ -109,7 +125,7 @@ object Users extends Table[User]("users") {
 
   def first : Option[User] = {
     db withSession {
-      val q = Users.map{ u => u}.take(1)
+      val q = Users.map{ u => u}.sortBy(_.id).take(1)
       q.list.headOption
     }
   }
@@ -134,5 +150,8 @@ object Users extends Table[User]("users") {
     }
   }
 
+  def calculateAverageRating = {
+    Users.all.foreach((user: User) => user.calculateAverageRating)
+  }
 
 }

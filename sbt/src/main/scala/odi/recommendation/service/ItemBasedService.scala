@@ -30,10 +30,14 @@ object ItemBasedService extends HttpServer with ListOperation {
     val items: List[Item] = Items.all
     val purchasedTogether = collection.mutable.Set[(Item, Item)]() //all items that where purchased together by one or more users
 
+    // log fortestting
+    var i = 1
     for(item: Item <- items) {
+      println("working on item: "+i)
+      i+=1
       val itemUserHash = collection.mutable.HashMap[Item, List[User]]()
       val localPurchasedTogether = collection.mutable.Set[(Item, Item)]() //all items that where purchased together with the current item use this for easy creation of purchasedTogether
-      for(user: User <- Users.usersForItem(item);
+      for(user: User <- Users.usersForItemId(item.id.get);
           itemUser: Item <- Items.allItemsUser(user.id.get))
       {
         if(item != itemUser && !(purchasedTogether.contains((item, itemUser)) || purchasedTogether.contains((itemUser, item)))) {
@@ -60,10 +64,10 @@ object ItemBasedService extends HttpServer with ListOperation {
     val allItemsUser = Items.allItemsUser(userId)
 
     for(userItem: Item <- allItemsUser;
-        similarItem: (Item, Double) <- userItem.similarItems) 
+        (similarItem, similarity) <- userItem.similarItems) 
     {
-      if(!allItemsUser.contains(similarItem._1) && similarItem._2 != 0) {//item is unknown to the user and similarity is not independence
-        similarItems += similarItem._1 -> addToList[(Item, Double)](similarItems.get(similarItem._1), (userItem, similarItem._2))
+      if(!allItemsUser.contains(similarItem) && similarity > 0) {//item is unknown to the user and similarity is not independence
+        similarItems += similarItem -> addToList[(Item, Double)](similarItems.get(similarItem), (userItem, similarity))
 
       }
     }
@@ -74,12 +78,13 @@ object ItemBasedService extends HttpServer with ListOperation {
   }
 
   //calculate the prediction for one item from one User by the items that he already rated
+  //integrate the average rating
   def calculatePrediction(userId: Int, similarItems: List[(Item, Double)]): Double = {
     similarItems.length match {
       case 0 => 0
       case _ => {
         val numerator = similarItems.map({case (item, similarity) => {
-          Ratings.getByItemUser(item.id.get, userId).get.rating * similarity
+          Ratings.byItemIdUserId(item.id.get, userId).get.rating * similarity
         }}).sum 
         (numerator / similarItems.map(_._2).sum)
       }

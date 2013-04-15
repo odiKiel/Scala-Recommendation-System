@@ -12,13 +12,13 @@ case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, s
     compact(render(json))
   }
 
-  def similarityByUserId(userId: Int): Option[(User, Double)] = {
+  def similarityByUserId(userId: Int): Option[(Int, Double)] = {
     if(userId == userOneId) {
-      Some((Users.get(userTwoId).get, similarity))
+      Some((userTwoId, similarity))
     }
     else {
       if(userId == userTwoId) {
-        Some((Users.get(userOneId).get, similarity))
+        Some((userOneId, similarity))
       }
       else {
         None

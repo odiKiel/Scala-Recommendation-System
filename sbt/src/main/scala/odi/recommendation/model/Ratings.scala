@@ -50,7 +50,7 @@ object Ratings extends Table[Rating]("ratings") {
 
   }
 
-  def getByUser(uid: Int) : List[Rating] = {
+  def byUserId(uid: Int) : List[Rating] = {
     var result:List[Rating] = List[Rating]()
 
     db withSession {
@@ -88,7 +88,7 @@ object Ratings extends Table[Rating]("ratings") {
 
   }
 
-  def getByItemUser(iid: Int, uid: Int) : Option[Rating] = {
+  def byItemIdUserId(iid: Int, uid: Int) : Option[Rating] = {
     var result:Option[Rating] = None;
 
     db withSession {
@@ -141,7 +141,7 @@ object Ratings extends Table[Rating]("ratings") {
    * Create or update rating if it exists
    */
   def create(rating: Rating): Rating = {
-    val ratingOption = getByItemUser(rating.itemId, rating.userId)
+    val ratingOption = byItemIdUserId(rating.itemId, rating.userId)
 
     if(ratingOption == None) {
       var id: Int = -1;

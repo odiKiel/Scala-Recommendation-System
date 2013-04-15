@@ -39,25 +39,39 @@ object SVDBasedService extends HttpServer with ListOperation {
 
   /*
    take all similar users, get their best rated items that are unknown to the user, sort them by rating
+   only use users with similarities > 0
    */
   //use only ratings that aren't predictions!
   def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
-    val predictions = collection.mutable.HashMap[Int, List[(Int, Double)]]()
+    val predictions = collection.mutable.HashMap[Int, List[(Int, Int, Double)]]()
     for(s <- SimilarUsers.byUserId(userId, 5)){
-      val (similarUser, similarity) = s.similarityByUserId(userId).get
-      for(rating <- Ratings.getUnknownItemsForUserByUser(userId, similarUser.id.get))
-      {
-        predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (rating.rating, similarity))
+      val (similarUserId, similarity) = s.similarityByUserId(userId).get
+      if(similarity > 0) { 
+        for(rating <- Ratings.getUnknownItemsForUserByUser(userId, similarUserId))
+        {
+          predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (similarUserId, rating.rating, similarity))
+        }
       }
     }
-    val predictionMap = predictions.flatMap((i: (Int, List[(Int, Double)])) => Map(i._1.toString->calculatePrediction(i._2).toString))
+    val predictionMap = predictions.flatMap((i: (Int, List[(Int, Int, Double)])) => Map(i._1.toString->calculatePrediction(userId, i._2).toString))
     Future.value(createHttpResponse(Json.toJson(predictionMap)))
   }
 
-  def calculatePrediction(topItems: List[(Int, Double)]): Double = {
-    val numerator = topItems.map((i: (Int, Double)) => i._1 * i._2).sum
-    var value = (numerator / topItems.map(_._2).sum)
-    if(value < 0) 0 else value
+  def calculatePrediction(userAId: Int, topItems: List[(Int, Int, Double)]): Double = {
+    if(topItems.length > 1){
+      val averageRatingA = Users.get(userAId).get.averageRating.get
+      val numerator = topItems.map{case(userBId: Int, rating: Int, similarity: Double) => {
+        val averageRatingB = Users.get(userBId).get.averageRating.get
+        (rating-averageRatingB)*similarity
+      }}.sum
+      val denominator = topItems.map(_._3).sum
+      println("numerator: "+numerator)
+      println("denominator: "+denominator)
+      println("averageRatingA: "+averageRatingA)
+      val rating = averageRatingA + numerator/denominator
+      if(rating > 0) rating else 0
+    }
+    else 0
   }
   /*
 
@@ -71,7 +85,7 @@ object SVDBasedService extends HttpServer with ListOperation {
     for(item <- allItems;
         (user, i) <- Users.all.zipWithIndex)
     {  
-      val rating = Ratings.getByItemUser(item.id.get, user.id.get)
+      val rating = Ratings.byItemIdUserId(item.id.get, user.id.get)
       if(rating != None) {
         matrix(i) += rating.get.rating
       }

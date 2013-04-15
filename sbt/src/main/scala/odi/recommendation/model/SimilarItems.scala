@@ -238,8 +238,8 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     val itemId = item.id.get
     userList match{
       case Nil => Vector[Double]()
-      case head::Nil => Vector[Double](Ratings.getByItemUser(itemId, head.id.get).get.rating.toDouble)
-      case head::tail => Ratings.getByItemUser(itemId, head.id.get).get.rating.toDouble +: createRatingVector(item, tail)
+      case head::Nil => Vector[Double](Ratings.byItemIdUserId(itemId, head.id.get).get.rating.toDouble)
+      case head::tail => Ratings.byItemIdUserId(itemId, head.id.get).get.rating.toDouble +: createRatingVector(item, tail)
     }
   }
 

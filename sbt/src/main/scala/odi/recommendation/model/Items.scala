@@ -8,7 +8,9 @@ import net.liftweb.json.JsonDSL._
 // Definition of the ITEMS table
 case class Item(id: Option[Int] = None, title: String) extends ToJson{
   def similarItems: List[(Item, Double)] = {
-    SimilarItems.byItemId(this.id.get).map((si: SimilarItem) => si.similarityByItemId(this.id.get).get)
+    SimilarItems.byItemId(this.id.get).map((si: SimilarItem) => {
+        si.similarityByItemId(this.id.get).get
+    })
   }
   def toJson = {
     val json = ("id"->id.get)~("title"->title)
