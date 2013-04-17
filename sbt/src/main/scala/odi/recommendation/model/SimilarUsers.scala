@@ -6,7 +6,7 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
 
-case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, similarity: Double) extends ToJson {
+case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, similarity: Double) extends ToJson with ModelTrait{
   def toJson = {
     val json = ("id"->id.get)~("userOneId"->userOneId)~("userTwoId"->userTwoId)~("similarity"->similarity)
     compact(render(json))
@@ -27,7 +27,7 @@ case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, s
   }
 }
 
-object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalculation {
+object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalculation with ModelTrait {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def userOneId = column[Int]("user_one_id") 
   def userTwoId = column[Int]("user_two_id")
@@ -39,10 +39,7 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
   def userOne = foreignKey("user_one_fk", userOneId, Users)(_.id)
   def userTwo = foreignKey("user_two_fk", userTwoId, Users)(_.id)
 
-  lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
-                         driver="org.postgresql.Driver",
-                         user="oliver_diestel",
-                         password="")
+
                        
   /*
                        .withSession {

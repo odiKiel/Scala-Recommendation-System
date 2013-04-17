@@ -7,11 +7,7 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
 // Definition of the USERS table
-case class User(id: Option[Int] = None, name: String, averageRating: Option[Double]) extends ToJson {
-  lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
-                         driver="org.postgresql.Driver",
-                         user="oliver_diestel",
-                         password="")
+case class User(id: Option[Int] = None, name: String, averageRating: Option[Double]) extends ToJson with ModelTrait{
 
   def toJson = {
     val json = ("id"->id.get)~("name"->name)
@@ -22,14 +18,13 @@ case class User(id: Option[Int] = None, name: String, averageRating: Option[Doub
     val ratings = Ratings.byUserId(id.get)
     val averageRating = ratings.map(_.rating).sum / ratings.length.toDouble
     db withSession {
-      val query = for (u <-Users if u.id === id ) yield u.averageRating 
+      val query = for (u <-Users if u.id === id.get ) yield u.averageRating 
       query.update((Some(averageRating)))
     }
-    averageRating
   }
 
 }
-object Users extends Table[User]("users") {
+object Users extends Table[User]("users") with ModelTrait{
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
   def averageRating = column[Option[Double]]("average_rating", O.Nullable)
@@ -37,10 +32,7 @@ object Users extends Table[User]("users") {
   def * = id.? ~ name ~ averageRating <> (User, User.unapply _)
   def noID = name 
 
-  lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
-                         driver="org.postgresql.Driver",
-                         user="oliver_diestel",
-                         password="")
+
   def createTable = {
     db.withSession {
       Users.ddl.create
@@ -83,6 +75,20 @@ object Users extends Table[User]("users") {
     }
   }
 
+  def userIdsForItemIdWithRating(itemId: Int) : List[(Int, Int)] = {
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (r <-Ratings if r.itemId === itemId;
+                       u <- Users if u.id === r.userId) yield u.id ~ r.rating
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, rating) => (id, rating)
+    	}
+
+      inter.list
+    }
+  }
 
   /**
    * Create a bid using scala query. This will always create a new bid

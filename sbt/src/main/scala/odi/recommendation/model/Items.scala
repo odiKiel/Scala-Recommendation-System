@@ -16,16 +16,12 @@ case class Item(id: Option[Int] = None, title: String) extends ToJson{
   }
 
 }
-object Items extends Table[Item]("items") {
+object Items extends Table[Item]("items") with ModelTrait{
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def title = column[String]("title")
   def * = id.? ~ title <>(Item, Item.unapply _)
   def noID = title 
 
-  lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
-                         driver="org.postgresql.Driver",
-                         user="oliver_diestel",
-                         password="")
   def createTable = {
     db.withSession {
       Items.ddl.create
@@ -87,6 +83,22 @@ object Items extends Table[Item]("items") {
     	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id) => id
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      inter.list
+    }
+  }
+
+  def allItemIdsForUserIdWithRating(userId: Int) : List[(Int, Int)] = {
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (r <-Ratings if r.userId === userId;
+                       i <- Items if i.id === r.itemId) yield i.id ~ r.rating 
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, rating) => (id, rating)
     	}
 
     	// check if there is one in the list and return it, or None otherwise

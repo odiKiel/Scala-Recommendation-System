@@ -16,7 +16,7 @@ case class Rating(id: Option[Int] = None, itemId: Int, userId: Int, rating: Int,
     compact(render(json))
   }
 }
-object Ratings extends Table[Rating]("ratings") {
+object Ratings extends Table[Rating]("ratings") with ModelTrait {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def itemId = column[Int]("item_id") 
   def userId = column[Int]("user_id")
@@ -29,10 +29,7 @@ object Ratings extends Table[Rating]("ratings") {
   def user = foreignKey("user_fk", userId, Users)(_.id)
   def item = foreignKey("item_fk", itemId, Items)(_.id)
 
-  lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
-                         driver="org.postgresql.Driver",
-                         user="oliver_diestel",
-                         password="")
+
                        
   /*
                        .withSession {

@@ -5,6 +5,7 @@ import Database.threadLocalSession
 import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
+import org.apache.commons.math3.linear._
 
  // Definition of the USER_ITEMS table
 case class SimilarItem(id: Option[Int] = None, itemOneId: Int, itemTwoId: Int, similarity: Double) extends ToJson {
@@ -27,7 +28,7 @@ case class SimilarItem(id: Option[Int] = None, itemOneId: Int, itemTwoId: Int, s
     }
   }
 }
-object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalculation {
+object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalculation with ModelTrait {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def itemOneId = column[Int]("item_one_id") 
   def itemTwoId = column[Int]("item_two_id")
@@ -39,10 +40,7 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
   def itemOne = foreignKey("item_one_fk", itemOneId, Items)(_.id)
   def itemTwo = foreignKey("item_two_fk", itemTwoId, Items)(_.id)
 
-  lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation",
-                         driver="org.postgresql.Driver",
-                         user="oliver_diestel",
-                         password="")
+
                        
   /*
                        .withSession {
@@ -180,6 +178,15 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     }
   }
 
+  def createAll(item1: Int, item2Similarity: collection.mutable.ArrayBuffer[(Int, Double)]) = {
+    db withSession {
+      item2Similarity.foreach{case(item2, similarity) => {
+        SimilarItems.noID insert (item1, item2, similarity)
+      }}
+    }
+
+  }
+
   /**
    * Delete a bid
    */
@@ -210,13 +217,14 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
   }
 
-  def calculateSimilarity(itemId: Int, itemIdUserIdHash: collection.mutable.HashMap[Int, List[Int]]) = {
+  def calculateSimilarity(itemId: Int, itemMapRatingsVector: collection.mutable.HashMap[Int, (Array[Double], Array[Double])]) = {
     println("calculate similarity")
     var i=1
-    itemIdUserIdHash.foreach{case(currentItemId: Int, userIdList: List[Int]) => 
+    val itemSimilarity = collection.mutable.ArrayBuffer[(Int, Double)]()
+    itemMapRatingsVector.foreach{case(currentItemId: Int, vectors: (Array[Double], Array[Double])) => 
       println("calculate similarity number: "+i)
       i+=1
-      if(userIdList.length < 2) {
+      if(vectors._1.length < 2) {
         //not enough ratings => no statement possible => save similarity of 0 (independence)
         SimilarItems.createOrUpdate(
           SimilarItem(
@@ -228,18 +236,24 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
         )
       }
       else {
+        val vec1 = new ArrayRealVector(vectors._1)
+        val vec2 = new ArrayRealVector(vectors._2)
+        /*
         SimilarItems.createOrUpdate(
           SimilarItem(
             None, 
             itemId, 
             currentItemId, 
-            calculateItemSimilarityUsers(userIdList, itemId, currentItemId)
-          )
-        )
+            */
+            val similarity = vec1.cosine(vec2)//cosinusSimilarity(vectors._1, vectors._2)//calculateItemSimilarityUsers(userIdList, itemId, currentItemId)
+            itemSimilarity += ((currentItemId, similarity))
+          //)
+        //)
       }
     }
+    createAll(itemId, itemSimilarity)
   }
-
+/*
   //calculate the similarity between two items with the users that rated both items
   def calculateItemSimilarityUsers(userIdList: List[Int], item1Id: Int, item2Id: Int): Double = {
     cosinusSimilarity(createRatingVector(item1Id, userIdList), createRatingVector(item2Id, userIdList))
@@ -255,6 +269,7 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     println("done creating rating vector")
     result
   }
+  */
 
 
   def deleteAll = {
