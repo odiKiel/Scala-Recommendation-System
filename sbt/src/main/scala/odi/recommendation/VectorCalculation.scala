@@ -1,5 +1,6 @@
 package odi.recommendation
 
+//not in use anymore substituted by apache math3 due to performance reasons
 trait VectorCalculation {
   def cosinusSimilarity(vector1: Vector[Double], vector2: Vector[Double]): Double = {
     require(vector1.length == vector2.length, " Vector must be of same length")

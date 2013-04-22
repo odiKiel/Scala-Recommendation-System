@@ -1,11 +1,3 @@
-test
-:q
-exit
-test
-~test
-test
-console
-test
 console
 test
 console
@@ -453,6 +445,14 @@ console
 exit
 console
 exti
+exit
+console
+exit
+console
+exit
+console
+exit
+console
 exit
 console
 exit

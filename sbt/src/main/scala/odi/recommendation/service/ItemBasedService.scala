@@ -2,6 +2,8 @@ package odi.recommendation
 import org.jboss.netty.handler.codec.http.{HttpResponse}
 import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
+import org.apache.commons.math3.linear._
+
 
 object ItemBasedService extends HttpServer with ListOperation {
   val name = "ItemBasedService"
@@ -35,9 +37,10 @@ object ItemBasedService extends HttpServer with ListOperation {
     var i = 1
     for(itemId: Int <- items) {
       println("working on item: "+i)
+      val time = System.nanoTime
       i+=1
       //val itemIdUserIdHash = collection.mutable.HashMap[Int, List[Int]]()
-      val itemMapRatingsVector = collection.mutable.HashMap[Int, (Array[Double], Array[Double])]()
+      val itemMapRatingsVector = collection.mutable.HashMap[Int, (RealVector, RealVector)]()
       val localPurchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together with the current item use this for easy creation of purchasedTogether
       for((userId: Int, userRating: Int) <- Users.userIdsForItemIdWithRating(itemId);
           (itemUserId: Int, itemUserRating: Int) <- Items.allItemIdsForUserIdWithRating(userId))
@@ -51,19 +54,20 @@ object ItemBasedService extends HttpServer with ListOperation {
 
       purchasedTogether ++= localPurchasedTogether
       SimilarItems.calculateSimilarity(itemId, itemMapRatingsVector) 
+      println("done with item: "+i+" after "+(System.nanoTime-time)/1e6+"ms")
     }
 
     Future.value(createHttpResponse("done"))
   }
 
-  def addToVector(vectors: Option[(Array[Double], Array[Double])], userRating: Double, itemUserRating: Double): (Array[Double], Array[Double]) = {
+  def addToVector(vectors: Option[(RealVector, RealVector)], userRating: Double, itemUserRating: Double): (RealVector, RealVector) = {
     if(vectors != None) {
-      val vec1 = vectors.get._1 :+ userRating
-      val vec2 = vectors.get._2 :+ itemUserRating
+      val vec1 = vectors.get._1.append(userRating)
+      val vec2 = vectors.get._2.append(itemUserRating)
       (vec1, vec2)
     }
     else {
-      (Array(userRating), Array(itemUserRating))
+      (new ArrayRealVector(Array(userRating)), new ArrayRealVector(Array(itemUserRating)))
     }
 
 

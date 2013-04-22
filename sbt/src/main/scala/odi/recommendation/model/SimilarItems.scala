@@ -217,27 +217,30 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
   }
 
-  def calculateSimilarity(itemId: Int, itemMapRatingsVector: collection.mutable.HashMap[Int, (Array[Double], Array[Double])]) = {
-    println("calculate similarity")
+  def calculateSimilarity(itemId: Int, itemMapRatingsVector: collection.mutable.HashMap[Int, (RealVector, RealVector)]) = {
+    val time = System.nanoTime
+    println("calculate similarity for item: "+itemId)
     var i=1
     val itemSimilarity = collection.mutable.ArrayBuffer[(Int, Double)]()
-    itemMapRatingsVector.foreach{case(currentItemId: Int, vectors: (Array[Double], Array[Double])) => 
-      println("calculate similarity number: "+i)
+    var vec1: ArrayRealVector = null
+    var vec2: ArrayRealVector = null
+    itemMapRatingsVector.foreach{case(currentItemId: Int, vectors: (RealVector, RealVector)) => 
       i+=1
-      if(vectors._1.length < 2) {
-        //not enough ratings => no statement possible => save similarity of 0 (independence)
-        SimilarItems.createOrUpdate(
-          SimilarItem(
-            None,
-            itemId,
-            currentItemId,
-            0
-          )
-        )
-      }
-      else {
-        val vec1 = new ArrayRealVector(vectors._1)
-        val vec2 = new ArrayRealVector(vectors._2)
+//    if(vectors._1.length < 2) {
+//      //not enough ratings => no statement possible => save similarity of 0 (independence)
+//      SimilarItems.createOrUpdate(
+//        SimilarItem(
+//          None,
+//          itemId,
+//          currentItemId,
+//          0
+//        )
+//      )
+//    }
+//    else {
+      if(vectors._1.getDimension() > 2) {
+        //vec1 = new ArrayRealVector(vectors._1)
+        //vec2 = new ArrayRealVector(vectors._2)
         /*
         SimilarItems.createOrUpdate(
           SimilarItem(
@@ -245,13 +248,14 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
             itemId, 
             currentItemId, 
             */
-            val similarity = vec1.cosine(vec2)//cosinusSimilarity(vectors._1, vectors._2)//calculateItemSimilarityUsers(userIdList, itemId, currentItemId)
-            itemSimilarity += ((currentItemId, similarity))
+            //cosinusSimilarity(vectors._1, vectors._2)//calculateItemSimilarityUsers(userIdList, itemId, currentItemId)
+            itemSimilarity += ((currentItemId, vectors._1.cosine(vectors._2)))
           //)
         //)
       }
     }
     createAll(itemId, itemSimilarity)
+    println("done time: "+(System.nanoTime-time))
   }
 /*
   //calculate the similarity between two items with the users that rated both items
