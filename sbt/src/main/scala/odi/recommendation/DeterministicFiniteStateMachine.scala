@@ -1,13 +1,14 @@
 package odi.recommendation
 import scala.collection.mutable.HashMap
 
-class DeterministicFiniteStateMachine {
+class DeterministicFiniteStateMachine(degree: Int) {
   type State = (Int, Int)
 
   val transition = new HashMap[State, HashMap[Char, collection.mutable.Set[State]]]() 
   val finalStates = collection.mutable.Set[(Int, Int)]()
   val defaultTransition = new HashMap[State, collection.mutable.Set[State]]()
-  val firstState = (0,0)
+  val firstStates = collection.mutable.Set() ++ (1 to degree).map((i: Int) => (i, i))
+  //not correct a deterministic can only have one start state
 
   def addTransition(src: State, input: Char, dst: collection.mutable.Set[State]) = {
     if(transition.contains(src)){
@@ -37,7 +38,7 @@ class DeterministicFiniteStateMachine {
     finalStates(state)
   }
 
-  def nextState(src: State, input: Char): collection.mutable.Set[State] = {
+  def nextStateSingle(src: State, input: Char): collection.mutable.Set[State] = {
     val ret = collection.mutable.Set[State]()
     if(transition.contains(src)) {
       ret ++= transition(src).get(input).getOrElse(collection.mutable.Set[State]())
@@ -45,18 +46,22 @@ class DeterministicFiniteStateMachine {
     ret ++ defaultTransition.get(src).getOrElse(collection.mutable.Set[State]())
   }
 
-  def nextStateSet(srcs: collection.mutable.Set[State], input: Char): collection.mutable.Set[State] = {
-    srcs.flatMap((src: State) => nextState(src, input))
+  def nextState(srcs: collection.mutable.Set[State], input: Char): collection.mutable.Set[State] = {
+    //(0,0) needs the states for the first insertion
+    if(srcs.contains((0,0))) {
+      srcs ++= firstStates
+    }
+    srcs.flatMap((src: State) => nextStateSingle(src, input))
   }
 
   def isInDistance(term: String): Boolean = {
-    var currentStates = collection.mutable.Set[State](firstState)
+    var currentStates = collection.mutable.Set((0,0))
     var c: Char = 'F'
     var i: Int = 0
 
     while(currentStates.size > 0 && i < term.length) {
       c = term(i).toLower
-      currentStates = nextStateSet(currentStates, c)
+      currentStates = nextState(currentStates, c)
       i += 1
     }
     currentStates.exists((state: State) => isFinal(state))

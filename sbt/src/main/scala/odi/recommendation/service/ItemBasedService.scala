@@ -28,9 +28,10 @@ object ItemBasedService extends HttpServer with ListOperation {
 
   //for each item that is connectet with a user find all items from the user and calculate the similarity with the original item
   //should work with a futurepool
-  // todo itemId -> (Vector[Rating], Vector[Rating])
+  //todo delete all items on each run?
   def getCalculateSimilarItems(path: Array[String]): Future[HttpResponse] = {
     val items: List[Int] = Items.allIds
+    SimilarItems.deleteAll
     val purchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together by one or more users
 
     // log for testing
@@ -86,7 +87,8 @@ object ItemBasedService extends HttpServer with ListOperation {
     for(userItemId: Int <- allItemsUser;
         (similarItemId, similarity) <- SimilarItems.byItemId(userItemId)) 
     {
-      println("tryint item"+userItemId)
+      println("tryint item"+userItemId+" similarity "+similarity)
+      println("current similar item "+similarItemId)
       if(!allItemsUser.contains(similarItemId) && similarity > 0) {//item is unknown to the user and similarity is not independence
         println("adding item to list")
         similarItems += similarItemId -> addToList[(Int, Double)](similarItems.get(similarItemId), (userItemId, similarity))

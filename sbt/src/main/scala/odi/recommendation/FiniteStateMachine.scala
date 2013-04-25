@@ -10,6 +10,7 @@ class FiniteStateMachine {
 
   val transition = collection.mutable.HashMap[State, HashMap[Char, collection.mutable.Set[State]]]() 
   val finalStates = collection.mutable.Set[(Int, Int)]()
+  var degree = 0
 
   //val startState: (Int, Int) = startState_
   
@@ -36,17 +37,27 @@ class FiniteStateMachine {
     finalStates += state
   }
 
+   
   def nextState(src: State, input: Char): collection.mutable.Set[State] = {
-    val ret = transition(src).get(input).getOrElse(collection.mutable.Set[State]())
-    ret ++= transition(src).get('*').getOrElse(collection.mutable.Set[State]())
-    expand(ret)
+    expand(collection.mutable.Set(src)).flatMap((state: State) => nextStateExpanded(state, input))
+  }
+
+  def nextStateExpanded(src: State, input: Char): collection.mutable.Set[State] = {
+    if(transition.contains(src)) {
+      val ret = transition(src).get(input).getOrElse(collection.mutable.Set[State]())
+      ret ++= transition(src).get('*').getOrElse(collection.mutable.Set[State]())
+      expand(ret)
+    }
+    else {
+      collection.mutable.Set[State]()
+    }
+
   }
 
   def isFinal(state: State): Boolean = {
     finalStates(state)
   }
 
-  //states should be unique
   //get all states that are available thru an epsilon (insertion)
   def expand(states: collection.mutable.Set[State]) = {
     val current_states = collection.mutable.Stack[State]() ++ states
@@ -55,8 +66,7 @@ class FiniteStateMachine {
       if(transition.contains(state)) {
         val new_states = transition(state).get('_').getOrElse(collection.mutable.Set[State]()) &~ (states)
         states ++= new_states
-        new_states.foreach((s: State) => current_states.push(s))
-        //states ++= transition(state).get('_').getOrElse(collection.mutable.Set[State]())
+        current_states.pushAll(new_states)
       }
     }
     states
@@ -64,7 +74,7 @@ class FiniteStateMachine {
 
 
   def toDfsm() = {
-    val dfa = new DeterministicFiniteStateMachine()
+    val dfa = new DeterministicFiniteStateMachine(degree)
     val currentStates = new Stack[State]()
     currentStates.push(firstState)
     val seen = collection.mutable.Set[State]()
@@ -99,8 +109,9 @@ class FiniteStateMachine {
   //words will be lowercased
   def levenshteinFiniteStateMachine(term: String, k: Int): FiniteStateMachine = {
     val fsm = this
+    degree = k
     term.toLowerCase.zipWithIndex.foreach((e: (Char, Int)) => {
-      (0 to k+1).foreach((i: Int) => {
+      (0 to k).foreach((i: Int) => {
         val current_state = (e._2, i)
         //correct character
         fsm.addTransition(current_state, e._1, (e._2+1, i))
@@ -115,7 +126,7 @@ class FiniteStateMachine {
       })
       
     })
-    (0 to k+1).foreach((e: Int) => {
+    (0 to k).foreach((e: Int) => {
       if(e<k) {
         //Deletion for last State
         fsm.addTransition((term.size, e), '*', (term.size, e+1))
