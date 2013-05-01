@@ -88,7 +88,7 @@ object TaggerService extends HttpServer {
   def createDfsm(text: List[String]): List[DeterministicFiniteStateMachine] = {
     text.map((word: String) => {
       val fsm = new FiniteStateMachine()
-      fsm.levenshteinFiniteStateMachine(word, 2).toDfsm()
+      fsm.levenshteinFiniteStateMachine(word, 1).toDfsm()
     })
   }
 

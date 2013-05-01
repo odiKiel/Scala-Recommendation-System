@@ -93,14 +93,14 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
     db withSession {
         // define the query and what we want as result
-    	val queryItemOne = for (s <-SimilarItems if s.itemOneId === itemId ) yield s.itemOneId ~ s.similarity 
-      val queryItemTwo = for (s <-SimilarItems if s.itemTwoId === itemId ) yield s.itemTwoId ~ s.similarity
+    	val queryItemOne = for (s <-SimilarItems if s.itemOneId === itemId ) yield s.itemTwoId ~ s.similarity 
+      val queryItemTwo = for (s <-SimilarItems if s.itemTwoId === itemId ) yield s.itemOneId ~ s.similarity
     	
     	val listOne = queryItemOne mapResult {
-    	  case(itemOneId, similarity) => (itemOneId, similarity)
+    	  case(itemTwoId, similarity) => (itemTwoId, similarity)
     	}
       val listTwo = queryItemTwo mapResult {
-        case(itemTwoId, similarity) => (itemTwoId, similarity)
+        case(itemOneId, similarity) => (itemOneId, similarity)
       }
 
 
@@ -222,8 +222,6 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     println("calculate similarity for item: "+itemId)
     var i=1
     val itemSimilarity = collection.mutable.ArrayBuffer[(Int, Double)]()
-    var vec1: ArrayRealVector = null
-    var vec2: ArrayRealVector = null
     itemMapRatingsVector.foreach{case(currentItemId: Int, vectors: (RealVector, RealVector)) => 
       i+=1
 //    if(vectors._1.length < 2) {

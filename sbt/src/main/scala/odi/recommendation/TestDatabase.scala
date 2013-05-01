@@ -13,11 +13,11 @@ object TestDatabase {
     val item4 = Items.create(Item(None, "Item4"))
     val item5 = Items.create(Item(None, "Item5"))
 
-    val user1 = Users.create(User(None, "User1", None))
-    val user2 = Users.create(User(None, "User2", None))
-    val user3 = Users.create(User(None, "User3", None))
-    val user4 = Users.create(User(None, "User4", None))
-    val user5 = Users.create(User(None, "User5", None))
+    val user1 = Users.create(User(None, "User1", 0.0))
+    val user2 = Users.create(User(None, "User2", 0.0))
+    val user3 = Users.create(User(None, "User3", 0.0))
+    val user4 = Users.create(User(None, "User4", 0.0))
+    val user5 = Users.create(User(None, "User5", 0.0))
 
     Ratings.create(Rating(None, item1.id.get, user1.id.get, 5, false))
     Ratings.create(Rating(None, item1.id.get, user2.id.get, 3, false))

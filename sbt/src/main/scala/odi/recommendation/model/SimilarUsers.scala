@@ -5,6 +5,7 @@ import Database.threadLocalSession
 import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
+import org.apache.commons.math3.linear._
 
 case class SimilarUser(id: Option[Int] = None, userOneId: Int, userTwoId: Int, similarity: Double) extends ToJson with ModelTrait{
   def toJson = {
@@ -187,19 +188,31 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
     result
   }
 
-  def calculateSimilarity(similarMatrix: Array[Array[Double]]) = {
+  def calculateSimilarity(similarMatrix: RealMatrix) = {
     val allUsers = Users.all
+    val similarUsers = collection.mutable.ArrayBuffer[SimilarUser]()
     for(i <- (0 until allUsers.length-1);
         j <- (i+1 until allUsers.length)) {
-      SimilarUsers.createOrUpdate(
-        SimilarUser(
-          None, 
-          allUsers(i).id.get, 
-          allUsers(j).id.get, 
-          cosinusSimilarity(similarMatrix(i).toVector, similarMatrix(j).toVector)
+        similarUsers += (
+          SimilarUser(
+            None, 
+            allUsers(i).id.get, 
+            allUsers(j).id.get, 
+            similarMatrix.getRowVector(i).cosine(similarMatrix.getRowVector(j))
+          )
         )
-      )
+      println("done with user "+i+" user "+j)
     }
+    createAll(similarUsers)
+  }
+
+  def createAll(similarUsers: collection.mutable.ArrayBuffer[SimilarUser]) = {
+    db withSession {
+      similarUsers.foreach{(similarUser: SimilarUser) => {
+        SimilarUsers.noID insert (similarUser.userOneId, similarUser.userTwoId, similarUser.similarity)
+      }}
+    }
+
   }
 
 

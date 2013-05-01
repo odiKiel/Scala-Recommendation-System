@@ -37,25 +37,23 @@ object ItemBasedService extends HttpServer with ListOperation {
     // log for testing
     var i = 1
     for(itemId: Int <- items) {
-      println("working on item: "+i)
       val time = System.nanoTime
       i+=1
       //val itemIdUserIdHash = collection.mutable.HashMap[Int, List[Int]]()
       val itemMapRatingsVector = collection.mutable.HashMap[Int, (RealVector, RealVector)]()
       val localPurchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together with the current item use this for easy creation of purchasedTogether
-      for((userId: Int, userRating: Int) <- Users.userIdsForItemIdWithRating(itemId);
-          (itemUserId: Int, itemUserRating: Int) <- Items.allItemIdsForUserIdWithRating(userId))
+      for((userId: Int, userRating: Double) <- Users.userIdsForItemIdWithRatingNormalized(itemId);
+          (itemUserId: Int, itemUserRating: Double) <- Items.allItemIdsForUserIdWithRatingNormalized(userId))
       {
         if(itemId != itemUserId && !(purchasedTogether.contains((itemId, itemUserId)) || purchasedTogether.contains((itemUserId, itemId)))) {
           localPurchasedTogether += ((itemId, itemUserId))
-          itemMapRatingsVector += itemUserId -> addToVector(itemMapRatingsVector.get(itemUserId), userRating.toDouble, itemUserRating.toDouble)
+          itemMapRatingsVector += itemUserId -> addToVector(itemMapRatingsVector.get(itemUserId), userRating, itemUserRating)
           //itemIdUserIdHash += itemUserId -> addToList[Int](itemIdUserIdHash.get(itemUserId), userId)
         }
       }
 
       purchasedTogether ++= localPurchasedTogether
       SimilarItems.calculateSimilarity(itemId, itemMapRatingsVector) 
-      println("done with item: "+i+" after "+(System.nanoTime-time)/1e6+"ms")
     }
 
     Future.value(createHttpResponse("done"))
@@ -87,16 +85,12 @@ object ItemBasedService extends HttpServer with ListOperation {
     for(userItemId: Int <- allItemsUser;
         (similarItemId, similarity) <- SimilarItems.byItemId(userItemId)) 
     {
-      println("tryint item"+userItemId+" similarity "+similarity)
-      println("current similar item "+similarItemId)
       if(!allItemsUser.contains(similarItemId) && similarity > 0) {//item is unknown to the user and similarity is not independence
-        println("adding item to list")
         similarItems += similarItemId -> addToList[(Int, Double)](similarItems.get(similarItemId), (userItemId, similarity))
 
       }
     }
 
-    println("i have"+similarItems.size)
     val recommendations = similarItems.flatMap({case (itemId: Int, similarItemList: List[(Int, Double)]) => Map(itemId.toString -> calculatePrediction(userId, similarItemList).toString)})
 
     Future.value(createHttpResponse(Json.toJson(recommendations)))

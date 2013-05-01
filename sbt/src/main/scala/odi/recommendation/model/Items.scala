@@ -106,6 +106,24 @@ object Items extends Table[Item]("items") with ModelTrait{
     }
   }
 
+  def allItemIdsForUserIdWithRatingNormalized(userId: Int) : List[(Int, Double)] = {
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (r <-Ratings if r.userId === userId;
+                       u <- Users if u.id === userId;
+                       i <- Items if i.id === r.itemId) yield i.id ~ r.rating ~ u.averageRating
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, rating, averageRating) => (id, rating-averageRating)
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      inter.list
+    }
+  }
+
+
   def first : Option[Item] = {
     db withSession {
       val q = Items.map{ u => u}.take(1)

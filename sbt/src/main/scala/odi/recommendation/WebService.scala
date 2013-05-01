@@ -28,9 +28,7 @@ object WebService extends HttpServer {
   }
 
   def saveData(path: Array[String], value: String): Future[HttpResponse] = {
-    println("saving json "+value)
     val data = parse(value)
-    println("saving data"+data)
     path.head match {
       case "ratings" => {
         val rating = data.extract[Rating]
@@ -66,7 +64,7 @@ object WebService extends HttpServer {
     path.head match {
       case "similarities" => {
         var ret = new Promise[HttpResponse]
-        recommendationClient.get("/calculateSimilarities/") onSuccess { v =>
+        recommendationClient.get("/calculateSimilarities/matrix") onSuccess { v =>
           ret.setValue(createHttpResponse(v))
         }
         ret
@@ -124,7 +122,6 @@ object WebService extends HttpServer {
   }
 
   def getOne(kind: String, id: Int): Future[HttpResponse] = {
-    println("type: "+kind+" id: "+id)
     kind match {
       case "ratings" => createHttpResponseForOption(Ratings.get(id))
       case "items" => createHttpResponseForOption(Items.get(id))

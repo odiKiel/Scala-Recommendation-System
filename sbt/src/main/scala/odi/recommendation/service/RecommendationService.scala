@@ -23,7 +23,7 @@ object RecommendationService extends HttpServer {
 
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
-      case "calculateSimilarities" => getCalculateSimilarities(path)
+      case "calculateSimilarities" => getCalculateSimilarities(path.tail)
       case "calculateUserPredictions" => getCalculateUserPredictions(path.tail.head.toInt, path.tail)
       case "calculateUserPredictionsItemBased" => getCalculateUserPredictionsItemBased(path.tail.head.toInt, path.tail)
       case _ => Future.value(createHttpResponse("No such method RecommendationService"))
@@ -34,12 +34,13 @@ object RecommendationService extends HttpServer {
    run this query every 24h
    calculate similar users and similar items save them in SimilarUsers and SimilarItems
    calculate average rating
+        Users.calculateAverageRating
    */
   def getCalculateSimilarities(path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
     itemClient.get("/calculateSimilarItems/") onSuccess { value =>
-      svdClient.get("/calculateSimilarUsers/") onSuccess { v =>
-        Users.calculateAverageRating
+      val displayMatrix = if(path.size > 0 && path.head == "matrix") "matrix" else ""
+      svdClient.get("/calculateSimilarUsers/"+displayMatrix) onSuccess { v =>
         ret.setValue(createHttpResponse(v))
       }
     }

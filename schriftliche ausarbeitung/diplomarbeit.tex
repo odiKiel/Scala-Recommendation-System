@@ -67,7 +67,7 @@
 \fi    
 \usepackage{todonotes}
 \usepackage{tikz}
-\usetikzlibrary{automata,positioning}
+\usetikzlibrary{arrows,automata,positioning}
 
 
 \setlength{\parindent}{0cm}
@@ -135,34 +135,34 @@ Kiel, ** Datum der Abgabe **
 %%                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\pagestyle{plain}
-\chapter*{Aufgabe}
+% \pagestyle{plain}
+% \chapter*{Aufgabe}
 
-\begin{tabular}{ll}
-{\bf Name, Vorname: }               & ** Name, Vorname **                            \\
-{\bf Immatrikulations-Nr: }         & ** Immatrikulations-Nr **                      \\
-{\bf Studiengang: }                 & ** Studiengang **                              \\
-                                    &                                                \\
-{\bf betreuender Hochschullehrer: } & ** Name des Hochschullehrers **   \\
-{\bf Betreuer: }                    & ** Name des Betreuers **                       \\
-{\bf Institut: }                    & Institut für Informatik  \\
-{\bf Arbeitsgruppe: }               & Technologie der Informationssysteme            \\
-                                    &                                                \\
-{\bf Beginn am: }                   & ** Datum des Beginns **                        \\
-{\bf Einzureichen bis: }            & ** Abgabetermin **                           
-\end{tabular}
+% \begin{tabular}{ll}
+% {\bf Name, Vorname: }               & ** Name, Vorname **                            \\
+% {\bf Immatrikulations-Nr: }         & ** Immatrikulations-Nr **                      \\
+% {\bf Studiengang: }                 & ** Studiengang **                              \\
+%                                     &                                                \\
+% {\bf betreuender Hochschullehrer: } & ** Name des Hochschullehrers **   \\
+% {\bf Betreuer: }                    & ** Name des Betreuers **                       \\
+% {\bf Institut: }                    & Institut für Informatik  \\
+% {\bf Arbeitsgruppe: }               & Technologie der Informationssysteme            \\
+%                                     &                                                \\
+% {\bf Beginn am: }                   & ** Datum des Beginns **                        \\
+% {\bf Einzureichen bis: }            & ** Abgabetermin **                           
+% \end{tabular}
 
-\vspace{1cm}
+% \vspace{1cm}
 
-{\bf Aufgabenstellung:}
+% {\bf Aufgabenstellung:}
 
-\vspace{0.5cm}
+% \vspace{0.5cm}
 
-** Text der Aufgabenstellung **
+% ** Text der Aufgabenstellung **
 
-\pagenumbering{roman}
-\setcounter{page}{1}
-\cleardoublepage
+% \pagenumbering{roman}
+% \setcounter{page}{1}
+% \cleardoublepage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                              %%
@@ -240,18 +240,18 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 %%                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\chapter*{Abstract}
+\cleardoublepage
+
 \pagestyle{headings}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\chapter{Einführung}
+\chapter{Introduction}
 
-** Jetzt geht's los! **
-
-\chapter{Zweites Kapitel}
-\section{Erster Unterabschnitt}
-\section{Zweiter Unterabschnitt}
-\section{Dritter Unterabschnitt}
+\section{Related Work}
+\section{Contributions}
+\section{Overview}
 
 %%purpose of a qa system why did I choose Askbot? 
 %%how I'm getting ratings for the items
@@ -266,7 +266,19 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 %%why start with finite automata why create deterministic finite automata and how
 \newpage
 \section{Tagging}
-The purpose of tagging is to find one or more keywords for a text that describe the content. For the context of economics the \emph{STW Thesaurus for Economics} includes\todo{check number of labels and add a source}16000 labels which can be used to match words from a text and provide therefore a good tagging base. However the \emph{STW Thesaurus for Economics} only includes the basic form of the words. Therefore a normal test for equal is not sufficient enough. For example a word that is used in it's plural form in a text would return false on a test for equal and would therefore not be a candidate as a tag for the text. This creates the need for a metric that indicates the distance between two words. A practical metric for such a task is the \emph{levenshtein distance}.
+The purpose of tagging is to find one or more keywords for a text that describe the content.
+For the context of economics the \emph{STW Thesaurus for Economics} includes\todo{check number of labels and add a source}16000 labels which can be used to match words from a text and provide therefore a good tagging base.
+However the \emph{STW Thesaurus for Economics} only includes the basic form of the words.
+Therefore a normal test for equal is not sufficient enough.
+For example a word that is used in it's plural form in a text would return false on a test for equal and would therefore not be a candidate as a tag for the text.
+So, the challenge for this tagging process is to find the correct words in the \emph{STW Thesaurus for Economics} even if they are in a different form then the corresponding words from the text.
+One possible solution for such a task is to reduce each word from the text to its stem. This is usually done by using predefined rules on the words. 
+A rule is usually a combination of the minimum number of letters in a word, plus the suffix that should be changed, an arrow and the replacement for the suffix. More advanced algorithms might also use rules for prefix reduction and detecting irregular changes of the stem.
+For example a predefined rule might be '3+ies' $\rightarrow$ 'y'. So, the word \emph{libraries} would be reduced to \emph{library}.
+Thus it is important that the stemming algorithm has all necessary rules for each supported language.\todo{reason why I didn't use stemming add source for example A Fast and Simple Stemming Algorithm for German words.}
+Another possible solution for the problem is to calculate the differences between the words from the text and the words from the tagging base and use the words from the tagging base as tags if they aren't too different from the original word in the text.
+This creates the need for a metric that indicates the difference or distance between two words.
+A practical metric for such a task is the \emph{levenshtein distance}.
 \subsection{Levenshtein Distance}
 
 The \emph{levenshtein distance} calculates the minimum numbers of substitutions, insertions and deletions that are needed to change one word into another.
@@ -281,7 +293,7 @@ Therefore it returns zero if the words are equal and adds one to the result if i
         levDist_{a,b}(i-1, j-1) + [a_i \neq b_i] 
       \end{cases}
   \end{cases}\\
-This can be written as a recursive algorithm. 
+This can be directly translated into a recursive algorithm. 
 \begin{algorithm}
   \caption{Recursive Levenshtein Distance Algorithm}\label{alg:levDist}
   \begin{algorithmic}[1]
@@ -316,7 +328,7 @@ However the direct implementation of the \emph{levenshtein distance algorithm} h
 %definitions
 \begin{definition}[Non Deterministic Finite Automata]
   A finite automata is a tupel of the form $FA = (Q, \Sigma, q_0, \Delta, F)$. 
-  Q is the set of the states. $\Sigma$ is the set of the input alphabet. $q_0 \in Q$ is the initial state and $F \subset Q$ is a subset that contains the final states. $\Delta$ is a relation of the form $\Delta \subset Q \times \Sigma \times Q$. FA is called finite exactly when $Q$ is finite. Furthermore is $\Sigma*$ the set of words over $\Sigma$ and $\epsilon$ is the empty word.
+  Q is the set of the states. $\Sigma$ is the set of the input alphabet. $q_0 \in Q$ is the initial state and $F \subset Q$ is a subset that contains the final states. $\Delta$ is a relation of the form $\Delta \subset Q \times \Sigma \times Q$. FA is called finite exactly when $Q$ is finite. Furthermore $\Sigma^*$ is the set of words over $\Sigma$ and $\epsilon$ is the empty word.
 \end{definition}
 \begin{definition}[Deterministic Finite Automata]
   FA is deterministic if for all $p \in Q$ and all $a \in \Sigma$ exists exactly one state $q \in Q$ with $(p, a, q) \in \Delta$. In this case $\Delta$ is written as a function $\delta : Q \times \Sigma \rightarrow Q$.
@@ -325,7 +337,7 @@ However the direct implementation of the \emph{levenshtein distance algorithm} h
   A path for FA is a series $\pi = p_0 a_1 p_1 a_2 \dots a_n p_n$, $(p_i, a_{i+1}, p_{i+1}) \in \Delta$ and $0 \leq i \leq n-1$. The length of $\pi$ is n and the label for $\beta(\pi)$ is $a_1 a_2 a_3 \dots a_n$.
 \end{definition}
 \begin{definition}[Path shortwriting]
-  $FA: p \xrightarrow[]{\omega} q$ with $\omega \in \Sigma*$ states, that a path $\pi$ for FA from p to q with label $\beta(\pi) = \omega$ exists.
+  $FA: p \xrightarrow[]{\omega} q$ with $\omega \in \Sigma^*$ states, that a path $\pi$ for FA from p to q with label $\beta(\pi) = \omega$ exists.
 \end{definition}
 \begin{definition}[FA accepts a word]
   FA accepts $\omega \in \Sigma^*$, if and only if $p \in I, q \in F$ exists with FA: $p \xrightarrow[]{\omega} q$. For FA let $\mathcal{L}(FA)=\{\omega \in \Sigma^*$ | FA accepts $\omega\}$ be the language that FA accepts.
@@ -339,55 +351,242 @@ However the direct implementation of the \emph{levenshtein distance algorithm} h
   $\mathcal{L}_{Lev}(n, W)$, $n \in \mathbb{N}$ and $W \in \Sigma^*$ is the set that denotes all words $V \in \Sigma^*$ such that $d_L(W,V) \leq n$.
 \end{definition}
 
-\begin{definition}[Degree of FA]
+\begin{definition}[Degree Levenshtein Automata]
   Let $W \in \Sigma^*$ and $n \in \mathbb{N}$. A finite state automaton A is a \emph{Levenshtein automaton} of degree n for W if and only if $\mathcal{L}(A) = \mathcal{L}_{Lev}(n,W)$.
 \end{definition}
 
 An optimized version of the \emph{levenshtein distance algorithm} that uses a deterministic finite automata was introduced in \emph{Fast string correction with Levenshtein automata by Schulz and Mihov}. 
-The deterministic finite automata for a word $W \in \Sigma^*$ is a \emph{levenshtein automata} with degree $n \in \mathbb{N}$ with n length of W.
-\todo{optimize this, probably better if I write this as out with a face in my mind.}
+The deterministic finite automata for a word $W \in \Sigma^*$ is a \emph{levenshtein automata} with degree $n \in \mathbb{N}$ with n max $d_L(W,V)$.
 
-The purpose of the \emph{levenshtein automata} is to decide whether $d_L(W,V)$ is smaller than a specific n with $V \in \Sigma^*$.
+The purpose of the \emph{levenshtein automata} is to decide whether $d_L(W,V)$ is smaller than a specific n with $V \in \Sigma^*$.\todo{W will be changed to V and this is the levenshtein distance}
 So, it is possible to decide if a word from a question is similar to a word from the \emph{STW Standard Thesaurus}, similar in the meaning it has a \emph{levenshtein distance} smaller than n.
 Therefore $\Sigma$ contains the alphabet \{a,\ldots,z,A,\ldots,Z\}.
-The states in Q of the \emph{levenshtein automata} denote how many letters are read i and the current \emph{levenshtein distance} between $\omega$ and W j, with $\omega$ prefix of V.
+The states in Q of the \emph{levenshtein automata} denote the current position in the original word W (i) and the current \emph{levenshtein distance} between $\omega$ and W (j), with $\omega$ prefix of V.
 The label of such a state is $i^j$.
 Thus the initial state $q_0 \in Q$ is $0^0$.
 The final states $f \in F$ are all states where i equals |W| and j is smaller than n.
-The function $\delta: (Q \times \Sigma \rightarrow Q)$ is mapped as follows\todo{right translation}:\\ 
+The $\Delta: (Q \times \Sigma \times Q)$ is mapped as follows\todo{right translation}:\\ 
 \begin{math}
 (i^j, \sigma) \rightarrow \begin{cases}
   (i+1)^j & \text{if correct}\\
-  (i)^{(j+1)} & \text{if deletion}\\
-  (i+1)^{(j+1)} & \text{if substitution or insertion}\\
+  (i)^{(j+1)} & \text{if insertion}\\
+  (i+1)^{(j+1)} & \text{if substitution or deletion}\\
   empty & \text{if j is equal to n}
 \end{cases}
 \end{math}
 
-Levenshtein automata example for the word test with max \emph{levenshtein distance} 1.
-\begin{tikzpicture}[->,auto,node distance=1.0cm,line width=0.2mm] 
-  \node[state,initial] (q_0)   {$\begin{matrix} 0^0 & 1^1 \end{matrix}$}; 
-   \node[state] (q_1) [below left=of q_0] {$\begin{matrix} 1^0 & 1^1\\ 0^1 & 2^1 \end{matrix}$}; 
-   \node[state] (q_2) [below =of q_1] {$\begin{matrix} 2^0 & 2^1\\ 1^1 & 3^1 \end{matrix}$}; 
-   \node[state] (q_3) [below =of q_2] {$\begin{matrix} 3^0 & 3^1\\ 2^1 & 4^1 \end{matrix}$}; 
-   \node[state] (q_4) [below =of q_3] {$\begin{matrix} 4^0 & 4^1\\ 3^1 \end{matrix}$}; 
-   \node[state] (q_5) [below =of q_4] {$\begin{matrix} 4^1 & \quad\\ \quad & \quad \end{matrix}$}; 
-   \node[state] (q_6) [right =of q_4] {$\begin{matrix} 3^1 & 4^1\\ \quad & \quad \end{matrix}$}; 
-   \node[state] (q_7) [right =of q_3] {$\begin{matrix} 2^1 & 3^1\\ 4^1 & \quad \end{matrix}$}; 
-   \node[state,accepting,minimum size=4.5em](q_4) [below =of q_3] ;
-   \node[state,accepting,minimum size=4.5em](q_3) [below =of q_2] ;
-   \node[state,accepting,minimum size=4.5em](q_5) [below =of q_4] ;
-    \path[->] 
-    (q_0) edge  node {t} (q_1)
-    (q_1) edge  node  {e} (q_2)
-    (q_2) edge  node  {s} (q_3)
-    (q_3) edge  node  {t} (q_4)
-    (q_4) edge  node  {*} (q_5)
-    (q_3) edge  node  {$\neg t$} (q_6)
-    (q_6) edge  node  {t} (q_5)
-    (q_2) edge  node  {t} (q_7)
-\end{tikzpicture}
+Non Deterministic Levenshtein automata for the word \emph{test}\\
+\begin{figure}[h]
+  \begin{tikzpicture}[->,auto,line width=0.2mm] 
+    %0,0 row
+    \node[state] (q_2) {$0^2$}; 
+    \node[state] (q_1) [below =of q_2] {$0^1$}; 
+    \node[state,initial] (q_0) [below =of q_1] {$0^0$}; 
 
+    %1,0 row t
+    \node[state] (q_5) [right =of q_2] {$1^2$}; 
+    \node[state] (q_4) [right =of q_1] {$1^1$}; 
+    \node[state] (q_3) [right =of q_0] {$1^0$}; 
+
+    %2,0 row e
+    \node[state] (q_8) [right =of q_5] {$2^2$}; 
+    \node[state] (q_7) [right =of q_4] {$2^1$}; 
+    \node[state] (q_6) [right =of q_3] {$2^0$};
+
+    %3,0 row s
+    \node[state] (q_11) [right =of q_8] {$3^2$}; 
+    \node[state] (q_10) [right =of q_7] {$3^1$}; 
+    \node[state] (q_9) [right =of q_6] {$3^0$};
+
+    %4,0 row t
+    \node[state, accepting] (q_14) [right =of q_11] {$4^2$}; 
+    \node[state, accepting] (q_13) [right =of q_10] {$4^1$}; 
+    \node[state, accepting] (q_12) [right =of q_9] {$4^0$};
+
+    %path deletion 0,0
+    \path[->] 
+    (q_0) edge node {$*$} (q_1)
+    (q_1) edge node {$*$} (q_2);
+    %path 0,0 -> 1,0
+    \path[->] 
+    %correct path
+    (q_0) edge  node {t} (q_3)
+    (q_1) edge  node  {t} (q_4)
+    (q_2) edge  node  {t} (q_5)
+
+    %insertion substitution
+    (q_0) edge[bend right=10]  node[above,midway] {$*$} (q_4)
+    (q_0) edge[bend left=20]  node  {$\epsilon$} (q_4)
+
+
+    (q_1) edge[bend right=10]  node[above,midway] {$*$} (q_5)
+    (q_1) edge[bend left=20]  node  {$\epsilon$} (q_5);
+
+    %path deletion 1,0
+    \path[->] 
+    (q_3) edge node {$*$} (q_4)
+    (q_4) edge node {$*$} (q_5);
+
+    %path 1,0 -> 2,0
+    \path[->] 
+    %correct path
+    (q_3) edge  node {e} (q_6)
+    (q_4) edge  node  {e} (q_7)
+    (q_5) edge  node  {e} (q_8)
+
+    %insertion substitution
+    (q_3) edge[bend right=10]  node[above,midway] {$*$} (q_7)
+    (q_3) edge[bend left=20]  node  {$\epsilon$} (q_7)
+
+
+    (q_4) edge[bend right=10]  node[above,midway] {$*$} (q_8)
+    (q_4) edge[bend left=20]  node  {$\epsilon$} (q_8);
+
+
+    %path deletion 2,0
+    \path[->] 
+    (q_6) edge node {$*$} (q_7)
+    (q_7) edge node {$*$} (q_8);
+
+    %path 1,0 -> 2,0
+    \path[->] 
+    %correct path
+    (q_6) edge  node {s} (q_9)
+    (q_7) edge  node  {s} (q_10)
+    (q_8) edge  node  {s} (q_11)
+
+    %insertion substitution
+    (q_6) edge[bend right=10]  node[above,midway] {$*$} (q_10)
+    (q_6) edge[bend left=20]  node  {$\epsilon$} (q_10)
+
+
+    (q_7) edge[bend right=10]  node[above,midway] {$*$} (q_11)
+    (q_7) edge[bend left=20]  node  {$\epsilon$} (q_11);
+
+    %path deletion 3,0
+    \path[->] 
+    (q_9) edge node {$*$} (q_10)
+    (q_10) edge node {$*$} (q_11);
+
+    %path 3,0 -> 4,0
+    \path[->] 
+    %correct path
+    (q_9) edge  node {t} (q_12)
+    (q_10) edge  node  {t} (q_13)
+    (q_11) edge  node  {t} (q_14)
+
+    %insertion substitution
+    (q_9) edge[bend right=10]  node[above,midway] {$*$} (q_13)
+    (q_9) edge[bend left=20]  node  {$\epsilon$} (q_13)
+
+
+    (q_10) edge[bend right=10]  node[above,midway] {$*$} (q_14)
+    (q_10) edge[bend left=20]  node  {$\epsilon$} (q_14);
+
+    %path deletion 3,0
+    \path[->] 
+    (q_12) edge node {$*$} (q_13)
+    (q_13) edge node {$*$} (q_14);
+
+
+  \end{tikzpicture}
+  \caption{A non deterministic levenshtein automata for the word \emph{test} with degree 2}
+  \label{ndla}
+\end{figure}
+The automata in example ~\ref{ndla} is a non deterministic levenshtein automata for the word \emph{test}.
+The initial state $0^0$ is in the bottom left corner. If the automata reads a correct letter it follows the horizontal path. The star (*) indicates that any element from $\Sigma$ is accepted on this path.
+A vertical path is an insertion and on a diagonal path it can be a deletion with the empty word $\epsilon$ or a substitution of the letter indicated with *. 
+Therefore after reading the letter 't' the automata can be in five different states namely $0^1$, $1^2$, $1^1$, $2^2$ and $1^0$.
+\todo{Problems with non deterministic automatas. How to generate a deterministic automata. example}
+Evaluating a non deterministic levenshtein automata is computational complex due to the fact that there can be a large number of active states at the same time. 
+Thus it is necessary to convert a non deterministic automata to a deterministic automata before using it to find tags.
+The process of generating a deterministic automata with a non deterministic automata is called \emph{powerset construction}.
+
+\subsubsection{Powerset Construction}
+\todo{add source book Introduction to Automata Theory, Languages and Computation by Hopcroft, Motwani }
+Given a \emph{non deterministic levenshtein automata} the construction of an equivalent \emph{deterministic levenshtein automata}: 
+\begin{itemize}
+  \item create $q_0'$ as a set with original $q_0$ and all states that are reachable with an $\epsilon$ path.
+  \item $Q' \subseteq 2^Q$, thus all $q \in Q'$ are subsets of Q.
+  \item $\delta(R,a) = \{q \in Q$ | $\exists r \in R$ with (r, a, q) $\in \Delta$ $\lor$ (r, $\epsilon$, q) $\in \Delta$ $\lor$ (r, $\epsilon$, p) and (p, a, q) $\in \Delta\}, R \subseteq Q$.
+  \item F' includes all $q \in Q'$ that include $f \in F$
+\end{itemize}
+Therefore the new \emph{deterministic levenshtein automata} is (Q', $\Sigma$, $q_0'$, $\delta$, F').
+
+
+\newpage
+Deterministic Levenshtein automata example for the word test with max \emph{levenshtein distance} 1.
+\todo{finish automata}
+\begin{figure}[h]
+  \begin{tikzpicture}[->,auto,line width=0.2mm] 
+    \node[state,initial, minimum size=4.5em] (0_0-1_1) {$\begin{matrix} 0^0 & 1^1 \end{matrix}$}; 
+    %correct path
+     \node[state] (1_0-1_1-0_1-2_1) [below left=of 0_0-1_1] {$\begin{matrix} 1^0 & 1^1\\ 0^1 & 2^1 \end{matrix}$}; 
+     \node[state] (2_0-2_1-1_1-3_1) [below left=of 1_0-1_1-0_1-2_1] {$\begin{matrix} 2^0 & 2^1\\ 1^1 & 3^1 \end{matrix}$}; 
+     \node[state, accepting] (3_0-3_1-2_1-4_1) [below left=of 2_0-2_1-1_1-3_1] {$\begin{matrix} 3^0 & 3^1\\ 2^1 & 4^1 \end{matrix}$}; 
+
+     \node[state, accepting] (4_0-4_1-3_1) [below left=of 3_0-3_1-2_1-4_1] {$\begin{matrix} 4^0 & 4^1\\ 3^1 \end{matrix}$}; 
+
+     %first not t,e
+     \node[state] (0_1-1_1) [below right=of 0_0-1_1] {$\begin{matrix} 0^1 & 1^1\end{matrix}$}; 
+
+     %first e
+     \node[state] (0_1-1_1-2_1) [right=of 0_1-1_1] {$\begin{matrix} 0^1 & 1^1\\ 2^1 \end{matrix}$}; 
+
+      %q1 edges
+     \node[state] (1_1-2_1) [below right=of 1_0-1_1-0_1-2_1] {$\begin{matrix} 1^1 & 2^1 \end{matrix}$}; 
+     \node[state] (1_1-2_1-3_1) [below =of 1_1-2_1] {$\begin{matrix} 1^1 & 2^1 \\ 3^1 \end{matrix}$}; 
+
+     %elementar
+     \node[state] (1_1) [below left=of 0_1-1_1-2_1] {$1^1$}; 
+     \node[state] (2_1) [below right=8em of 1_1-2_1-3_1] {$2^1$}; 
+     \node[state] (3_1) [below =of 2_1] {$3^1$}; 
+
+
+
+     \node[state, accepting] (3_1-4_1) [below =of 3_0-3_1-2_1-4_1] {$\begin{matrix} 3^1 & 4^1 \end{matrix}$}; 
+
+     \node[state] (2_1-3_1) [below =of 1_1-2_1-3_1] {$\begin{matrix} 2^1 & 3^1 \end{matrix}$}; 
+     \node[state, accepting] (2_1-3_1-4_1) [below left=of 2_1-3_1] {$\begin{matrix} 2^1 & 3^1\\ 4^1 \end{matrix}$}; 
+     \node[state, accepting, minimum size=4.5em] (4_1) [below =of 2_1-3_1-4_1] {$4^1$}; 
+     \path[->]
+     (0_0-1_1) edge node {$\neg t \wedge \neg e$} (0_1-1_1)
+     (2_0-2_1-1_1-3_1) edge node {$\neg s \land \neg t$} (2_1-3_1)
+     (2_0-2_1-1_1-3_1) edge node {t} (2_1-3_1-4_1)
+     (0_0-1_1) edge node {e} (0_1-1_1-2_1)
+     (1_0-1_1-0_1-2_1) edge node {$\neg t \wedge \neg e \wedge \neg s$} (1_1-2_1)
+     (1_0-1_1-0_1-2_1) edge node {s} (1_1-2_1-3_1)
+     (0_1-1_1) edge  node {t} (1_1)
+     (0_1-1_1) edge  node {e} (2_1)
+     (1_1) edge  node {e} (2_1)
+     (2_1) edge  node {s} (3_1)
+     (3_1) edge  node {t} (4_1)
+     (1_1-2_1) edge  node {e} (2_1)
+     (1_1-2_1) edge  node {s} (3_1)
+     (3_0-3_1-2_1-4_1) edge node {$\neg$ t} (3_1-4_1)
+     (3_1-4_1) edge node {t} (4_1)
+     (0_0-1_1) edge  node {t} (1_0-1_1-0_1-2_1)
+     (1_0-1_1-0_1-2_1) edge  node  {e} (2_0-2_1-1_1-3_1)
+     (2_0-2_1-1_1-3_1) edge  node  {s} (3_0-3_1-2_1-4_1)
+     (3_0-3_1-2_1-4_1) edge  node  {t} (4_0-4_1-3_1)
+     (2_1-3_1-4_1) edge  node {t} (4_1)
+     (2_1-3_1-4_1) edge  node {s} (3_1)
+     (2_1-3_1) edge  node {s} (3_1)
+     (2_1-3_1) edge  node {t} (4_1)
+     (0_1-1_1-2_1) edge  node {t} (1_1)
+     (0_1-1_1-2_1) edge  node {e} (2_1)
+     (0_1-1_1-2_1) edge[bend left=30]  node {s} (3_1)
+     (1_1-2_1-3_1) edge  node {e} (2_1)
+     (1_1-2_1-3_1) edge  node {s} (3_1)
+     (1_1-2_1-3_1) edge  node {t} (4_1)
+     (4_0-4_1-3_1) edge  node  {*} (4_1);
+
+
+  \end{tikzpicture}
+  \caption{A deterministic levenshtein automata for the word \emph{test} with degree 1}
+  \label{dla}
+
+\end{figure}
 
 
 % \begin{itemize}
@@ -398,6 +597,8 @@ Levenshtein automata example for the word test with max \emph{levenshtein distan
 %   \item The set of final states F contains all states where the correct letter count is equal to the size of the original word W.
 % \end{itemize}
 
+Let $NDLA = (Q, \Sigma, q_0, \Delta, F)$ be the \emph{non deterministic levenshtein automata} from figure ~\ref{ndla} then the \emph{deterministic levenshtein automata} $DLA = (Q', \Sigma, q_0', \delta, F')$ from figure ~\ref{dla} is the output from the powerset construction.
+Therefore DLA can only have one active state at a time and accepts all words V from $\Sigma^*$ with $d_L('test', V) \leq 1$. 
 This deterministic finite automata with degree $n \in \mathbb{N}$ for a word $W \in \Sigma^*$ can decide in linear time if for a word $V \in \Sigma^*$ $d_L(W,V) \leq n$ source Lemma3.
 \subsubsection{The generation process of the levenshtein automata}
 
@@ -415,6 +616,12 @@ A possible optimization would be to calculate once all the automata's for the co
 %description of collaborative filtering, description of svd, how do I use this sort of recommendations
 \section{Recommendation}
 A recommendation system recommends items to a user. \todo{more general stuff}
+Challenges of recommendation systems: Scarcity, \dots
+\subsection{Different types of recommendation systems}
+\subsubsection{Collaborative recommendation}
+\subsubsection{Content-based recommendation}
+\subsubsection{Knowledge-based recommendation}
+
 \begin{definition}[User]
   $U = \{u_1, u_2, u_3, \dots, u_n\}$ is a set with $u_i$ users from the recommendation system. With $n, i \in \mathbb{N}$ and $i \leq n$.
 \end{definition}
@@ -471,6 +678,23 @@ Collaborative filtering is the task of recommending items based on the interest 
 The singular value decomposition is a mathematical concept created by \dots . The interesting part in hinsight of recommendation system is that with the singular value decomposition it is possible to create the best matrix approximation of the original matrix. \todo{quote proof} 
 Therefore the rows of the original matrix that represent the users can be approximated by a single two dimensional matrix. Thus it is easily possible to calculate the similarity between users. Forexample with cosinus similarity.
 The calculation of the similar users can be created offline and theirefore fits with the item based recommendation technique. So it is possible to create a pipeline architecture that starts with the item based technique to decrease the scarcity of the user item matrix and if this has finished can calculate the similarity between users. All this information can be stored in a database and can be used to calculate user recommendations if they are needed.
+\chapter{Implementation}
+\section{Technologies}
+\section{Architecture}
+\chapter{Evaluation}
+\section{Comparison Of Different Approaches}
+\subsection{Performance of the Recommendations}
+\subsection{Accuracy of the Recommendations}
+\subsubsection{Item-Based}
+\subsubsection{Singular Value Decomposition}
+\subsubsection{Hybrid Of Item-Based and Singular Value Decomposition}
+\chapter{Future Work}
+\section{Rating System}
+\section{Tagging Service}
+Direct implementation of the deterministic levenshtein automata, table based approach.
+Save levenshtein automatas from all \emph{STW Standard Thesaurus Economic} words with an appropriate datastructure.
+\section{Recommendation System}
+
 \appendix
 
 \chapter{Erster Anhang}

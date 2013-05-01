@@ -133,6 +133,14 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     result
   }
 
+  def userRatingListByItemId(itemId: Int) : List[(Int, Int)] = {
+    db withSession {
+      val query = for {
+        (user, rating) <- Users leftJoin Ratings on (_.id === _.userId) if rating.itemId === itemId} yield (user.id, rating.rating)
+        query.sortBy(_._1).list
+      }
+    }
+
 
   /**
    * Create or update rating if it exists
