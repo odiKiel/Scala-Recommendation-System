@@ -1,6 +1,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {algorithm}{\numberline {1}{\ignorespaces Recursive Levenshtein Distance Algorithm}}{5}{algorithm.1}
+\contentsline {algorithm}{\numberline {1}{\ignorespaces Recursive Levenshtein Distance Algorithm}}{9}{algorithm.1}
+\contentsline {algorithm}{\numberline {2}{\ignorespaces Levenshtein Automata is in distance}}{14}{algorithm.2}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
