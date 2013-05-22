@@ -1,7 +1,3 @@
-console
-exit
-console
-exit
 scala
 console
 :q
@@ -495,6 +491,10 @@ console
 exit
 console
 exit
+console
+exit
+console
+scala
 console
 exit
 console

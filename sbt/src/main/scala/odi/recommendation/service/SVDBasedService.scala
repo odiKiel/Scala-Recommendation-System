@@ -111,6 +111,12 @@ object SVDBasedService extends HttpServer with ListOperation {
 
   def u2d(svd: SingularValueDecomposition): RealMatrix = {
     val u = svd.getU()
+//  println("u:")
+//  println(u)
+//  println("sigma:")
+//  println(svd.getS())
+//  println("VT:")
+//  println(svd.getVT())
     val uColumnSize = u.getColumn(0).length
     
     u.getSubMatrix(0, uColumnSize-1, 0, 1)
