@@ -10,6 +10,7 @@ object Services {
       case "itemBasedService" => "13100"
       case "svdBasedService" => "13200"
       case "webService" => "10000"
+      case "ratingService" => "12000"
     }
   }
 }
