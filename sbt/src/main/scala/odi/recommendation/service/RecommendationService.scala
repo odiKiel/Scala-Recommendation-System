@@ -60,7 +60,7 @@ object RecommendationService extends HttpServer {
 
   def getCalculateUserPredictionsItemBased(userId: Int, path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
-    itemClient.get("/calculateUserPredictions/"+userId) onSuccess { v =>
+    itemClient.get("/calculateUserPrediction/"+userId) onSuccess { v =>
       ret.setValue(createHttpResponse(v))
     }
     ret

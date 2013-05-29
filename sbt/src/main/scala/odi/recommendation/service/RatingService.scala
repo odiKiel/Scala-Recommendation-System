@@ -36,9 +36,9 @@ object RatingService extends HttpServer {
   //attention used .get() here todo improve this!
   def postTagText(args: Array[String], value: String): Future[HttpResponse] = {
     val r = new Promise[HttpResponse]
-    tagText(value) onSuccess { tags => 
-      r.setValue(createHttpResponse(Json.toJson(tags.toList)))
-    }
+//  tagText(value) onSuccess { tags => 
+//    r.setValue(createHttpResponse(Json.toJson(tags.toList)))
+//  }
     r
   }
 

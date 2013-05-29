@@ -54,7 +54,7 @@ App.Views.RecommendationIndex = Backbone.View.extend({
           
           $.plot($("#placeholder"), plotData, {
             points: {show: true, border: false, fillColor: false},
-            xaxis: { min: 0, max: 1, autoscaleMargin: 0.02 },
+            xaxis: { min: -1, max: 1, autoscaleMargin: 0.02 },
             yaxis: { min: -1, max: 1 },
           });
         }

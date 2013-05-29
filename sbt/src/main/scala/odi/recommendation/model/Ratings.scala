@@ -230,6 +230,47 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
   }
 
+  //returns a list of similar items that the user has rated together with the similarity and the rating
+  // (ItemId, Rating, Similarity)
+  def byUserIdItemIdWithSimilarItem(uid: Int, iid: Int) : List[(Int, Double)] = {
+
+    db withSession {
+      val query = for {
+        //(rating, similarItem) <- Ratings leftJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (similarItem.itemOneId, similarItem.itemTwoId, rating.rating, similarItem.similarity)
+        (rating, similarItem) <- Ratings leftJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (rating.rating, similarItem.similarity)
+
+      query.sortBy(_._2.desc).take(25).list
+    }
+
+//  result.map((r) => {
+//      if(r._1 == iid) (r._2, r._3, r._4)
+//      else (r._1, r._3, r._4)
+//  })
+
+  }
+
+  //returns all user ratings for an item id if the user has not rated the item it returns null 
+  def allUserRatingsForItemId(itemId: Int): List[(Int, Int, Option[Int])] = {
+    db withSession{
+      val query = for {
+        //innerJoin on true hack for postgreSQL slick bug
+        ((user, item), rating) <- Users innerJoin Items on ((a, b) => a.id === a.id) leftJoin Ratings on ((a, b) => a._1.id === b.userId && a._2.id === b.itemId) if(item.id === itemId)
+      }yield (user.id, item.id, rating.rating.?)
+      query.sortBy(_._1).list
+    }
+  }
+
+  //returns all item ratings for an user id if the user has not rated the item it returns null 
+  def allItemRatingsForUserId(userId: Int): List[(Int, Int, Option[Int])] = {
+    db withSession{
+      val query = for {
+        //innerJoin on true hack for postgreSQL slick bug
+        ((user, item), rating) <- Users innerJoin Items on ((a, b) => a.id === a.id) leftJoin Ratings on ((a, b) => a._1.id === b.userId && a._2.id === b.itemId) if(user.id === userId)
+      }yield (user.id, item.id, rating.rating.?)
+      query.sortBy(_._2).list
+    }
+  }
+
 
 
 }

@@ -41,6 +41,7 @@ object SVDBasedService extends HttpServer with ListOperation {
   }
 
   def calculateSimilarUsers: RealMatrix = {
+    val time = System.nanoTime
     println("start with calculations")
     val userItemMatrix = createUserItemMatrix
     println("done with createUserItemMatrix")
@@ -50,6 +51,7 @@ object SVDBasedService extends HttpServer with ListOperation {
     println("done with getting u2d")
     SimilarUsers.calculateSimilarity(users2D)
     println("done with calculateSimilarity")
+    println("done time: "+(System.nanoTime-time))
     users2D
   }
 
@@ -93,8 +95,19 @@ object SVDBasedService extends HttpServer with ListOperation {
   def createUserItemMatrix: Array[Array[Double]] = {
     //each item each user search for rating if not enter 0 tons of db queries
     val allUsers = Users.all
-    val matrix = Array.fill(allUsers.length){collection.mutable.ListBuffer[Double]()}
     val allItems: List[Item] = Items.all
+    val matrix = Array.fill(allUsers.length){collection.mutable.ListBuffer[Double]()}
+    for((user, i) <- allUsers.zipWithIndex) {
+      //all missing ratings are filled with the medium of all ratings the three an improvement would be to use the average of that rating
+      //however that would highly decrease the computation time of the algorithm
+      val allItemsForUser = Ratings.allItemRatingsForUserId(user.id.get).map({case (user, item, rating) => rating.getOrElse(3).toDouble}).toArray
+      matrix(i) ++= allItemsForUser
+    }
+    println("this is the matrix: \n")
+    println(matrix.map(_.toArray).deep.mkString("\n"))
+
+    /*
+     //not efficient enough
     for(item <- allItems;
         (user, i) <- Users.all.zipWithIndex)
     {  
@@ -106,13 +119,14 @@ object SVDBasedService extends HttpServer with ListOperation {
         matrix(i) += 0.0
       }
     }
+    */
     matrix.map(_.toArray)
   }
 
   def u2d(svd: SingularValueDecomposition): RealMatrix = {
     val u = svd.getU()
-//  println("u:")
-//  println(u)
+  println("u:")
+  println(u)
 //  println("sigma:")
 //  println(svd.getS())
 //  println("VT:")
@@ -125,6 +139,8 @@ object SVDBasedService extends HttpServer with ListOperation {
   //calculate the singular value decomposition for an array of int
   def calculateSVD(matrix: Array[Array[Double]]): SingularValueDecomposition = {
     val realMatrix = MatrixUtils.createRealMatrix(matrix)
+    println("realMatrix \n")
+    println(realMatrix)
     new SingularValueDecomposition(realMatrix)
   }
 }
