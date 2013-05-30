@@ -24,8 +24,8 @@ object RecommendationService extends HttpServer {
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
       case "calculateSimilarities" => getCalculateSimilarities(path.tail)
-      case "calculateUserPredictions" => getCalculateUserPredictions(path.tail.head.toInt, path.tail)
-      case "calculateUserPredictionsItemBased" => getCalculateUserPredictionsItemBased(path.tail.head.toInt, path.tail)
+      case "calculateUserPrediction" => getCalculateUserPrediction(path.tail.head.toInt, path.tail)
+      case "calculateUserPredictionItemBased" => getCalculateUserPredictionItemBased(path.tail.head.toInt, path.tail)
       case _ => Future.value(createHttpResponse("No such method RecommendationService"))
     }
   }
@@ -50,15 +50,15 @@ object RecommendationService extends HttpServer {
   /*
    take all similar users, get their best rated items that are unknown to the user, sort them by rating
    */
-  def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
+  def getCalculateUserPrediction(userId: Int, path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
-    svdClient.get("/calculateUserPredictions/"+userId) onSuccess { v =>
+    svdClient.get("/calculateUserPrediction/"+userId) onSuccess { v =>
       ret.setValue(createHttpResponse(v))
     }
     ret
   }
 
-  def getCalculateUserPredictionsItemBased(userId: Int, path: Array[String]): Future[HttpResponse] = {
+  def getCalculateUserPredictionItemBased(userId: Int, path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
     itemClient.get("/calculateUserPrediction/"+userId) onSuccess { v =>
       ret.setValue(createHttpResponse(v))

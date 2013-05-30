@@ -73,6 +73,12 @@ class FiniteStateMachine {
   }
 
 
+  /** This method transforms the current non deterministic automata to a deterministic automata.
+    *
+    * For each epsilon transition one transition is introduced for every transition t_n that starts at the destination of the epsilon transition.
+    * These transitions start at the source of the epsilon transition and end at the destinations of each t_n as label the label of the t_n transition is used.
+    * The wildcard transitions are transformed in the way that they only accept labels that are not used by any other transition from the current source.
+    */
   def toDfsm() = {
     val dfa = new DeterministicFiniteStateMachine(degree)
     val currentStates = new Stack[State]()

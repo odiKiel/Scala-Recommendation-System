@@ -19,7 +19,7 @@ object ItemBasedService extends HttpServer with ListOperation {
   }
 
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
-    if(path.size < 1) Future.value(createHttpResponse("No such method ItemBasedService"))
+    if(path.size < 1) Future.value(createHttpResponse("Not enough parameter for ItemBasedService"))
     else {
       path.head match {
         case "calculateSimilarItems" => getCalculateSimilarItems(path)
@@ -83,7 +83,8 @@ object ItemBasedService extends HttpServer with ListOperation {
       val numerator = ratingsSimilarities.map({case (rating, similarity) => {
         rating * similarity
       }}).sum 
-      val result = (numerator / ratingsSimilarities.map(_._2).sum)
+      val denumerator = ratingsSimilarities.map(_._2).sum
+      val result = if(denumerator == 0) 0 else (numerator / denumerator)
 
       //calculate prediction for a specific item
       Future.value(createHttpResponse(""+result))

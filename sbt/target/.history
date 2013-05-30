@@ -1,11 +1,3 @@
-console
-exit
-console
-exit
-test HttpServerSpec
-test
-console
-exti
 exit
 console
 exit
@@ -467,6 +459,14 @@ console
 exit
 console
 scala
+console
+exit
+console
+exit
+console
+exit
+console
+exit
 console
 exit
 console

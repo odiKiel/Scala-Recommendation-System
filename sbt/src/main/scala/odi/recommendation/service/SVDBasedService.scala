@@ -19,10 +19,16 @@ object SVDBasedService extends HttpServer with ListOperation {
   }
 
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
-    path.head match {
-      case "calculateSimilarUsers" => getCalculateSimilarUsers(path.tail)
-      case "calculateUserPredictions" => getCalculateUserPredictions(path.tail.head.toInt, path.tail)
-      case _ => Future.value(createHttpResponse("No such method"))
+    if(path.size < 1) Future.value(createHttpResponse("Not enough parameter for ItemBasedService"))
+    else {
+      path.head match {
+        case "calculateSimilarUsers" => getCalculateSimilarUsers(path.tail)
+        case "calculateUserPrediction" => {
+          if(path.size > 1) getCalculateUserPrediction(path.tail.head.toInt, path.tail.tail)
+          else Future.value(createHttpResponse("Not enough parameter for prediction calculation"))
+        }
+        case _ => Future.value(createHttpResponse("No such method"))
+      }
     }
   }
 
@@ -41,17 +47,19 @@ object SVDBasedService extends HttpServer with ListOperation {
   }
 
   def calculateSimilarUsers: RealMatrix = {
+    SimilarUsers.deleteAll
     val time = System.nanoTime
     println("start with calculations")
     val userItemMatrix = createUserItemMatrix
     println("done with createUserItemMatrix")
     val svd = calculateSVD(userItemMatrix)
     println("done with svd calculation")
+    println("time after svd: "+(System.nanoTime-time))
     val users2D = u2d(svd)
     println("done with getting u2d")
     SimilarUsers.calculateSimilarity(users2D)
     println("done with calculateSimilarity")
-    println("done time: "+(System.nanoTime-time))
+    println("total time: "+(System.nanoTime-time))
     users2D
   }
 
@@ -60,19 +68,43 @@ object SVDBasedService extends HttpServer with ListOperation {
    only use users with similarities > 0
    */
   //use only ratings that aren't predictions!
-  def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
-    val predictions = collection.mutable.HashMap[Int, List[(Int, Int, Double)]]()
-    for(s <- SimilarUsers.byUserId(userId, 5)){
-      val (similarUserId, similarity) = s.similarityByUserId(userId).get
-      if(similarity > 0) { 
-        for(rating <- Ratings.getUnknownItemsForUserByUser(userId, similarUserId))
-        {
-          predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (similarUserId, rating.rating, similarity))
+  def getCalculateUserPrediction(userId: Int, path: Array[String]): Future[HttpResponse] = {
+    if(path.size > 0) {
+      //predict rating for a specific item
+      val itemId = path.head.toInt
+      val user = Users.get(userId).get
+      // rating, similarity, averageRating
+      val ratingsSimilarities = Ratings.byUserIdItemIdWithSimilarUserAverageRating(userId, itemId)
+
+      val numerator = ratingsSimilarities.map({case (userId, rating, similarity, averageRating) => {
+        (rating-averageRating) * similarity
+      }}).sum 
+      val denumerator = ratingsSimilarities.map(_._3).sum
+      val result = if (denumerator == 0) {
+        0
+      }
+      else {
+        user.averageRating + (numerator / denumerator)
+      }
+      if(result < 0) result == 0
+
+      //calculate prediction for a specific item
+      Future.value(createHttpResponse(""+result))
+    }
+    else {
+      val predictions = collection.mutable.HashMap[Int, List[(Int, Int, Double)]]()
+      for(s <- SimilarUsers.byUserId(userId, 5)){
+        val (similarUserId, similarity) = s.similarityByUserId(userId).get
+        if(similarity > 0) { 
+          for(rating <- Ratings.getUnknownItemsForUserByUser(userId, similarUserId))
+          {
+            predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (similarUserId, rating.rating, similarity))
+          }
         }
       }
+      val predictionMap = predictions.flatMap((i: (Int, List[(Int, Int, Double)])) => Map(i._1.toString->calculatePrediction(userId, i._2).toString))
+      Future.value(createHttpResponse(Json.toJson(predictionMap)))
     }
-    val predictionMap = predictions.flatMap((i: (Int, List[(Int, Int, Double)])) => Map(i._1.toString->calculatePrediction(userId, i._2).toString))
-    Future.value(createHttpResponse(Json.toJson(predictionMap)))
   }
 
   def calculatePrediction(userAId: Int, topItems: List[(Int, Int, Double)]): Double = {
@@ -80,11 +112,10 @@ object SVDBasedService extends HttpServer with ListOperation {
       val averageRatingA = Users.get(userAId).get.averageRating
       val numerator = topItems.map{case(userBId: Int, rating: Int, similarity: Double) => {
         val averageRatingB = Users.get(userBId).get.averageRating
-        (rating-averageRatingB)*similarity
+        (Math.abs(rating-averageRatingB))*similarity
       }}.sum
       val denominator = topItems.map(_._3).sum
-      val rating = averageRatingA + numerator/denominator
-      if(rating > 0) rating else 0
+      averageRatingA + numerator/denominator
     }
     else 0
   }
@@ -98,13 +129,11 @@ object SVDBasedService extends HttpServer with ListOperation {
     val allItems: List[Item] = Items.all
     val matrix = Array.fill(allUsers.length){collection.mutable.ListBuffer[Double]()}
     for((user, i) <- allUsers.zipWithIndex) {
-      //all missing ratings are filled with the medium of all ratings the three an improvement would be to use the average of that rating
+      //all missing ratings are filled with the middle of the ratings 1-5 the three an improvement would be to use the average of that rating
       //however that would highly decrease the computation time of the algorithm
       val allItemsForUser = Ratings.allItemRatingsForUserId(user.id.get).map({case (user, item, rating) => rating.getOrElse(3).toDouble}).toArray
       matrix(i) ++= allItemsForUser
     }
-    println("this is the matrix: \n")
-    println(matrix.map(_.toArray).deep.mkString("\n"))
 
     /*
      //not efficient enough
@@ -125,8 +154,8 @@ object SVDBasedService extends HttpServer with ListOperation {
 
   def u2d(svd: SingularValueDecomposition): RealMatrix = {
     val u = svd.getU()
-  println("u:")
-  println(u)
+//  println("u:")
+//  println(u)
 //  println("sigma:")
 //  println(svd.getS())
 //  println("VT:")
@@ -139,8 +168,6 @@ object SVDBasedService extends HttpServer with ListOperation {
   //calculate the singular value decomposition for an array of int
   def calculateSVD(matrix: Array[Array[Double]]): SingularValueDecomposition = {
     val realMatrix = MatrixUtils.createRealMatrix(matrix)
-    println("realMatrix \n")
-    println(realMatrix)
     new SingularValueDecomposition(realMatrix)
   }
 }

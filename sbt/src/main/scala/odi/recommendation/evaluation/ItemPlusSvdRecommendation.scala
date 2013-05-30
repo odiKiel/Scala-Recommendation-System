@@ -64,7 +64,7 @@ object ItemPlusSvdRecommendation {
 
   //testData (userId, itemId, rating)
   def loadTestData: List[(Int, Int, Int)] = {
-    val reader = CSVReader.open(new File("ml-100k/u1test-min.csv"))
+    val reader = CSVReader.open(new File("ml-100k/u1test.csv"))
 
     val itemOffset = Items.first.get.id.get-1
     val userOffset = Users.first.get.id.get-1
@@ -81,15 +81,24 @@ object ItemPlusSvdRecommendation {
 
   //testEntry (userCsvId, itemCsvId, rating)
   def comparePrediction(testEntry: (Int,  Int, Int)): Double = {
-    //val res = itemClient.get("/calculateUserPrediction/"+testEntry._1+"/"+testEntry._2) 
-    val res = ItemBasedService.getCalculateUserPrediction(testEntry._1, Array(""+testEntry._2)).get().getContent().toString("UTF-8").toDouble
-    println("predictet: "+res+" real: "+testEntry._3)
+    //comparePredictionSvdBased(testEntry)
+    //comparePredictionItemBased(testEntry)
+    comparePredictionOfThree(testEntry)
+  }
+
+
+  def comparePredictionSvdBased(testEntry: (Int,  Int, Int)): Double = {
+    val res = SVDBasedService.getCalculateUserPrediction(testEntry._1, Array(""+testEntry._2)).get().getContent().toString("UTF-8").toDouble
     Math.abs(res - testEntry._3)
   }
 
-  def comparePredictionItemBased(testEntry: (Int,  Int, Int)): scala.math.BigDecimal = {
-    
-    0.0
+  def comparePredictionItemBased(testEntry: (Int,  Int, Int)): Double = {
+    val res = ItemBasedService.getCalculateUserPrediction(testEntry._1, Array(""+testEntry._2)).get().getContent().toString("UTF-8").toDouble
+    Math.abs(res - testEntry._3)
+  }
+
+  def comparePredictionOfThree(testEntry: (Int, Int, Int)): Double = {
+    Math.abs(3 - testEntry._3)
   }
 
 }

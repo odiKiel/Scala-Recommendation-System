@@ -133,6 +133,7 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     result
   }
 
+  // return all users with ratings for an item
   def userRatingListByItemId(itemId: Int) : List[(Int, Int)] = {
     db withSession {
       val query = for {
@@ -237,7 +238,7 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     db withSession {
       val query = for {
         //(rating, similarItem) <- Ratings leftJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (similarItem.itemOneId, similarItem.itemTwoId, rating.rating, similarItem.similarity)
-        (rating, similarItem) <- Ratings leftJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (rating.rating, similarItem.similarity)
+        (rating, similarItem) <- Ratings innerJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (rating.rating, similarItem.similarity)
 
       query.sortBy(_._2.desc).take(25).list
     }
@@ -248,6 +249,34 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 //  })
 
   }
+
+  def byUserIdItemIdWithSimilarUserAverageRating(userId: Int, itemId: Int) : List[(Int, Int, Double, Double)] = {
+
+    db withSession {
+      val query = for {
+        ((rating, similarUser), user) <- Ratings innerJoin SimilarUsers on ((r, s) => (r.userId === s.userOneId) || (r.userId === s.userTwoId)) innerJoin Users on((r,s) => (r._1.userId === s.id)) if(rating.itemId === itemId && (similarUser.userOneId === userId || similarUser.userTwoId === itemId))} yield (user.id, rating.rating, similarUser.similarity, user.averageRating)
+
+      query.sortBy(_._3.desc).take(25).list
+    }
+  }
+
+
+  //return for a user all similar users that rated a specific item with the averageRating
+  /*
+  def byUserIdItemIdWithSimilarUserAverageRating(userId: Int, itemId: Int): List[(Int, Int, Double, Double)] = {
+    db withSession {
+
+      val query = for {
+        r <- Ratings if r.itemId === itemId
+        s <- SimilarUsers if((r.userId === s.userOneId && s.userTwoId === userId) || (r.userId === s.userTwoId && s.userOneId === userId))
+        u <- Users if r.userId === u.id
+      } yield (u.id, r.rating, s.similarity, u.averageRating)
+      
+      query.sortBy(_._3.desc).take(25).list
+    }
+
+  }
+  */
 
   //returns all user ratings for an item id if the user has not rated the item it returns null 
   def allUserRatingsForItemId(itemId: Int): List[(Int, Int, Option[Int])] = {
