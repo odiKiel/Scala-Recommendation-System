@@ -48,6 +48,7 @@ object SVDBasedService extends HttpServer with ListOperation {
 
   def calculateSimilarUsers: RealMatrix = {
     SimilarUsers.deleteAll
+    Users.calculateAverageRating
     val time = System.nanoTime
     println("start with calculations")
     val userItemMatrix = createUserItemMatrix
@@ -84,9 +85,9 @@ object SVDBasedService extends HttpServer with ListOperation {
         0
       }
       else {
-        user.averageRating + (numerator / denumerator)
+        val res = user.averageRating + (numerator / denumerator)
+        if(res < 0) 0 else res
       }
-      if(result < 0) result == 0
 
       //calculate prediction for a specific item
       Future.value(createHttpResponse(""+result))
@@ -112,10 +113,10 @@ object SVDBasedService extends HttpServer with ListOperation {
       val averageRatingA = Users.get(userAId).get.averageRating
       val numerator = topItems.map{case(userBId: Int, rating: Int, similarity: Double) => {
         val averageRatingB = Users.get(userBId).get.averageRating
-        (Math.abs(rating-averageRatingB))*similarity
+        (rating-averageRatingB)*similarity
       }}.sum
       val denominator = topItems.map(_._3).sum
-      averageRatingA + numerator/denominator
+      if(denominator == 0) 0 else averageRatingA + numerator/denominator
     }
     else 0
   }
@@ -131,7 +132,10 @@ object SVDBasedService extends HttpServer with ListOperation {
     for((user, i) <- allUsers.zipWithIndex) {
       //all missing ratings are filled with the middle of the ratings 1-5 the three an improvement would be to use the average of that rating
       //however that would highly decrease the computation time of the algorithm
-      val allItemsForUser = Ratings.allItemRatingsForUserId(user.id.get).map({case (user, item, rating) => rating.getOrElse(3).toDouble}).toArray
+      val allItemsForUser = Ratings.allItemRatingsForUserId(user.id.get).map({case (user: Int, item: Int, rating: Option[Int], averageRating: Double) => {
+          if(rating == None) averageRating.round else rating.get.toDouble
+        }
+      }).toArray
       matrix(i) ++= allItemsForUser
     }
 

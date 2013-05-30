@@ -25,7 +25,7 @@ object ItemPlusSvdRecommendation {
     val reader = CSVReader.open(new File("ml-100k/u1base.csv"))
 
     (1 to 943).foreach(f => Users.create(User(None, "User "+f, 0.0)))
-    (1 to 1682).foreach(f => Items.create(Item(None, "Item "+f)))
+    (1 to 1682).foreach(f => Items.create(Item(None, "Item "+f, 0.0)))
     println("created users and items")
 
     val itemOffset = Items.first.get.id.get-1
@@ -64,7 +64,7 @@ object ItemPlusSvdRecommendation {
 
   //testData (userId, itemId, rating)
   def loadTestData: List[(Int, Int, Int)] = {
-    val reader = CSVReader.open(new File("ml-100k/u1test.csv"))
+    val reader = CSVReader.open(new File("ml-100k/u1test-min.csv"))
 
     val itemOffset = Items.first.get.id.get-1
     val userOffset = Users.first.get.id.get-1
@@ -81,14 +81,15 @@ object ItemPlusSvdRecommendation {
 
   //testEntry (userCsvId, itemCsvId, rating)
   def comparePrediction(testEntry: (Int,  Int, Int)): Double = {
-    //comparePredictionSvdBased(testEntry)
+    comparePredictionSvdBased(testEntry)
     //comparePredictionItemBased(testEntry)
-    comparePredictionOfThree(testEntry)
+    //comparePredictionOfThree(testEntry)
   }
 
 
   def comparePredictionSvdBased(testEntry: (Int,  Int, Int)): Double = {
     val res = SVDBasedService.getCalculateUserPrediction(testEntry._1, Array(""+testEntry._2)).get().getContent().toString("UTF-8").toDouble
+    println("result: "+res+" expected: "+testEntry._3)
     Math.abs(res - testEntry._3)
   }
 

@@ -218,7 +218,6 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
   }
 
   def calculateSimilarity(itemId: Int, itemMapRatingsVector: collection.mutable.HashMap[Int, (RealVector, RealVector)]) = {
-    val time = System.nanoTime
     println("calculate similarity for item: "+itemId)
     var i=1
     val itemSimilarity = collection.mutable.ArrayBuffer[(Int, Double)]()
@@ -253,7 +252,6 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
       }
     }
     createAll(itemId, itemSimilarity)
-    println("done time: "+(System.nanoTime-time))
   }
 /*
   //calculate the similarity between two items with the users that rated both items

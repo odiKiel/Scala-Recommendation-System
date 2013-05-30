@@ -71,14 +71,14 @@ object WebService extends HttpServer {
       }
       case "recommendations" => {
         var ret = new Promise[HttpResponse]
-        recommendationClient.get("/calculateUserPredictions/"+path.tail.head) onSuccess { v =>
+        recommendationClient.get("/calculateUserPrediction/"+path.tail.head) onSuccess { v =>
           ret.setValue(createHttpResponse(v))
         }
         ret
       }
       case "recommendationsItemBased" => {
         var ret = new Promise[HttpResponse]
-        recommendationClient.get("/calculateUserPredictionsItemBased/"+path.tail.head) onSuccess { v =>
+        recommendationClient.get("/calculateUserPredictionItemBased/"+path.tail.head) onSuccess { v =>
           ret.setValue(createHttpResponse(v))
         }
         ret

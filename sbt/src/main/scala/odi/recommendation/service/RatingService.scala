@@ -10,7 +10,10 @@ import com.twitter.util.{Promise, Future}
 <script type='text/javascript'>
 var _rating = _rating || [];
 _rating.push(['user', 'UA-25122923-1']);
+_rating.push(['item', '23']);
 _rating.push(['tags', []]);
+_rating.push(['button', ['css tag', 'css tag']]);
+_rating.push(['information', ['css tag', 'css tag']);
 </script>
 */ 
 object RatingService extends HttpServer {
@@ -23,6 +26,7 @@ object RatingService extends HttpServer {
 
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
+      case "currentItem" => postCurrentItem(path.tail.head.toInt)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -33,18 +37,8 @@ object RatingService extends HttpServer {
     }
   }
 
-  //attention used .get() here todo improve this!
-  def postTagText(args: Array[String], value: String): Future[HttpResponse] = {
-    val r = new Promise[HttpResponse]
-//  tagText(value) onSuccess { tags => 
-//    r.setValue(createHttpResponse(Json.toJson(tags.toList)))
-//  }
-    r
-  }
-
-  def getTagWord(value: String): Future[HttpResponse] = {
-    //run levenshtein distance algorithm with the word and all stw thesaurus words
-    Future.value(createHttpResponse("string"))
+  def postCurrentItem(itemId: Int): Future[HttpResponse] = {
+    Future.value(createHttpResponse("test"))
   }
 }
 

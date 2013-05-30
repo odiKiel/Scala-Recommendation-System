@@ -38,6 +38,7 @@ object ItemBasedService extends HttpServer with ListOperation {
   def getCalculateSimilarItems(path: Array[String]): Future[HttpResponse] = {
     val items: List[Int] = Items.allIds
     SimilarItems.deleteAll
+    val time = System.nanoTime
     val purchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together by one or more users
 
     // log for testing
@@ -59,6 +60,7 @@ object ItemBasedService extends HttpServer with ListOperation {
       SimilarItems.calculateSimilarity(itemId, itemMapRatingsVector) 
     }
 
+    println("total time: "+(System.nanoTime-time))
     Future.value(createHttpResponse("done"))
   }
 

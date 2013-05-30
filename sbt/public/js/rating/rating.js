@@ -105,5 +105,49 @@ var sendData = function(visibleTime, scrollTime){
   xmlhttp.open("POST","ajax_test.asp",true);
   xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   xmlhttp.send("visibleTime="+visibleTime+"&scrollTime="+scrollTime);
+
+ 
   
 }  
+(function() {
+  var sendInitialItemId = function() {
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.open("POST","ajax_test.asp",true);
+    xmlhttp.onreadystatechange = runJs;
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("visibleTime="+visibleTime+"&scrollTime="+scrollTime);
+
+    function runJs()
+    {
+      if (xmlhttp.readyState == 4) {
+        var result = xmlHttp.responseText;
+        if(result != 'OK') {
+          eval(result);
+        }
+      }
+
+      /* if you've returned javascript instead of xml or text, 
+      you can eval(result) to access the javascript variables returned.
+      */
+    }
+  }
+ 
+
+  if(document.readyState === "complete") {
+    //Already loaded!
+  }
+  else {
+    //Add onload or DOMContentLoaded event listeners here: for example,
+    window.addEventListener("onload", function () {/* your code here */}, false);
+    //or
+    //document.addEventListener("DOMContentLoaded", function () {/* code */}, false);
+  }
+})();

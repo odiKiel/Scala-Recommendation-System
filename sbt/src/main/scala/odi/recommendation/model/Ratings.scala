@@ -70,6 +70,30 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     result
   }
 
+  def byItemId(iid: Int) : List[Rating] = {
+    var result:List[Rating] = List[Rating]()
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = (for {u <-Ratings if u.itemId === iid} yield u.id ~ u.itemId ~ u.userId ~ u.rating ~ u.prediction).sortBy(_._2)
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, itemId, userId, rating, prediction) => Option(Rating(Option(id), itemId, userId, rating, prediction));
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+      if(inter.list != Nil){
+        result = inter.list.flatten
+      }
+      result
+    }
+
+    // return the found bid
+    result
+  }
+
+
   /*
    find ratings from one user for items that are unknown to another user
    use only ratings that aren't predictions!
@@ -290,12 +314,12 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
   }
 
   //returns all item ratings for an user id if the user has not rated the item it returns null 
-  def allItemRatingsForUserId(userId: Int): List[(Int, Int, Option[Int])] = {
+  def allItemRatingsForUserId(userId: Int): List[(Int, Int, Option[Int], Double)] = {
     db withSession{
       val query = for {
         //innerJoin on true hack for postgreSQL slick bug
         ((user, item), rating) <- Users innerJoin Items on ((a, b) => a.id === a.id) leftJoin Ratings on ((a, b) => a._1.id === b.userId && a._2.id === b.itemId) if(user.id === userId)
-      }yield (user.id, item.id, rating.rating.?)
+      }yield (user.id, item.id, rating.rating.?, item.averageRating)
       query.sortBy(_._2).list
     }
   }
