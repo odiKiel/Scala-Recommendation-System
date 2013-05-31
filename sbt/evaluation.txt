@@ -1,0 +1,52 @@
+
+svd
+100 prediction
+Sum: 77.2247627665672 MAE: 0.772247627665672 time: 26082737000 mit average
+
+Sum: 76.5520042226515 MAE: 0.765520042226515 time: 24567744000 ohne average  
+
+
+
+svd based offline similarity calculation with empty entries filled with 3
+total time: 469827102000
+
+
+
+therefore 469.827102 seconds
+7.8 min
+
+20000 predictions svd neighbourhood size of 25 empty entries with 3 filled
+Sum: 15909.184802592928 MAE: 0.7954592401296464 time: 4395752457000 mit average 
+
+
+20000 predictions item based
+Sum: 16637.518040823947 MAE: 0.8318759020411973 time: 4208495745000 
+
+20000 predictions of three
+Sum: 20666.0 MAE: 1.0333 time: 494136000 
+
+
+with rounded double average item value
+offline calculation time: 465679116000
+                   total time: 507904664000
+
+500 predictions with rounded double average      svd
+Sum: 412.7125220363872 MAE: 0.8254250440727744 time: 121722171000 
+
+500 predictions with three dvd
+Sum: 412.7125220363872 MAE: 0.8254250440727744 time: 113087593000 
+
+
+item based offline calculation
+total time: 3187699731000
+53min
+
+svd based 20000 prediction with average item rating used for empty entries 
+Sum: 15724.569633338271 MAE: 0.7862284816669135 time: 4226311237000  
+
+all predictions for one user:
+total time: 30469728000
+therefore all predictions for all users  2.8732954e+13 = 28290 seconds = 471 min = 7.85h
+dvd based 20000 prediction with pre calculated rounded item rating used for empty entries
+Sum: 15837.569633338271 MAE: 0.7793784616669135 time: 4226311237000  
+
