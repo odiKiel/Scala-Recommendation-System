@@ -257,6 +257,7 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
   //returns a list of similar items that the user has rated together with the similarity and the rating
   // (ItemId, Rating, Similarity)
+
   def byUserIdItemIdWithSimilarItem(uid: Int, iid: Int) : List[(Int, Int, Double)] = {
 
     val result = db withSession {

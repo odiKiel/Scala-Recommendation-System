@@ -139,6 +139,7 @@ object Items extends Table[Item]("items") with ModelTrait{
   }
 
   def first : Option[Item] = {
+    
     db withSession {
       val q = Items.map{ u => u}
       q.sortBy(_.id).take(1).list.headOption
