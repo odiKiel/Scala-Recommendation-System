@@ -7,11 +7,11 @@ object TestDatabase {
     SimilarUsers.deleteAll
     Items.deleteAll
     Users.deleteAll
-    val item1 = Items.create(Item(None, "Item1", 0.0))
-    val item2 = Items.create(Item(None, "Item2", 0.0))
-    val item3 = Items.create(Item(None, "Item3", 0.0))
-    val item4 = Items.create(Item(None, "Item4", 0.0))
-    val item5 = Items.create(Item(None, "Item5", 0.0))
+    val item1 = Items.create(Item(None, "Item1", 0.0, "http://www.item1.de", 1))
+    val item2 = Items.create(Item(None, "Item2", 0.0, "http://www.item2.de", 2))
+    val item3 = Items.create(Item(None, "Item3", 0.0, "http://www.item3.de", 3))
+    val item4 = Items.create(Item(None, "Item4", 0.0, "http://www.item4.de", 4))
+    val item5 = Items.create(Item(None, "Item5", 0.0, "http://www.item5.de", 5))
 
     val user1 = Users.create(User(None, "User1", 0.0))
     val user2 = Users.create(User(None, "User2", 0.0))

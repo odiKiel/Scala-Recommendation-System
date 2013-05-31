@@ -25,7 +25,7 @@ object ItemPlusSvdRecommendation {
     val reader = CSVReader.open(new File("ml-100k/u1base.csv"))
 
     (1 to 943).foreach(f => Users.create(User(None, "User "+f, 0.0)))
-    (1 to 1682).foreach(f => Items.create(Item(None, "Item "+f, 0.0)))
+    (1 to 1682).foreach(f => Items.create(Item(None, "Item "+f, 0.0, "http://www."+f".de", +f)))
     println("created users and items")
 
     val itemOffset = Items.first.get.id.get-1

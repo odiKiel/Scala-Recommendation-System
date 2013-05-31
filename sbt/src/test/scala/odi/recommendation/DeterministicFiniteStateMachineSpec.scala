@@ -9,9 +9,9 @@ object DeterministicFiniteStateMachineSpec extends Specification {
     
     //short explanation: (a,b) a => current letter number, b error count
     "should generate a deterministic final state machine with max distance 3" in {
-      dfsm.nextState((0,0), 't') mustEqual Set((1,0), (0,1), (1,1), (1,2), (2,2), (2,1), (3,2))
-      dfsm.nextState((0,0), 'F') mustEqual Set((0,1), (1,2), (1,1), (2,2))
-      dfsm.nextState((1,0), 'F') mustEqual Set((2,1), (1,1), (2,2), (3,2))
+      dfsm.nextState(collection.mutable.Set((0,0), (1,1), (2,2)), 't') mustEqual Set((1,0), (0,1), (1,1), (1,2), (2,2), (2,1), (3,2))
+      dfsm.nextState(collection.mutable.Set((0,0)), 'F') mustEqual Set((0,1), (1,2), (1,1), (2,2))
+      dfsm.nextState(collection.mutable.Set((1,0)), 'F') mustEqual Set((2,1), (1,1), (2,2), (3,2))
     }
     "returns true if string is in distance (equal)" in {
       dfsm.isInDistance("test") mustEqual true

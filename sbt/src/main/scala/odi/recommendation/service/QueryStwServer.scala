@@ -35,7 +35,7 @@ object QueryStwServer extends HttpServer {
   private
 
   def getStwPrefLabel(value: String): String = {
-    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE { {?s skos:prefLabel '"+value+"'@de} UNION{?s skos:prefLabel '"+value+"'@de}} LIMIT 10"
+    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE { {?s skos:prefLabel '"+value+"'@de} UNION{?s skos:altLabel '"+value+"'@de}} LIMIT 10"
     runQueryOn4Store(sparql)
   }
 
@@ -68,20 +68,26 @@ object QueryStwServer extends HttpServer {
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     Future.value(path.head match {
       case "runQuery" => postRunQueryOn4Store(path.tail, value)
+      case "allPrefLabels" => postAllPrefLabels(value)
       case _ => createHttpResponse("Method "+path.head+" not found")
     })
   }
 
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     Future.value(path.head match {
-      case "prefLabel" => getPrefLabel(path.tail)
+      case "prefLabel" => getPrefLabel(path.tail.head)
       case _ => createHttpResponse("Method "+path.head+" not found")
     })
   }
 
-  def getPrefLabel(value: Array[String]): HttpResponse = {
-    val prefLabel = findPrefLabel(value.head)
+  def getPrefLabel(value: String): HttpResponse = {
+    val prefLabel = findPrefLabel(value)
     createHttpResponse(prefLabel.getOrElse(""))
+  }
+
+  def postAllPrefLabels(value: String): HttpResponse = {
+    val tags = Json.jsonToList(value)
+    createHttpResponse(Json.toJson(tags.flatMap(tag => findPrefLabel(tag))))
   }
 
   def postRunQueryOn4Store(args: Array[String], query: String): HttpResponse = {

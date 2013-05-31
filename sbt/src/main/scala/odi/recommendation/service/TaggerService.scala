@@ -21,6 +21,7 @@ object TaggerService extends HttpServer {
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case "tagText" => postTagText(path.tail, value)
+      case "prefLabelText" => postPrefLabelText(path.tail, value)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -32,7 +33,6 @@ object TaggerService extends HttpServer {
     }
   }
 
-  //attention used .get() here todo improve this!
   def postTagText(args: Array[String], value: String): Future[HttpResponse] = {
     val r = new Promise[HttpResponse]
     tagText(value) onSuccess { tags => 
@@ -40,6 +40,22 @@ object TaggerService extends HttpServer {
     }
     r
   }
+
+  def postPrefLabelText(args: Array[String], value: String): Future[HttpResponse] = {
+    val r = new Promise[HttpResponse]
+    tagText(value) onSuccess { tags => 
+
+      val prefLabelFuture =  tags.flatMap(tag => {
+        //queryStwClient.get("/prefLabels/"+tag)
+        QueryStwServer.findPrefLabel(tag) // speed hack only words if TaggerService and QuerySTw run on the same server
+      })
+      //r.setValue(createHttpResponse(Json.toJson(Future.collect(prefLabelFuture).get())))
+      r.setValue(createHttpResponse(Json.toJson(prefLabelFuture.distinct))) // speed hack only words if TaggerService and QuerySTw run on the same server
+    }
+
+    r
+  }
+
 
   def getTagWord(value: String): Future[HttpResponse] = {
     //run levenshtein distance algorithm with the word and all stw thesaurus words
@@ -64,12 +80,13 @@ object TaggerService extends HttpServer {
   }
 
   def tagTextRec(dfsmList: List[DeterministicFiniteStateMachine], pagination: Int, offset: Int): Future[Seq[String]] = {
-    if(offset > 4000) {
+    if(offset > 32000) {
       return Future.value(Seq())
     }
 
     val test = queryStwClient.post("/runQuery/", query + " LIMIT " + pagination + " OFFSET "+offset) flatMap {labelsJson =>
-      val seqString = Json.jsonToValue4Store(labelsJson) map {label => {
+      val labels = Json.jsonToValue4Store(labelsJson)
+      val seqString = labels map {label => {
           var ret: Option[String] = None
           if(labelForText(label, dfsmList)) {
             ret = Some(label)
@@ -88,7 +105,8 @@ object TaggerService extends HttpServer {
   def createDfsm(text: List[String]): List[DeterministicFiniteStateMachine] = {
     text.map((word: String) => {
       val fsm = new FiniteStateMachine()
-      fsm.levenshteinFiniteStateMachine(word, 1).toDfsm()
+      val degree = if(word.length < 8 && word.length > 3) 1 else if(word.length >= 8) 3 else 0
+      fsm.levenshteinFiniteStateMachine(word, degree).toDfsm()
     })
   }
 

@@ -6,12 +6,12 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
 // Definition of the ITEMS table
-case class Item(id: Option[Int] = None, title: String, averageRating: Double) extends ToJson with ModelTrait{
+case class Item(id: Option[Int] = None, title: String, averageRating: Double, url: String, qId: Int) extends ToJson with ModelTrait{
   def similarItems: List[(Int, Double)] = {
     SimilarItems.byItemId(this.id.get)
   }
   def toJson = {
-    val json = ("id"->id.get)~("title"->title)
+    val json = ("id"->id.get)~("title"->title)~("averageRating"->averageRating)~("url"->url)~("qId"->qId)
     compact(render(json))
   }
   def calculateAverageRating = {
@@ -24,12 +24,21 @@ case class Item(id: Option[Int] = None, title: String, averageRating: Double) ex
     }
   }
 
+  def addTag(prefLabel: String) = {
+    val tag = Tags.byPrefLabel(prefLabel)
+    ItemTags.create(ItemTag(None, id.get, tag.id.get))
+  }
+
+
+
 }
 object Items extends Table[Item]("items") with ModelTrait{
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def title = column[String]("title")
   def averageRating = column[Double]("average_rating")
-  def * = id.? ~ title ~ averageRating <>(Item, Item.unapply _)
+  def url = column[String]("url")
+  def qId = column[Int]("q_id")
+  def * = id.? ~ title ~ averageRating ~ url ~ qId <>(Item, Item.unapply _)
   def noID = title ~ 0.0
 
   def createTable = {
@@ -43,11 +52,11 @@ object Items extends Table[Item]("items") with ModelTrait{
 
     db withSession {
         // define the query and what we want as result
-    	val query = for (i <-Items if i.id === id) yield i.id ~ i.title ~ i.averageRating
+    	val query = for (i <-Items if i.id === id) yield i.id ~ i.title ~ i.averageRating ~ url ~ qId
 
     	// map the results to a Bid object
     	val inter = query mapResult {
-    	  case(id, title, averageRating) => Option(Item(Option(id), title, averageRating))
+    	  case(id, title, averageRating, url, qId) => Option(Item(Option(id), title, averageRating, url, qId))
     	}
 
     	// check if there is one in the list and return it, or None otherwise
@@ -60,6 +69,31 @@ object Items extends Table[Item]("items") with ModelTrait{
     // return the found bid
     result
   }
+
+
+  def byQId(qId: Int) : Option[Item] = {
+    var result:Option[Item] = None;
+
+    db withSession {
+        // define the query and what we want as result
+    	val query = for (i <-Items if i.qId === qId) yield i.id ~ i.title ~ i.averageRating ~ url ~ qId
+
+    	// map the results to a Bid object
+    	val inter = query mapResult {
+    	  case(id, title, averageRating, url, qId) => Option(Item(Option(id), title, averageRating, url, qId))
+    	}
+
+    	// check if there is one in the list and return it, or None otherwise
+    	result = inter.list match {
+    	  case _ :: tail => inter.first
+    	  case Nil => None
+    	}
+    }
+
+    // return the found bid
+    result
+  }
+
 
   def all : List[Item] = {
     db withSession {
@@ -161,7 +195,7 @@ object Items extends Table[Item]("items") with ModelTrait{
       id = idQuery.list().head
     }
     // create a bid to return
-    new Item(Option(id), item.title, 0.0)
+    new Item(Option(id), item.title, 0.0, item.url, item.qId)
   }
 
 

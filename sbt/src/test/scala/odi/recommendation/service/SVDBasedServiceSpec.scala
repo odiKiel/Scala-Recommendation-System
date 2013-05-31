@@ -3,7 +3,7 @@ import org.specs2.mutable._
 
 object SVDBasedServiceSpec extends Specification {
   "SVDBased Algorithm" should {
-    TestDatabase.setup()
+    TestDatabase.setup
     val svdBasedServer = SVDBasedService(Services("svdBasedService").toInt)
     val svdBasedClient = new HttpClient("localhost:"+Services("svdBasedService"))
     val ret1 = svdBasedClient.get("/calculateSimilarUsers/")

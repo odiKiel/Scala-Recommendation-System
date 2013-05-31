@@ -1,130 +1,3 @@
-console
-exit
-console
-exit
-console
-exit
-test-only org.spec2.TaggerServiceSpec
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-console
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-console
-exit
-console
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-console
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-console
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-console
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-console
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.LevenshteinDistanceServiceSpec
-exit
-test-only odi.recommendation.FiniteStateMachineSpec
-test-only odi.recommendation.DeterministicFiniteStateMachineSpec
-exit
-console
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.DeterministicFiniteStateMachineSpec
-exit
-test-only odi.recommendation.DeterministicFiniteStateMachineSpec
-exit
-test-only odi.recommendation.DeterministicFiniteStateMachineSpec
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-test-only odi.recommendation.DeterministicFiniteStateMachineSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
 test-only odi.recommendation.TaggerServiceSpec
 exit
 test-only odi.recommendation.TaggerServiceSpec
@@ -497,4 +370,131 @@ exit
 console
 exit
 console
+exit
+console
+test-only odi.recommendation.TaggerServiceSpec
+console
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+e
+exit
+e
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+test-only odi.recommendation.TaggerServiceSpecexit
+exit
+test-only odi.recommendation.TaggerServiceSpecexit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exic
+exit
+exic
+test-only odi.recommendation.TaggerServiceSpec
 exit

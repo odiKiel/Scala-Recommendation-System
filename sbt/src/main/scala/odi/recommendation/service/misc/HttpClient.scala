@@ -17,10 +17,11 @@ class HttpClient(hosts: String) {
      .hosts(hosts) // If >1 host, client does simple load-balancing
      .tcpConnectTimeout(5.seconds)
      .requestTimeout(30.seconds)
-     .hostConnectionLimit(1)
+     .hostConnectionLimit(100)
      .retries(3)
-     .logger(java.util.logging.Logger.getLogger("debug"))
      .build()
+     //.logger(java.util.logging.Logger.getLogger("debug"))
+     
 
   def post(path: String, params: String): Promise[String] = {
     var httpReq = new DefaultHttpRequest(HttpVersion.HTTP_1_1,HttpMethod.POST,path)

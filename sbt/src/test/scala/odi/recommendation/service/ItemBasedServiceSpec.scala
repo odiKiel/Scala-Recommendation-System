@@ -3,7 +3,7 @@ import org.specs2.mutable._
 
 object ItemBasedServiceSpec extends Specification {
   "ItemBased Algorithm" should {
-    TestDatabase.setup()
+    TestDatabase.setup
     val itemBasedServer = ItemBasedService(Services("itemBasedService").toInt)
     val itemBasedClient = new HttpClient("localhost:"+Services("itemBasedService"))
     val ret1 = itemBasedClient.get("/calculateSimilarItems/")

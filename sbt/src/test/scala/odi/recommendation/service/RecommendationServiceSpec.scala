@@ -3,7 +3,7 @@ import org.specs2.mutable._
 
 object RecommendationServiceSpec extends Specification {
   "Recommendation Service" should {
-    TestDatabase.setup()
+    TestDatabase.setup
     val recommendationServer = RecommendationService(Services("recommendationService").toInt)
     val recommendationClient = new HttpClient("localhost:"+Services("recommendationService"))
     val ret1 = recommendationClient.get("/calculateSimilarities/")
