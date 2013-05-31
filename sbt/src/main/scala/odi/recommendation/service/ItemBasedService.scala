@@ -75,14 +75,13 @@ object ItemBasedService extends HttpServer with ListOperation {
     }
   }
 
-  // userItems -> SimilarItems - userItems -> calculate predictions
-  //todo improve this with k-nearest
+  //if the path contains an item id predict the rating for user and item if not predict the ratings for all items 
   def getCalculateUserPrediction(userId: Int, path: Array[String]): Future[HttpResponse] = {
     if(path.size > 0) {
       val itemId = path.head.toInt
       val ratingsSimilarities = Ratings.byUserIdItemIdWithSimilarItem(userId, itemId)
 
-      val numerator = ratingsSimilarities.map({case (rating, similarity) => {
+      val numerator = ratingsSimilarities.map({case (itemId, rating, similarity) => {
         rating * similarity
       }}).sum 
       val denumerator = ratingsSimilarities.map(_._2).sum
@@ -93,34 +92,44 @@ object ItemBasedService extends HttpServer with ListOperation {
     }
 
     else {
+      val time = System.nanoTime
 
       //save the items that are unknown together with the item that are known and their similarity values
-      val similarItems = collection.mutable.HashMap[Int, List[(Int, Double)]]()
+      val similarItems = collection.mutable.HashMap[Int, List[(Int, Double, Int)]]()
       val allItemsUser = Items.allItemIdsUserId(userId)
 
       for(userItemId: Int <- allItemsUser;
-          (similarItemId, similarity) <- SimilarItems.byItemId(userItemId)) 
+          (similarItemId, rating, similarity) <- Ratings.byUserIdItemIdWithSimilarItem(userId, userItemId)) //take top 25 
       {
         if(!allItemsUser.contains(similarItemId) && similarity > 0) {//item is unknown to the user and similarity is not independence
-          similarItems += similarItemId -> addToList[(Int, Double)](similarItems.get(similarItemId), (userItemId, similarity))
+          similarItems += similarItemId -> addToList[(Int, Double, Int)](similarItems.get(similarItemId), (userItemId, similarity, rating)) //add new item, similarity pair to the item that is to be calculated
 
         }
       }
+      println("done building similarity list")
+      println("similarItems to calculate: "+similarItems.size)
 
-      val recommendations = similarItems.flatMap({case (itemId: Int, similarItemList: List[(Int, Double)]) => Map(itemId.toString -> calculatePrediction(userId, similarItemList).toString)})
+      var i = 0
+      val recommendations = similarItems.flatMap({case (itemId: Int, similarItemList: List[(Int, Double, Int)]) => {
+          i += 1
+          println("calculating item nr: "+i)
+          Map(itemId.toString -> calculatePrediction(userId, similarItemList).toString)
+        }  
+      })
 
+      println("total time: "+(System.nanoTime - time))
       Future.value(createHttpResponse(Json.toJson(recommendations)))
     }
   }
 
   //calculate the prediction for one item from one User by the items that he already rated
   //integrate the average rating
-  def calculatePrediction(userId: Int, similarItems: List[(Int, Double)]): Double = {
+  def calculatePrediction(userId: Int, similarItems: List[(Int, Double, Int)]): Double = {
     similarItems.length match {
       case 0 => 0
       case _ => {
-        val numerator = similarItems.map({case (itemId, similarity) => {
-          Ratings.byItemIdUserId(itemId, userId).get.rating * similarity
+        val numerator = similarItems.map({case (itemId, similarity, rating) => {
+          rating * similarity
         }}).sum 
         (numerator / similarItems.map(_._2).sum)
       }

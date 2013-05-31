@@ -257,20 +257,20 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
   //returns a list of similar items that the user has rated together with the similarity and the rating
   // (ItemId, Rating, Similarity)
-  def byUserIdItemIdWithSimilarItem(uid: Int, iid: Int) : List[(Int, Double)] = {
+  def byUserIdItemIdWithSimilarItem(uid: Int, iid: Int) : List[(Int, Int, Double)] = {
 
-    db withSession {
+    val result = db withSession {
       val query = for {
-        //(rating, similarItem) <- Ratings leftJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (similarItem.itemOneId, similarItem.itemTwoId, rating.rating, similarItem.similarity)
-        (rating, similarItem) <- Ratings innerJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (rating.rating, similarItem.similarity)
+        (rating, similarItem) <- Ratings leftJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (similarItem.itemOneId, similarItem.itemTwoId, rating.rating, similarItem.similarity)
+        //(rating, similarItem) <- Ratings innerJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (rating.rating, similarItem.similarity)
 
       query.sortBy(_._2.desc).take(25).list
     }
 
-//  result.map((r) => {
-//      if(r._1 == iid) (r._2, r._3, r._4)
-//      else (r._1, r._3, r._4)
-//  })
+  result.map((r) => {
+      if(r._1 == iid) (r._2, r._3, r._4)
+      else (r._1, r._3, r._4)
+  })
 
   }
 

@@ -82,11 +82,11 @@ object SVDBasedService extends HttpServer with ListOperation {
       }}).sum 
       val denumerator = ratingsSimilarities.map(_._3).sum
       val result = if (denumerator == 0) {
-        0
+        3 //no similar user is found therefore use the middle of the rating scala
       }
       else {
         val res = user.averageRating + (numerator / denumerator)
-        if(res < 0) 0 else res
+        if(res < 0) 1 else res
       }
 
       //calculate prediction for a specific item

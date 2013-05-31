@@ -9,8 +9,8 @@ trait ModelTrait {
                          driver="org.postgresql.Driver",
                          user="oliver_diestel",
                          password="")
-
   /*
+
   lazy val db = Database.forURL("jdbc:postgresql://localhost/recommendation_test",
                          driver="org.postgresql.Driver",
                          user="oliver_diestel",
