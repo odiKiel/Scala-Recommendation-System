@@ -25,6 +25,10 @@ object SVDBasedServiceSpec extends Specification {
       val prediction = Json.jsonToList(ret2.get())
       prediction mustEqual Items.all.last.id.get+"#"+2.716305083936734
     }
+
+//  "should generate recommendations" in {
+//    Ratings.getUnknownItemsForUserByUserWithTag(userId, similarUserId, 25, prefLabels)
+//  }
   }
 
 }

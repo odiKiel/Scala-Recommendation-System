@@ -6,6 +6,10 @@ import com.twitter.util.{Promise, Future}
 import org.apache.commons.math3.linear._
 
 object SVDBasedService extends HttpServer with ListOperation {
+
+  TaggerService(Services("taggerService").toInt)
+  val tagClient = new HttpClient("localhost:"+Services("taggerService"))
+
   val name = "SVDBasedService"
 
   def apply(port: Int): Int = {
@@ -64,6 +68,72 @@ object SVDBasedService extends HttpServer with ListOperation {
     users2D
   }
 
+
+  /** generate recommendations for user and tags
+    *
+    * args 0 = user
+    * args 1 = amount of recommendations
+    * value from post = tags
+    * if no user (userId 0) or user doesnt exists take first user this should be the default user
+    * if no tags take top items from similar users
+    * else take top items from similar users filtered by tags
+    **/
+
+  def postGenerateRecommendations(args: Array[String], value: String): Future[HttpResponse] = {
+    if(args.length > 1) {
+      val userId = if(args(0).toInt > 0) { 
+        val user = Users.byQUserId(args(0).toInt) 
+        if(user == None) {
+          Users.first.get.id.get
+        }
+        else{
+          user.get.id.get
+        }
+      }
+      else {
+        Users.first.get.id.get  //take first user if user is not existing
+      }
+      val amount = args(1).toInt
+      val predictions = collection.mutable.HashMap[Int, List[(Int, Int, Double)]]()
+      val prefLabels = if(value.size > 0) {
+        val prefLabelsFuture = tagClient.post("/prefLabelsTags", value)
+        Json.jsonToList(prefLabelsFuture.get()) // get shouldnt matter the tags to pref labels is fast
+      }
+      else {
+        List[String]()
+      }
+
+      for(s <- SimilarUsers.byUserId(userId, 25)){
+        val (similarUserId, similarity) = s.similarityByUserId(userId).get
+        if(similarity > 0) { 
+          val ratings = if(prefLabels.length > 0) {
+            prefLabels.flatMap(label => Ratings.getUnknownItemsForUserByUserWithTag(userId, similarUserId, 25, label))
+          }
+          else {
+            Ratings.getUnknownItemsForUserByUser(userId, similarUserId, 25)
+          }
+          for(rating <- ratings)
+          {
+            //take into account that it would be good if items are rated by more than one
+            predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (similarUserId, rating.rating, similarity))
+          }
+        }
+      }
+
+        //get top amount rated items
+
+      val predictionMap = predictions.flatMap((i: (Int, List[(Int, Int, Double)])) => Map(i._1->calculatePrediction(userId, i._2)))
+      val itemPredictions = predictionMap.take(amount).map((i: (Int, Double)) => {
+          val item = Items.get(i._1).get
+          List(item.title, item.url, i._2.toString)
+      })
+      Future.value(createHttpResponse(Json.toJson(itemPredictions)))
+    }
+    else {
+      Future.value(createHttpResponse("Not enough parameter"))
+    }
+  }
+
   /*
    take all similar users, get their best rated items that are unknown to the user, sort them by rating
    only use users with similarities > 0
@@ -97,7 +167,7 @@ object SVDBasedService extends HttpServer with ListOperation {
       for(s <- SimilarUsers.byUserId(userId, 5)){
         val (similarUserId, similarity) = s.similarityByUserId(userId).get
         if(similarity > 0) { 
-          for(rating <- Ratings.getUnknownItemsForUserByUser(userId, similarUserId))
+          for(rating <- Ratings.getUnknownItemsForUserByUser(userId, similarUserId, 25))
           {
             predictions += rating.itemId -> addToList(predictions.get(rating.itemId), (similarUserId, rating.rating, similarity))
           }
@@ -174,5 +244,7 @@ object SVDBasedService extends HttpServer with ListOperation {
     val realMatrix = MatrixUtils.createRealMatrix(matrix)
     new SingularValueDecomposition(realMatrix)
   }
+
+
 }
 

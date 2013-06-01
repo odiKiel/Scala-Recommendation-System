@@ -13,9 +13,14 @@ object TaggerServiceSpec extends Specification {
 //    returnList.contains("Statistics") mustEqual true
 //  }
 
-    val prefLabels = tagClient.post("/prefLabelText", "Marketing ist im STW allerdings auch Schulauswahl")
-    "prefLabelForText should return all prefered labels for a text" in {
-      prefLabels.get() mustEqual """["14888-0","19024-5","28541-5","15743-0","12766-3","13650-3"]"""
+//  val prefLabels = tagClient.post("/prefLabelText", "Marketing ist im STW allerdings auch Schulauswahl")
+//  "prefLabelForText should return all prefered labels for a text" in {
+//    prefLabels.get() mustEqual """["14888-0","19024-5","28541-5","15743-0","12766-3","13650-3"]"""
+//  }
+
+    val prefLabels2 = tagClient.post("/tagsPrefLabels", Json.toJson(List("14888-0","19024-5","28541-5","15743-0","12766-3","13650-3")))
+    "prefLabelTags should return all prefered labels for tags" in {
+      prefLabels2.get() mustEqual """["Stoff","Zwiebel","Schulauswahl","Luftverunreinigung","Marketing","Buch"]"""
     }
 
 

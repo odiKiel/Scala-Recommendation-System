@@ -18,12 +18,12 @@ App.Views.RecommendationIndex = Backbone.View.extend({
            case "addItem":
              var item = new Item;
              var number = App.ItemCollection.length+1;
-             item.save({"title": "Item "+number}, {success: reloadWindow, error: reloadWindow});
+             item.save({"title": "Item "+number, "averageRating": 0.0, "url": "http://www.g.de", "qId": number, "truncatedTimeSpend": 0.0, "truncatedTimeScroll": 0.0, "truncatedAmount": 0}, {success: reloadWindow, error: reloadWindow});
              break;
            case "addUser":
              var user = new User;
              var number = App.UserCollection.length+1;
-             user.save({"name": "User "+number}, {success: reloadWindow, error: reloadWindow});
+             user.save({"name": "User "+number, "averageRating": 0.0, "qUserId": number}, {success: reloadWindow, error: reloadWindow});
              break;
            case "deleteItem":
              var item = App.ItemCollection.last();

@@ -1,75 +1,3 @@
-test-only odi.recommendation.TaggerServiceSpec
-exit
-test-only odi.recommendation.TaggerServiceSpec
-exit
-console
-exit
-console
-exit
-console
-exit
-console
-2.55
-val t = 2.55
-console
-exit
-console
-sbt test
-test-only odi.recommendation.SimilarItemsSpec
-exit
-test-only odi.recommendation.SimilarItemsSpec
-test-only odi.recommendation.DeterministicFiniteStateMachineSpec
-test-only odi.recommendation.SimilarItemsSpec
-last test:test-only
-test-only odi.recommendation.SimilarItemsSpec
-console
-exit
-console
-exit
-test-only odi.recommendation.SimilarItemsSpec
-console
-test-only odi.recommendation.SimilarItemsSpec
-test-only odi.recommendation.SimilarItemsSpe
-test-only odi.recommendation.SimilarItemsSpec
-console
-test-only odi.recommendation.SimilarItemsSpec
-console
-test-only odi.recommendation.SimilarItemsSpec
-test
-test-only odi.recommendation.ItemBasedServiceSpec
-console
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.SimilarItemsSpec
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-console
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-console
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-console
-test-only odi.recommendation.ItemBasedServiceSpec
-console
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
 test-only odi.recommendation.SimilarItemSpec
 test-only odi.recommendation.SimilarItemsSpec
 exit
@@ -497,4 +425,76 @@ exic
 exit
 exic
 test-only odi.recommendation.TaggerServiceSpec
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+test-only odi.recommendation.TaggerServiceSpec
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
 exit

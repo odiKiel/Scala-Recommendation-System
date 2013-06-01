@@ -28,16 +28,30 @@ object QueryStwServer extends HttpServer {
 	def findPrefLabel(a: String): Option[String] = {
 
     val result = getStwPrefLabel(a)
+    println(result)
     getDescriptor(result)
 
 	}
+
+  def findTagByPrefLabel(a: String): Option[String] = {
+    val result = getStwTag(a)
+    useRegexOnTag(result) //.headOption getOrElse None
+  }
 
   private
 
   def getStwPrefLabel(value: String): String = {
     val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE { {?s skos:prefLabel '"+value+"'@de} UNION{?s skos:altLabel '"+value+"'@de}} LIMIT 10"
+    println(sparql)
     runQueryOn4Store(sparql)
   }
+
+  def getStwTag(value: String): String = {
+    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE {<http://zbw.eu/stw/descriptor/"+value+"> skos:prefLabel ?o} LIMIT 10"
+    val result = runQueryOn4Store(sparql)
+    result
+  }
+
 
   def runQueryOn4Store(sparql: String): String = {
 
@@ -55,13 +69,19 @@ object QueryStwServer extends HttpServer {
 
   def getDescriptor(query: String): Option[String] = {
     val resultList = Json.jsonToValue4Store(query)
-    resultList.map(useRegex(_)).headOption getOrElse None
+    resultList.map(useRegexOnPrefLabel(_)).headOption getOrElse None
   }
 
-  def useRegex(value: String): Option[String] = {
+  def useRegexOnPrefLabel(value: String): Option[String] = {
     val regex = """(\d+-\d)""".r
     regex findFirstIn value
   }
+
+  def useRegexOnTag(value: String): Option[String] = {
+    val regex = """\"value\":\"(\w*)\",\"xml:lang\":\"DE""".r
+    for (regex(group) <- regex.findFirstIn(value)) yield group
+  }
+
 
   //http Methods and their called methods
 

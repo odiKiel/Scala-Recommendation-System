@@ -17,6 +17,7 @@ object RecommendationService extends HttpServer {
 
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
+      case "generateRecommendations" => postGenerateRecommendations(path.tail)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -64,6 +65,13 @@ object RecommendationService extends HttpServer {
       ret.setValue(createHttpResponse(v))
     }
     ret
+  }
+
+  def postGenerateRecommendations(path: Array[String]): Future[HttpResponse] = {
+    //take user and tags from path generate prefLabels from tags
+    //take 25 most similar users, filter items by tags, take best rated items, calculate prediction, recommend
+    // path 0 userid path 1 tags
+    Future.value(createHttpResponse("not yet implemented"))
   }
 }
 

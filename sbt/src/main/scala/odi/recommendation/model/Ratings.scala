@@ -98,9 +98,9 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
    find ratings from one user for items that are unknown to another user
    use only ratings that aren't predictions!
    */
-  def getUnknownItemsForUserByUser(uid1: Int, uid2: Int): List[Rating] = {
+  def getUnknownItemsForUserByUser(uid1: Int, uid2: Int, amount: Int): List[Rating] = {
     db withSession {
-      val q = Q.query[(Int, Int), (Int, Int, Int, Int, Boolean)]("select * from ratings where user_id = ? AND prediction = FALSE AND item_id NOT IN (select item_id from ratings where user_id = ? and prediction = false) order by rating")
+      val q = Q.query[(Int, Int), (Int, Int, Int, Int, Boolean)]("select * from ratings where user_id = ? AND prediction = FALSE AND item_id NOT IN (select item_id from ratings where user_id = ? and prediction = false) order by rating limit "+amount)
       val inter = q mapResult {
     	  case(id, itemId, userId, rating, prediction) => Rating(Option(id), itemId, userId, rating, prediction);
       }
@@ -108,6 +108,22 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
 
   }
+
+  /*
+   find ratings from one user for items that are unknown to another user that have the correct tag
+   use only ratings that aren't predictions!
+   */
+  def getUnknownItemsForUserByUserWithTag(uid1: Int, uid2: Int, amount: Int, prefLabel: String): List[Rating] = {
+    db withSession {
+      val q = Q.query[(Int, String, Int, Int), (Int, Int, Int, Int, Boolean)]("select ratings.id, ratings.item_id, ratings.user_id, ratings.rating, ratings.prediction from ratings INNER JOIN item_tags on ratings.item_id = item_tags.item_id INNER JOIN tags on item_tags.tag_id = tags.id where ratings.user_id = ? AND ratings.prediction = FALSE AND tags.pref_label = ? AND ratings.item_id NOT IN (select item_id from ratings where user_id = ? and prediction = false) order by rating limit ?")
+      val inter = q mapResult {
+    	  case(id, itemId, userId, rating, prediction) => Rating(Option(id), itemId, userId, rating, prediction);
+      }
+      inter.list(uid2, prefLabel, uid1, amount)
+    }
+
+  }
+
 
   def byItemIdUserId(iid: Int, uid: Int) : Option[Rating] = {
     var result:Option[Rating] = None;
@@ -323,6 +339,36 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
       }yield (user.id, item.id, rating.rating.?, item.averageRating)
       query.sortBy(_._2).list
     }
+  }
+
+  /** calculate Rating 
+    * 
+    * with the time a user spends on the page and the time a user scrolls the page
+    */
+  def calculateRatingByTimes(item: Item, userId: Int, timeSpend: Double, timeScroll: Double, userInteraction: Boolean) = {
+    if(userInteraction) { //if userinteraction this user is highly interested
+      Ratings.create(Rating(None, item.id.get, userId, 5, false))
+    }
+    else {
+      if(item.truncatedAmount > 10) {
+        val spendRating = (timeSpend / item.truncatedTimeSpend) match {
+          case x if x < 0.4 => 1
+          case x if x >= 0.4 && x < 0.8 => 2
+          case x if x >= 0.8 && x < 1.2 => 3
+          case x if x >= 1.2 => 4
+        }
+        val scrollRating = (timeScroll / item.truncatedTimeScroll) match {
+          case x if x < 0.4 => 1
+          case x if x >= 0.4 && x < 0.8 => 2
+          case x if x >= 0.8 && x < 1.2 => 3
+          case x if x >= 1.2 => 4
+        }
+
+        val totalRating = ((spendRating + scrollRating) / 2).round.toInt
+        Ratings.create(Rating(None, item.id.get, userId, totalRating, false))
+      }
+    }
+      
   }
 
 

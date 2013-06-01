@@ -95,7 +95,7 @@ object SimilarUsers extends Table[SimilarUser]("similar_users") with VectorCalcu
     	val query = for (s <-SimilarUsers if s.userOneId === userId || s.userTwoId === userId) yield s.id ~ s.userOneId ~ s.userTwoId ~ s.similarity 
 
     	
-    	val inter = query.take(amount) mapResult {
+    	val inter = query.sortBy(_._4).take(amount) mapResult {
     	  case(id, userOneId, userTwoId, similarity) => SimilarUser(Option(id), userOneId, userTwoId, similarity)
     	}
 

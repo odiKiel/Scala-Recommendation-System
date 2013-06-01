@@ -1084,6 +1084,7 @@ For this task the algorithm takes all similar users $U_{sim}$ for $user_a$.\\
 Afterwards it uses the top rated items from all $user_b \in U_{sim}$ that are not rated by $user_a$ $I'_{user_a, user_b}$.
 $\overline{r_a}$ denotes the average rating of user a.
 Finally for each item $i \in I'_{user_a, user_B}$ the prediction is calculated.
+%todo if no user is logged in the default user is used to generate recommendations this user should have ratings for the items that most users are interested in.
 
 \begin{displaymath}
   pred_{a, i} = \overline{r_a} + \frac{\sum_{b \in U_{sim}}{(r_{i, b} - \overline{r_b}) * similarity_{a, b}}}{\sum_{b \in U_{sim}}{similarity_{a, b}}}

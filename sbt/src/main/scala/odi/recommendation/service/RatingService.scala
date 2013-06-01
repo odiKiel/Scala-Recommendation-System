@@ -28,7 +28,7 @@ object RatingService extends HttpServer {
 
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
-      case "currentItem" => postCurrentItem(path.tail.head.toInt)
+      case "currentItem" => postCurrentItem(path.tail)
       case "curentItemDetails" => postCurrentItemDetail(path.tail)
       case "calculateRating" => postCalculateRating(path.tail)
       case _ => Future.value(createHttpResponse("No such method"))
@@ -41,22 +41,40 @@ object RatingService extends HttpServer {
     }
   }
 
-  def postCurrentItem(qItemId: Int): Future[HttpResponse] = {
-    val item = Items.byQId(qItemId)
-    if(item == None) {
-      createItemResponse
+  def postCurrentItem(args: Array[String]): Future[HttpResponse] = {
+    if(args.length > 1) {
+      val item = Items.byQId(args(0).toInt)
+      val user = Users.byQUserId(args(1).toInt)
+      if(user == None) {
+        Users.create(User(None, "User "+args(1), 0.0, args(1).toInt))
+      }
+      if(item == None) {
+        createItemResponse
+      }
+      else {
+        Future.value(createHttpResponse("OK"))
+      }
     }
     else {
-      Future.value(createHttpResponse("OK"))
+      Future.value(createHttpResponse("Not enough parameter"))
     }
   }
 
-  def postCalculateRating(args: Array[String]) = {
-    if(args.length > 1) {
-      val spendTime = args(0).toDouble
+  def postCalculateRating(args: Array[String]): Future[HttpResponse] = {
+    if(args.length > 3) {
+      val timeSpend = args(0).toDouble
       val timeScroll = args(1).toDouble
-      // save times if item has averageTimeSpend and averageTimeScroll calculate rating if not add times check if 10 < entries and calculate
-      Future.value(createHttpResoponse("OK"))
+      val item = Items.byQId(args(2).toInt)
+      val user = Users.byQUserId(args(3).toInt)
+      val userInteraction = (args.length > 4) 
+      if(user != None && item != None) {
+        ItemUserTimes.create(ItemUserTime(None, item.get.id.get, user.get.id.get, timeSpend, timeScroll))
+        Ratings.calculateRatingByTimes(item.get, user.get.id.get, timeSpend, timeScroll, userInteraction)
+        Future.value(createHttpResponse("OK"))
+      }
+      else {
+        Future.value(createHttpResponse("user or item is missing"))
+      }
     }
     else Future.value(createHttpResponse("Not enough parameter"))
   }
@@ -68,7 +86,7 @@ object RatingService extends HttpServer {
       val url = args(1)
       val title = args(2)
       val text = args(3) + " "+title
-      val item = Items.create(Item(None, title, 0.0, url, qId))
+      val item = Items.create(Item(None, title, 0.0, url, qId, 0.0, 0.0, 0))
       tagClient.post("/prefLabelText", text) onSuccess {response => {
         val prefLabels = Json.jsonToList(response)
         prefLabels.foreach(prefLabel => item.addTag(prefLabel))
@@ -80,9 +98,6 @@ object RatingService extends HttpServer {
     }
 
     //get question id, url and list of tags
-  }
-
-  def addTagToItem = {
   }
 
   /** returns a javascript code that reads the current item details */

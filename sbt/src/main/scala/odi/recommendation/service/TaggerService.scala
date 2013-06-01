@@ -20,8 +20,10 @@ object TaggerService extends HttpServer {
 
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
-      case "tagText" => postTagText(path.tail, value)
-      case "prefLabelText" => postPrefLabelText(path.tail, value)
+      case "tagText" => postTagText(path.tail, value)  //returns the tags for a text
+      case "prefLabelText" => postPrefLabelText(path.tail, value) //returns the tags for a text
+      case "tagsPrefLabels" => postTagsPrefLabels(path.tail, value)  //returns the prefLabels for tags
+      case "prefLabelsTags" => postPrefLabelsTags(path.tail, value) //ruturns the tags for pref labels
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -44,16 +46,44 @@ object TaggerService extends HttpServer {
   def postPrefLabelText(args: Array[String], value: String): Future[HttpResponse] = {
     val r = new Promise[HttpResponse]
     tagText(value) onSuccess { tags => 
-
-      val prefLabelFuture =  tags.flatMap(tag => {
-        //queryStwClient.get("/prefLabels/"+tag)
-        QueryStwServer.findPrefLabel(tag) // speed hack only words if TaggerService and QuerySTw run on the same server
-      })
+      val prefLabels = generatePrefLabelForTags(tags.toList)
+  
       //r.setValue(createHttpResponse(Json.toJson(Future.collect(prefLabelFuture).get())))
-      r.setValue(createHttpResponse(Json.toJson(prefLabelFuture.distinct))) // speed hack only words if TaggerService and QuerySTw run on the same server
+      r.setValue(createHttpResponse(Json.toJson(prefLabels))) // speed hack only words if TaggerService and QuerySTw run on the same server
     }
 
     r
+  }
+
+  def postPrefLabelsTags(args: Array[String], value: String): Future[HttpResponse] = {
+    val tags = Json.jsonToList(value)
+    val prefLabels = generatePrefLabelForTags(tags)
+    Future.value(createHttpResponse(Json.toJson(prefLabels)))
+  }
+
+  def postTagsPrefLabels(args: Array[String], value: String): Future[HttpResponse] = {
+
+    val tags = Json.jsonToList(value)
+    println(tags)
+    val prefLabels = generateTagForPrefLabels(tags)
+    println(prefLabels)
+  
+      //r.setValue(createHttpResponse(Json.toJson(Future.collect(prefLabelFuture).get())))
+      Future.value(createHttpResponse(Json.toJson(prefLabels))) // speed hack only words if TaggerService and QuerySTw run on the same server
+
+  }
+
+  def generateTagForPrefLabels(prefLabels: List[String]): List[String] = {
+    prefLabels.flatMap(prefLabel => {
+        QueryStwServer.findTagByPrefLabel(prefLabel)
+      }).distinct
+  }
+
+  def generatePrefLabelForTags(tags: List[String]): List[String] = {
+    tags.flatMap(tag => {
+        //queryStwClient.get("/prefLabels/"+tag)
+        QueryStwServer.findPrefLabel(tag) // speed hack only works if TaggerService and QuerySTw run on the same server
+      }).distinct
   }
 
 
