@@ -17,7 +17,7 @@ object RecommendationService extends HttpServer {
 
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
-      case "generateRecommendations" => postGenerateRecommendations(path.tail)
+      case "generateRecommendations" => postGenerateRecommendations(path.tail, value)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -67,11 +67,19 @@ object RecommendationService extends HttpServer {
     ret
   }
 
-  def postGenerateRecommendations(path: Array[String]): Future[HttpResponse] = {
-    //take user and tags from path generate prefLabels from tags
-    //take 25 most similar users, filter items by tags, take best rated items, calculate prediction, recommend
-    // path 0 userid path 1 tags
-    Future.value(createHttpResponse("not yet implemented"))
+  def postGenerateRecommendations(args: Array[String], value: String): Future[HttpResponse] = {
+    if(args.length > 1) {
+      val ret = new Promise[HttpResponse]
+      val userId = args(0)
+      val amount = args(1)
+      svdClient.post("/generateRecommendations/"+userId+"/"+amount, value) onSuccess { v =>
+        ret.setValue(createHttpResponse(v))
+      }
+      ret
+    }
+    else {
+      Future.value(createHttpResponse("not enough paramater"))
+    }
   }
 }
 

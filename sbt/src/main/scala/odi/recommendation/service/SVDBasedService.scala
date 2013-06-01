@@ -18,6 +18,7 @@ object SVDBasedService extends HttpServer with ListOperation {
 
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
+      case "generateRecommendations" => postGenerateRecommendations(path.tail, value)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
