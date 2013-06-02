@@ -1761,6 +1761,22 @@ For this process the recommendation system is trained with for example 80\% of a
   MAE = 
 \end{definition}
 
+  \begin{center}
+    \begin{tabular}{| l | l | l | l |}
+      \hline
+      \multicolumn{3}{|c|}{Recommendation Comparison 80.000 ratings 20.000 predictions} \\ 
+      \hline \hline
+      Recommendation Technology & MAE & Offline Computation Time & Online Prediction Time\\ \hline
+      SVD Three & 0.79545 & 469.82 & 4395.75\\ \hline
+      SVD Average & 0.78622 & 507.90 & 4226.31\\ \hline
+      Item Based & 0.83187 & 3187.69 & 4208.49\\ \hline
+      Three & 1.03333 & 0.00 & \\ \hline
+      Average & 1.03333 & 0.00 & \\ \hline
+    \end{tabular} 
+  \end{center}
+
+
+
 \subsection{Performance of the Recommendations}
 The following table displays the different recommendation approaches together with the wall clock time.
 Therefore \dots

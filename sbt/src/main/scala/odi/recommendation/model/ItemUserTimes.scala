@@ -30,12 +30,13 @@ object ItemUserTimes extends Table[ItemUserTime]("item_user_times") with ModelTr
     }
   }
 
+
   def create(itemUserTime: ItemUserTime): ItemUserTime = {
     var id: Int = -1;
 
     // start a db session
     db withSession {
-    	val query = for (i <-ItemUserTimes if i.itemId === itemUserTime.itemId && i.userId === itemUserTime.userId) yield i.id ~ i.itemId ~ i.userId ~ timeSpend ~ timeScroll
+    	val query = for (i <-ItemUserTimes if i.itemId === itemUserTime.itemId && i.userId === itemUserTime.userId) yield i.id ~ i.itemId ~ i.userId ~ i.timeSpend ~ i.timeScroll
 
     	val inter = query mapResult {
     	  case(id, itemId, userId, timeSpend, timeScroll) => Option(ItemUserTime(Option(id), itemId, userId, timeSpend, timeScroll))
@@ -54,7 +55,12 @@ object ItemUserTimes extends Table[ItemUserTime]("item_user_times") with ModelTr
         new ItemUserTime(Option(id), itemUserTime.itemId, itemUserTime.userId, itemUserTime.timeSpend, itemUserTime.timeScroll)
       }
       else {
-        result.get
+        val oldItemUserTime = result.get
+        db withSession {
+          val query = for (i <-ItemUserTimes if i.itemId === itemUserTime.itemId && i.userId === itemUserTime.userId) yield i.id ~ i.userId ~ i.itemId ~ i.timeSpend ~ i.timeScroll
+          query.update((oldItemUserTime.id.get, itemUserTime.itemId, itemUserTime.userId, (itemUserTime.timeSpend+oldItemUserTime.timeSpend), (itemUserTime.timeScroll+oldItemUserTime.timeScroll)))
+        }
+        new ItemUserTime(oldItemUserTime.id, itemUserTime.itemId, itemUserTime.userId, (itemUserTime.timeSpend+oldItemUserTime.timeSpend), (itemUserTime.timeScroll+oldItemUserTime.timeScroll))
       }
     }
     // create a bid to return

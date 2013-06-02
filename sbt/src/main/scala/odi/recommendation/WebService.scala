@@ -15,6 +15,7 @@ object WebService extends HttpServer {
   implicit val formats = DefaultFormats 
   val recommendationServer = RecommendationService(Services("recommendationService").toInt)
   val recommendationClient = new HttpClient("localhost:"+Services("recommendationService"))
+  val ratingClient = new HttpClient("localhost:"+Services("ratingService"))
 
   def apply(port: Int): Int = {
     super.apply(port, name)
@@ -23,6 +24,7 @@ object WebService extends HttpServer {
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case "data" => saveData(path.tail, value)
+      case "rating" => forwardToRating(path.tail, value)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -50,14 +52,33 @@ object WebService extends HttpServer {
   }
 
 
+  def forwardToRating(args: Array[String], value: String): Future[HttpResponse] = {
+    Future.value(createHttpResponse(ratingClient.post("/"+args.head+"/"+args.tail.mkString("/"), value).get))
+  }
+
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
       case "" => getFile(Array("index.html"))
+      case "tagger" => getFile(Array("tagger.html"))
       case "data" => getData(path.tail)
       case "file" => getFile(path.tail)
       case "calculate" => getCalculation(path.tail)
+      case "recommendation" => getRecommendations(path.tail)
       case _ => Future.value(createHttpResponse("No such method"))
     }
+  }
+
+  def getRecommendations(args: Array[String]): Future[HttpResponse] = {
+    val tags = args.drop(2)
+    val recommendationsJson = recommendationClient.post("/generateRecommendations/"+args(0)+"/"+args(1), Json.toJson(tags)).get()
+    val recommendations = Json.jsonToLists(recommendationsJson)
+    val links = recommendations.map(entry => "<a href ='"+entry(1)+"'>"+entry(0)+" Prediction: "+entry(2)+"</a>")
+    println("recommendations: "+recommendations)
+    val source = scala.io.Source.fromFile("public/js/rating/recommend.js")
+    val lines = source.getLines mkString "\n"
+    source.close()
+    val js = lines.format(links.mkString("</br>"))
+    Future.value(createHttpResponse(js))
   }
 
   def getCalculation(path: Array[String]): Future[HttpResponse] = {

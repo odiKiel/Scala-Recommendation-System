@@ -128,6 +128,7 @@ object SVDBasedService extends HttpServer with ListOperation {
           val item = Items.get(i._1).get
           List(item.title, item.url, i._2.toString)
       })
+      println("predictions: "+itemPredictions)
       Future.value(createHttpResponse(Json.toJson(itemPredictions)))
     }
     else {

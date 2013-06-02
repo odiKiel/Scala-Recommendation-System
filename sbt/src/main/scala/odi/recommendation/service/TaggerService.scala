@@ -36,6 +36,7 @@ object TaggerService extends HttpServer {
   }
 
   def postTagText(args: Array[String], value: String): Future[HttpResponse] = {
+    println(value)
     val r = new Promise[HttpResponse]
     tagText(value) onSuccess { tags => 
       r.setValue(createHttpResponse(Json.toJson(tags.toList)))
@@ -64,9 +65,7 @@ object TaggerService extends HttpServer {
   def postTagsPrefLabels(args: Array[String], value: String): Future[HttpResponse] = {
 
     val tags = Json.jsonToList(value)
-    println(tags)
     val prefLabels = generateTagForPrefLabels(tags)
-    println(prefLabels)
   
       //r.setValue(createHttpResponse(Json.toJson(Future.collect(prefLabelFuture).get())))
       Future.value(createHttpResponse(Json.toJson(prefLabels))) // speed hack only words if TaggerService and QuerySTw run on the same server

@@ -1,47 +1,3 @@
-import scala.slick.driver.PostgresDriver.simple._
-import scala.slick.jdbc.{ GetResult, StaticQuery => Q }
-import Q.interpolation
-import Database.threadLocalSession
-console
-test
-exit
-test
-exit
-test-only odi.recommendation.SimilarItemsSpec
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-test-only odi.recommendation.ItemBasedServiceSpec
-exit
-console
-test-only odi.recommendation.SVDBasedServiceSpec
-exit
-test-only odi.recommendation.SVDBasedServiceSpec
-console
-test-only odi.recommendation.SVDBasedServiceSpec
-exit
-test-only odi.recommendation.SVDBasedServiceSpec
-console
-test-only odi.recommendation.RecommendationServiceSpec
-console
-exit
-test-only odi.recommendation.RecommendationServiceSpec
-exit
-test-only odi.recommendation.RecommendationServiceSpec
-exit
-test-only odi.recommendation.RecommendationServiceSpec
-console
-exit
-console
-exit
-console
-exit
-console
-exit
-console
-exit
-console
-consolee
-exit
 consolee
 console
 exit
@@ -457,6 +413,50 @@ exit
 test-only odi.recommendation.TaggerServiceSpec
 exit
 test-only odi.recommendation.TaggerServiceSpec
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
 exit
 console
 exit

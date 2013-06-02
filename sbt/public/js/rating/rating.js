@@ -21,8 +21,8 @@
 (function() {
     var hidden = "hidden";
     var timer = new Date().getTime();
-    var visibleTime = 0;
-    var visible = false;
+    window.visibleTime = 0;
+    window.visible = true;
 
     // Standards:
     if (hidden in document)
@@ -41,17 +41,35 @@
         window.onpageshow = window.onpagehide 
             = window.onfocus = window.onblur = onchange;
 
+    var sendData = function(visibleTime, scrollTime){
+      var xmlhttp;
+      if (window.XMLHttpRequest)
+      {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+      }
+      else
+      {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.open("POST","http://localhost:10000/rating/calculateRating",true);
+      xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+      var post = [""+visibleTime, ""+scrollTime, _rating['item'], _rating['user'], ""+0] //last parameter is user interaction
+      xmlhttp.send(JSON.stringify(post));
+      
+    }
+
     function onchange(evt) {
       if(isVisible(evt, this)) {
-        visible = true;
+        window.visible = true;
         console.log("visible");
         timer = new Date().getTime();
       }
       else {
-        visible = false;
-        visibleTime += (new Date().getTime() - timer)
-        sendData(visibleTime, window.scrollTime);
-        console.log("hidden visible for "+visibleTime);
+        window.visible = false;
+        window.visibleTime += (new Date().getTime() - timer)
+        //sendData(window.visibleTime, window.scrollTime);
+        console.log("hidden visible for "+window.visibleTime);
         timer = -1;
       }
     }
@@ -79,38 +97,24 @@
 
     }
 
-  window.onbeforeunload = function() {
-    //send rating to server
-      console.log('bye')
-      if(visible){
-        visibleTime += (new Date().getTime() - timer)
+    var sendDataTimer = function() {
+      if(window.visible){
+        window.visibleTime += (new Date().getTime() - timer);
         timer = new Date().getTime();
-        sendData(visibleTime, window.scrollTime);
+        sendData(window.visibleTime, window.scrollTime);
       }
-      return "Active website: "+visibleTime+" scroll time: "+window.scrollTime
-  }
+      window.setTimeout(sendDataTimer, 2000);
+    }; 
+
+    window.setTimeout(sendDataTimer, 2000);
+
+    
 
 })();
 
-var sendData = function(visibleTime, scrollTime){
-  var xmlhttp;
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.open("POST","ajax_test.asp",true);
-  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  xmlhttp.send("visibleTime="+visibleTime+"&scrollTime="+scrollTime);
-
- 
-  
-}  
+    
 (function() {
-  var sendInitialItemId = function() {
+  var sendInitialItem = function() {
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -120,34 +124,22 @@ var sendData = function(visibleTime, scrollTime){
     {// code for IE6, IE5
       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.open("POST","ajax_test.asp",true);
-    xmlhttp.onreadystatechange = runJs;
+    xmlhttp.open("POST","http://localhost:10000/rating/currentItem/"+_rating['item']+"/"+_rating['user'],true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xmlhttp.send("visibleTime="+visibleTime+"&scrollTime="+scrollTime);
+    var post = {};
+    post['text'] = $(_rating['information']).text();
+    post['title'] = $(_rating['title']).text();
+    post['url'] = document.URL;
 
-    function runJs()
-    {
-      if (xmlhttp.readyState == 4) {
-        var result = xmlHttp.responseText;
-        if(result != 'OK') {
-          eval(result);
-        }
-      }
-
-      /* if you've returned javascript instead of xml or text, 
-      you can eval(result) to access the javascript variables returned.
-      */
-    }
+    xmlhttp.send(JSON.stringify(post));
   }
  
 
   if(document.readyState === "complete") {
-    //Already loaded!
+    sendInitialItem();
   }
   else {
-    //Add onload or DOMContentLoaded event listeners here: for example,
-    window.addEventListener("onload", function () {/* your code here */}, false);
-    //or
-    //document.addEventListener("DOMContentLoaded", function () {/* code */}, false);
+    window.addEventListener("onload", function () {sendInitialItem()}, false);
   }
 })();
+

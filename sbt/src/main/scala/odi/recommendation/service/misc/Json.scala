@@ -14,6 +14,11 @@ object Json {
     for {JString(value) <- json} yield value
   }
 
+  def jsonToLists(query: String): List[List[String]] = {
+    implicit val formats = net.liftweb.json.DefaultFormats
+    parse(query).extract[List[List[String]]]
+  }
+
   def toJson[A <: AnyRef](element: A): String = {
     implicit val formats = net.liftweb.json.DefaultFormats
     write(element)
