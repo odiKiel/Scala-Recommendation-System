@@ -1402,7 +1402,7 @@ The user interface is implemented with the \emph{backbone.js} library that provi
 % backbone.js models expect restful api to work without configuration
 
 \section{Architecture}
-The system uses a service oriented architecture.
+The system uses a service oriented architecture.\todo{add database schema}
 Thus the main components of the system namely the tagging process, the rating system and the different recommendation techniques are encapsulated in different services.
 One advantage of that architectural choice is that the system can be spread on different servers.
 This not just opens the possibility to run services that have high hardware requirements on different servers but also enables the choice to duplicate services.
@@ -1681,7 +1681,12 @@ These services return a standard http response that contains a json string as a 
 \subsection{WebService}
 
 \chapter{Evaluation}
-This chapter is about \dots
+In this chapter the different concepts that are introduced in this thesis are evaluated.
+The first section deals with the rating concept and evaluates the quality of the ratings that are generated for the individual user interaction on a web page.
+The second section evaluates the time and the quality of the tagging concept by applying the tagging algorithm on texts with different word counts.
+Moreover the tags that are returned by the algorithm are compared with the tags that should have been returned by the algorithm.
+Finally different recommendation techniques are compared by the run time and the quality of their predictions.
+
 \section{Rating}
 The evaluation for the rating system refers to the rating concept from subsection 2.2.5.
 This concept is build upon the researches from \citet{claypool2001} who evaluated different user interactions and compared those with explicit user ratings.
@@ -1694,61 +1699,115 @@ For the rating evaluation an item test website is created.
 This test website is a standard html website with a high of 2000px.
 Consequently there is the possibility to scroll on a standard screen resolution.
 Additionally the item test website has a truncated mean time for the time a user spends on the website and another truncated mean time for the time a user scrolls on the website.
-For these truncated mean times the average times from the users of the field test from \citet{claypool2001} that rated websites with a 3 are used.
-These average times are 5.267 seconds for the time a user scrolls and 21.217 seconds for the time a user spends on a website.
+For these truncated mean times the average times from all user ratings of the field test from \citet{claypool2001} are used.
+These average times are 5.339 seconds for the time a user scrolls and 20.763 seconds for the time a user spends on a website.
 Finally users who visits the website are simulated.
 Those users are interacting with the website according to the times of \citet{claypool2001} field experiment.
 Therefore the ratings that the simulated users generate can be compared to the data from the team of \citet{claypool2001}.
-\begin{displaymath}
-  \begin{tabular}{c c c c c c}
-     %&Low Scroll Time and Low Time Spend & Low Scroll Time and Medium Time Spend & Item3 & Item4 & Item5 \\ 
-     Scroll Time & 5 & 3 & 4 & 4 &  \\  
-     Scroll Time Rating \\
-    Time Spend & 3 & 1 & 2 & 3 & 3\\ 
-    Time Spend Rating \\
-    Total Rating & 1 & 5 & 5 & 2 & 1\\ 
-  \end{tabular} 
-\end{displaymath}
 
-% The single ratings match with the ratings of \citet{claypool2001}.
-% The total ratings reflect the expected ratings.
-% However the total rating is derived from the data of \citet{claypool2001} and it would have been desirable to conduct a field experiment but unfortunately due to the lack of time this was not possible.
+  \begin{center}
+    \begin{tabular}{| l | l | l | l | l | }
+      \hline
+      \multicolumn{5}{|c|}{Rating Algorithm Evaluation} \\ 
+      \hline \hline
+      Scroll Time & Scroll Rating & Time Spend & Time Rating & Total Rating \\ \hline
+      3.559 & 1 & 14.012 & 1 & 1 \\ \hline
+      3.249 & 1 & 21.603 & 3 & 2 \\ \hline
+      3.355 & 1 & 25.497 & 4 & 3 \\ \hline
+      5.077 & 3 & 13.414 & 1 & 2 \\ \hline
+      5.342 & 3 & 21.217 & 3 & 3 \\ \hline
+      5.287 & 3 & 26.797 & 4 & 4 \\ \hline
+      7.374 & 5 & 12.113 & 1 & 3 \\ \hline
+      7.504 & 5 & 20.917 & 3 & 4 \\ \hline
+      7.431 & 5 & 24.797 & 4 & 5 \\ \hline
+    \end{tabular} 
+  \end{center}
+
+  The table represents the result of the rating algorithm evaluation.
+  The \emph{Scroll Time} represents the time that a user scrolls on the page and the \emph{Scroll Rating} represents the rating that results out of that scrolling behavior.
+  Additionally the \emph{Time Spend} represents the time that a user spends on the web page and the \emph{Time Rating} represents the rating that the system generates for that behavior.
+  The total rating is the implicit rating that the system uses as the rating of that user for the specific item.
+  These total ratings are integer values and are therefore rounded.
+  The values of the \emph{Scroll Time} nearly match the average times that were found out as rating indicators in the field experiment from \citet{claypool2001}.
+  These average times that a user scrolls on a web page and rates the site with an explicit rating are 3.485 seconds for an explicit rating of 1, 4.079 seconds for an explicit rating of 2, 5.267 seconds for an explicit rating of 3, 6.444 seconds for an explicit rating of 4 and 7427 seconds for an explicit rating of 5.
+  All generated \emph{Scroll Ratings} reflect the expected ratings from the field test of \citet{claypool2001}.
+  The same is true for the generated \emph{Time Ratings}.
+  The \emph{Time Spend} values nearly match the average times for the specific ratings from the \citet{claypool2001} field experiment.
+  These average times are 13.414 for a rating of 1, 18.017 for a rating of 2, 21.217 for a rating of 3, 24.372 for a rating of 4 and 26.797 for a rating of 5.
+  However the rating of five could not be achieved by spending time on the web page this rating is only attainable by performing a pre defined user interaction such as clicking on a specific button.
+  All other \emph{Time Ratings} reflect the expected ratings from the field experiment of \citet{claypool2001}.
+  The \emph{Total Rating} which is introduced in this thesis correlate with the combined user interest of the \emph{Scroll Rating} and the \emph{Time Rating} and therefore represent the expected result.
+  Moreover the total rating is derived from the data of \citet{claypool2001} and it would have been desirable to conduct a field experiment but unfortunately due to the lack of time this was not possible and should be considered for future works.
 
 
 %%daher wurde getestet ob unterschiedliche surfverhalten unterschiedliche ratings hervorbringen. und ob diese mit den in chapter 2 section 2.2 subsubsection 2.2.5 vorgestellten theorien uebereinstimmen
-%%versuchsaufbau fuer die evaluation wurde eine test webseite erstellt diese hat eine truncated mean time erhalten die aus den aussagen von claypool et al hervorgingen.
-%anschliessend wurden seiten aufrufe simuliert die mit den werten von claypool uebereinstimmten und ueberprueft ob die ergebnisse wiederspiegeln was man erwartet.
 \section{Tagging}
 This section evaluates the tagging process that was introduced in subsection 2.3.2.
-The concept behind the tagging process is to create a \emph{levenshtein automata} for every word in an item\footnote{An item represents a question and answer} and read each word from the \emph{STW Standard Thesaurus Economics} into the automata.
+The concept behind the tagging process is to create a \emph{levenshtein automata} for every word in an item and read each word from the \emph{STW Standard Thesaurus Economics} into the automata.
 If the word ends in a final state it is used as a tag for the item.
 Such a \emph{levenshtein automata} is a deterministic finite automata that can decide in linear time if a word has a \emph{levenshtein distance} smaller than a desired $n\in\mathbb{N}$.
 Four different texts are created for the evaluation process. 
-At each of these four texts are 30\% of the words from the \emph{STW Standard Thesaurus Economics}.
+In each of these four texts 70\% of the words are from a placeholder text that is called \emph{Lorem ipsum}.
+The \emph{Lorem ipsum} text is according to \cite{wiki:lorem} typically based on a Latin text from Cicero with words altered added and removed thus it is not a proper Latin text any more.
+These words are chosen based on the fact that they do not match with the words from the \emph{STW Standard Thesaurus Economics}.
+Consequently they do not create false matches during the evaluation process.
+The other 30\% of the words in the evaluation texts are from the \emph{STW Standard Thesaurus Economics}.
 However, not all of the words are in the same form as they are found in the \emph{STW Standard Thesaurus Economics}.
 Thus the tagging algorithm has to match the words from the item with the correct words from the STW.
 After each test the matched words are compared to the words that should have matched.
-Moreover, the time that the algorithm needed is evaluated.
+Moreover, the time that the algorithm needed for creating the Levenshtein automata and the total time in seconds is evaluated.
+The computer that is used for testing this tagging algorithm is a \emph{Macbook Air} with a 1.86 \emph{GHz Intel Core 2 Duo} precessor and 4 GB DDR3 memory.
 
-\begin{displaymath}
-  \begin{tabular}{c c c c c c}
-     &STW Words & Words Matched & Wall Clock Time \\ 
-     10 Words & 3 & 3 & 4 \\  
-     100 Words & 30 & 28 & 10\\
-    500 Words & 150 & 145 & 30 \\ 
-    1000 Words & 300 & 280 & 100 \\
-  \end{tabular} 
-\end{displaymath}
+  \begin{center}
+    \begin{tabular}{| l | l | l | l | l | l |}
+      \hline
+      \multicolumn{6}{|c|}{Tagging Algorithm Evaluation} \\ 
+      \hline \hline
+      Words & STW & Non Matching & Matched Words & Levenshtein Automata Time & Total Time \\ \hline
+      1 & 1 & 0 & 2 & 0.099 & 14.481 \\ \hline
+      10 & 3 & 7 & 3 & 0.2843 & 20.348 \\ \hline
+      100 & 30 & 70 & 54 & 0.4751 & 79.9616\\ \hline
+      1000 & 300 & 700 & 470 & 2.5606 & 777.4643\\ \hline
+    \end{tabular} 
+  \end{center}
 
-%erstelle text mit keywords die im STW enthalten sind und daher gefunden werden muessen. stelle fest das die meisten gefunden werden aber wenn woerter zu stark veraendert werden nicht mehr gematcht werden was zu erwarten war
-%test 10 words 100 words 500 words 1000 words with the service
-%compare original levenshtein to new levenshtein
+  At first the word \emph{tests} is used with the tagging algorithm.
+  This evaluation results two matches from the \emph{STW} namely \emph{test} once for the English and once for the German language.
+  The time that is needed for creating the Levenshtein automata is approximately a tenth of a second.
+  For this complicated generation process this is a good performance.
+  However the total computation time is 14.481 seconds which involves the loading of the 31.682 words from the \emph{STW} and the reading of all of these words into the Levenshtein automata.
+
+  For the second evaluation ten words are used with 7 non matching words and three words from the \emph{STW}.
+  Two of the three words are modified therefore they are not in the same form as they appear in the \emph{STW}.
+  All three of these words are matched by the tagging algorithm.
+  The creation time of the Levenshtein automata is 0.2843 seconds which is approximately three times as high as the Levenshtein automata computation time for the one word creation.
+  The total computation time of 20.348 seconds is 1.5 times higher than the total computation time for the one word tagging process.
+
+  The 100 words evaluation consist of 30 words from the \emph{STW} with spelling mistakes and different forms.
+  The other 70 words are non matching words from the \emph{Lorem ipsum} placeholder text. 
+  The algorithm returns 54 words as matches from the \emph{STW}.
+  These 54 words include all 30 words that were included in the original 100 words plus 24 words that are similar spelled or use the same words in English and German.
+  The computation time for the 100 Levenshtein automata is 0.4751 and in total the computation needs 79.9616 seconds.
+
+  For the final tagging algorithm test a text with 1000 words is used.
+  This text contains 300 words from the \emph{STW} with approximately 150 words in different forms or with spelling mistakes.
+  The other 700 words are words from the \emph{Lorem ipsum} placeholder text and thus are non matching.
+  The algorithm returns 470 words almost all of the original words were included.
+  The words that did not match are the words that had more than three changes resulting from changing the singular form to its plural form and adding spelling mistakes.
+  The computation time for the Levenshtein automata is five times higher than the corresponding time for the 100 word test.
+  However the total computation time is nearly ten times higher than the total time for the 100 word test.
+
+  %fazit man sollte seine aufmerksamkeit nicht auf beschleunigung des erstellungs prozesses des levenshtein automatas legen sondern auf die korrekte auswahl der tagging base 
+  A conclusion of this evaluation is that the largest part of the total time is the reading of the words from the tagging base into the Levenshtein automata and not the time that the algorithm needs to create these automata.
+  Therefore the main focus in future works should not be to improve the performance of the creation process of the Levenshtein automata but to decrease the number of words in the tagging base.
+
 \section{Recommendation}
+\todo{state that each recommendation technique used almost the same prediction calculations}
 This section evaluates the different recommendation approaches that are explained in subsection 2.4.4.
-These different approaches are the item-based recommendation, the singular valued decomposition (SVD) based recommendation, and the approach that is described in this thesis that uses item-based predictions to decrease the sparsity of the rating table and the SVD-based approach for recommendations.\todo{improve this}
-The evaluation process of the recommendation system is split into two parts.
-At first the performance of the different approaches is evaluated by using the wall clock time.
-Second the accuracy of the different concepts is compared.
+These different approaches are the item-based recommendation, the different singular valued decomposition (SVD) based recommendations, and the approach that is described in this thesis that uses item-based predictions to decrease the sparsity of the rating table and the SVD-based approach for recommendations.
+The evaluation process of the recommendation system contains two parts.
+First the evaluation of the performance of the different approaches by using the wall clock time.
+Second the comparison of the accuracy of the different concepts.
 For this task the \emph{MovieLens} database is used.
 The \emph{MovieLens} database includes 100.000 ratings from 943 users for 1682 movies.
 This data is collected with the movielens.org website that is part of the \emph{GroupLens} research project from the University of Minnesota.
@@ -1759,7 +1818,9 @@ To compare the accuracy of the recommendation systems the \emph{Mean Absolute Er
 \begin{definition}[Mean Absolute Error]
   Let $p_{i, j}$ be the predicted rating for user i and item j and let $q_{i, j}$ be the real rating for user i and item j.
   Then the following formula calculates the MAE.
-  MAE = 
+  \begin{displaymath}
+    MAE = \frac{\sum_{u \in U}\sum_{i \in testset_u} |rec(u, i) - r_{u,i}|}{\sum_{u \in U}|testset_u|}
+  \end{displaymath}
 \end{definition}
 
 This metric is according to \citet{sarwar2001} most commonly used for evaluating recommendation systems.
@@ -1786,7 +1847,7 @@ They explain this hypothesis with the reason that users tend to provide inconsis
   \end{center}
 
   The table \dots represents the evaluation of the recommendation systems.
-  The computer that is used for testing the different recommendation techniques is a \emph{Macbook Air} with a 1.86 GHz Intel Core 2 Duo precessor and 4 GB DDR3 Memory.
+  The computer that is used for testing the different recommendation techniques is a \emph{Macbook Air} with a 1.86 \emph{GHz Intel Core 2 Duo} precessor and 4 GB DDR3 memory.
   Consequently all computation times that are measured in this evaluation are based on this hardware system and can be faster on a productive server.
   However the computation times can be used to compare the speed of the different recommendation systems.
   The evaluation contains three different metrics the mean absolute error, the offline computation time and the prediction time.
@@ -1798,7 +1859,7 @@ They explain this hypothesis with the reason that users tend to provide inconsis
 
   The \emph{Item Based} technology is the implementation of the item based recommendation approach that is part of the overall recommendation concept of this thesis.
   It has a mean absolute error of 0.83187 which is the second poorest mean absolute error of all tested technologies.
-  This is a surprising\todo{can I write this?} outcome of the evaluation and cannot be explained it was expected that this technology would be more similar to the mean absolute error of the \emph{SVD Concept} technology. \todo{any reasons?}
+  This is a surprising\todo{can I write this?} outcome of the evaluation it was expected that this technology would be more similar to the mean absolute error of the SVD based technologies. \todo{any reasons?}
   The offline computation time in this implementation consists of finding items that were rated by the same users and calculating the adjusted cosine similarity between those items.
   The adjusted cosine similarity is a special form of the cosine similarity.
   The cosine similarity for two items is calculated by applying the dot product between the rating vectors of the items and dividing the result by the Euclidean length of the rating vectors.
@@ -1840,7 +1901,7 @@ They explain this hypothesis with the reason that users tend to provide inconsis
   The \emph{SVD Three} technology represents a singular value based recommendation system that uses a rating of three to fill in the missing user-item ratings in the rating matrix.
   The rating of three is used because it represents the middle of the rating scale of 1 to 5 and therefore it should have the least distance between all ratings if the ratings are uniformly distributed.
   The mean absolute error of this implementation is 0.79545 which is the poorest of the SVD based approaches this is expected because it generates the singular value decomposition with a rating matrix that uses static values for the missing entries.
-  This should have the highest difference to the matrix that would represent the real user interest.\todo{improve this}
+  This matrix should have the highest difference to the matrix that would represent the real user interest and therefore should generate the poorest user similarities.
   The offline computation time of this system consist mostly of the same parts as the \emph{SVD Concept}.
   Namely by calculating the average user rating for each user, creating the rating matrix from the database, calculating the singular value decomposition, creating the approximation of the matrix U that is part of the singular value decomposition, calculating the cosine similarity between the columns of the matrix U approximation and storing this user similarities in the database.
   The calculations that are created during the prediction time are the same as the calculations that were used in the \emph{SVD Concept} approach namely the finding of similar users that rated a specific item and the calculation of the predictions.
@@ -1863,19 +1924,33 @@ They explain this hypothesis with the reason that users tend to provide inconsis
 
   The last two systems are added to the evaluation to compare the results of the more advanced recommendation systems with naive approaches.
   The \emph{Three} technique uses a rating of three for all predictions.
-  The three was chosen because it represents the middle of a five point rating scale. 
-  Therefore it should have the smallest mean absolute error of all ratings if the user ratings are evenly distributed.
+  The three was chosen because it represents the middle of the five point rating scale. 
+  Therefore it has the smallest mean absolute error of 1.2 of all static ratings if the user ratings are evenly distributed.
   This technique does not require any offline computations and the mean absolute error calculation consists of subtracting the real rating from three.
-  So, it has a very fast computation time  \dots
+  This approach yields a MAE of 1.03333.
+  Consequently the ratings are less common on the outer boundaries of the rating scale which is a common user rating behaviour.
+  The MAE of 1.03333 can be seen as a lower boundary.
+  If any of the recommendation techniques is below this MAE it is an indicator that the recommendation technique does not work properly. 
 
   The \emph{Average} technique uses the average item rating as a rating prediction.
   Thus it is the least complex method which generates dynamical rating predictions that represent the interest of all users.
-  It has almost the same mean absolute error as the item based approach.
-  Therefore it can be concluded that the interests of the individual user from the \emph{MovieLens} database does not vary widely.
-  \dots
+  The difference from its MAE of 0.82714 to the lower boundary of 1.03333 is 0.20619 which is a good result.
+  Additionally it has nearly the same mean absolute error as the item based approach.
+  Therefore it can be concluded that the interests of the individual users from the \emph{MovieLens} database does not vary widely.
+  However this technique has to calculate the average user ratings of all users which is very fast and needs to load only one value from the database to instead of calculating a prediction.
+  As a result the \emph{Average} technique is a good choice if the user interest of the system does not vary widely and if the system needs a fast solution.
 
-  Conclusion
-  %die evaluation sollte man wiederholen wenn mit dem system ratings gesammelt wurden die zum anwendungsgebiet passen um zu sehen ob die mean absolute error werte sich dadurch veraendern. man kann sagen, dass der svd approach mit average ratings das beste empfehlungs system ist, da es mit die besten mean absolute error werte erreicht und zudem noch performant in den computation times arbeiten kann. allerdings sollte man fuer eine webseite die keine zu genauen empfehlungen benoetigt durchaus die reine average version in erwaegung ziehen, da sie sehr gute computation times hat und einen guten mean absolute error bei der getesteten datenbank erreichen konnte.
+  In conclusion the evaluation of the recommendation techniques revealed that the SVD based approach that was introduced in this thesis has the best mean absolute error of the implemented approaches.
+  However it does not vary widely from the MAE of the \emph{SVD Average} technique and the offline computation time of the \emph{SVD Concept} approach is by far the slowest.
+  The item based approach has a slow computation time and the MAE is nearly the same as the \emph{Average} approach.
+  The research teams of \citet{sarwar2001} showed that this method can yield an MAE of up to 0.73 by improving the prediction calculation but these improvements should have the same effect for the SVD based approaches and therefore the SVD based techniques should be the better choice for collaborative recommendation systems.
+  The evaluation of the \emph{SVD Three} technique indicates that SVD based recommendation systems result generally good predictions.
+  Moreover it showed that improvements for the missing entries for the rating matrix yield improvements of the predictions but that these optimizations only improve the MAE by approximately 0.2 points.
+  Therefore future works with the goal of optimizing collaborative recommendations should concentrate on the improvement of the prediction calculations.
+  Finally the evaluation revealed that using the average user rating as a rating prediction can yield good and fast predictions if the user interest does not vary widely.
+  Consequently this can be used for calculating rating predictions as part of recommendation systems if the use case of the system does not require highly optimized recommendations.
+  This evaluation should be repeated when the system is in productive usage and has collected the same amount of data that was used for this evaluation.
+  To check if the data for a specific use case reveal the same findings as this evaluation.
 
 
 \chapter{Future Work}

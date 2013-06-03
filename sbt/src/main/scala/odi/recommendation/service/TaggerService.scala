@@ -98,14 +98,20 @@ object TaggerService extends HttpServer {
   val pagination = 1000
 
   def tagText(text: String): Future[Seq[String]] = {
+    val time = System.nanoTime
     val textList = text.split("\\W").toList
     if(!(query contains "ORDER BY")) {
      throw new IllegalArgumentException("query needs to use ORDER BY")
     }
 
-    val dfsmList = createDfsm(textList)
 
-    tagTextRec(dfsmList, pagination, 0)
+    val dfsmList = createDfsm(textList)
+    val dfsmTime = System.nanoTime-time
+
+    val result = tagTextRec(dfsmList, pagination, 0).get //do not forget to remove this
+
+    println("dfsm time: "+dfsmTime +" total time: "+(System.nanoTime-time))
+    Future.value(result) //do not forget to remove this
   }
 
   def tagTextRec(dfsmList: List[DeterministicFiniteStateMachine], pagination: Int, offset: Int): Future[Seq[String]] = {
@@ -115,6 +121,7 @@ object TaggerService extends HttpServer {
 
     val test = queryStwClient.post("/runQuery/", query + " LIMIT " + pagination + " OFFSET "+offset) flatMap {labelsJson =>
       val labels = Json.jsonToValue4Store(labelsJson)
+      println(labels.length)
       val seqString = labels map {label => {
           var ret: Option[String] = None
           if(labelForText(label, dfsmList)) {
@@ -142,6 +149,7 @@ object TaggerService extends HttpServer {
 
 
   def labelForText(label: String, dfsmList: List[DeterministicFiniteStateMachine]): Boolean = {
+    //println(label)
     dfsmList.exists((dfsm: DeterministicFiniteStateMachine) => dfsm.isInDistance(label))
     //levenshteinDistanceClient.post("/labelForText/"+label, Json.listToJson(text))
   }

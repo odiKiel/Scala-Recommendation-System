@@ -352,19 +352,21 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     else {
       if(item.truncatedAmount > 10) {
         val spendRating = (timeSpend / item.truncatedTimeSpend) match {
-          case x if x < 0.4 => 1
-          case x if x >= 0.4 && x < 0.8 => 2
-          case x if x >= 0.8 && x < 1.2 => 3
-          case x if x >= 1.2 => 4
+          case x if x < 0.765 => 1
+          case x if x >= 0.765 && x < 0.9439 => 2
+          case x if x >= 0.9439 && x < 1.0965 => 3
+          case x if x >= 1.23 => 4
         }
         val scrollRating = (timeScroll / item.truncatedTimeScroll) match {
-          case x if x < 0.4 => 1
-          case x if x >= 0.4 && x < 0.8 => 2
-          case x if x >= 0.8 && x < 1.2 => 3
-          case x if x >= 1.2 => 4
+          case x if x < 0.69 => 1
+          case x if x >= 0.69 && x < 0.86 => 2
+          case x if x >= 0.86 && x < 1.08 => 3
+          case x if x >= 1.08 && x < 1.29 => 4
+          case x if x >= 1.29 => 5
         }
 
         val totalRating = ((spendRating + scrollRating) / 2).round.toInt
+        println("rating spend on page: "+spendRating+" scroll rating: "+scrollRating+" total rating: "+totalRating)
         Ratings.create(Rating(None, item.id.get, userId, totalRating, false))
       }
     }
