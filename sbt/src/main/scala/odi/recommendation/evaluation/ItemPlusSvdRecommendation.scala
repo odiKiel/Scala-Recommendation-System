@@ -81,9 +81,10 @@ object ItemPlusSvdRecommendation {
 
   //testEntry (userCsvId, itemCsvId, rating)
   def comparePrediction(testEntry: (Int,  Int, Int)): Double = {
-    comparePredictionSvdBased(testEntry)
+    //comparePredictionSvdBased(testEntry)
     //comparePredictionItemBased(testEntry)
     //comparePredictionOfThree(testEntry)
+    comparePredictionAverage(testEntry)
   }
 
 
@@ -102,6 +103,12 @@ object ItemPlusSvdRecommendation {
   def comparePredictionOfThree(testEntry: (Int, Int, Int)): Double = {
     Math.abs(3 - testEntry._3)
   }
+  def comparePredictionAverage(testEntry: (Int, Int, Int)): Double = {
+    val res = Items.get(testEntry._2.toInt).get.averageRating
+    println("result: "+res+" expected: "+testEntry._3)
+    Math.abs(res - testEntry._3)
+  }
+
 
 }
 

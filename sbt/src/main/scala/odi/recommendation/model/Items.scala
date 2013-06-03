@@ -17,7 +17,12 @@ case class Item(id: Option[Int] = None, title: String, averageRating: Double, ur
   def calculateAverageRating = {
     println("calculate average rating for Item"+id.get)
     val ratings = Ratings.byItemId(id.get)
-    val averageRating = ratings.map(_.rating).sum / ratings.length.toDouble
+    val averageRating = if(ratings.length == 0) {
+      3.0 //if no ratings for this item use the scale middle
+    }
+    else {
+      ratings.map(_.rating).sum / ratings.length.toDouble
+    }
     db withSession {
       val query = for (i <-Items if i.id === id.get ) yield i.averageRating 
       query.update(averageRating)
@@ -172,7 +177,9 @@ object Items extends Table[Item]("items") with ModelTrait{
 
 
   def calculateAverageRating = {
+    val time = System.nanoTime
     Items.all.foreach((item: Item) => item.calculateAverageRating)
+    println("time: "+(System.nanoTime-time))
   }
 
   def first : Option[Item] = {
