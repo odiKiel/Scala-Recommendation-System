@@ -11,6 +11,7 @@ object TaggerService extends HttpServer {
 
   val queryStwClient = new HttpClient("localhost:"+Services("queryStwServer"))
   val levenshteinDistanceClient = new HttpClient("localhost:"+Services("levenshteinDistanceService"))
+  val taggerPool = FuturePool(Executors.newFixedThreadPool(4))
 
   val name = "TaggerService"
 
@@ -107,10 +108,8 @@ object TaggerService extends HttpServer {
     val dfsmList = createDfsm(textList)
     val dfsmTime = System.nanoTime-time
 
-    val result = tagTextRec(dfsmList, pagination, 0).get //do not forget to remove this
+    tagTextRec(dfsmList, pagination, 0)
 
-    println("dfsm time: "+dfsmTime +" total time: "+(System.nanoTime-time))
-    Future.value(result) //do not forget to remove this
   }
 
   def tagTextRec(dfsmList: List[DeterministicFiniteStateMachine], pagination: Int, offset: Int): Future[Seq[String]] = {

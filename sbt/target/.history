@@ -1,13 +1,3 @@
-exit
-console
-exit
-console
-exit
-console
-exit
-console
-ext
-exit
 console
 exit
 console
@@ -327,6 +317,16 @@ exit
 test-only odi.recommendation.TaggerServiceSpec
 exit
 test-only odi.recommendation.TaggerServiceSpec
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
 exit
 console
 exit
