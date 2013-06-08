@@ -17,7 +17,7 @@ class HttpClient(hosts: String) {
      .hosts(hosts) // If >1 host, client does simple load-balancing
      .tcpConnectTimeout(5.seconds)
      .requestTimeout(30.seconds)
-     .hostConnectionLimit(100)
+     .hostConnectionLimit(1000)
      .retries(3)
      .build()
      //.logger(java.util.logging.Logger.getLogger("debug"))

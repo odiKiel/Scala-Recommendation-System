@@ -46,6 +46,7 @@ object ItemUserTimes extends Table[ItemUserTime]("item_user_times") with ModelTr
     	  case _ :: tail => inter.first
     	  case Nil => None
     	}
+      println("result item user times create: "+result+"itemUserTime userId: "+itemUserTime.userId+" itemId: "+itemUserTime.itemId)
       if(result == None) {
         // create a new bid
         val res = ItemUserTimes.noID insert (itemUserTime.itemId, itemUserTime.userId, itemUserTime.timeSpend, itemUserTime.timeScroll)
@@ -57,7 +58,7 @@ object ItemUserTimes extends Table[ItemUserTime]("item_user_times") with ModelTr
       else {
         val oldItemUserTime = result.get
         db withSession {
-          val query = for (i <-ItemUserTimes if i.itemId === itemUserTime.itemId && i.userId === itemUserTime.userId) yield i.id ~ i.userId ~ i.itemId ~ i.timeSpend ~ i.timeScroll
+          val query = for (i <-ItemUserTimes if i.id === oldItemUserTime.id.get) yield i.id ~ i.itemId ~ i.userId ~ i.timeSpend ~ i.timeScroll
           query.update((oldItemUserTime.id.get, itemUserTime.itemId, itemUserTime.userId, (itemUserTime.timeSpend+oldItemUserTime.timeSpend), (itemUserTime.timeScroll+oldItemUserTime.timeScroll)))
         }
         new ItemUserTime(oldItemUserTime.id, itemUserTime.itemId, itemUserTime.userId, (itemUserTime.timeSpend+oldItemUserTime.timeSpend), (itemUserTime.timeScroll+oldItemUserTime.timeScroll))

@@ -11,7 +11,7 @@
 %% sind mit ** gekennzeichnet.
 
 %% Größe: A4, doppelseitig 
-\documentclass[twoside,a4paper,BCOR1.0cm]{scrbook}
+\documentclass[oneside,a4paper,BCOR1.0cm]{scrbook}
 
 \usepackage{ifpdf}
 
@@ -68,6 +68,7 @@
 \fi    
 \usepackage{todonotes}
 \usepackage{tikz}
+\usepackage{pgf-umlsd}
 %\usetikzlibrary{arrows,automata,positioning}
 \usetikzlibrary{%
   arrows,%
@@ -100,21 +101,21 @@
 %%                          Titelseite                          %%
 %%                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\pagenumbering{alph}
 \pagestyle{empty}
 
 \begin{center}
-{\huge \it Diplomarbeit}
+{\Large \it Diplomarbeit}
 
 \vspace{2cm}
 
-{\Large \bf A Contribution to Rating and Recommendation Systems: Concepts, Development and Evaluation}
+{\huge \bf A Contribution to Rating and Recommendation Systems: Concepts, Development and Evaluation}
 
-\vspace{2.25cm}
+\vspace{1.25cm}
 
-%%\includegraphics[height=4cm]{CAU-Siegel}
+\includegraphics[height=6cm]{CAU-Siegel}
 
-\vspace{2.25cm}
+\vspace{1.25cm}
 
 {\large 
 Christian-Albrechts-Universität zu Kiel \\
@@ -128,10 +129,10 @@ Lehrstuhl Medieninformatik
 
 \begin{tabular}{ll}
 angefertigt von:             & {\bf Oliver Diestel} \\
-betreuender Hochschullehrer: & ** Name des betreuenden Hochschullehrers ** \\%
+betreuender Hochschullehrer: & Prof. Dr. Klaus Tochtermann \\%
 %                              z.B. Prof. Dr. rer. nat. habil. Bernhard Thalheim 
 %                              oder Prof. Dr. rer. nat. habil. Hans-Joachim Klein
-Betreuer:                    & ** Name des Betreuers ** 
+Betreuer:                    & Arne Martin Klemenz 
 \end{tabular}
 
 \vspace{1cm}
@@ -174,8 +175,8 @@ Kiel, ** Datum der Abgabe **
 
 % ** Text der Aufgabenstellung **
 
-% \pagenumbering{roman}
-% \setcounter{page}{1}
+ \pagenumbering{roman}
+ \setcounter{page}{1}
 % \cleardoublepage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,6 +256,34 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter*{Abstract}
+The focus of this thesis is the development of a recommendation system for user generated content.
+The purpose of this system is to utilize the unused content that is contributed by users.
+%use this content sinnvoll auf bestehenden seiten unterbringt kann dies den user nutzen erhoehen 
+If this content is added in a meaningful way on existing websites it can increase the benefit of the website for its users.
+Meaningful way means, that the content matches the current context of the website and is interesting for the current user.
+This process involves three different types of research areas.
+
+First, the generation of implicit user ratings by analyzing user interactions on a website.
+This part of the thesis involves the discussion of different user interactions on a website.
+For the two interactions that correspond the most with explicit ratings of a user a rating scale is created that enables the transformation of user interactions into implicit ratings.
+
+The second research area is approximate string matching which is the matching of strings even if the words are slightly different.
+This technology is used for categorizing the user generated content by its keywords.
+This part of the thesis involves the analysis of different techniques that can be used for such a process.
+The technique of the \emph{levenshtein automaton} is explained in more detail and a range is created that expresses how different words are allowed to be in order to be accepted as a match.\todo{improve this sentence}
+
+The last research area is the field of recommendation systems.% generating implicit user ratings, developing a recommendation system
+The different types of recommendation systems are discussed in this part.
+Moreover a new technique is introduced that combines two well known recommendation techniques to improve the rating predictions.
+This system is implemented with a service oriented architecture so, that every component of the system can be exchanged with different alternatives or parts can be used to extend existing systems.
+This leads to a considerable amount of flexibility and expandability.
+
+%With this content websites can add additional benefit for users to their content den unbenutzten content um webseite zu bereichern und user engagement zu erhoehen.
+%this was done by creating a scale for the two user interactions that correspond the most with explicit ratings of a user
+%with the combination of both scales a concept is introduced that enables websites to generate user ratings by analysing their interactions.
+%moreover a method is evaluated and explained for matching the words of a text with a thesaurus that would allow error matches thus matches with spelling mistakes or different form of words
+%different types of recommendation approaches are discussed and a combination of two of the most spread techniques are combined to improve the rating predictions of users
+%the three 
 \cleardoublepage
 
 \pagestyle{headings}
@@ -262,10 +291,33 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 \setcounter{page}{1}
 
 \chapter{Introduction}
-\section{Overview}
-What is this thesis all about.
-Why should anyone add a recommendation system for questions and answers to a website.
-What components are included in the recommendation system.
+%user generated content is important and the systems should involve it more in their pages ka 
+  %Herausforderungen/Ziele
+  Since the creation of the term Web 2.0 the internet is about user generated content and communities.
+  More and more website operators are adding methods to their sites with the goal of increasing the user engagement by allowing users to actively contribute to the content of the website.
+  However, as more and more content is produced most of the user contributed content will remain unseen.
+  The value of a website is the benefit that it brings to its users.
+  Therefore every content that includes valuable information must be presented to users that might be interested in it. 
+  %The information of this content can be of high value for other users\dots the value of a website is the information / benefit that it brings to the user therefore every content that is not efficient used is equivalent to geld liegen lassen.
+  %This user generated content can be used for enriching the moderated websites by adding user generated content on these sites.
+  This can improve the user interactions on the website and can help the users to learn from each other and thus to better understand the content.
+  Though, the quality of the content that is produced by users may vary widely.
+  Moreover, the context of the user generated content can be inappropriate to the current subject of the page.
+  Thus there is a need for a system that is able to identify the interest of a user and the context of the user generated content.
+
+
+  With these information contributed content that is interesting for the current user could be added individually on websites with matching subject.
+  %derzeitiger stand \dots
+  This thesis deals with the development of a system that can %match content, generate implicit ratings, recommend stuff on pages
+
+%existing website adding new methods for user engagement
+%the resulting user generated content can be used for enriching the existing website
+%immer mehr webseiten beziehen ihre user in die erstellung von content mit ein 
+%hierdurch koennen sich webseiten breiter aufstellen?
+%vieles von diesem kontent geht in der flut des neuen kontents unter
+%dieses problem koennte man loesen wenn zu bestehendem moderierten content einer seite user generated content hinzugefuegt wird 
+%passend zum thema und zum interesse des users hierdurch kann man die user interaction erhoehen sowie dem user beim verstehen
+%des contents helfen wenn dieser die fragen und antworten von aehnlichen benutzern betrachten kann
 
 
 
@@ -274,15 +326,84 @@ What components are included in the recommendation system.
 %discuss qa system, rating system, tagging system, item based, svd based, bringing it all together, display recommendations on a website
 
 \section{Related Work}
-Current state of the art 
-- recommendation systems.
-- rating systems.
-- tagging systems.
+This thesis combines different fields of research namely the field of recommender systems, the field of collecting implicit user ratings and the field of string matching techniques.
+The team of \citet{claypool2001} developed a web browser that collects user interactions on a website.
+This browser asks the user when he leaves a website for his rating for the site.
+They conducted a field experiment with 75 students that rated 1823 websites and analyzed the correlation between the explicit ratings and the implicit user interactions.
+The paper \emph{Personalized news recommendation based on click behavior} written by \citet{Liu:2010:PNR:1719970.1719976} analyzed the click behavior of Google news users to find out how the interest of the users changed over time to predict the current and future interest depending on the clicks of similar users.
+They tested the developed system in production mode and found out that the traffic of the \emph{Google News} website increased because of the improved recommendation system.
+The team of \citet{sarwar2001} introduces their invention of the \emph{item-based} recommendation algorithm.
+This algorithm calculates the item similarities based on item rating vectors and recommends items to users based on the similarity of the items they rated.
+Furthermore they discuss different calculation techniques and evaluate the performance of the algorithm.
+\citet{amazon2003} explains the product recommendation system of \emph{amazon.com} in detail and describes their implementation of the \emph{item-based} recommendation algorithm.
+\citet{Karatzoglou:2010uq} describe a mathematical concept and an algorithm for representing and compressing the latent factors of the singular value decomposition with hashing. For each user and each item one vector has to be stored in the main memory while calculating the matrix decomposition.
+However usually only a small number of ratings exist for each item \citet{Karatzoglou:2010uq} introduced a method of an approximate compressed representation of the latent factor matrices. 
+\citet{Cacheda:2011:CCF:1921591.1921593} describe the current state of the algorithm and evaluation techniques of collaborative filtering recommendation systems.
+They discuss the different metrics that are used for evaluating recommendation systems.
+Additionally they found that the best performing algorithms in their evaluation are all based on the singular value decomposition.
+The article \emph{Matrix Factorization Techniques for Recommender Systems} by \citet{Koren:2009:MFT:1608565.1608614} explains the strategies of recommender systems and how to apply matrix factorization methods in these systems which are according to \citet{Koren:2009:MFT:1608565.1608614} the most accurate prediction techniques found out by many of the teams that were competing for the \emph{Netflix prize}\footnote{http://www.netflixprize.com/}.
+The paper of \citet{Herlocker04evaluatingcollaborative} deals with the evaluation of recommender systems.
+They explain in detail the different type of testing datasets and the current trends in datasets and accuracy metrics.
+The following article treat the techniques of approximate string matching which is the matching of strings that allow errors.
+\citet{Navarro:2001:GTA:375360.375365} presents an overview on the different kind of concepts that enable approximate string matching.
+%dynamic programming, high time requirements, algorithm based on automatas, bit-parallelism, filtering algorithm
+\citet{schulz2002} explain the principle of a \emph{levenshtein automata} in detail and describe a concept on how to use this levenshtein automata for an efficient way to correct strings with the help of a dictionary.
+The same authors wrote a paper about an \emph{universal levenshtein automata} - \citet{Mihov04fastapproximate} - which is a specialized version of a \emph{levenshtein automata} that improves the time that is needed for constructing the automata.
+
+\section{Challenges}
+  The focus of this work is the development of a recommendation system for user generated content.
+  One challenge of such a system is that no trustworthy information about the quality or context of the user generated content is available.
+  Hence, a concept must be created that treats the finding of keywords in this content. %zum einen
+  These keywords should be found by matching the content with the words from a thesaurus even if the words have spelling mistakes or are in a different form.
+  Additionally the concept must include the generation of user ratings for this content to be able to predict how interesting the content is for the user.
+  This rating generation should work by automatically analysing the user interactions on the website that presents the content.
+  Therefore the user experience of the website is not disturbed by explicitly asking for the users opinion.
+  Another challenge is to use the rating and keyword information to generate content recommendations for users based on their interest.
+  This concept should be implemented into a system that can be used as an ad on for existing systems.
+  Moreover each component should be usable as a standalone system to extend existing systems.
+  Finally the developed system has to be evaluated to see if the requirements are fulfilled and to propose offers for future work.
+  
+  
+
+%in dieser thesis soll ein system zum bewerten und empfehlen von user generierten content entwickelt werden.
+%hierzu soll ein concept entwickelt werden, welches die Probleme behandelt, die auftreten wenn
+%unbekannter inhalt von usern erstellt wird
+%hierzu gehoeren dass: finden von keywords in dem content um diesen themen gerecht empfehlen zu koennen dies soll mit hilfe eines thesaurus geschehen problem ist, dass auch woerter mit schreibfehlern oder in anderen wortformen gefunden werden sollen.
+%bewerten von content anhand von user interactionen, d.h. ohne das der user explizit hierfuer etwas tun muss
+%finden von content welcher interessant fuer den user ist und zu dem thema der seite passt auf der dieser sich gerade befindet
+%dieses system soll so umgesetzt werden, dass einzelne componenten getrennt von einander verwendet werden koennen um die entwickelten concepte und technologien in anderen systemen verwenden zu koennen.
+%das entwickelte system soll evaluiert werden um schwachstellen festzustellen damit diese in folge arbeiten ausgebessert werden koennen.
+%somit stellt diese thesis eine contribution to rating and recommendation systems dar mit den anspruch ein concept zu entwickeln diese zu developen und auszuwerten.
 
 
-\section{Contributions}
-What is the new concept?
+\section{Overview}
+In Chapter~\ref{chapter:concept} the concepts of this thesis are presented.
+This chapter is divided into four sections.
+At first the concept of a \emph{Question and Answer} website is explained which is used as a tool for collecting user generated content.
+The second section evaluates the differences between implicit and explicit ratings and the different sources of types of user interactions on websites.
+Besides it introduces a concept for generating implicit ratings with these user interactions.
+The next section examines the methods of string matching that allows a system to match words even if they are in a different form or have spelling mistakes.
+Additionally this section introduces the technique that is used in the developed system for finding the keywords in the user generated content that is collected by the \emph{Question and Answer} website.
+In the last section different types of recommendation systems are considered and the concept of \emph{collaborative filtering} is explained in more detail.
+Likewise the new concept of recommending user generated content based on a combination of \emph{item} - and \emph{singular value decompositon} - based methods is explained.\\
+Chapter~\ref{chapter:implementation} starts with a section about the presentation of the technologies that are used for implementing the previously developed concept.
+Alongside, with a description of the service oriented software architecture and an insight into the implementation as well as the relationships of the single services.\\
+Chapter~\ref{chapter:evaluation} evaluates the implemented rating, tagging and recommendation concepts.
+This chapter is divided into three sections.
+The first section tests the implemented concept of the implicit ratings.
+For this process values that are collected by a field experiment conducted by \citet{claypool2001} are used for evaluating the rating concept.
+These values are used for simulating user interactions on a website and the results are compared with the analysis of \citet{claypool2001}.
+The second section evaluates the implemented tagging concept.
+For this evaluation different sized texts were created.
+These texts have a percentage of 30\% of words that are included in the used thesaurus and 70\% that are not.
+However, into the 30\% of the words that are included in the thesaurus are spelling mistakes inserted or the form is changed.
+Hence, the tagging implementation is tested for the amount of words that are found and the time that it needed for this process.
+The last section evaluates different types of recommendation systems that are composed with the techniques of the recommendation concept of this thesis.
+This evaluation uses a rating database with 100.000 real user ratings of the \emph{MovieLens}\footnote{http://movielens.org/} project for evaluating the speed and the quality of the predictions of the different recommendation systems.
+
+
 \chapter{Concepts}
+\label{chapter:concept}
 %\todo{better introduction for 2}
 This chapter outlines the concepts that are integrated in the developed system.
 The first section deals with the approach of a \emph{question and answer site} and explains the necessity of such a system. 
@@ -293,6 +414,7 @@ The fourth section is a discussion about the different types of recommendation s
 This leads to the analysis of the different techniques of collective recommendations and explains how these techniques are used in the final system.
 Finally the last section presents the relationship of the individual concepts from the previous sections.
 \section{Question and Answer Site}
+%also known as social or collaborative \emph{Question and Answer} website.
 A question and answer site is a website that has only one focus namely getting the right answer for a question.
 Therefore a user can ask a question. 
 This question should be precise enough and include all information that another user needs to be able to write a correct answer to the question without asking for more details.
@@ -346,7 +468,7 @@ Which will be clarified in the following sections.
 \subsection{The time the cursor is in motion}
 Whereas the general time a user spends on a website already gives a good indication on how interesting the website is it is also important to measure how far the user actively engages with the website.
 The use of methods that measure how active a user is on a website is important because these methods can indicate whether a user just opened a website and does not work with it or if he really engages with the content.
-This time the cursor is in motion was measured by timing how long the mouse cursor changes its position inside the active browser window.
+The time the cursor is in motion was measured by timing how long the mouse cursor changes its position inside the active browser window.
 By comparing the explicit user ratings with the collected data they found out that the time a user moves the mouse cursor is proportional to the interest a user has in the website.
 However, due to the fact that some users use the mouse heavily whilst reading the content of the website or looking at interesting objects such as diagrams or pictures, other users tend to only use the mouse in order to click on objects.
 Consequently, it is not possible to tell how much a user is interested in the website by timing the cursor motion but it is only possible to tell which websites receive the least amount of interest.
@@ -400,14 +522,20 @@ In order to collect implicit user ratings by timing how long the website is in f
     Truncated Mean = \sum_{j=k+1}^{n-k}{v_j} \cdot \frac{1}{r}
   \end{displaymath}
 \end{definition}
-The percentages of the two rating processes result out of the two diagrams of figure ~\ref{pic:scrolltime} and figure ~\ref{pic:time}.%todo more detail
-The following paragraph explains the rating of the item page in relation to the truncated mean time.
-\todo{Add diagrams, maybe write the itemization as a text}
+The percentages of the two rating processes result out of the two diagrams of figure ~\ref{pic:scrolltime} and figure ~\ref{pic:time}. %todo more detail
+These diagrams are created by the team of \citet{claypool2001}.
+The x-axis represents the explicit user ratings and the y-axis represent the time that a user has spend on the website and the time a user has scrolled on a website respectively.
+The bar for each explicit rating represents the time range of all users that explicitly rated with that rating.
+The line in each of the bars represents the average time of all user times of that range.
+For this thesis the time differences between the average times of each rating is assumed as a range for implicit ratings.
+These ranges are expressed as percentages in dependence to the complete average time of all users in the following two enumerations. 
+%zeitliche abstaende zwischen den average ratings wurden als bereich fuer ein explicites rating angenommen und dieses wurde in abhaengigkeit zur gesamten average time prozentual ausgedrueckt
+%\todo{Add diagrams, maybe write the itemization as a text}
 \begin{itemize}
-  \item If the user spends less than 10\% of the truncated mean time on the item page it is used as a rating of 1.
-  \item If the user spends less than the truncated mean time minus 20\% on the webpage it is used as a rating of 2.
-  \item If the user spends plus minus 20\% of the truncated mean time on the item page, it is used as a rating of 3.
-  \item If the user spends longer than the truncated mean time plus 20\% on the webpage it is used as a rating of 4.
+  \item If the user spends 76.5\% of the truncated mean time on the item page it is used as a rating of 1.
+  \item If the user spends between 76.5\% and 94.3\% of the truncated mean time on the website it is used as a rating of 2.
+  \item If the user spends between 94.3\% and 109.6\% of the truncated mean time on the item page, it is used as a rating of 3.
+  \item If the user spends longer than 109.6\% of the truncated mean time on the website it is used as a rating of 4.
 \end{itemize}
 A rating of 5 can only be achieved if a user does a predefined user interaction on the web page.
 The reason behind this choice is that users tend to make breaks while surfing the internet.
@@ -417,11 +545,11 @@ Such a predefined user interaction can be used as an indicator that a user likes
 A possible predefined user interaction could be an up-vote or the writing of a comment or answer. 
 A similar scale is chosen for determining the rating of a user by the time a user scrolls.
 \begin{itemize}
-  \item If the user scrolls less than 40\% of the truncated mean time on the item page it is used as a rating of 1.
-  \item If the user scrolls between 40\% and 80\% of the truncated mean time on the webpage it is used as a rating of 2.
-  \item If the user spends plus minus 20\% of the truncated mean time on the item page, it is used as a rating of 3.
-  \item If the user spends between the truncated mean time plus 20\% and 60\% on the webpage it is used as a rating of 4.
-  \item If the user scrolls longer than the truncated mean time plus 60\% it is used as a rating of 5
+  \item If the user scrolls less than 69\% of the truncated mean time on the item page it is used as a rating of 1.
+  \item If the user scrolls between 69\% and 86\% of the truncated mean time on the webpage it is used as a rating of 2.
+  \item If the user scrolls between 86\% and 108\% of the truncated mean time on the webpage it is used as a rating of 3.
+  \item If the user scrolls between 108\% and 129\% of the the truncated mean time on the website it is used as a rating of 4.
+  \item If the user scrolls longer than 129\% of the truncated mean time on the website it is used as a rating of 5
 \end{itemize}
 Due to the fact that scrolling is an active process and the user has to be in front of the computer a rating of 5 is achievable in this method.
 First of all both implicit ratings - the time a user spends on a website and the time a user scrolls - are determined separately.
@@ -431,9 +559,7 @@ Afterwards the average of both ratings is calculated and used as the total ratin
   total rating = \frac{rating_{time} + rating_{scroll}}{2}
 \end{displaymath}
 %\todo{add this to evaluation}The concept is build upon measurements of a field experiment of 75 students by \citet{claypool2001}, though due to the lack of time it wasn't possible to test this concept on a large user base.
-If a user returns to an item site the new rating is added onto the previous rating with a maximum sum of 5.
-This rating calculation results from the observation that users tend to revisit websites they were interested in in the past and which might help them with their current research.
-It was considered to generally rate all websites that were revisited with the highest rating of 5 but this concept was abandoned because a user might be revisiting a formally uninteresting website unintentionally. %\todo{find a source}
+If a user returns to an item site the time the user spends on the page and the time the user scrolls on the page is added to the previous times and the sum of both sessions is used to calculate the new rating.
 
 As mentioned above \citet{claypool2001} research group bases its results on a field experiment of over 80 people browsing over 2500 Web pages.
 The total rating concept is strongly build upon these results.
@@ -528,7 +654,7 @@ Therefore it is a good utility to better understand the \emph{levenshtein distan
 %definitions
 The following definitions are based on the book \citet{automata2003}.
 \begin{definition}[Non Deterministic Finite Automata]
-  A non deterministic finite automata is a 5-tupel of the form $\mathcal{A} = (Q, \Sigma, q_0, \Delta, F)$. 
+  A non deterministic finite automaton is a 5-tupel of the form $\mathcal{A} = (Q, \Sigma, q_0, \Delta, F)$. 
   \begin{itemize}
     \item Q is a finite set of the states
     \item $\Sigma$ is a finite set of input symbols
@@ -566,20 +692,20 @@ The following definitions are based on \citet{schulz2002}
   Let $W \in \Sigma^*$ and $n \in \mathbb{N}$. A finite state automaton A is a Levenshtein automaton of degree n for W if and only if $\mathcal{L}(A) = \mathcal{L}_{Lev}(n,W)$.
 \end{definition}
 
-An optimized version of the \emph{levenshtein distance algorithm} that uses a \emph{levenshtein automata} is described by \citet{Baeza-Yates96aunified}.
-The purpose of the \emph{levenshtein automata} is to decide whether $d_L(W,V)$ is smaller than a specific $n \in \mathbb{N}$ with $V \in \Sigma^*$.
+An optimized version of the \emph{levenshtein distance algorithm} that uses a \emph{levenshtein automaton} is described by \citet{Baeza-Yates96aunified}.
+The purpose of the \emph{levenshtein automaton} is to decide whether $d_L(W,V)$ is smaller than a specific $n \in \mathbb{N}$ with $V \in \Sigma^*$.
 So, it is possible to decide if a word from a question is similar to a word from the \emph{STW Standard Thesaurus}, similar in the meaning it has a \emph{levenshtein distance} smaller than n.
 Therefore $\Sigma$ contains the alphabet \{a,\ldots,z,A,\ldots,Z\}.
-The states in Q of the \emph{levenshtein automata} denote the current position in the original word W, written as i and the current \emph{levenshtein distance} between $\omega$ and W, written as j, with $\omega$ prefix of V.
+The states in Q of the \emph{levenshtein automaton} denote the current position in the original word W, written as i and the current \emph{levenshtein distance} between $\omega$ and W, written as j, with $\omega$ prefix of V.
 The label of such a state is $i^j$.
 Thus the initial state $q_0 \in Q$ is $0^0$.
 The final states $f \in F$ are all states where i equals |W| and j is smaller than n.\\
 Let $\omega_{correct}$ be the correct letter after state $i^j$.
 The relation $\Delta: (Q \times \Sigma \times Q)$ has the following elements.
 \begin{itemize}
-  \item $(i^j, \sigma, (i+1)^j)$ if $\sigma = \sigma_{correct}$ 
+  \item $(i^j, \sigma, (i+1)^j)$ if $\sigma = \omega_{correct}$ 
   \item $(i^j, \sigma, i^{(j+1)})$ if $\sigma$ is inserted after state $i^j$ and $(j+1) < n$
-  \item $(i^j, \sigma, (i+1)^{(j+1)})$, if $\sigma$ is substituted by $\sigma_{correct}$ and $(j+1) < n$
+  \item $(i^j, \sigma, (i+1)^{(j+1)})$, if $\sigma$ is substituted by $\omega_{correct}$ and $(j+1) < n$
   \item $(i^j, \sigma, (i+1)^{(j+1)})$, if $\omega_{correct}$ is deleted
 \end{itemize}
 The elements are not exclusive, therefore all of these cases can be possible after reading only one letter.
@@ -706,17 +832,17 @@ The elements are not exclusive, therefore all of these cases can be possible aft
 
 
   \end{tikzpicture}
-  \caption{A non deterministic levenshtein automata for the word \emph{test} with degree 2}
+  \caption{A non deterministic levenshtein automaton for the word \emph{test} with degree 2}
   \label{ndla}
 \end{figure}
-The automata in example ~\ref{ndla} is a non deterministic levenshtein automata for the word \emph{test}.
-In the following description the \emph{levenshtein automata} represents the word $W \in \Sigma^*$ and $\sigma \in \Sigma$ is the currently read letter.
+The automaton in example ~\ref{ndla} is a non deterministic levenshtein automaton for the word \emph{test}.
+In the following description the \emph{levenshtein automaton} represents the word $W \in \Sigma^*$ and $\sigma \in \Sigma$ is the currently read letter.
 $\Sigma$ indicates that any element from $\Sigma$ is accepted on this path.
 The initial state $0^0$ is in the bottom left corner.
-If $\sigma$ is a correct letter it follows the horizontal path in the automata.
+If $\sigma$ is a correct letter it follows the horizontal path in the automaton.
 A vertical path is an insertion of a letter $l \in \Sigma$ into the word W which is possible for any $\sigma$.
 A diagonal path can be a deletion of a letter $l \in W$ with the empty word $\epsilon$ or a substitution of $\sigma$ for any $\sigma$.
-Therefore after reading the letter 't' in the initial state $0^0$ the automata can be in five different states namely $0^1$, $1^2$, $1^1$, $2^2$ and $1^0$.
+Therefore after reading the letter 't' in the initial state $0^0$ the automaton can be in five different states namely $0^1$, $1^2$, $1^1$, $2^2$ and $1^0$.
 %\todo{explanation of the five different states}
 Evaluating a non deterministic levenshtein automata is computational complex due to the fact that there can be a large number of active states at the same time. 
 Thus it is necessary to convert a non deterministic automata to a deterministic automata before using it to find tags.
@@ -724,18 +850,17 @@ The process of generating a deterministic automata with a non deterministic auto
 
 \subsubsection{Powerset Construction}
 The process of creating a \emph{deterministic levenshtein automata} out of an \emph{non deterministic levenshtein automata} is based on the \emph{powerset construction} from the book \emph{Introduction to Automata Theory, Languages, and Computation} by \citet{automata2003}.
-Given a \emph{non deterministic levenshtein automata} the construction of an equivalent \emph{deterministic levenshtein automata} is described below. 
+Given a \emph{non deterministic levenshtein automaton} the construction of an equivalent \emph{deterministic levenshtein automaton} is described below. 
 \begin{itemize}
   \item Create $q_0'$ as a set with original $q_0$ and all states that are reachable with an $\epsilon$ path.
   \item $Q' \subseteq 2^Q$, thus all $q \in Q'$ are subsets of Q.
   \item $\delta(R,a) = \{q \in Q$ | $\exists r \in R$ with (r, a, q) $\in \Delta$ or (r, $\epsilon$, p) and (p, a, q) $\in \Delta\}, R \subseteq Q$. %(r, a, p) and (p, $\epsilon$, q) $\in \Delta$ or 
   \item F' includes all $q \in Q'$ that include $f \in F$
 \end{itemize}
-Therefore the new \emph{deterministic levenshtein automata} is (Q', $\Sigma$, $q_0'$, $\delta$, F').
-
-
+Therefore the new \emph{deterministic levenshtein automaton} is (Q', $\Sigma$, $q_0'$, $\delta$, F').
 \newpage
-Deterministic Levenshtein automata example for the word test with max \emph{levenshtein distance} 1.
+
+
 %\todo{finish automata}
 \begin{figure}[h]
   \begin{tikzpicture}[->,auto,line width=0.2mm] 
@@ -774,7 +899,7 @@ Deterministic Levenshtein automata example for the word test with max \emph{leve
      (2_0-2_1-1_1-3_1) edge node {$\neg s \land \neg t$} (2_1-3_1)
      (2_0-2_1-1_1-3_1) edge node {t} (2_1-3_1-4_1)
      (0_0-1_1) edge node {e} (0_1-1_1-2_1)
-     (1_0-1_1-0_1-2_1) edge node {$\neg t \wedge \neg e \wedge \neg s$} (1_1-2_1)
+     (1_0-1_1-0_1-2_1) edge node {$\neg e \wedge \neg s$} (1_1-2_1)
      (1_0-1_1-0_1-2_1) edge node {s} (1_1-2_1-3_1)
      (0_1-1_1) edge  node {t} (1_1)
      (0_1-1_1) edge  node {e} (2_1)
@@ -803,7 +928,7 @@ Deterministic Levenshtein automata example for the word test with max \emph{leve
 
 
   \end{tikzpicture}
-  \caption{A deterministic levenshtein automata for the word \emph{test} with degree 1}
+  \caption{A deterministic levenshtein automaton for the word \emph{test} with degree 1}
   \label{dla}
 
 \end{figure}
@@ -817,13 +942,13 @@ Deterministic Levenshtein automata example for the word test with max \emph{leve
 %   \item The set of final states F contains all states where the correct letter count is equal to the size of the original word W.
 % \end{itemize}
 
-Let $(Q, \Sigma, q_0, \Delta, F)$ be a \emph{non deterministic levenshtein automata} for the word \emph{test} with maximum \emph{levenshtein distance} 1 \footnote{This is the automata from figure ~\ref{ndla} without the first row}. 
-Then the \emph{deterministic levenshtein automata} $DLA = (Q', \Sigma, q_0', \delta, F')$ from figure ~\ref{dla} is the output from the powerset construction.
+Let $(Q, \Sigma, q_0, \Delta, F)$ be a \emph{non deterministic levenshtein automaton} for the word \emph{test} with maximum \emph{levenshtein distance} 1 \footnote{This is the automaton from figure ~\ref{ndla} without the first row}. 
+Then the \emph{deterministic levenshtein automaton} $DLA = (Q', \Sigma, q_0', \delta, F')$ from figure ~\ref{dla} is the output from the powerset construction.
 Consequently the DLA can only have one active state at a time and accepts all words V from $\Sigma^*$ with $d_L('test', V) \leq 1$. 
-This deterministic finite automata with degree $n \in \mathbb{N}$ for a word $W \in \Sigma^*$ can decide in linear time if a word $V \in \Sigma^*$ has $d_L(W,V) \leq n$. %\todo{source Lemma3}.
+This deterministic finite automaton with degree $n \in \mathbb{N}$ for a word $W \in \Sigma^*$ can decide in linear time if a word $V \in \Sigma^*$ has $d_L(W,V) \leq n$. %\todo{source Lemma3}.
 
 \begin{algorithm}
-  \caption{Levenshtein Automata is in distance}\label{alg:levDistIsInDist}
+  \caption{Levenshtein Automaton is in distance}\label{alg:levDistIsInDist}
   \begin{algorithmic}[1]
     \Procedure{isInDistance}{$automata: DeterministicFiniteAutomata, term: String$}
     \State $i\gets 0$
@@ -846,20 +971,22 @@ This deterministic finite automata with degree $n \in \mathbb{N}$ for a word $W 
 The maximum distance for a given word $W \in \Sigma^*$ depends on the length n of W.
 %\todo{try to find the nouns of the content cause these are the keywords of the text}
 %todo the word W is the plural form therefore it should be if n > 7 degree 3 is used otherwise 1
-A word with length of $n\leq3$ in the \emph{Standard Thesaurus Economics} is usually an abbreviation and therefore is only used as a direct match.
-A word with length of $n>3$ is used with a maximum distance of three due to the reason that most of the plural forms involve three changes (substitution, insertion and deletion) in the German language.%\todo{add source Die Pluralbildung im Deutschen: Eine Untersuchung an Hand der Optimalitätstheorie: "German Noun Plural reconsidered" von Dieter Wunderlich explain that there are 15 different plural forms \dots}
+A word with a length of $n\leq3$ in the \emph{Standard Thesaurus Economics} is usually an abbreviation and therefore is only used as a direct match.
+A word with a length of $n>3$ is used with a maximum distance of one due to the reason that most of the plural forms for short words involve the appending of a letter.
+A word with a length of $n>7$ is used with a maximum distance of three considering that composing the plural form of a word involves a maximum of three changes (substitution, insertion and deletion) in the German language. \todo{add source Die Pluralbildung im Deutschen: Eine Untersuchung an Hand der Optimalitätstheorie: "German Noun Plural reconsidered" von Dieter Wunderlich explain that there are 15 different plural forms \dots}
 
 %optimization generate dfa directly or use table based evaluation method
 
 %Lemma 6 For any fixed number n, given two words W and V of length w and v respectively, it is decidable in time O(max(w, v)) if the Levenshtein distance between W and V is <= n.
 
 %\todo{add more explanation how the levenshtein automata is integrated into the system}
-To get back to the original problem this paragraph explains the application of the \emph{levenshtein distance automata} to find the right tags for a text.
+To get back to the original problem this paragraph explains the application of a \emph{levenshtein distance automata} to find the right tags for a text.
 The overall tagging concept is to calculate for every word from the text an automata and read all words from the \emph{STW Thesaurus for Economics} into each automata.
 If a word from the \emph{STW Thesaurus for Economics} ends in a final state it is used as a tag for the text. 
 A possible optimization would be to calculate once all the automata's for the complete \emph{STW Thesaurus for Economics} and to store it with an efficient data structure in a database.
 Currently the \emph{STW Thesaurus for Economics} is stored in a triple store because it can easily be updated with the standard files from the website.
-\todo{triple store definition}
+A triple store is special database that stores data in the form of triples.
+The triple store technology is described in more detail in subsection 3.1.2.
 
 \newpage
 %why did I choose item-based and svd-based recommendations? why the combination of both
@@ -901,8 +1028,8 @@ Furthermore not only the system needs to correctly interpret the information but
 So, knowledge-based recommendation is a good approach if the system has to recommend items that are not frequently requested and no user history is available.
 It is especially suited for applications in which items are not frequently bought such as expensive digital goods or cars. 
 
-\subsubsection{Hybrid approaches}
-All recommendation system approaches have advantages and disadvantages, therefore a combinations of the different approaches which are mentioned above could improve the user recommendations as long as the system has enough information about the items or users.
+% \subsubsection{Hybrid approaches}
+% All recommendation system approaches have advantages and disadvantages, therefore a combinations of the different approaches which are mentioned above could improve the user recommendations as long as the system has enough information about the items or users.
 
 \subsubsection{Conclusion}
 %\todo{improve this}
@@ -913,14 +1040,16 @@ All recommendation system approaches have advantages and disadvantages, therefor
 %use top rated items for the subject
 %if no items 
 %use top rated items
+All of the described recommendation approaches have advantages and disadvantages.
 Knowledge based systems require too much domain knowledge that is not accessible for user generated questions and answers, therefore knowledge based systems are not feasible for the system.
-Collaborative recommendation systems have the \emph{cold start problem}, so they need an initial amount of user item relationship data in order to present good recommendations. 
-Additionally, they have no information about the subject of the items and this might lead to a situation were a collaborative filtering system might recommend unapropriate items to the current context. 
+Collaborative recommendation systems need an initial amount of user item relationship data in order to present good recommendations. 
+Additionally, they have no information about the subject of the items and this might lead to a situation were a collaborative filtering system might recommend inappropriate items to the current context. 
 Nonetheless collaborative filtering is the only approach that takes the interest of similar users into account. 
 As such it is the only technique that is able to recommend items that are approved by similar users. 
 Moreover the content-based systems have the disadvantage that they do not make use of the information whether or not a user likes a document.
 Yet, they do not need to collect additional relationship information in order to recommend items.
-For these reasons the described recommendation system uses a collaborative filtering technique with pre filtered content based on the tags for each item.
+Because of the reason that the user generated content is not moderated and therefore the system has no information about the quality of the content the implemented system uses a collaborative filtering technique with pre filtered content based on the tags for each item.
+This approach should yield the best possible recommendations for a user of the system.
 
 %%definitions Users, items, ratings, predictions
 \subsection{Collaborative recommendation system}
@@ -966,8 +1095,8 @@ The following definitions are based on \citet{recommender2011}
 The concept of item-based recommendation was introduced by \citet{sarwar2001}.
 The idea behind this concept is that recommendations can be calculated based on similar items of the items that a user likes.
 If $i, \in \hat{I_u}$ and $u \in U$, then the prediction for i can be calculated with the similarity between i and all items $j \in \tilde{I_u}$.
-There are different possible ways to calculate the similarity between two items.
-However, the similarity calculation with the best performance is \emph{adjusted cosine similarity} which is an optimized form of the \emph{cosine similarity}\footnote{see \citet{sarwar2001}}
+One method for calculating the similarity between two items is the cosine similarity.
+%However, \citet{sarwar2001} found out that the similarity calculation with the best performance is \emph{adjusted cosine similarity} which is an optimized form of the \emph{cosine similarity}.
 \begin{definition}[Cosine Similarity]
   With i, j $\in \mathbb{N}^n$, n $\in \mathbb{N}$.
   \begin{equation}
@@ -984,7 +1113,7 @@ This results in the \emph{adjusted cosine similarity}.
     sim(i, j) = \frac{\sum_{u \in U}{(r_{u, i} - \overline{r_u})(r_{u, j} - \overline{r_u})}}{\sqrt{\sum_{u \in U}(r_{u,i} - \overline{r_u})^2} \sqrt{\sum_{u \in U}(r_{u,j} - \overline{r_u})^2}}
   \end{equation}
 \end{definition}
-Researches show that the \emph{adjusted cosine similarity} has the best performance with attention to prediction accuracy compared to all other similarity measures for item based algorithms. [\citet{sarwar2001}]
+Researches made by \citet{sarwar2001} show that the \emph{adjusted cosine similarity} has the best performance with attention to prediction accuracy compared to all other similarity measures for item based algorithms. 
 The results of the cosine similarity are between -1 and 1 with 1 meaning identical, 0 meaning indifferent and -1 meaning opposite [\citet{wikiCosineSimilarity}].
 Although the results vary between -1 and 1 those items that have a \emph{cosine similarity} of $\leq 0$ are too different and thus are not used for further calculations.
 The user item predictions can be generated with the similarities by using the following formula.
@@ -996,7 +1125,7 @@ The user item predictions can be generated with the similarities by using the fo
 The item similarity calculations can be calculated offline on a regular basis - every day or weekly - depending on the activeness of the users and the amount of item changes.
 So, the item based technique is a good choice for websites that need fast scalable recommendations because only the item predictions are calculated on time.
 Furthermore the team of \emph{Sarwar et al} found out that the system only needs a subset of all items.
-According to \emph{Sarwar et al} a sample of the 25 most similar items is needed to generate good recommendations [\citet{sarwar2001}].
+According to \emph{Sarwar et al} a sample of the 25 most similar items is needed to generate good recommendations.
 Thus the on time calculation needs to find the top 25 most similar users in the similarity table and has to calculate the recommendations with these users instead of using all similar users.
 Moreover, it is a tested concept for instance amazon.com uses item based recommendations for their product recommendations [\citet{amazon2003}]. 
 To get back to the overall concept, the item based predictions are used in order to decrease the rating sparsity of the user-item table. 
@@ -1006,7 +1135,7 @@ In real world recommendation systems the user item ratings tend to be very spars
 \subsubsection{Example for Item-Based Recommendations}
 The table in figure ~\ref{itemBasedTable} represents a user item relationship.\\
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \begin{tabular}{c c c c c c}
    &Item1 & Item2 & Item3 & Item4 & Item5 \\ 
@@ -1081,7 +1210,7 @@ Therefore, it enables a graphical presentation of the user similarities.
 Furthermore the user similarities can be calculated by using the cosine similarity between the columns of $U_k$.\\
 After calculating the similarities for each user, the recommendations for $user_a \in U$ are calculated.
 For this task the algorithm takes all similar users $U_{sim}$ for $user_a$.\\
-Afterwards it uses the top rated items from all $user_b \in U_{sim}$ that are not rated by $user_a$ $I'_{user_a, user_b}$.
+Afterwards it uses the top rated items from all $user_b \in U_{sim}$ that are not rated by $user_a$ this is denoted by $I'_{user_a, user_b}$.
 $\overline{r_a}$ denotes the average rating of user a.
 Finally for each item $i \in I'_{user_a, user_B}$ the prediction is calculated.
 %todo if no user is logged in the default user is used to generate recommendations this user should have ratings for the items that most users are interested in.
@@ -1243,16 +1372,19 @@ The following itemization contains the average user ratings.
 \end{minipage}
 \end{figure}
 
+\newpage
 \subsection{The recommendation process}
 The sparsity of the user item table is decreased by using item based predictions for user-item pairs that are not rated.
 For this process the system uses the similarities between rated and not rated user-item pairs.
 Therefore for each user (u) the rating for a not rated item (i) is predicted by using the similarity of i and items that are rated by u.
 This improved user item table is decomposed into three matrices $U$, $\Sigma$ and $V^t$. 
-The matrix U represents the user interests and is reduced by k rows in order to remove noise from the user item table and to improve the execution time of the recommendation process.%\todo{improve noise}
+The matrix U represents the user interests and is reduced by k rows in order to improve the execution time of the recommendation process.%\todo{improve noise}
 The cosine similarity is calculated between the columns of the matrix $U_k$.
 With these similarity information the recommendations are generated by finding the top rated items of the most similar users that are unknown for the current user.
+If the current user of the system is not registered the system uses the default user to calculate the recommendations.
+This default user is the first user of the system who should be generated by the system administrator.
+Besides the default user should have the average ratings for the items that most of the system users agree up on with their ratings.
 \subsection{Different Recommendation approaches}
-/todo{svd variations}
 The explained techniques that where used in the recommendation process can be used for other recommendation processes.
 \subsubsection{Only Item-Based Recommendations}
 The recommendation system concept uses item-based recommendations to decrease the sparsity of the rating table.
@@ -1264,16 +1396,26 @@ Yielding a functional recommendation system which will be compared with the main
 %svd kann alleine verwendet werden um recommendations zu erstellen die performance zwischen nur svd und dem gesamten werd in sectien 4.3 evaluiert
 The svd-based recommendation system is part of the recommendation concept that is introduced in this thesis.
 This svd-based recommendation system calculates the user-item recommendations after the item-based system decreased the sparsity of the rating table.
-Consequently this svd-based recommendation system can be used as a standalone recommendation system.
-The runtime and performance of this system is compared with the recommendation system of this thesis in section 4.3.
+Consequently the svd-based recommendation system can be used as a standalone recommendation system.
+However rating matrix that results out of the rating table does not have empty entries otherwise the singular value decomposition can not be calculated for that matrix.
+Hence the empty entries of the rating matrix must be filled with values before calculating the singular value decomposition.
+For this process two different approaches are tested in the evaluation process.
+The first one fills the empty entries with the average value of the 1 to 5 rating scale which is the 3.
+The second one uses the average item ratings for the missing entries.
+The runtime and performance of these systems is compared with the recommendation system of this thesis in section 4.3.
 %\subsubsection{Use Item Similarities of the V Matrix}
-\section{Concept Relationships}\todo{write this}
+\section{Concept Relationships}
 The last sections described the different concepts that are used in this thesis.
 This section emphasizes the relationship between the different ideas.
 The \emph{question and answer} system enables users of a website to create questions and answers.
 These questions and answers are the \emph{items} that are used as recommendations on sites that have the same subject.
 For this process the items need to have a rating that indicates the interest that a user has for this item.
-Besides the items need a tag that describes the content of the item.
+These ratings are generated with the implicit rating concept that is introducted in this thesis.
+Additionally the ratings are used by the recommendation system concept for calculating the rating predictions.
+Besides the items need a tag that describes the content of the item for filtering the recommendations before they are used on the website.
+These tags are generated with the explained tagging concept.
+The final outcome is a question and answer recommendation list that is ordered by the predicted interest for an user.
+Moreover the recommendation list matches the current subject of the website.
 %todo maybe use this at the beginning of the chapter
 
 
@@ -1282,8 +1424,9 @@ Besides the items need a tag that describes the content of the item.
 % Calculate the average ratings, calculate the item similarities, calculate user predictions, calculate svd, calculate $U_k$, calculate user similarities.
 % Create on time recommendations.
 \chapter{Implementation}
-This chapter begins with an explanation of the service oriented software architecture and the different interfaces to those services.
-Afterwards follows a discussion about the technology choices for the different system parts.
+\label{chapter:implementation}
+This chapter begins with a discussion about the technology choices for the different system parts.
+Afterwards, the service oriented software architecture and the different interfaces to those services are explained.
 \section{Technologies}
 This system combines five different concepts namely the \emph{question and answer system}, the \emph{rating system}, the \emph{tagging system}, the \emph{rating system} and the \emph{recommendation system}.
 For such a variety of techniques with different requirements there is the need for different technologies.
@@ -1296,30 +1439,35 @@ Such a fast execution time can only be achieved by using different tricks that u
 This implementation process would be too time consuming for a six month thesis.
 A programming language that meets these requirements is the scala programming language.
 \subsubsection{Scala Programming Language}
-The scala programming language is an object oriented and functional programming language.
+The Scala programming language is an object oriented and functional programming language.
 Meaning that it is possible to write code with a functional programming paradigm together with an object oriented programming paradigm.
-Moreover every value in scala is an object and every function is a value.
+Moreover every value in Scala is an object and every function is a value.
 The advantage of a functional programming paradigm is that it enables a more mathematical programming approach due to the reason that functions can be passed as parameters and can be used as return values.
 This is helpful for designing complex algorithms.
-Additionally scala offers the functionality to mark all operations on collections as parallel. 
+Additionally Scala offers the functionality to mark all operations on collections as parallel. 
 Consequently the language supports developers to write programs that can utilize multicore computer systems. 
-The scala programming language compiles to the java byte code therefore it runs in the \emph{java runtime environment}.
-Thus it is possible to use applications that are developed with the scala programming language on any system that is able to run the \emph{java runtime environment} which is almost any operating system.
-Likewise an application that is developed with the scala programming language can use any java library.
+The Scala programming language compiles to the Java byte code therefore it runs in the \emph{Java runtime environment}.
+Thus it is possible to use applications that are developed with the Scala programming language on any system that is able to run the \emph{Java runtime environment} which is almost any operating system.
+Likewise an application that is developed with the Scala programming language can use any Java library.
+Moreover \citet{codeBenchmark} analyzed four different programming languages namely C++, Go, Java and Scala. 
+He implemented the same algorithm in each of these programming languages and analyzed the outcome on their individual performance, code size, binary size and complexity.
+The Scala implementation of this algorithm has the fastest execution time and the lowest number of lines of code of all non optimized implementations.
+The only implementation that achieved a shorter execution time is a highly optimized C++ version that utilizes optimized non standard C++ data structures.
+For these reasons the Scala programming language is used as the server side programming language.
 However the part of the rating systems that collects the user activities needs to run on the client side inside the web browser.
-This is currently only possible with the javascript programming language.
-Out of that reason javascript is used as a second programming language for the development of the system which is explained in more detail in the next section.
-\todo{Performance auswertung google paper}
-\subsubsection{Javascript}
-As mentioned in the last section the javascript programming language has to be used to create client side browser applications which is needed for the part of the rating system that collects the user activities.
+This is currently only possible with the JavaScript programming language.
+Out of that reason JavaScript is used as a second programming language for the development of the system which is explained in more detail in the next subsection.
+\subsubsection{JavaScript}
+As mentioned in the last section the JavaScript programming language has to be used to create client side browser applications which is needed for the part of the rating system that collects the user activities.
 %javascript ist functional und object orientiert allerdings verwendet es andere paradigmen fuer die oo programmierung als die meisten anderen sprachen 
 %serverseitige javascript programmierung ist inzwischen moeglich aber noch nicht so ausgereift siehe node.js 
-Javascript is a scripting language as a consequence it can be interpreted and executed without being compiled first.
-The language is in use by almost every web browser and thus is used by web pages to interact with the user and to dynamically load and change the website.
+JavaScript is a scripting language as a consequence it can be interpreted and executed without being compiled first.
+The language is supported by almost every web browser and therefore is used by web pages to interact with the user and to dynamically load and change the website.
 As of the \emph{W3C Document Object Model Events} specification which is a web standard and therefore implemented by almost all web browsers the browser has to provide events for detecting scroll and focus events.
-On these events callback functions such as activity timers can be bound that are getting called if the event fires.
+Callback functions such as activity timers can be attached to these callback functions. 
+These callback functions are called if the event fires.
 This enables the rating system to detect the user activities that it needs to calculate the user ratings.
-Therefore all technical requirements for the programming language are fulfilled with the use of the scala programming language in combination with the javascript programming language.
+Therefore all technical requirements for the programming language are fulfilled with the use of the Scala programming language in combination with the JavaScript programming language.
 
 \subsection{Databases}
 The system uses two different databases one for the main system and a second database for the \emph{STW Thesaurus for Economics}.
@@ -1337,32 +1485,49 @@ Whereas the subjects and the predicates are resources the object might be a valu
 The subject is described by the predicate with the object.
 For example the subject can be an identifier for a person the predicate can be a resource for a name and the object is the name itself.\\
 ID:5462, name, 'John Doe'\\
-With these tools it is possible to create a graph that represents the data.
 The triples can be retrieved via a query-language which is called \emph{SPARQL}.
 %todo explain sparql in comparison to sql
 The triple store that is used in the implemented system is \emph{4store} which is a free to use triple store developed and maintained by \emph{Garlik}.
-The \emph{4store} can be used as a service that uses the http protocol for querying the database this goes with the service oriented system architecture.
-%todo find paper that displays the performance
+The \emph{4store} can be used as a service that uses the http protocol for querying the database this goes with the service oriented system architecture that is used in this thesis.
+Furthermore an important aspect for the use case of the triple store in this thesis is the retrieving of ordered lists of objects.
+These order function is needed for dividing all words that are stored in the triple store into parts of 1000 words per request by using the ordered by, limit and offset command.
+This is used for processing 1000 words at once for the tagging algorithm.
+The triple store performance benchmark of \citet{benchmark2010} tested five triple store implementations for the average response time of different queries.
+This benchmark shows that the \emph{4Store} is the fastest triple store for the task of responding to requests which uses \emph{ordered by} and that it has in comparison with the other triple store implementations an overall good performance result.
+
 
 %explain why im using 4store
 %Learning SPARQL
  %von Bob DuCharme
 %
 \subsection{Network Communication}
-The implemented system uses the \emph{Hypertext Transfer Protocol (http)} as a network communication protocol.
+The implemented system uses the \emph{Hypertext Transfer Protocol (HTTP)} as a network communication protocol.
 The network communication for this system is handled by the \emph{finagle} open source framework that is developed and maintained by \emph{Twitter}.
 \subsubsection{Hypertext Transfer Protocol (HTTP)}
 %wichtig path, methods 
 %todo http
-HTTP is a stateless network protocol that is used amongst other things by web browsers to access content in the world wide web.
+HTTP is a stateless network protocol that is used by web browsers to access content in the world wide web.
 This protocol specifies how clients request data and how servers respond to those requests.
-There are five different http requests methods as of the standard HTTP 1.1
-\dots
-The http protocol specifies a path that 
+The HTTP protocol is used in combination with the Uniform Resource Locator (URL).
+This URL is a combination of a host, a port and a path.
+http://host[:port][path]
+The host specifies the server address that provides the requested service and the port is an optional number for further specifications.
+The path describes a specific resource that the client can access on the server.
+The implemented system uses the port for selecting the service.
+Consequently each service is accessible with a specific port.
+The path is used for accessing the methods that the service provides.
+For example http://localhost:10000/recommendation/5/3/marketing/unternehmen calls the recommendation method on the \emph{WebService} that is running on the current computer.
+This method generates three item recommendations for the user with id 5 that are tagged with \emph{Marketing} and \emph{Unternehmen}.
+The implemented system uses four different HTTP request methods that are defined by the HTTP 1.1 standard\footnote{http://www.w3.org/Protocols/}.
+These requests are the HTTP Get request, the HTTP Post request, the HTTP Put request and the HTTP Delete request.
+The HTTP Get request can access resources but cannot provide additional data than the data that it specifies in the URL.
+The HTTP Post request can access resources and can specify additional data to the path in the body of the request that should be added to the resource.
+The HTTP Put request is used for requesting that the specified data is stored or updated on the specific URL.
+The HTTP Delete request is used for requesting that the specific resource on the URL is deleted.
 
 %todo advantages disadvantages reasoning alternatives
 \subsubsection{Finagle Framework}
-The \emph{finagle} framework is an extensible remote procedure call system with the purpose of creating high performance and concurrent servers.
+The \emph{finagle} framework\footnote{http://twitter.github.io/finagle/} is an extensible remote procedure call system with the purpose of creating high performance and concurrent servers.
 On the one hand it provides interfaces for creating services that can be bound to a combination of a network address and a protocol for the network communication.
 Yielding a server that waits for a connection on the specific network address in order to execute the implemented service.
 On the other hand it provides interfaces for creating clients that must specify one ore more server addresses together with the protocol and the connection limit.
@@ -1374,7 +1539,6 @@ In that case the future can either provide the value from the server directly or
 However the client and the server should be build in such a way that the server is able to return a value before the client actually needs the return value.
 As an additional feature the framework offers the possibility to bind functions on futures thus the functions will be executed if the server returns the value to the future.
 This yields a non blocking service architecture.
-%todo http
 
 \subsection{Testing}
 The implemented application uses two different test systems.
@@ -1387,22 +1551,26 @@ These test classes must have the same package structure as the original implemen
 Moreover it is necessary to define a test inside the test class that checks if a function works as expected.
 The developed system uses the \emph{Spec2} test framework to check if all core components such as services function as anticipated.
 \subsubsection{Graphical User Interface}
-The graphical user interface is useful in order to test the single recommendation techniques on a small and easy to edit test user-item table.
-The purpose of this application is to illustrate how the recommendation process works in the praxis to help understand the theory behind it.
+The graphical user interface is useful for analyzing the recommendation techniques.
+The purpose of this application is to illustrate how the recommendation process works in the praxis.
+The figure ~\ref{pic:recommendationGui} displays the recommendation test website.
+On the top of the page the user can define the user ratings for the items.
+Depending on these entries the user and item similarities are calculated which is displayed by the diagram and the two tables underneath the diagram.
+Additionally the recommendation test website can calculate rating predictions for the users that have empty rating entries in the table.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{image/recommendationGui.png}
+  \includegraphics[width=0.5\textwidth]{image/recommendationGui.png}
   \caption{The Graphical User Interface for The Recommendation Process}
   \label{pic:recommendationGui}
 \end{figure}
 
-The user interface is implemented with the \emph{backbone.js} library that provides models, collections and views for creating model view controller websites on the client side.
-%dies wurde benoetigt, damit kein echter webservice mit file struktur usw gebaut werdem musste und kein weiteres framework benoetigt wurde
-%es musste lediglich eine restful api erstellt werden sowie eine moeglichkeit um javascript dateien vom filesystem an den client zu schicken.
-% backbone.js models expect restful api to work without configuration
+The user interface is implemented with the \emph{backbone.js} framework that provides models, collections and views for creating model view controller websites on the client side.
+The advantage of such a framework is that it supports the development of creating client side applications that communicate with the database.
+Therefore the framework provides objects that represent the data from the database and sends request to the server if data is modified added or deleted.
+The server has to provide interfaces for the \emph{backbone.js} framework that are based on HTTP Get, Post, Put and Delete methods for reading, updating, deleting and storing data in the database.
 
 \section{Architecture}
-The system uses a service oriented architecture.\todo{add database schema}
+The system uses a service oriented architecture. %\todo{add database schema}
 Thus the main components of the system namely the tagging process, the rating system and the different recommendation techniques are encapsulated in different services.
 One advantage of that architectural choice is that the system can be spread on different servers.
 This not just opens the possibility to run services that have high hardware requirements on different servers but also enables the choice to duplicate services.
@@ -1411,70 +1579,67 @@ A disadvantage of a service oriented architecture is that it is more complex to 
 However one requirement for this system is that the single system components should be usable separately.
 With a service oriented architecture each service can be used individually over a network communication.
 The network communication protocol that is necessary for communicating with the services is the http protocol which is explained in subsection 3.1.3.
-Figure ~\ref{serviceArchitecture} outlines the different services and the communication paths between those services.
-%The http get and post request are the standard requests that are used by web
-%browsers to send data.
-%answer by http request respond
-%explain http
+The next sections describe the single services and the methods that they provide.
 
-\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
-    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
-\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
-    text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-\tikzstyle{cloud} = [text width = 7.5em, text badly centered, draw, ellipse,fill=red!20, node distance=4cm,
-    minimum height=2em]
-    
-\begin{figure}[h]
-\begin{tikzpicture}[node distance = 2cm, auto]
-    % Place nodes
-    \node [cloud] (webservice) {Webservice};
-    \node [cloud, right of=webservice] (recommendation) {Recommendation Service};
-    \node [cloud, above right of=recommendation] (item) {Item-Based Recommendation Service};
-    \node [cloud, below right of=recommendation] (svd) {SVD-Based Recommendation Service};
-    \node [cloud, below of=recommendation] (tag) {Tagging Service};
-    \node [cloud, below of=tag] (rating) {Rating Service};
-    \node [cloud, right of=tag] (stw) {Query STW Service};
-%   \node [block] (init) {initialize model};
-%   \node [cloud, left of=init] (expert) {expert};
-%   \node [cloud, right of=init] (system) {system};
-%   \node [block, below of=init] (identify) {identify candidate models};
-%   \node [block, below of=identify] (evaluate) {evaluate candidate models};
-%   \node [block, left of=evaluate, node distance=3cm] (update) {update model};
-%   \node [decision, below of=evaluate] (decide) {is best candidate better?};
-%   \node [block, below of=decide, node distance=3cm] (stop) {stop};
-    % Draw edges
-%   \path [line] (init) -- (identify);
-%   \path [line] (identify) -- (evaluate);
-%   \path [line] (evaluate) -- (decide);
-%   \path [line] (decide) -| node [near start] {yes} (update);
-%   \path [line] (update) |- (identify);
-%   \path [line] (decide) -- node {no}(stop);
-%   \path [line,dashed] (expert) -- (init);
-%   \path [line,dashed] (system) -- (init);
-%   \path [line,dashed] (system) |- (evaluate);
-    \path [line] (webservice) -- (recommendation);
-    \path [line] (recommendation) |- (item);
-    \path [line] (recommendation) |- (svd);
-    \path [line] (webservice) |- (tag);
-    \path [line] (webservice) |- (rating);
-  \end{tikzpicture}
-  \caption{The Service Architecture of the system}
-  \label{serviceArchitecture}
-\end{figure}
+
+
+% \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+%     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+% \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+%     text width=5em, text centered, rounded corners, minimum height=4em]
+% \tikzstyle{line} = [draw, -latex']
+% \tikzstyle{cloud} = [text width = 7.5em, text badly centered, draw, ellipse,fill=red!20, node distance=4cm,
+%     minimum height=2em]
+%     
+% \begin{figure}[h]
+% \begin{tikzpicture}[node distance = 2cm, auto]
+%     % Place nodes
+%     \node [cloud] (webservice) {Webservice};
+%     \node [cloud, right of=webservice] (recommendation) {Recommendation Service};
+%     \node [cloud, above right of=recommendation] (item) {Item-Based Recommendation Service};
+%     \node [cloud, below right of=recommendation] (svd) {SVD-Based Recommendation Service};
+%     \node [cloud, below of=recommendation] (tag) {Tagging Service};
+%     \node [cloud, below of=tag] (rating) {Rating Service};
+%     \node [cloud, right of=tag] (stw) {Query STW Service};
+% %   \node [block] (init) {initialize model};
+% %   \node [cloud, left of=init] (expert) {expert};
+% %   \node [cloud, right of=init] (system) {system};
+% %   \node [block, below of=init] (identify) {identify candidate models};
+% %   \node [block, below of=identify] (evaluate) {evaluate candidate models};
+% %   \node [block, left of=evaluate, node distance=3cm] (update) {update model};
+% %   \node [decision, below of=evaluate] (decide) {is best candidate better?};
+% %   \node [block, below of=decide, node distance=3cm] (stop) {stop};
+%     % Draw edges
+% %   \path [line] (init) -- (identify);
+% %   \path [line] (identify) -- (evaluate);
+% %   \path [line] (evaluate) -- (decide);
+% %   \path [line] (decide) -| node [near start] {yes} (update);
+% %   \path [line] (update) |- (identify);
+% %   \path [line] (decide) -- node {no}(stop);
+% %   \path [line,dashed] (expert) -- (init);
+% %   \path [line,dashed] (system) -- (init);
+% %   \path [line,dashed] (system) |- (evaluate);
+%     \path [line] (webservice) -- (recommendation);
+%     \path [line] (recommendation) |- (item);
+%     \path [line] (recommendation) |- (svd);
+%     \path [line] (webservice) |- (tag);
+%     \path [line] (webservice) |- (rating);
+%   \end{tikzpicture}
+%   \caption{The Service Architecture of the system}
+%   \label{serviceArchitecture}
+% \end{figure}
 
 
 %Service oriented architecture why?
 %communication diagram
 %explain diagram
 \section{Services}
-The individual parts of the system are separated into different services this is illustrated in figure ~\ref{serviceArchitecture}.
-Each service inherits from the HttpServer.
-This HttpServer handles the decomposing of the http request, provides simple http routing and creates the http responses for the network communication.
+The individual parts of the system are separated into different services. 
+Each service inherits from the implemented HttpServer.
+This HttpServer handles the decomposing of the http request, provides simple HTTP routing and creates the http responses for the network communication.
 Thus the services implement the service specific logic and provide methods for accessing this logic.
-These methods are accessible for the router that is inherited by the HttpServer and provide a http path for each method in form of a string.
-Consequently the services are accessible on their specific port with http post and http get requests that correspond to the http path.
-These services return a standard http response that contains a json string as a return value.
+These methods are accessible for the router that is inherited by the HttpServer and provide a HTTP path for each method in form of a string.
+Consequently the services are accessible on their specific port with HTTP Post and HTTP Get requests that correspond to the HTTP path.
 %todo this section explains the different services that were developed for this thesis. Overall design pattern for the services \dots
 %what is the service for 
 %how to communicate with the service
@@ -1493,25 +1658,24 @@ These services return a standard http response that contains a json string as a 
       \hline \hline
       Get Methods & Parameter: Type & Return Value\\ \hline
       /calculateSimilarities & - & \\ \hline
-      \multirow{2}{*}{/calculateUserRecommendations} & user id: Integer & List (user, rating)\\
-      & amount: Integer & \\ \hline
       \multirow{2}{*}{/calculateUserPrediction} & user id: Integer & List (user, rating)\\
       & item id: Integer &\\ %\hline
       %/calculateUserPredictionsItemBased & user id: Integer & \\ \hline
       %/calculateUserPredictionsSvdBased & user id: Integer & \\ 
       \hline \hline
       Post Methods & Parameter: Type & \\ \hline
-      - & - & -\\ \hline
+      \multirow{2}{*}{/generateRecommendations} & user id: Integer & List (user, rating)\\
+      & amount: Integer & \\ \hline
     \end{tabular} 
   \end{center}
-  The \emph{/calculateSimilatities} method starts the item similarity calculation of the \emph{ItemBasedService} Service.
-  After the calculation finishes the \emph{RecommendationService} Service starts the svd based similar user calculation of the \emph{SVDBasedService} Service.
+  The \emph{/calculateSimilatities} method starts the item similarity calculation of the \emph{ItemBasedService}.
+  After the calculation finishes the \emph{RecommendationService} starts the svd based similar user calculation of the \emph{SVDBasedService}.
   These similarity values are stored in the database by the individual service for future rating predictions.
-  The \emph{/calculateUserRecommendations} method takes an user id, a number of predictions and a list of tags as parameters.
-  This method forwards the parameters to the \emph{SVDBasedService} Service and returns the list of item rating pairs.
   The \emph{/calculateUserPredictions} method takes an user id and an item id as parameters.
   If the item id is empty the prediction for all items are calculated if enough similar item ratings exist.
-  The final prediction calculation is handled by the \emph{SVDBasedService} Service. 
+  The final prediction calculation is handled by the \emph{SVDBasedService}. 
+  The \emph{/generateRecommendations} method takes an user id, an amount of predictions that should be returned and a list of tags as parameters.
+  This method forwards the parameters to the \emph{SVDBasedService} and returns the list of item rating pairs to the caller method.
 
 
 
@@ -1592,8 +1756,10 @@ These services return a standard http response that contains a json string as a 
       \multirow{2}{*}{/calculateUserPrediction} & user id: Integer & List (user, rating)\\
       & item id: Integer & \\ 
       \hline \hline
-      Post Methods & Parameter: Type & \\ \hline
-      - & - & -\\ \hline
+      Post Methods & Parameter: Type & Return Value \\ \hline
+      \multirow{2}{*}{/generateRecommendations} & user id: Integer & List (itemTitle, url, rating)\\
+      & amount: Integer & \\
+      & tags: List[String] & \\ \hline
     \end{tabular} 
   \end{center}
 
@@ -1614,13 +1780,27 @@ These services return a standard http response that contains a json string as a 
   With these similar users it generates a list of items that these users rated but are unknown to the current user.
   For each item that is in the unknown item list the system calculates the prediction for the user-item pair as described in subsection 2.4.2.
   These predictions are returned as a list of user-item tupel.
+  The \emph{/generateRecommendations} method calculates the item recommendations for the current user.
+  This user is the first parameter that is passed to the function.
+  If the user is unknown because he is not logged in a value of zero is passed.
+  This zero user is the default user that has ratings for the most popular items.
+  The second parameter specifies the amount of recommendations that the system should return.
+  The third parameter that is passed inside the request body as a post parameter is a Json string that represents a list of tags.
+  The recommendations that the system generates correlate with these tags.
+  The whole recommendation process is split into four steps.
+  At first the tags are converted into the corresponding descriptor from the \emph{STW Standard Thesaurus Economics}.\todo{describe stw and descriptor}
+  Afterwards the system generates a list of the most similar users for the current user.
+  For each of these similar users a list is generated that contains the top rated items from this user that are unknown to the current user.
+  Besides, the top rated items match the tags that are specified at the beginning of the request.
+  Finally, for each of these items the rating prediction for the current user is calculated.
+  The items with the highest rating predictions are used as recommendations.
 
 
 \subsection{TaggerService}
   The \emph{TaggerService} is the implementation of the tagging concept.
   This concept describes the process of finding the right tags for a text.
   For this process the system creates a deterministic levenshtein automata for each word in a text.
-  Every one of these deterministic levenshtein automatas reads the complete \emph{STW Standard Thesaurus Economics} if a word from the \emph{STW} ends in a final state the word is used as a tag for the text.
+  Every one of these deterministic levenshtein automata reads the complete \emph{STW Standard Thesaurus Economics} if a word from the \emph{STW} ends in a final state the word is used as a tag for the text.
   More details about the tagging concept can be found in section 2.3.
   \begin{center}
     \begin{tabular}{| l | l | l |}
@@ -1635,28 +1815,78 @@ These services return a standard http response that contains a json string as a 
       \hline \hline
       Post Methods & Parameter: Type & \\ \hline
       /tagText & text: String & list of tags\\ \hline
+      /descriptorsForText & text: String & list of STW descriptors\\ \hline
+      /tagsForDescriptors & descriptors: List[String] & list of tags\\ \hline
+      /descriptorsForTags & tags: List[String] & list of STW descriptors \\ \hline
     \end{tabular} 
   \end{center}
-  The \emph{tegText} method takes a text as parameter. 
+
+  The \emph{/tagText} method takes a text as parameter. 
   The single words of the text are extracted into a list.
-  For each word in this list a deterministic levenshtein automata is generated.
-  For this process the service creates a finite automata for each word with a specific degree.
-  A degree states the maximum allowed levenshtein distance between the word for which the automata is generated and the word that the automata can read.
+  For each word in this list a deterministic levenshtein automaton is generated.
+  For this process the service creates a finite automaton for each word with a specific degree.
+  A degree states the maximum allowed levenshtein distance between the word for which the automaton is generated and the word that the automaton can read.
   This degree depends on the word size.
   For a word with more than five letters a degree of three is used otherwise a degree of one is used.%todo this has to match the concept
-  %\todo{Add Algorithm here}
-  The states are written as tupel of the form (c, d) where c denotes the current position in the word and d denotes the current levenshtein distance between the prefix of the original word and the word that the automata reads.
+  The states are written as tupel of the form (c, d) where c denotes the current position in the word and d denotes the current levenshtein distance between the prefix of the original word and the word that the automaton reads.
   For each letter in a word W with a length of n four transitions are created if the levenshtein distance of the current state is smaller than n.
   These four transitions represent reading a correct letter, deleting a letter, inserting a letter and substituting a letter.
   The last states that are reached thru the last letter do not get any transitions by this process.
-  Consequently the next step is to insert the missing \emph{insertion} transitions for these last states where the current position in the word is the size of the word.
+  Consequently the next step is to insert the missing insertion transitions for these last states where the current position in the word is the size of the word.
   These insertions are needed because the word that is read might be longer than the original word and therefore letters must be added to the original word up to the maximum degree.
-  The last step for creating this finite automata is to mark all of the last states where the current position in the word is the size of the word as final states.
-  This finite levenshtein automata is transformed into a deterministic finite levenshtein automata.
-  \todo{add transformation algorithm}
+  The last step for creating this finite automaton is to mark all of the last states where the current position in the word is the size of the word as final states.
+  This finite levenshtein automaton is transformed into a deterministic finite levenshtein automaton. 
+  %\todo{add transformation algorithm}
+  This transformation process replaces every deletion transition which represents an $\epsilon$ transition by one or more new transitions.
+  These new transition start at the beginning of the $\epsilon$ transition and end at a destination of a transition that starts at the end of the $\epsilon$ transition.
+  This operation has to be performed due to the reason that $\epsilon$ transitions are not allowed in deterministic automata.
+  Furthermore the substitution and insertion transitions are transformed in the way that they only accept labels that are not used by any other transition from the current source.
+  This process yields a deterministic Levenshtein automata.
+  Finally, all words from the \emph{STW} are loaded and read into the deterministic Levenshtein automaton
+  Each word that ends in a final state is added to the list of tags that is returned to the caller.
+  The \emph{/descriptorsForText} method generates a list of labels for a text.
+  This method is implemented the same way as the \emph{tagText} method.
+  The only difference is that it converts the words which end in a final state to their corresponding \emph{STW} descriptors before returning them.
+  The \emph{/tagsForDescriptors} method takes a list of STW descriptors as a parameter and returns the corresponding list of tags.
+  For this process each preferred label is read from the triple store by its descriptors.
+  The triple store contains the STW.
+  The \emph{/descriptorsForTags} method takes a list of tags as a parameter and returns a list of STW descriptors.
+  This method loads the descriptors from the triple store that corresponds to the tags that were passed as a parameter.
+
+  \subsection{QuerySTWService}
+  The \emph{QuerySTWService} is the interface between the services and the triple store.
+  It provides methods for sending data to the triple store and processes the data before responding to the requests.
+  This service encapsulates the triple store communication.
+  Hence, it enables an integration into existing systems that use different triple store technologies by replacing only the provided methods of this service.
+
+  \begin{center}
+    \begin{tabular}{| l | l | l |}
+      \hline
+      \multicolumn{3}{|c|}{QuerySTWService } \\ 
+      \hline \hline
+      Standard Port & \multicolumn{1}{l}{11500} &\\ 
+      \hline \hline
+      Get Methods & Parameter: Type & Return Value\\ \hline
+      /descriptor & preferred label: String & descriptor \\ 
+      \hline \hline
+      Post Methods & Parameter: Type & Return Value\\ \hline
+      /runQuery & query: String & - \\ \hline
+      /descriptorsForTags & tags: List[String] & list of descriptors \\ \hline
+    \end{tabular} 
+  \end{center}
+
+  The \emph{/descriptor} method takes a word from the STW as a parameter and returns the descriptor of the preferred label.
+  Another method that the service provides is the \emph{/runQuery} method.
+  This method takes a query that should be executed on the triple store as a parameter and returns the response from the triple store.
+  The last method that this service provides is the \emph{/descriptorsForTags} method.
+  Which takes a list of tags as a parameter and returns the corresponding list of descriptors.
 
 
 \subsection{RatingService}
+  The \emph{RatingService} is responsible for calculating and creating the user ratings for the items.
+  This contains the creation process of new users and items.
+  Besides the service starts the asynchronous tagging process if a new item is created and adds the tags to the items if it finishes.
+
 %load javascript add user id item id to the page as js
 %if item is unknown return javascript that reads the question and returns it to the rating service this service sends it to the tagging service
 %with the tagging information it creates a new item
@@ -1671,16 +1901,243 @@ These services return a standard http response that contains a json string as a 
       - & - & - \\ 
       \hline \hline
       Post Methods & Parameter: Type & Return Value\\ \hline
-      \multirow{4}{*}{/rateItem} & user id: Integer & JavaScript if item is unknown\\
+      \multirow{5}{*}{/currentItem} & user id: Integer & - \\
       & item id: Integer &  \\
-      & time spend: decimal &  \\
-      & time scroll: decimal &  \\ \hline
+      & item title: String &  \\
+      & item text: String &  \\ 
+      & item url: String &  \\ \hline
+      \multirow{4}{*}{/calculateRating} & user id: Integer & -\\
+      & item id: Integer &  \\
+      & time spend: Double &  \\
+      & time scroll: Double &  \\
+      & user interaction: Boolean &  \\ \hline
     \end{tabular} 
   \end{center}
 
+  An in the item-page included JavaScript code calls the \emph{/currentItem} method every time a user visits an item-page.
+  This JavaScript code sends the item id, the item title, the item text and the user id to the \emph{WebService} which forwards these data to the rating service.
+  The \emph{/currentItem} method creates a new item if the current item does not exist.
+  In addition it sends the item text to the \emph{taggerService} to get the tags for the item if it does not exist.
+  Moreover it creates a new user if the current user is unknown to the system.
+  The same JavaScript code is responsible for sending every two seconds the current time that the user has stayed on the page (CT) as well as the time that the user has scrolled on the page (ST) together with the user id and the item id to the \emph{WebService} which forwards the data to the \emph{/calculateRating} method. 
+  The design choice of sending the data periodically every two seconds to the server is made for the reason that sending the complete data set if the user leaves the website is not reliable enough and can lead to the loss of these rating information.
+  After the \emph{/calculateRating} method receives the CT and ST times it adds these times to the previously received times or creates a new table entry with the times for that user.
+  With these new times the method calculates the new rating for that item and stores it in the database.
+
 \subsection{WebService}
+  The \emph{WebService} is the interface for external clients which are usually web browser that visit item pages or the developed recommendation test page.
+  This service forwards external enquiries and processes data before it sends the data back to the client.
+  Furthermore it provides an interface for accessing the database objects for the \emph{backbone.js} application that represents the \emph{recommendation test website} as well as an interface for accessing static files like JavaScript and HTML files.
+
+  \begin{center}
+    \begin{tabular}{| l | l | l |}
+      \hline
+      \multicolumn{3}{|c|}{WebService } \\ 
+      \hline \hline
+      Standard Port & \multicolumn{1}{l}{10000} &\\ 
+      \hline \hline
+      Get Methods & Parameter: Type & Return Value\\ \hline
+      / & - & index.html \\ \hline
+      /tagger & - & tagger.html \\ \hline
+      \multirow{2}{*}{/data} & type: String & model\\
+      & id: Integer &  \\ \hline
+      /file & path: String & document\\ \hline
+      \multirow{2}{*}{/calculate} & type: String & result\\
+      & id: Integer &  \\ \hline
+      \multirow{2}{*}{/recommendation} & user id: Integer & JavaScript code\\
+      & amount: Integer &  \\ 
+      & tags: List[String] &  \\ 
+      \hline \hline
+      Post Methods & Parameter: Type & Return Value\\ \hline
+      /data & model: Object & - \\ \hline
+      /rating & * & - \\ \hline
+
+    \end{tabular} 
+  \end{center}
+
+  The \emph{/} and the \emph{/tagger} methods are both returning specific static HTML files from the file system these methods should be deactivated for the production mode.
+  The \emph{/} methods returns the index.html file which is the main page for the recommendation test website.
+  Additionally the \emph{/tagger} method returns the tagger.html website which is a website for testing the \emph{taggerService}.
+  The \emph{/calculate} method forwards the calculation requests that can be specified by a provided type parameter to the \emph{RecommendationService}.
+  For the types the client can use \emph{similarities}, \emph{recommendations} and \emph{recommendationsItemBased}.
+  If a client sends a request for similarities to the WebService the service starts the calculations for similar users and items on the RecommendationService the user id is not necessary for this request.
+  By sending the \emph{recommendations} type together with an user id to the \emph{/calculate} method the service sends a request to the RecommendationService for calculating all predictions for the items that the user has not yet rated.
+  The \emph{recommendationsItemBased} type has the same effect as the \emph{recommendations} type the only difference is that the predictions are calculated with the item based approach instead of the standard SVD based approach.
+  The \emph{/recommendation} method is usually called by an HTML website that expects a JavaScript code that is embedded into the page.
+  The method takes an user id, an amount and a list of tags as a parameter.
+  These data is forwarded to the recommendation system.
+  However the returned list of item recommendations is transformed into a HTML link for each recommendation.
+  These HTML links are embedded into a JavaScript code that is returned by the service.
+  This JavaScript code inserts all item links into a specified HTML Div container.
+  There are three \emph{/data} methods that are interfaces for reading, creating, updating and deleting entries in the database.
+  These interfaces are necessary for the backbone.js framework that is used for building the recommendation test website.
+  The first method that is called via a post request updates existing entries in the database or creates new entries for the provided parameter.  
+  The second method which is called via a get request reads data from the database.
+  The type that is provided as a parameter represents the database table from where the data should be read.
+  If an id is provided as a parameter the service returns the specific entry otherwise the service returns all entries from the database table.
+  The third method is accessible via a http delete method and must provide a type and an id.
+  The specific entry with the corresponding id from the database table that is specified by the type is deleted by the service.
+  The \emph{/rating} method forwards all request to the \emph{RatingService}.
+
+  \section{Service Relationships}
+  This section explains the relationships between the services.
+  The whole system can be separated into three use cases.
+  The first use case is the situation when a user visits an item page this situation is illustrated by a sequence diagram in figure ~\ref{seq:userVisits}.
+  The second use case is the situation when a user visits a website that recommends items to users this situation is described by the sequence diagram in figure ~\ref{seq:rec}.
+  The third use case is the situation when the system starts the calculation of the user and item similarities.
+  This situation is described by the sequence diagram in ~\ref{seq:calc}.
+
+  \subsection{User Visits Item Page}
+  The use case that occurs if a user visits an item page is illustrated in the sequence diagram in figure ~\ref{seq:rec}.
+  The web browser that executes the JavaScript code that is embedded in each item page sends the current information about the item and the user to the WebService.
+  However the web browser does not expect a response.
+  The WebService checks if the data is complete and forwards the request to the RatingService.
+  The sequence diagram from figure~\ref{seq:rec} represents the situation when the item and the user are unknown to the system.
+  Therefore the RatingService creates a new item and a new user.
+  Besides, the RatingService sends the text of the item together with its title to the TaggingService.
+  The TaggingService creates a Levenshtein distance automaton for each word in the text and requests all words that are included in the STW from the QuerySTWService.
+  These words are tested with the Levenshtein automatas each word that ends in a final state is returned in a list of tags.
+  Finally the returned tags are added to the newly created item.
+
+  Additionally the web browser sends periodically the time that the user spends on the website together with the time that the user has scrolled on the website to the WebService.
+  This data is needed to calculate the implicit user rating for the item.
+  The WebService forwards the request to the RatingService which updates the times in the database and calculates the new rating.
+
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{sequencediagram}
+    \newthread{wb}{Web Browser}
+    \newinst{ws}{WebService}
+    \newinst{rs}{RatingService}
+    \newinst{ts}{TaggingService}
+    \newinst{qs}{QuerySTWS.}
+
+    \begin{call}{wb}{Visits Item Page.}{ws}{}
+      \begin{call}{ws}{currentItem}{rs}{}
+        \begin{call}{rs}{tagText}{ts}{tags}
+          \begin{callself}{rs}{createItem}{}
+          \end{callself}
+          \begin{callself}{rs}{createUser}{}
+          \end{callself}
+          \begin{call}{ts}{runQuery}{qs}{labels}
+          \end{call}
+          \begin{callself}{ts}{Levenshtein}{tags}
+          \end{callself}
+        \end{call}
+      \end{call}
+    \end{call}
+    \begin{call}{wb}{calcRating}{ws}{}
+      \begin{call}{ws}{calcRating}{rs}{}
+        \begin{callself}{rs}{calcRating}{save rating}
+        \end{callself}
+      \end{call}
+    \end{call}
+  \end{sequencediagram}
+
+  \caption{User Visits Item Page Sequence Diagram}
+  \label{seq:userVisits}
+\end{figure}
+
+
+
+  \subsection{User Visits Recommendation Website}
+  This subsection describes the network communication between the services if a user visits a website that recommends items.
+  The sequence diagram in figure \~ref{rec} represents the network communication between the involved services.
+  The website that has to display the recommendations communicates with the system by including a JavaScript file from the system.
+  The path for this JavaScript file includes optional parameters namely the user id, the amount of recommendations and tags.
+  If the current user is not registered the system uses a standard user for generating recommendations.
+  The tags are used for filtering the items so that the recommended items match the subject of the website.
+  The web browser requests the JavaScript file from the WebService.
+  Which is basically the interface for external clients for the internal services.
+  Thus the WebService forwards the request to the RecommendationService.
+  This RecommendationService requests the recommendation calculation on the currently activated recommendation system which is in the sequence diagram the SVDBasedService.
+  Another option would be the ItemBasedService.
+  The SVDBasedService passes the tags to the TaggerService which translates them to the corresponding descriptors by communicating with the triple store via the QuerySTWService.
+  The latter returns the descriptors to the TaggerService which passes the returned descriptor list on to the SVDBasedService.
+  This SVDBasedService generates the item list which includes the items with the highest rating prediction for the current user that match the subject of the tags.
+  This item list is returned to the RecommendationService.
+  The RecommendationService hands the item list to the Webservice.
+  The WebService creates html links for each of the items in the list and embeds these links into the requested JavaScript file.
+  The web browser executes the JavaScript file and thus inserts the recommended item links into the website.
+
+
+%The http get and post request are the standard requests that are used by web
+%browsers to send data.
+%answer by http request respond
+%explain http
+
+\begin{figure}[h]
+  \centering
+
+  \begin{sequencediagram}
+    \newthread{wb}{Web Browser}
+    \newinst{ws}{WebService}
+    \newinst{rs}{Recom.Service}
+    \newinst{ss}{SVDB.Service}
+    \newinst{ts}{TaggingService}
+    \newinst{qs}{QuerySTWS.}
+
+    \begin{call}{wb}{gen.Recomm.}{ws}{Javascript}
+      \begin{call}{ws}{gen.Recomm.}{rs}{Predictions}
+        \begin{call}{rs}{gen.Recomm.}{ss}{Predictions}
+          \begin{call}{ss}{descriptorsTags}{ts}{descriptors}
+            \begin{call}{ts}{runQuery}{qs}{descriptors}
+            \end{call}
+          \end{call}
+          \begin{callself}{ss}{calculateRecommendation}{}
+          \end{callself}
+        \end{call}
+      \end{call}
+      \begin{callself}{ws}{convert Prediction to JS}{}
+      \end{callself}
+    \end{call}
+  \end{sequencediagram}
+  \caption{Embedded Recommendations Sequence Diagram}
+  \label{seq:rec}
+\end{figure}
+
+
+  \subsection{System Calculates Similarities}
+
+  The system requests the calculation of new similar user and similar item value from the RecommendationService.
+  The RecommendationService calculates the average user ratings and the average item ratings.
+  Additionally, the service requests the calculation of the user similarities by the SVDBasedService and the calculation of the item similarities by the ItemBasedService. 
+  Each of these services stores the calculated values in the database.
+  This should occur periodically every 24 hours to once a week depending on the frequency that the item catalog changes and the frequency that new user ratings are generated.
+
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{sequencediagram}
+    \newthread{system}{System}
+    \newinst{rs}{RecommendationService}
+    \newinst{ss}{SVDBasedService}
+    \newinst{is}{ItemBasedService}
+
+    \begin{call}{system}{startCalculation}{rs}{}
+      \begin{callself}{rs}{Calc. Avg. User rating}{}
+      \end{callself}
+      \begin{callself}{rs}{Calc. Avg. Item rating}{}
+      \end{callself}
+      \begin{call}{rs}{Calc. Sim. Users}{ss}{}
+      \end{call}
+      \begin{call}{rs}{Calc. Sim. Items}{is}{}
+      \end{call}
+    \end{call}
+  \end{sequencediagram}
+  \caption{System Calculates Similarities Sequence Diagram}
+  \label{seq:calc}
+\end{figure}
+
+
 
 \chapter{Evaluation}
+\label{chapter:evaluation}
 In this chapter the different concepts that are introduced in this thesis are evaluated.
 The first section deals with the rating concept and evaluates the quality of the ratings that are generated for the individual user interaction on a web page.
 The second section evaluates the time and the quality of the tagging concept by applying the tagging algorithm on texts with different word counts.
@@ -1763,7 +2220,7 @@ The computer that is used for testing this tagging algorithm is a \emph{Macbook 
       \hline
       \multicolumn{6}{|c|}{Tagging Algorithm Evaluation} \\ 
       \hline \hline
-      Words & STW & Non Matching & Matched Words & Levenshtein Automata Time & Total Time \\ \hline
+      Words & STW & Non Matching & Matched Words & Levenshtein Time & Total Time \\ \hline
       1 & 1 & 0 & 2 & 0.099 & 14.481 \\ \hline
       10 & 3 & 7 & 3 & 0.2843 & 20.348 \\ \hline
       100 & 30 & 70 & 54 & 0.4751 & 79.9616\\ \hline
@@ -1802,7 +2259,7 @@ The computer that is used for testing this tagging algorithm is a \emph{Macbook 
   Therefore the main focus in future works should not be to improve the performance of the creation process of the Levenshtein automata but to decrease the number of words in the tagging base.
 
 \section{Recommendation}
-\todo{state that each recommendation technique used almost the same prediction calculations}
+%\todo{state that each recommendation technique used almost the same prediction calculations}
 This section evaluates the different recommendation approaches that are explained in subsection 2.4.4.
 These different approaches are the item-based recommendation, the different singular valued decomposition (SVD) based recommendations, and the approach that is described in this thesis that uses item-based predictions to decrease the sparsity of the rating table and the SVD-based approach for recommendations.
 The evaluation process of the recommendation system contains two parts.
@@ -1859,7 +2316,7 @@ They explain this hypothesis with the reason that users tend to provide inconsis
 
   The \emph{Item Based} technology is the implementation of the item based recommendation approach that is part of the overall recommendation concept of this thesis.
   It has a mean absolute error of 0.83187 which is the second poorest mean absolute error of all tested technologies.
-  This is a surprising\todo{can I write this?} outcome of the evaluation it was expected that this technology would be more similar to the mean absolute error of the SVD based technologies. \todo{any reasons?}
+  This is a surprising \todo{can I write this?} outcome of the evaluation it was expected that this technology would be more similar to the mean absolute error of the SVD based technologies. %\todo{any reasons?}
   The offline computation time in this implementation consists of finding items that were rated by the same users and calculating the adjusted cosine similarity between those items.
   The adjusted cosine similarity is a special form of the cosine similarity.
   The cosine similarity for two items is calculated by applying the dot product between the rating vectors of the items and dividing the result by the Euclidean length of the rating vectors.
@@ -1949,17 +2406,87 @@ They explain this hypothesis with the reason that users tend to provide inconsis
   Therefore future works with the goal of optimizing collaborative recommendations should concentrate on the improvement of the prediction calculations.
   Finally the evaluation revealed that using the average user rating as a rating prediction can yield good and fast predictions if the user interest does not vary widely.
   Consequently this can be used for calculating rating predictions as part of recommendation systems if the use case of the system does not require highly optimized recommendations.
-  This evaluation should be repeated when the system is in productive usage and has collected the same amount of data that was used for this evaluation.
-  To check if the data for a specific use case reveal the same findings as this evaluation.
+  This evaluation should be repeated when the system is in productive usage and has collected the same amount of data that was used for this evaluation to check if the data for the specific use case of recommending questions and answers reveal the same findings as this evaluation.
 
 
-\chapter{Future Work}
-\section{Rating System}
-\section{Tagging Service}
-Direct implementation of the deterministic levenshtein automata, table based approach.
-Save levenshtein automatas from all \emph{STW Standard Thesaurus Economic} words with an appropriate datastructure.
-\section{Recommendation System}
 
+\chapter{Conclusion}
+%wiederhole die herausforderungen und ziele der arbeit und erklaere meine contribution to the field
+%section: what have i done and how und stelle dar wie diese geloest wurden
+%section: what are the main findings show links across the structure
+%section: future work
+%section: summary great original contribution highly significant
+%verdeutliche den teil den du selbst gemach hast und stelle die ergebnisse dar
+  The focus of this thesis is the development of a recommendation system for user generated content.
+  These recommendations should match the user interest and the context of the website on which they are included.
+  For this focus it is important to analyze the user generated content for quality and to identify the subject of the content automatically.
+  Hence, user interactions that can occur on a website are evaluated to be able to tell if a user is interested in the content.
+  Based on the research of \citet{claypool2001} the time a user spends on a website and the time a user scrolls on a website are chosen for generating implicit user ratings.
+  These two user interactions correspond about 70\% of the time with the explicit ratings of a user.
+  The times of each of these interactions are used separately for creating a scale that expresses user ratings by these times.
+  The average of these two ratings is then used as the total rating.
+  This concept is evaluated with simulated user interactions.
+  The result of this simulation displays that the two separate ratings agree with the findings of \citet{claypool2001}.
+  Besides the total ratings are as expected.
+  However for this part of the thesis a field test in the future would be a good idea to adjust the formula according to the use case.
+  %unterschiedliche concepte zum approximativen string matchen wurden discussed 
+  %die idee des levenshtein automata wurde aufgegriffen und in das gesamt concept integriert hierfuer wurden maximale word distancen selectiert in abhaengigkeit der wortlaenge
+  The identification of the subject of the user generated content is based on matching the words of the content with words from a thesaurus.
+  For this task different error allowing string matching methods are evaluated. 
+  The chosen concept is the \emph{levenshtein automata} which is a special automata for approximate string matching.
+  Based on the work of \citet{schulz2002} the algorithm for a deterministic levenshtein automata is integrated into the overall concept.
+  Besides, a concept for finding the maximum \emph{levenshtein distance} for a word depending on its length is introduced in this thesis.
+  This is important because a word with a small word size can not be handled the same way as a word with a long size.
+  The smaller word needs a smaller distance otherwise it would generate too many false matches.
+  This word match algorithm is used to find the keywords of a text and to use them as tags.
+  This enables the system to presort the content by the keywords before recommending it on a website. 
+  The tagging process is evaluated by using texts with a different amount of words.
+  Each of those texts has 30\% words that should match with the words in the thesaurus however most of the words are in a different form or spelling mistakes are inserted.
+  So, the evaluation process checks how many words are found and how long does the algorithm need.
+  In three of four tests more words were returned than the algorithm should have matched.
+  This is mostly due to the reason that most words in the thesaurus are included in the German and English language and that some of those words are quite similar.
+  Consequently the algorithm returns the English and the German word.
+  Other false matches occurred because the thesaurus included words that were too similar and thus the algorithm returned both of these words.
+  Therefore a future optimization is to reduce the size of the tagging base which would not just reduce the occurrence of false matches but would also decrease the time that the algorithm needs to find the matches.
+  Another possible future work is to decide whether the text is in the German or English language and to use only the words from the corresponding language as a tagging base.
+  In addition, different types of recommender systems are discussed.
+  The conclusion of this discussion is that for the use case of recommending user generated content a collaborative recommendation system would be the best approach.
+  Two existing collaborative recommendation techniques are explained namely the \emph{item based} technique and a recommendation technique based on \emph{singular value decomposition}.
+  These techniques are combined into a new recommendation concept which is introduced in this thesis.
+  This concept uses the \emph{item based} approach for decreasing the scarcity of the rating matrix which is used for the calculation of the \emph{singular value decomposition}.
+  This recommendation system uses the ratings that are generated with the user interactions on the website and the tags that are generated with the help of the \emph{levenshtein automata} to recommend user individual matching content that is interesting for the current user.
+  The evaluation of the recommendation system showed that the new recommendation concept creates better prediction than the two techniques on their own.
+  Though, the calculation time increased drastically and the prediction was slightly better than a prediction that uses average ratings for decreasing the sparsity of the rating matrix for the singular value decomposition.
+  Consequently future works with the goal of improving the recommendation system should use the \emph{singular value decomposition} that uses average ratings and concentrate on the prediction calculation for improvements.
+  Moreover the evaluation showed that the method of using only average ratings for recommendation can create good rating predictions.
+  Thus, systems that do not have a need for using highly optimized recommendations could use this method for creating recommendations.
+
+\section{Future Work}
+The implemented system is fully functional and can be used for the purpose it is intended to be.
+However each of the single parts might have the possibility of improvements.
+The following subsections are suggestions on how the system might be enhanced in the future.
+\subsection{Rating System}
+The evaluation of the rating system denotes that the implicit ratings should approximately mirror the real user interest.
+However due to the shortness of time it was not possible to conduct a field experiment to test the assumptions.
+Such a field experiment would be desirable and might lead to further improvements.
+One possible improvement that could be tested would be to to weight the two single ratings that result out of the time a user spends on a website and the time a user scrolls on a website during the average calculation phase by the difference of their times to the truncated mean time.
+\subsection{Tagging Service}
+The evaluation of the tagging service suggests that the process can be improved by decreasing the tagging base.
+This might be done by automatically detecting the language of the content and only using the words of that language for generating tags.
+% Direct implementation of the deterministic levenshtein automata, table based approach.
+% Save levenshtein automatas from all \emph{STW Standard Thesaurus Economic} words with an appropriate datastructure.
+\subsection{Recommendation System}
+The evaluation of the recommendation techniques yield that the best recommendation approach of the implemented recommendation systems for a productive system is the \emph{singular value decomposition} with the use of average ratings for the empty entries in the rating matrix.
+Furthermore the evaluation suggests to concentrate future improvements on the calculation of the rating predictions instead of the calculation of the user similarities.
+Thus, it might improve the prediction calculation by weighting the ratings for the calculation based on the difference to the average rating.
+This should on the one hand reduce the importance of ratings on which most user agree upon and on the other hand should increase the importance of the items that are more diverse.
+Consequently the predictions should be more individual for the single user.
+  %entwicklung eines empfehlungssystems welches speziell fuer diesen anwendungszweck entwickelt wurde 
+  %dieses system muss schnell listen von empfehlungen generieren koennen diese muessen nach interesse und zugehoerigkeit ausgewaehlt werden.
+  %ein solches system wurde konzipiert und umgesetzt
+
+  %dieser focus macht es noetig das der content des recommendation system sich selbst verwalten koennen muss
+  %dh die qualitaet sollte durch die mach der vielen sicher gestellt werden und der inhalt des contents sollte automatisch erfasst werden koennen.
 \appendix
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

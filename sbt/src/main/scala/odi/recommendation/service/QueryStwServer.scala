@@ -41,13 +41,14 @@ object QueryStwServer extends HttpServer {
   private
 
   def getStwPrefLabel(value: String): String = {
-    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE { {?s skos:prefLabel '"+value+"'@de} UNION{?s skos:altLabel '"+value+"'@de}} LIMIT 10"
+    //val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE { {?s skos:prefLabel '"+value+"'@de} UNION{?s skos:altLabel '"+value+"'@de}} LIMIT 10"
+    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE {?s skos:prefLabel '"+value+"'@de} LIMIT 10"
     println(sparql)
     runQueryOn4Store(sparql)
   }
 
   def getStwTag(value: String): String = {
-    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE {<http://zbw.eu/stw/descriptor/"+value+"> skos:prefLabel ?o} LIMIT 10"
+    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE {<http://zbw.eu/stw/descriptor/"+value+"> skos:prefLabel@de ?o} LIMIT 10"
     val result = runQueryOn4Store(sparql)
     result
   }

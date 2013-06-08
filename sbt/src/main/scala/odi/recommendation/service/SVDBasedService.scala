@@ -81,6 +81,7 @@ object SVDBasedService extends HttpServer with ListOperation {
     **/
 
   def postGenerateRecommendations(args: Array[String], value: String): Future[HttpResponse] = {
+    val time = System.nanoTime
     if(args.length > 1) {
       val userId = if(args(0).toInt > 0) { 
         val user = Users.byQUserId(args(0).toInt) 
@@ -96,6 +97,7 @@ object SVDBasedService extends HttpServer with ListOperation {
       }
       val amount = args(1).toInt
       val predictions = collection.mutable.HashMap[Int, List[(Int, Int, Double)]]()
+      println("Time before stw: "+(System.nanoTime - time))
       val prefLabels = if(value.size > 0) {
         val prefLabelsFuture = tagClient.post("/prefLabelsTags", value)
         Json.jsonToList(prefLabelsFuture.get()) // get shouldnt matter the tags to pref labels is fast
@@ -103,6 +105,7 @@ object SVDBasedService extends HttpServer with ListOperation {
       else {
         List[String]()
       }
+      println("Time after stw: "+(System.nanoTime - time))
 
       for(s <- SimilarUsers.byUserId(userId, 25)){
         val (similarUserId, similarity) = s.similarityByUserId(userId).get
@@ -120,6 +123,7 @@ object SVDBasedService extends HttpServer with ListOperation {
           }
         }
       }
+      println("Time before calculate prediction: "+(System.nanoTime - time))
 
         //get top amount rated items
 
@@ -129,6 +133,7 @@ object SVDBasedService extends HttpServer with ListOperation {
           List(item.title, item.url, i._2.toString)
       })
       println("predictions: "+itemPredictions)
+      println("Time after calculate prediction: "+(System.nanoTime - time))
       Future.value(createHttpResponse(Json.toJson(itemPredictions)))
     }
     else {

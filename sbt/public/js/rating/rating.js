@@ -102,6 +102,8 @@
         window.visibleTime += (new Date().getTime() - timer);
         timer = new Date().getTime();
         sendData(window.visibleTime, window.scrollTime);
+        window.visibleTime = 0;
+        window.scrollTime = 0;
       }
       window.setTimeout(sendDataTimer, 2000);
     }; 
@@ -114,7 +116,14 @@
 
     
 (function() {
+  var setCookie = function(cookieName, cookieValue) {
+    var date =new Date();
+    date.setMonth(date.getMonth()+12);
+    document.cookie = cookieName+"="+ cookieValue +";expires="+ date+";path=/"
+  }
+
   var sendInitialItem = function() {
+    setCookie('user_id', _rating['user']);
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -136,10 +145,14 @@
  
 
   if(document.readyState === "complete") {
+    alert("complete")
     sendInitialItem();
   }
   else {
-    window.addEventListener("onload", function () {sendInitialItem()}, false);
+//  window.onload = sendInitialItem()
+  window.addEventListener("DOMContentLoaded", function () {sendInitialItem()}, false);
+//  window.addEventListener("onload", function () {alert("onload")}, false);
   }
+
 })();
 

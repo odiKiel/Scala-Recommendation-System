@@ -3,7 +3,7 @@ package odi.recommendation
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.Http
 import com.twitter.util.{Promise, Future}
-import org.jboss.netty.handler.codec.http.{HttpResponseStatus, DefaultHttpResponse, DefaultHttpRequest, HttpRequest, HttpResponse, HttpVersion, HttpMethod, HttpHeaders}
+import org.jboss.netty.handler.codec.http.{HttpResponseStatus, DefaultHttpResponse, DefaultHttpRequest, HttpRequest, HttpResponse, HttpVersion, HttpMethod, HttpHeaders, CookieDecoder, Cookie}
 import java.net.{SocketAddress, InetSocketAddress}
 import com.twitter.finagle.builder.{Server, ServerBuilder}
 import com.twitter.finagle.builder.ClientBuilder
@@ -12,6 +12,7 @@ import com.twitter.finagle.http.Method
 import org.jboss.netty.buffer.ChannelBuffers
 import org.jboss.netty.buffer.ChannelBuffer
 import java.nio.charset.Charset
+import scala.collection.JavaConversions._
 
 import scala.reflect._ //beanproperty
 
@@ -23,6 +24,11 @@ trait HttpServer {
     new Service[HttpRequest, HttpResponse] {
       def apply(request: HttpRequest): Future[HttpResponse] = {
         val r = new Promise[HttpResponse]
+        val value = request.getHeader("Cookie")
+        if(value != null) {
+          cookies = new CookieDecoder().decode(value).toSet;
+        }
+      
         val responseFuture: Future[HttpResponse] = routing(request) 
         responseFuture onSuccess { response => 
           r.setValue(response)
@@ -33,6 +39,7 @@ trait HttpServer {
   }
 
 
+  var cookies = Set[Cookie]()
   var portServer = 0
   var running = false
   @BeanProperty // generates getServer() setServer() methods
@@ -61,7 +68,7 @@ trait HttpServer {
   //val hosts = Map("updateService" -> "localhost:11000", "requestService" -> "localhost:12000")
   //use put like post
   def routing(request: HttpRequest): Future[HttpResponse] = {
-    println("new request: "+request)
+    //println("new request: "+request)
     val path = request.getUri().substring(1).split("/") // remove leading / and split
     request.getMethod() match {
       case Method.Post => callPostMethod(path, request.getContent().toString("UTF-8"))

@@ -1,5 +1,5 @@
 package odi.recommendation
-import org.jboss.netty.handler.codec.http.{HttpRequest, HttpResponse}
+import org.jboss.netty.handler.codec.http.{HttpRequest, HttpResponse, Cookie}
 import com.twitter.finagle.http.Method
 import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
@@ -15,6 +15,7 @@ object WebService extends HttpServer {
   implicit val formats = DefaultFormats 
   val recommendationServer = RecommendationService(Services("recommendationService").toInt)
   val recommendationClient = new HttpClient("localhost:"+Services("recommendationService"))
+  val ratingServer = RatingService(Services("ratingService").toInt)
   val ratingClient = new HttpClient("localhost:"+Services("ratingService"))
 
   def apply(port: Int): Int = {
@@ -53,7 +54,12 @@ object WebService extends HttpServer {
 
 
   def forwardToRating(args: Array[String], value: String): Future[HttpResponse] = {
-    Future.value(createHttpResponse(ratingClient.post("/"+args.head+"/"+args.tail.mkString("/"), value).get))
+    val ret = new Promise[HttpResponse]
+    ratingClient.post("/"+args.head+"/"+args.tail.mkString("/"), value) onSuccess{returnValue =>
+      ret.setValue(createHttpResponse(returnValue))
+    }
+      
+    ret
   }
 
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
@@ -69,8 +75,11 @@ object WebService extends HttpServer {
   }
 
   def getRecommendations(args: Array[String]): Future[HttpResponse] = {
-    val tags = args.drop(2)
-    val recommendationsJson = recommendationClient.post("/generateRecommendations/"+args(0)+"/"+args(1), Json.toJson(tags)).get()
+    val userIdCookie = cookies.find(cookie => cookie.getName() == "user_id")
+    val userId = if(userIdCookie == None) 0 else userIdCookie.get.getValue().toInt
+    println("userId: "+userId)
+    val tags = args.drop(1)
+    val recommendationsJson = recommendationClient.post("/generateRecommendations/"+userId+"/"+args(0), Json.toJson(tags)).get()
     val recommendations = Json.jsonToLists(recommendationsJson)
     val links = recommendations.map(entry => "<a href ='"+entry(1)+"'>"+entry(0)+" Prediction: "+entry(2)+"</a>")
     println("recommendations: "+recommendations)

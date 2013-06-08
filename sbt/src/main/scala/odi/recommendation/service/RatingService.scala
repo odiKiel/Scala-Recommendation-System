@@ -54,7 +54,7 @@ object RatingService extends HttpServer {
       }
       if(item == None) {
         val list = Json.jsonToList(value)
-        if(list.length == 4) {
+        if(list.length == 3) {
           createItem(args(0).toInt, list(0), list(1), list(2))
         }
         else {
@@ -96,7 +96,7 @@ object RatingService extends HttpServer {
   /** creates a new item for the new question */
   def createItem(itemId: Int, text: String, title: String, url: String) = {
     println("trying to create item")
-    val item = Items.create(Item(None, title, 0.0, url, itemId, 0.0, 0.0, 0))
+    val item = Items.create(Item(None, title, 0.0, url, itemId, 20763, 5339, 11))
     tagClient.post("/prefLabelText", text) onSuccess {response => {
       val prefLabels = Json.jsonToList(response)
       prefLabels.foreach(prefLabel => item.addTag(prefLabel))

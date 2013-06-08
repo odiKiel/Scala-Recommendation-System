@@ -21,16 +21,15 @@ object TaggerService extends HttpServer {
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case "tagText" => postTagText(path.tail, value)  //returns the tags for a text
-      case "prefLabelText" => postPrefLabelText(path.tail, value) //returns the tags for a text
-      case "tagsPrefLabels" => postTagsPrefLabels(path.tail, value)  //returns the prefLabels for tags
-      case "prefLabelsTags" => postPrefLabelsTags(path.tail, value) //ruturns the tags for pref labels
+      case "prefLabelText" => postPrefLabelText(path.tail, value) //returns the preferred labels for a text
+      case "tagsPrefLabels" => postTagsPrefLabels(path.tail, value)  //returns the tags for the preferred labels
+      case "prefLabelsTags" => postPrefLabelsTags(path.tail, value) //ruturns the preferred labels for the tags
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
 
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
-      case "tagWord" => getTagWord(path(0).toString)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
@@ -79,22 +78,22 @@ object TaggerService extends HttpServer {
   }
 
   def generatePrefLabelForTags(tags: List[String]): List[String] = {
+    println("generatePrefLabels!!!")
     tags.flatMap(tag => {
         //queryStwClient.get("/prefLabels/"+tag)
-        QueryStwServer.findPrefLabel(tag) // speed hack only works if TaggerService and QuerySTw run on the same server
+        val time = System.nanoTime
+        println("Time before query: "+(System.nanoTime - time))
+        val result = QueryStwServer.findPrefLabel(tag) // speed hack only works if TaggerService and QuerySTw run on the same server
+        println("Time after query: "+(System.nanoTime - time))
+        result
       }).distinct
   }
 
 
-  def getTagWord(value: String): Future[HttpResponse] = {
-    //run levenshtein distance algorithm with the word and all stw thesaurus words
-    Future.value(createHttpResponse("string"))
-  }
-
   //only use runQueryWithPagination query with ORDER BY
 
   //Im working with Json strings!
-  val query = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT ?q WHERE { ?s ?p ?q FILTER(?p = skos:prefLabel || ?p = skos:altLabel)} ORDER BY ?p"
+  val query = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT ?q WHERE { ?s ?p ?q FILTER(?p = skos:prefLabel || ?p = skos:altLabel)} ORDER BY ?q"
   val pagination = 1000
 
   def tagText(text: String): Future[Seq[String]] = {

@@ -1,8 +1,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {algorithm}{\numberline {1}{\ignorespaces Recursive Levenshtein Distance Algorithm}}{10}{algorithm.1}
-\contentsline {algorithm}{\numberline {2}{\ignorespaces Levenshtein Automata is in distance}}{15}{algorithm.2}
+\contentsline {algorithm}{\numberline {1}{\ignorespaces Recursive Levenshtein Distance Algorithm}}{11}{algorithm.1}
+\contentsline {algorithm}{\numberline {2}{\ignorespaces Levenshtein Automaton is in distance}}{16}{algorithm.2}
 \addvspace {10\p@ }
-\contentsline {algorithm}{\numberline {3}{\ignorespaces Item Similarity Calculation}}{31}{algorithm.3}
+\contentsline {algorithm}{\numberline {3}{\ignorespaces Item Similarity Calculation}}{34}{algorithm.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
