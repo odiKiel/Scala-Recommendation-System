@@ -11,7 +11,7 @@ object TaggerService extends HttpServer {
 
   val queryStwClient = new HttpClient("localhost:"+Services("queryStwServer"))
   val levenshteinDistanceClient = new HttpClient("localhost:"+Services("levenshteinDistanceService"))
-  val taggerPool = FuturePool(Executors.newFixedThreadPool(4))
+  //val taggerPool = FuturePool(Executors.newFixedThreadPool(4))
 
   val name = "TaggerService"
 
@@ -39,6 +39,7 @@ object TaggerService extends HttpServer {
     println(value)
     val r = new Promise[HttpResponse]
     tagText(value) onSuccess { tags => 
+      println(tags)
       r.setValue(createHttpResponse(Json.toJson(tags.toList)))
     }
     r
@@ -48,6 +49,7 @@ object TaggerService extends HttpServer {
     val r = new Promise[HttpResponse]
     tagText(value) onSuccess { tags => 
       val prefLabels = generatePrefLabelForTags(tags.toList)
+      println("done with pref labels: "+prefLabels)
   
       //r.setValue(createHttpResponse(Json.toJson(Future.collect(prefLabelFuture).get())))
       r.setValue(createHttpResponse(Json.toJson(prefLabels))) // speed hack only words if TaggerService and QuerySTw run on the same server

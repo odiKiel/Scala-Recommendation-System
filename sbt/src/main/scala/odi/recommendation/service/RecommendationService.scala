@@ -35,10 +35,11 @@ object RecommendationService extends HttpServer {
    run this query every 24h
    calculate similar users and similar items save them in SimilarUsers and SimilarItems
    calculate average rating
-        Users.calculateAverageRating
    */
   def getCalculateSimilarities(path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
+    Users.calculateAverageRating
+    Items.calculateAverageRating
     itemClient.get("/calculateSimilarItems/") onSuccess { value =>
       val displayMatrix = if(path.size > 0 && path.head == "matrix") "matrix" else ""
       svdClient.get("/calculateSimilarUsers/"+displayMatrix) onSuccess { v =>

@@ -66,6 +66,7 @@ object WebService extends HttpServer {
     path.head match {
       case "" => getFile(Array("index.html"))
       case "tagger" => getFile(Array("tagger.html"))
+      case "recommend" => getFile(Array("recommendation.html"))
       case "data" => getData(path.tail)
       case "file" => getFile(path.tail)
       case "calculate" => getCalculation(path.tail)
@@ -75,19 +76,24 @@ object WebService extends HttpServer {
   }
 
   def getRecommendations(args: Array[String]): Future[HttpResponse] = {
+    val ret = new Promise[HttpResponse]
     val userIdCookie = cookies.find(cookie => cookie.getName() == "user_id")
     val userId = if(userIdCookie == None) 0 else userIdCookie.get.getValue().toInt
     println("userId: "+userId)
     val tags = args.drop(1)
-    val recommendationsJson = recommendationClient.post("/generateRecommendations/"+userId+"/"+args(0), Json.toJson(tags)).get()
-    val recommendations = Json.jsonToLists(recommendationsJson)
-    val links = recommendations.map(entry => "<a href ='"+entry(1)+"'>"+entry(0)+" Prediction: "+entry(2)+"</a>")
-    println("recommendations: "+recommendations)
-    val source = scala.io.Source.fromFile("public/js/rating/recommend.js")
-    val lines = source.getLines mkString "\n"
-    source.close()
-    val js = lines.format(links.mkString("</br>"))
-    Future.value(createHttpResponse(js))
+    recommendationClient.post("/generateRecommendations/"+userId+"/"+args(0), Json.toJson(tags)) onSuccess { recommendationsJson => 
+    //val recommendationsJson = .get()
+      val recommendations = Json.jsonToLists(recommendationsJson)
+      val links = recommendations.map(entry => "<a href ='"+entry(1)+"'>"+entry(0)+" Prediction: "+entry(2)+"</a>")
+      println("recommendations: "+recommendations)
+      val source = scala.io.Source.fromFile("public/js/rating/recommend.js")
+      val lines = source.getLines mkString "\n"
+      source.close()
+      val js = lines.format(links.mkString("</br>"))
+      ret.setValue(createHttpResponse(js))
+    }
+    //Future.value(createHttpResponse(js))
+    ret
   }
 
   def getCalculation(path: Array[String]): Future[HttpResponse] = {
@@ -171,7 +177,7 @@ object WebService extends HttpServer {
   }
 
   override def routing(request: HttpRequest): Future[HttpResponse] = {
-    println("new request: "+request)
+    //println("new request: "+request)
     val path = request.getUri().substring(1).split("/") // remove leading / and split
     request.getMethod() match {
       case Method.Post => callPostMethod(path, request.getContent().toString("UTF-8"))

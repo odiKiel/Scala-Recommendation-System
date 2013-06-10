@@ -30,6 +30,7 @@ case class Item(id: Option[Int] = None, title: String, averageRating: Double, ur
   }
 
   def addTag(prefLabel: String) = {
+    println("addTag: "+prefLabel)
     val tag = Tags.byPrefLabel(prefLabel)
     ItemTags.create(ItemTag(None, id.get, tag.id.get))
   }

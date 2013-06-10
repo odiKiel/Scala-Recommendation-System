@@ -96,11 +96,12 @@ object RatingService extends HttpServer {
   /** creates a new item for the new question */
   def createItem(itemId: Int, text: String, title: String, url: String) = {
     println("trying to create item")
-    val item = Items.create(Item(None, title, 0.0, url, itemId, 20763, 5339, 11))
-    tagClient.post("/prefLabelText", text) onSuccess {response => {
+    val item = Items.create(Item(None, title, 0.0, url, itemId, 20763, 5339, 11)) //the last three numbers are for testing purpose only otherwise the system need at least three ratings befor it recommends this item
+    tagClient.post("/prefLabelText", text) onSuccess {response => 
+      println("descriptor: "+response)
       val prefLabels = Json.jsonToList(response)
       prefLabels.foreach(prefLabel => item.addTag(prefLabel))
-    }}
+    }
     Future.value(createHttpResponse("Item created"))
   }
 

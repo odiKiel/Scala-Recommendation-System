@@ -41,8 +41,9 @@ object QueryStwServer extends HttpServer {
   private
 
   def getStwPrefLabel(value: String): String = {
-    //val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE { {?s skos:prefLabel '"+value+"'@de} UNION{?s skos:altLabel '"+value+"'@de}} LIMIT 10"
-    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE {?s skos:prefLabel '"+value+"'@de} LIMIT 10"
+    val requestValue = value.capitalize
+    //val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE { {?s skos:prefLabel '"+requestValue+"'@de} UNION{?s skos:altLabel '"+requestValue+"'@de}} LIMIT 10"
+    val sparql = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX xml: <http://zbw.eu/stw/> SELECT * WHERE {?s skos:prefLabel '"+requestValue+"'@de} LIMIT 10"
     println(sparql)
     runQueryOn4Store(sparql)
   }

@@ -265,17 +265,20 @@ This process involves three different types of research areas.
 
 First, the generation of implicit user ratings by analyzing user interactions on a website.
 This part of the thesis involves the discussion of different user interactions on a website.
-For the two interactions that correspond the most with explicit ratings of a user a rating scale is created that enables the transformation of user interactions into implicit ratings.
+The two interactions that correspond the most with explicit ratings are \emph{the time a user spends on a website} and \emph{the time a user scrolls on a website}.
+For the two times a scale is created that enables the transformation of user interactions into implicit ratings.
 
 The second research area is approximate string matching which is the matching of strings even if the words are slightly different.
 This technology is used for categorizing the user generated content by its keywords.
 This part of the thesis involves the analysis of different techniques that can be used for such a process.
-The technique of the \emph{levenshtein automaton} is explained in more detail and a range is created that expresses how different words are allowed to be in order to be accepted as a match.\todo{improve this sentence}
+The technique of the \emph{levenshtein automaton} is explained in more detail.
+Besides, a range is created that expresses how diverse words are allowed to be in order to be accepted as a match.
 
 The last research area is the field of recommendation systems.% generating implicit user ratings, developing a recommendation system
 The different types of recommendation systems are discussed in this part.
 Moreover a new technique is introduced that combines two well known recommendation techniques to improve the rating predictions.
-This system is implemented with a service oriented architecture so, that every component of the system can be exchanged with different alternatives or parts can be used to extend existing systems.
+This system is implemented with a service oriented architecture so, that every component of the system can be exchanged with different alternatives.
+Furthermore services can be used to extend existing systems.
 This leads to a considerable amount of flexibility and expandability.
 
 %With this content websites can add additional benefit for users to their content den unbenutzten content um webseite zu bereichern und user engagement zu erhoehen.
@@ -293,8 +296,8 @@ This leads to a considerable amount of flexibility and expandability.
 \chapter{Introduction}
 %user generated content is important and the systems should involve it more in their pages ka 
   %Herausforderungen/Ziele
-  Since the creation of the term Web 2.0 the internet is about user generated content and communities.
-  More and more website operators are adding methods to their sites with the goal of increasing the user engagement by allowing users to actively contribute to the content of the website.
+  Since the creation of the term \emph{Web 2.0} the internet is full of user generated content and communities.
+  More and more website operators are adding methods to their sites which have the goal to increase the user engagement by allowing users to actively contribute to the content of the website.
   However, as more and more content is produced most of the user contributed content will remain unseen.
   The value of a website is the benefit that it brings to its users.
   Therefore every content that includes valuable information must be presented to users that might be interested in it. 
@@ -304,11 +307,16 @@ This leads to a considerable amount of flexibility and expandability.
   Though, the quality of the content that is produced by users may vary widely.
   Moreover, the context of the user generated content can be inappropriate to the current subject of the page.
   Thus there is a need for a system that is able to identify the interest of a user and the context of the user generated content.
+  Such a system is developed in this thesis.
+  This development includes the categorizing of the content by its keywords by matching the words of the content with words from a \emph{thesaurus}.
+  This process should work even if the words have spelling mistakes or are in a different form than the words of the \emph{thesaurus}.
+  Additionally a concept is developed and implemented that generates implicit user ratings for the content by analyzing the user interactions on the website of the content.
+  Finally a recommendation system is introduced and evaluated that combines two different well known recommendation techniques for improving the prediction accuracy.
+  %main contributions creating a scale that maps user interactions to ratings, range for the maximum divesity of words based on word length and creating a new recommendation system based on two well known concepts
 
 
-  With these information contributed content that is interesting for the current user could be added individually on websites with matching subject.
+  %With these information contributed content that is interesting for the current user could be added individually on websites with matching subject.
   %derzeitiger stand \dots
-  This thesis deals with the development of a system that can %match content, generate implicit ratings, recommend stuff on pages
 
 %existing website adding new methods for user engagement
 %the resulting user generated content can be used for enriching the existing website
@@ -326,10 +334,16 @@ This leads to a considerable amount of flexibility and expandability.
 %discuss qa system, rating system, tagging system, item based, svd based, bringing it all together, display recommendations on a website
 
 \section{Related Work}
-This thesis combines different fields of research namely the field of recommender systems, the field of collecting implicit user ratings and the field of string matching techniques.
+This thesis combines different fields of research areas namely the field of recommender systems, the field of collecting implicit user ratings and the field of string matching techniques.
+Thus the following papers are related to one ore more of the research fields that are treated in this thesis.
 The team of \citet{claypool2001} developed a web browser that collects user interactions on a website.
 This browser asks the user when he leaves a website for his rating for the site.
 They conducted a field experiment with 75 students that rated 1823 websites and analyzed the correlation between the explicit ratings and the implicit user interactions.
+Another paper in the field of implicit feedback is written by \citet{Joachims:2005:AIC:1076034.1076063}.
+In this paper \citet{Joachims:2005:AIC:1076034.1076063} analyze the behaviour of users with eye tracking technology before they click on links in a search result.
+Hereby they discover that users tend to click on links more frequently if they are relevant to their current interest.
+However the users tend to be biased by the trust in the search engines and tend to click more often on the highest ranking links.
+Thus they found out that it is difficult to interpret clicks as absolute feedback.
 The paper \emph{Personalized news recommendation based on click behavior} written by \citet{Liu:2010:PNR:1719970.1719976} analyzed the click behavior of Google news users to find out how the interest of the users changed over time to predict the current and future interest depending on the clicks of similar users.
 They tested the developed system in production mode and found out that the traffic of the \emph{Google News} website increased because of the improved recommendation system.
 The team of \citet{sarwar2001} introduces their invention of the \emph{item-based} recommendation algorithm.
@@ -353,15 +367,14 @@ The same authors wrote a paper about an \emph{universal levenshtein automata} - 
 \section{Challenges}
   The focus of this work is the development of a recommendation system for user generated content.
   One challenge of such a system is that no trustworthy information about the quality or context of the user generated content is available.
-  Hence, a concept must be created that treats the finding of keywords in this content. %zum einen
+  Hence, a concept must be created that treats the finding of keywords to represent the content. %zum einen
   These keywords should be found by matching the content with the words from a thesaurus even if the words have spelling mistakes or are in a different form.
   Additionally the concept must include the generation of user ratings for this content to be able to predict how interesting the content is for the user.
   This rating generation should work by automatically analysing the user interactions on the website that presents the content.
   Therefore the user experience of the website is not disturbed by explicitly asking for the users opinion.
   Another challenge is to use the rating and keyword information to generate content recommendations for users based on their interest.
   This concept should be implemented into a system that can be used as an ad on for existing systems.
-  Moreover each component should be usable as a standalone system to extend existing systems.
-  Finally the developed system has to be evaluated to see if the requirements are fulfilled and to propose offers for future work.
+  Moreover each component should be usable as a standalone system to extend existing technologies.
   
   
 
@@ -386,7 +399,7 @@ The next section examines the methods of string matching that allows a system to
 Additionally this section introduces the technique that is used in the developed system for finding the keywords in the user generated content that is collected by the \emph{Question and Answer} website.
 In the last section different types of recommendation systems are considered and the concept of \emph{collaborative filtering} is explained in more detail.
 Likewise the new concept of recommending user generated content based on a combination of \emph{item} - and \emph{singular value decompositon} - based methods is explained.\\
-Chapter~\ref{chapter:implementation} starts with a section about the presentation of the technologies that are used for implementing the previously developed concept.
+Chapter~\ref{chapter:implementation} starts with a section about the presentation of the technologies that are used for implementing the developed concept.
 Alongside, with a description of the service oriented software architecture and an insight into the implementation as well as the relationships of the single services.\\
 Chapter~\ref{chapter:evaluation} evaluates the implemented rating, tagging and recommendation concepts.
 This chapter is divided into three sections.
@@ -411,26 +424,26 @@ The second section is about the differences between implicit and explicit rating
 Moreover this section describes the implemented concept of collecting implicit ratings.
 The third section treats the automated tagging process that is used to connect the questions and answers with the recommendation system.
 The fourth section is a discussion about the different types of recommendation systems.
-This leads to the analysis of the different techniques of collective recommendations and explains how these techniques are used in the final system.
-Finally the last section presents the relationship of the individual concepts from the previous sections.
+This leads to the analysis of the different techniques of \emph{collective recommendations} and explains how these techniques are used in the final system.
+Finally the last section presents the relation between the individual concepts from the previous sections.
 \section{Question and Answer Site}
 %also known as social or collaborative \emph{Question and Answer} website.
 A question and answer site is a website that has only one focus namely getting the right answer for a question.
-Therefore a user can ask a question. 
-This question should be precise enough and include all information that another user needs to be able to write a correct answer to the question without asking for more details.
+That means that a user can ask a question and that this question should be precise enough and include all information that another user needs to be able to write a correct answer to the question without asking for more details.
 So, it is not a discussion forum but a website in which every answer only refers to the original question.
 Then the user who started the question can mark one answer as correct.
 This question and answer site should make the information retrieval process on a website publicly accessible.
 Therefore all users are able to read all questions and answers and can support domain experts by answering questions.
-For each question on the site there is exactly one answer marked as correct, thus, it is possible to recommend the questions with the correct answers to users who visit a website with the same subject.
-This recommendation process should increase the user interaction with the website.
+For each question on the site there is exactly one answer marked as correct, thus, it is possible to recommend the questions with the correct answers to users who visit a website with the same or similar subject.
+This recommendation process should increase the user interaction on the website.
 Moreover, it should help the user to understand the content which he is interested in.
 Such question and answer sites are widely spread on the internet and there exists a couple of open source implementations that can be used for free.
 Some of such open source implementations are askbot.com, discourse.org, lampcms.com and osqa.net.
 They all work and almost look the same.
 However, they use different technologies and some are more mature than others.
-The open source variant that is in use for the implemented system is askbot.com.
+The open source variant that has been decided to be used for the implemented system is askbot.com.
 It is build with the \emph{django web framework} and actively maintained since 2011.
+Though, the system is implemented the way that every other question and answer site can be used as well.
 %\todo{why did I choose askbot some screenshots}
 
 %explain the function and idea of a qa system, explain askbot, explain why you choosed askbot and how to integrate it.
@@ -445,25 +458,27 @@ The latter are those in which a user is explicitly asked for his opinion on a sp
 Implicit ratings are those in which a system generates a rating according to the actions of a user.
 Anyhow, according to the book \emph{recommender systems an introduction} [\citet{recommender2011}] the explicit user ratings are usually not well accepted if a direct benefit is not visible to the user. 
 Furthermore, the explicit ratings might disturb the user experience of a website.
-Adding the explicit ratings with visible benefits to an existing \emph{question and answer website} would require too much customization, because in case the \emph{question and answer website} is replaced by a different open source version or an own implementation the explicit ratings with visible benefits have to be added again.
+Adding the explicit ratings with visible benefits to an existing question and answer website would require too much customization because in case the question and answer website is replaced by a different open source version or an own implementation the explicit ratings with visible benefits have to be added again.
 Therefore it is a good approach to use implicit ratings to collect the interest of a user.
 The research group of \citet{claypool2001} developed a web browser that monitors user interactions and afterwards asks a user how he would rate the page.
 Thereby it compares user interactions with explicit ratings.
-\citet{claypool2001} build their results on a field experiment of over 80 people browsing over 2500 Web pages.
+\citet{claypool2001} build their results on a field experiment of over 80 people browsing over 2500 web pages.
 The user interactions they measured with their web browser are presented below.
 
 \subsection{The time a user spends on a website}
-The team of \citet{claypool2001} measured the time a user spends on a website as a first indicator that the user works with the site.
-The idea behind this method is that the more time the user takes to view the content of the website the more interesting the website is for him.
+The team of \citet{claypool2001} measured the time a user spends on a website as a first indicator that the user is interested in the web site.
+The idea behind this method is that the more time the user takes to view the content of the website the more interesting the website seems to be for him.
 For this method a timer was used that measured the time a user spends on a website.
 The timer starts after the website is completely loaded and stops when the user leaves the website or closes the window.
-Additionally the timer is only active as long as the website is visible in the web browser.
-They compared the time a user spends on a website with the explicit rating from the user this correlated about 70\% of the time.
+%Additionally the timer is only active as long as the website is visible in the web browser.
+So, as soon as the internet user switches to another website the timer stops.
+They compared the time a user spends on a website with the explicit rating from the user.
+They found out that the time a user spends on a website correlates about 70\% of the time with the explicit rating of the same user.
 So, they found out that the time a user spends on a website is a good indicator of interest.
 For this reason this method is used as one implicit rating indicator in this thesis.
-However one has to keep in mind, that the general time a website is open and visible needs to be relativized because one does not know whether the user is actually reading or interacting with the content of the current website.
-Therefore other indicators where measured and included in \citet{claypool2001} research.
-Which will be clarified in the following sections.
+However, one has to keep in mind that the general time a website is open and visible needs to be relativized because one does not know whether the user is actually reading or interacting with the content of the current website.
+For all we know the user could have opened a website and afterwards left the computer.
+Therefore other indicators where measured and included in \citet{claypool2001} research which will be clarified in the following sections.
 
 \subsection{The time the cursor is in motion}
 Whereas the general time a user spends on a website already gives a good indication on how interesting the website is it is also important to measure how far the user actively engages with the website.
@@ -471,41 +486,41 @@ The use of methods that measure how active a user is on a website is important b
 The time the cursor is in motion was measured by timing how long the mouse cursor changes its position inside the active browser window.
 By comparing the explicit user ratings with the collected data they found out that the time a user moves the mouse cursor is proportional to the interest a user has in the website.
 However, due to the fact that some users use the mouse heavily whilst reading the content of the website or looking at interesting objects such as diagrams or pictures, other users tend to only use the mouse in order to click on objects.
-Consequently, it is not possible to tell how much a user is interested in the website by timing the cursor motion but it is only possible to tell which websites receive the least amount of interest.
+Consequently, it is not possible to tell how much a user is interested in the website by just timing the cursor motion but it is possible to tell which websites receive the least amount of interest.
 Thus, in order to reflect the users interest more properly other ways to measure the active time on the website must be taken into account.
 
 \subsection{The number of mouse clicks}
 Another method of collecting user interactions that might correlate with the explicit rating of a user is the number of mouse clicks on a website.
 The research team of \citet{claypool2001} thought that a high number of mouse clicks would be a sign that the website has links to interesting websites or objects and as such would be valuable to the users.
-The collected data, however, showed that the number of mouse clicks on a website is not significantly different as though the user rated it with the highest or lowest rating. %\todo{check this sentence}
-So, this method is not a good indicator for the users' interest.
+The collected data, however, showed that the number of mouse clicks on a website does not significantly differ even if the user rated it with the highest or lowest rating. %\todo{check this sentence}
+So, this method does not seem to be a good indicator for the users' interest.
 
 \subsection{The time a user scrolls}
-The last indicator they used was the time a user scrolls.
-This is an important activity indicator because a user has to scroll in order to be able to see the whole content of a website.
+The last indicator they used to determine how interesting a website is was the time a user scrolls.
+This is an important activity indicator because a user usually has to scroll in order to be able to see the whole content of a website.
 The web browser the team of \citet{claypool2001} developed measured the time a user scrolls a website by keys and by mouse.
 They compared the data of the method of the field experiment with over 80 people with the explicit user ratings.
-With that data they found out that both the measurement of user scrolls by keys and by mouse are on their own poor indicators of interest a combination of both methods is found to be a good indicator of interest.
+Due to this data they found out that both the measurement of user scrolls by keys and by mouse are on their own poor indicators of interest whereas a combination of both methods is found to be a good indicator of interest.
 This is explainable by the fact that some users prefer to scroll by using the mouse while others prefer the keyboard for such a task.
-For this reason the time a user scrolls by mouse and by key was used in this thesis as an activity indicator.
+For this reason the time a user scrolls by mouse and by key is used in this thesis as an activity indicator.
 
 \subsection{Total Rating Concept}
-As could be seen above the best sources of implicit ratings are the time a user spends on a web page and the amount a user scrolls on a web page according to \citet{claypool2001}.
-These methods have an accuracy of about 70\% to the explicit user ratings.
+As could be seen above the best sources of implicit ratings are the time a user spends on a web page and the amount a user scrolls on a web page according to the results of \citet{claypool2001}.
+These methods agree approximately 70\% to the explicit user ratings.
 This correlation between the implicit and explicit ratings can be explained by the fact that a user who is interested in an item takes a good look at an interesting website and reads the content that is presented on this site more carefully.
-This process takes time, the user stays on the website longer and the user has to scroll in order to see the whole content of the website.
+This process takes time so that the user stays on the website longer and most of the time he/she has to scroll in order to see the whole content of the website.
 
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=7.5cm]{image/scroll.png}
-  \caption{Time spent scrolling \citet{claypool2001}}
+  \caption{Time spent scrolling (source: \citet{claypool2001}})
   \label{pic:scrolltime}
 \end{figure}
 \begin{figure}[h]
   \centering
   \includegraphics[width=7.5cm]{image/time.png}
-  \caption{Time spent on a page \citet{claypool2001}}
+  \caption{Time spent on a page (source: \citet{claypool2001}})
   \label{pic:time}
 \end{figure}
 
@@ -519,16 +534,16 @@ In order to collect implicit user ratings by timing how long the website is in f
   Let $k = np$ be the trimmed value, $r = n - 2k$ be the remaining values, $v_j \in V$ and $j \in \mathbb{N}$.
   Then the following formula represents the truncated mean.
   \begin{displaymath}
-    Truncated Mean = \sum_{j=k+1}^{n-k}{v_j} \cdot \frac{1}{r}
+    tm = \sum_{j=k+1}^{n-k}{v_j} \cdot \frac{1}{r}
   \end{displaymath}
 \end{definition}
 The percentages of the two rating processes result out of the two diagrams of figure ~\ref{pic:scrolltime} and figure ~\ref{pic:time}. %todo more detail
 These diagrams are created by the team of \citet{claypool2001}.
-The x-axis represents the explicit user ratings and the y-axis represent the time that a user has spend on the website and the time a user has scrolled on a website respectively.
+The x-axis represents the explicit user ratings and the y-axis represents the time a user has scrolled on a website and the time that a user has spend on the website respectively.
 The bar for each explicit rating represents the time range of all users that explicitly rated with that rating.
-The line in each of the bars represents the average time of all user times of that range.
-For this thesis the time differences between the average times of each rating is assumed as a range for implicit ratings.
-These ranges are expressed as percentages in dependence to the complete average time of all users in the following two enumerations. 
+The line in each of the bars represents the average time of all user times of that rating.
+For this thesis the time differences between the average times of each rating are assumed as a range for implicit ratings.
+These ranges are expressed as percentages in dependence to the general average time of all users in the following two enumerations. 
 %zeitliche abstaende zwischen den average ratings wurden als bereich fuer ein explicites rating angenommen und dieses wurde in abhaengigkeit zur gesamten average time prozentual ausgedrueckt
 %\todo{Add diagrams, maybe write the itemization as a text}
 \begin{itemize}
@@ -537,12 +552,12 @@ These ranges are expressed as percentages in dependence to the complete average 
   \item If the user spends between 94.3\% and 109.6\% of the truncated mean time on the item page, it is used as a rating of 3.
   \item If the user spends longer than 109.6\% of the truncated mean time on the website it is used as a rating of 4.
 \end{itemize}
-A rating of 5 can only be achieved if a user does a predefined user interaction on the web page.
+A rating of 5 can only be achieved if a user does a predefined user interaction on the web page such as clicking on a button that indicates interest.
 The reason behind this choice is that users tend to make breaks while surfing the internet.
 Thus, the user leaves the current browser window open but is not actively working on this website.
-Therefore it is possible that a user is on a break and the currently active browser window might not be interesting for him in that moment.
+Therefore, it is possible that a user is on a break and the currently active browser window might not be interesting for him in that moment.
 Such a predefined user interaction can be used as an indicator that a user likes an item.
-A possible predefined user interaction could be an up-vote or the writing of a comment or answer. 
+A possible predefined user interaction could be an up-vote or the writing of a comment or an answer. 
 A similar scale is chosen for determining the rating of a user by the time a user scrolls.
 \begin{itemize}
   \item If the user scrolls less than 69\% of the truncated mean time on the item page it is used as a rating of 1.
@@ -556,14 +571,15 @@ First of all both implicit ratings - the time a user spends on a website and the
 Afterwards the average of both ratings is calculated and used as the total rating.
 %todo add weighting factor
 \begin{displaymath}
-  total rating = \frac{rating_{time} + rating_{scroll}}{2}
+  total Rating = \frac{rating_{time} + rating_{scroll}}{2}
 \end{displaymath}
 %\todo{add this to evaluation}The concept is build upon measurements of a field experiment of 75 students by \citet{claypool2001}, though due to the lack of time it wasn't possible to test this concept on a large user base.
-If a user returns to an item site the time the user spends on the page and the time the user scrolls on the page is added to the previous times and the sum of both sessions is used to calculate the new rating.
+If a user returns to an item site the time that the user spends on the page and the time the user scrolls on the page is added to the previous times.
+The sum of both sessions is used to calculate the new rating.
 
-As mentioned above \citet{claypool2001} research group bases its results on a field experiment of over 80 people browsing over 2500 Web pages.
+As mentioned above the research group of \citet{claypool2001} bases its results on a field experiment of over 80 people browsing over 2500 web pages.
 The total rating concept is strongly build upon these results.
-It would have been desirable to conduct a field experiment for the concept of the total rating but unfortunately due to the lack of time it was not possible.
+It would have been desirable to conduct a field experiment for the newly developed concept of the total rating but unfortunately due to the lack of time it was not possible.
 %\todo{eligable to conduct such a field experiment in the future} 
 %describe the google news approach, explain the changes that where made and why.
 
@@ -574,31 +590,34 @@ It would have been desirable to conduct a field experiment for the concept of th
 In order to recommend items with a matching subject on a website, the newly developed system needs to be able to filter the items based on their content.
 Therefore the keywords of the item content are used as tags in order to reflect the content of the items. %\todo{improve}
 %The content can be described with the use of tags, these tags are the keywords of the content.
-In the context of economics the \emph{ZBW} provides the \emph{STW Thesaurus for Economics}.
-The \emph{STW Thesaurus for Economics} provides vocabulary on any economic subject and includes about 19000 terms and 6000 standardized keywords which can be used to match words from a text.\footnote{STW Thesaurus for Economics url: http://zbw.eu/stw/versions/latest/about}
+In the context of economics the \emph{Deutsche Zentralbibliothek für Wirtschaftswissenschaften Leibniz-Informationszentrum Wirtschaft} (ZBW) provides the \emph{STW Thesaurus for Economics} (STW).
+The STW provides vocabulary on any economic subject and includes about 19000 terms and 6000 standardized keywords which can be used to match words from a text.\footnote{STW Thesaurus for Economics url: http://zbw.eu/stw/versions/latest/about}
 It, thus, provides a good basis for the tagging process.
-However, the \emph{STW Thesaurus for Economics} only includes the basic form of the words while excluding most of the words with affixation.
-Due to this it is not sufficient to check whether the words from the items are equal to the words from the \emph{STW Thesaurus for Economics}.
-So, the challenge for this tagging process is to find the correct words in the \emph{STW Thesaurus for Economics} even though the words from the item might not correspond directly to the words in the \emph{STW Thesaurus for Economics}.
-One possible solution for such a task is to reduce each word from the text to its stem.\todo{definition stem}
+However, the STW only includes the basic form of the words while excluding most of the words with affixation, due to this it is not sufficient to check whether the words from the items are equal to the words from the STW.
+So, the challenge for this tagging process is to find the correct words in the STW even though the words from the item might not correspond directly to the words in the STW.
+One possible solution for such a task is to reduce each word from the text to its stem.
+According to \citet{englishLinguistics} a stem is the lexical unit that remains when all inflectional affixes are taken away.
+Whereby, inflectional affixes are affixes that produce a new word form without changing the core meaning of the word.
+Such an inflectional affix is for example the adding of the plural \emph{s} to a word.
 Such a task is called stemming and is usually done by using predefined rules on the words. 
 A rule is usually a combination of the minimum number of letters in a word, plus the suffix that should be changed and the replacement for the suffix.
-More advanced algorithms might also use rules for prefix reduction and detecting irregular changes of the stem according to \emph{Caumanns A Fast and Simple Stemming Algorithm for German Words}.
+More advanced algorithms might also use rules for prefix reduction and detecting irregular changes of the stem according to \citet{germanStemming}.
 For example a predefined rule might be '3+ies' $\rightarrow$ 'y'.
-So, the word \emph{libraries} would be reduced to \emph{library}.
-Thus it is important that the stemming algorithm has all necessary rules for each supported language.\\
+So, the word \emph{libraries} would be transformed to \emph{library}.
+Thus, it is important that the stemming algorithm has all necessary rules for each supported language.\\
 Another challenge for using the stemming algorithm is that all words in the basis for the tagging process must be in the stem form. 
-Otherwise the algorithm might reduce a word to its stem that would match in its original form.
+Otherwise the algorithm might reduce a word to its stem that would actually match already in its original form.
 Due to these maintenance problems it was decided that the stemming algorithm is not suitable for the developed system.
-Another possible solution for the problem is to calculate the differences between the words from the text and the words from the basis for the tagging process.
-This difference can be used as an indicator whether the words are similar or not.
-If they are in a predefined difference range the words can be used as tags.%\todo{read this for a second time}
+Another possible solution for the problem is to calculate the number of changes that have to be done in order to transform the word from the text to the word from the basis for the tagging process.
+%Another possible solution for the problem is to calculate the differences between the words from the text and the words from the basis for the tagging process.
+This number can be used as an indicator whether the words are similar or not.
+If they are in a predefined difference range the words can be used as tags.
 This creates the need for a metric that indicates the difference or distance between two words.
-A practical metric for such a task is the \emph{levenshtein distance} which will be explained in the following section.
+A well known metric for such a task is the \emph{levenshtein distance} which will be used in the system and will be explained in the following section.
 \subsection{Levenshtein Distance}
 
 The \emph{levenshtein distance} calculates the minimum numbers of substitutions, insertions and deletions that are needed to change one word into another.
-The following example explains the \emph{levenshtein distance} for the words \emph{library} and \emph{libraries}.
+The following example explains the levenshtein distance for the words \emph{library} and \emph{libraries}.
 The algorithm has to perform two deletions and one substitution in order to create the word \emph{library} out of the word \emph{libraries}.
 If it creates the word \emph{libraries} out of the word \emph{library} it has to perform a substitution and two insertions.
 \begin{displaymath}
@@ -648,11 +667,11 @@ For a more detailed description compare algorithm ~\ref{alg:levDist}.
 
 
 
-The direct implementation of the \emph{levenshtein distance algorithm} has a complexity of O(mn) with m size of the first word and n size of the second word. 
-Therefore it is a good utility to better understand the \emph{levenshtein distance} in general, but it is not feasible for a software that should work in production mode. 
+The direct implementation of the levenshtein distance algorithm has a complexity of O(mn) with m being the size of the first word and n being the size of the second word. 
+Therefore it is a good utility to better understand the levenshtein distance in general, but it is not feasible for a software that should work in production mode. 
 \subsection{Optimized Levenshtein distance algorithm}
 %definitions
-The following definitions are based on the book \citet{automata2003}.
+The following definitions are based on the book by \citet{automata2003}.
 \begin{definition}[Non Deterministic Finite Automata]
   A non deterministic finite automaton is a 5-tupel of the form $\mathcal{A} = (Q, \Sigma, q_0, \Delta, F)$. 
   \begin{itemize}
@@ -662,18 +681,19 @@ The following definitions are based on the book \citet{automata2003}.
     \item $F \subset Q$ is a subset that contains the final states
     \item $\Delta$ is a relation of the form $\Delta \subset Q \times \Sigma \times Q$
   \end{itemize}
-  $\mathcal{A}$ is called finite exactly when $Q$ is finite. Furthermore $\Sigma^*$ is the set of words over $\Sigma$ and $\epsilon$ is the empty word.
+  $\mathcal{A}$ is called finite if and only if $Q$ is finite. Furthermore $\Sigma^*$ is the set of words over $\Sigma$ and $\epsilon$ is the empty word.
 \end{definition}
 \begin{definition}[Deterministic Finite Automata]
   $\mathcal{A}$ is deterministic if for all $p \in Q$ and all $a \in \Sigma$ exists exactly one state $q \in Q$ with $(p, a, q) \in \Delta$. In this case $\Delta$ is written as a function $\delta : Q \times \Sigma \rightarrow Q$.
 \end{definition}
 \begin{definition}[Path]
-  A path for $\mathcal{A}$ is a series $\pi = p_0 a_1 p_1 a_2 \dots a_n p_n$, $(p_i, a_{i+1}, p_{i+1}) \in \Delta$ and $0 \leq i \leq n-1$. The length of $\pi$ is n and the label for $\beta(\pi)$ is $a_1 a_2 a_3 \dots a_n$.
+  A path for $\mathcal{A}$ is a series $\pi = p_0 a_1 p_1 a_2 \dots a_n p_n$ with $(p_i, a_{i+1}, p_{i+1}) \in \Delta$, $0 \leq i \leq n-1$ and $n \in \mathbb{N}$.
+  The function $\beta(\pi)$ maps a path $\pi$ to a word $\omega \in \Sigma^*$.
+  The length of $\pi$ is n and the label for $\beta(\pi)$ is $a_1 a_2 a_3 \dots a_n$.
 \end{definition}
 %\todo{$\beta$ explanation}
 \begin{definition}[Path shortwriting]
-  The function $\beta(\pi)$ maps a path $\pi$ to a label $\omega$.
-  $\mathcal{A}: p \xrightarrow[]{\omega} q$ with $\omega \in \Sigma^*$ states, that a path $\pi$ for $\mathcal{A}$ from p to q with label $\beta(\pi) = \omega$ exists.
+  $\mathcal{A}: p \xrightarrow[]{\omega} q$ with $\omega \in \Sigma^*$ states that a path $\pi$ for $\mathcal{A}$ from p to q with label $\beta(\pi) = \omega$ exists.
 \end{definition}
 \begin{definition}[Automata accepts a word]
   $\mathcal{A}$ accepts $\omega \in \Sigma^*$, if and only if $p \in I, q \in F$ exists with $\mathcal{A}$: $p \xrightarrow[]{\omega} q$. For $\mathcal{A}$ let $\mathcal{L}(\mathcal{A})=\{\omega \in \Sigma^*$ | $\mathcal{A}$ accepts $\omega\}$ be the language that $\mathcal{A}$ accepts.
@@ -689,26 +709,26 @@ The following definitions are based on \citet{schulz2002}
 \end{definition}
 
 \begin{definition}[Degree Levenshtein Automata]
-  Let $W \in \Sigma^*$ and $n \in \mathbb{N}$. A finite state automaton A is a Levenshtein automaton of degree n for W if and only if $\mathcal{L}(A) = \mathcal{L}_{Lev}(n,W)$.
+  Let $W \in \Sigma^*$ and $n \in \mathbb{N}$. A finite state automaton $\mathcal{A}$ is a Levenshtein automaton of degree n for W if and only if $\mathcal{L}(\mathcal(A)) = \mathcal{L}_{Lev}(n,W)$.
 \end{definition}
 
-An optimized version of the \emph{levenshtein distance algorithm} that uses a \emph{levenshtein automaton} is described by \citet{Baeza-Yates96aunified}.
-The purpose of the \emph{levenshtein automaton} is to decide whether $d_L(W,V)$ is smaller than a specific $n \in \mathbb{N}$ with $V \in \Sigma^*$.
-So, it is possible to decide if a word from a question is similar to a word from the \emph{STW Standard Thesaurus}, similar in the meaning it has a \emph{levenshtein distance} smaller than n.
-Therefore $\Sigma$ contains the alphabet \{a,\ldots,z,A,\ldots,Z\}.
-The states in Q of the \emph{levenshtein automaton} denote the current position in the original word W, written as i and the current \emph{levenshtein distance} between $\omega$ and W, written as j, with $\omega$ prefix of V.
+An optimized version of the levenshtein distance algorithm that uses a levenshtein automaton is described by \citet{Baeza-Yates96aunified}.
+The purpose of the levenshtein automaton is to decide whether $d_L(W,V)$ with $W,V \in \Sigma^*$ is smaller than a specific $n \in \mathbb{N}$.
+So, it is possible to decide if a word from a question is similar to a word from the STW, similar in the meaning it has a levenshtein distance smaller than n.
+Therefore $\Sigma$ contains the alphabet \{a, \ldots, z, A, \ldots, Z\}.
+The states in Q of the levenshtein automaton denote the current position in the original word W, written as i and the current levenshtein distance between $\omega$ and W, written as j, with $\omega$ prefix of V.
 The label of such a state is $i^j$.
 Thus the initial state $q_0 \in Q$ is $0^0$.
 The final states $f \in F$ are all states where i equals |W| and j is smaller than n.\\
 Let $\omega_{correct}$ be the correct letter after state $i^j$.
-The relation $\Delta: (Q \times \Sigma \times Q)$ has the following elements.
+The relation $\Delta: (Q \times \Sigma \times Q)$ has the following elements:
 \begin{itemize}
   \item $(i^j, \sigma, (i+1)^j)$ if $\sigma = \omega_{correct}$ 
   \item $(i^j, \sigma, i^{(j+1)})$ if $\sigma$ is inserted after state $i^j$ and $(j+1) < n$
   \item $(i^j, \sigma, (i+1)^{(j+1)})$, if $\sigma$ is substituted by $\omega_{correct}$ and $(j+1) < n$
   \item $(i^j, \sigma, (i+1)^{(j+1)})$, if $\omega_{correct}$ is deleted
 \end{itemize}
-The elements are not exclusive, therefore all of these cases can be possible after reading only one letter.
+The elements are not exclusive therefore all of these cases can be possible after reading only one letter.
 % \begin{math}
 % (i^j, \sigma) \rightarrow \begin{cases}
 %   (i+1)^j & \text{if correct}\\
@@ -836,28 +856,28 @@ The elements are not exclusive, therefore all of these cases can be possible aft
   \label{ndla}
 \end{figure}
 The automaton in example ~\ref{ndla} is a non deterministic levenshtein automaton for the word \emph{test}.
-In the following description the \emph{levenshtein automaton} represents the word $W \in \Sigma^*$ and $\sigma \in \Sigma$ is the currently read letter.
+In the following description the levenshtein automaton represents the word $W \in \Sigma^*$ and $\sigma \in \Sigma$ is the currently read letter.
 $\Sigma$ indicates that any element from $\Sigma$ is accepted on this path.
 The initial state $0^0$ is in the bottom left corner.
 If $\sigma$ is a correct letter it follows the horizontal path in the automaton.
 A vertical path is an insertion of a letter $l \in \Sigma$ into the word W which is possible for any $\sigma$.
 A diagonal path can be a deletion of a letter $l \in W$ with the empty word $\epsilon$ or a substitution of $\sigma$ for any $\sigma$.
-Therefore after reading the letter 't' in the initial state $0^0$ the automaton can be in five different states namely $0^1$, $1^2$, $1^1$, $2^2$ and $1^0$.
+Therefore after reading the letter 't' in the initial state $0^0$ the automaton can be in five different states namely $0^1$, $1^2$, $1^1$, $2^2$, $1^0$, $2^1$ and $3^2$.
 %\todo{explanation of the five different states}
 Evaluating a non deterministic levenshtein automata is computational complex due to the fact that there can be a large number of active states at the same time. 
 Thus it is necessary to convert a non deterministic automata to a deterministic automata before using it to find tags.
 The process of generating a deterministic automata with a non deterministic automata is called \emph{powerset construction}.
 
 \subsubsection{Powerset Construction}
-The process of creating a \emph{deterministic levenshtein automata} out of an \emph{non deterministic levenshtein automata} is based on the \emph{powerset construction} from the book \emph{Introduction to Automata Theory, Languages, and Computation} by \citet{automata2003}.
-Given a \emph{non deterministic levenshtein automaton} the construction of an equivalent \emph{deterministic levenshtein automaton} is described below. 
+The process of creating a deterministic levenshtein automata out of an non deterministic levenshtein automata is based on the powerset construction from the book \emph{Introduction to Automata Theory, Languages, and Computation} by \citet{automata2003}.
+Given a non deterministic levenshtein automaton the construction of an equivalent deterministic levenshtein automaton is described below. 
 \begin{itemize}
   \item Create $q_0'$ as a set with original $q_0$ and all states that are reachable with an $\epsilon$ path.
   \item $Q' \subseteq 2^Q$, thus all $q \in Q'$ are subsets of Q.
   \item $\delta(R,a) = \{q \in Q$ | $\exists r \in R$ with (r, a, q) $\in \Delta$ or (r, $\epsilon$, p) and (p, a, q) $\in \Delta\}, R \subseteq Q$. %(r, a, p) and (p, $\epsilon$, q) $\in \Delta$ or 
   \item F' includes all $q \in Q'$ that include $f \in F$
 \end{itemize}
-Therefore the new \emph{deterministic levenshtein automaton} is (Q', $\Sigma$, $q_0'$, $\delta$, F').
+Therefore the new deterministic levenshtein automaton is (Q', $\Sigma$, $q_0'$, $\delta$, F').
 \newpage
 
 
@@ -942,8 +962,8 @@ Therefore the new \emph{deterministic levenshtein automaton} is (Q', $\Sigma$, $
 %   \item The set of final states F contains all states where the correct letter count is equal to the size of the original word W.
 % \end{itemize}
 
-Let $(Q, \Sigma, q_0, \Delta, F)$ be a \emph{non deterministic levenshtein automaton} for the word \emph{test} with maximum \emph{levenshtein distance} 1 \footnote{This is the automaton from figure ~\ref{ndla} without the first row}. 
-Then the \emph{deterministic levenshtein automaton} $DLA = (Q', \Sigma, q_0', \delta, F')$ from figure ~\ref{dla} is the output from the powerset construction.
+Let $(Q, \Sigma, q_0, \Delta, F)$ be a non deterministic levenshtein automaton for the word \emph{test} with maximum levenshtein distance 1\footnote{This is the automaton from figure ~\ref{ndla} without the first row}. 
+Then the deterministic levenshtein automaton $DLA = (Q', \Sigma, q_0', \delta, F')$ from figure~\ref{dla} is the output from the powerset construction.
 Consequently the DLA can only have one active state at a time and accepts all words V from $\Sigma^*$ with $d_L('test', V) \leq 1$. 
 This deterministic finite automaton with degree $n \in \mathbb{N}$ for a word $W \in \Sigma^*$ can decide in linear time if a word $V \in \Sigma^*$ has $d_L(W,V) \leq n$. %\todo{source Lemma3}.
 
@@ -971,7 +991,7 @@ This deterministic finite automaton with degree $n \in \mathbb{N}$ for a word $W
 The maximum distance for a given word $W \in \Sigma^*$ depends on the length n of W.
 %\todo{try to find the nouns of the content cause these are the keywords of the text}
 %todo the word W is the plural form therefore it should be if n > 7 degree 3 is used otherwise 1
-A word with a length of $n\leq3$ in the \emph{Standard Thesaurus Economics} is usually an abbreviation and therefore is only used as a direct match.
+A word with a length of $n\leq3$ in the STW is usually an abbreviation and therefore is only used as a direct match.
 A word with a length of $n>3$ is used with a maximum distance of one due to the reason that most of the plural forms for short words involve the appending of a letter.
 A word with a length of $n\geq6$ is used with a maximum distance of three considering that composing the plural form of a word involves a maximum of three changes (substitution, insertion and deletion) in the German language. \todo{add source Die Pluralbildung im Deutschen: Eine Untersuchung an Hand der Optimalitätstheorie: "German Noun Plural reconsidered" von Dieter Wunderlich explain that there are 15 different plural forms \dots}
 %Maskulina und Neutra mit er-Plural 3 aenderungen Wurm Wuermer
@@ -982,12 +1002,12 @@ A word with a length of $n\geq6$ is used with a maximum distance of three consid
 %Lemma 6 For any fixed number n, given two words W and V of length w and v respectively, it is decidable in time O(max(w, v)) if the Levenshtein distance between W and V is <= n.
 
 %\todo{add more explanation how the levenshtein automata is integrated into the system}
-To get back to the original problem this paragraph explains the application of a \emph{levenshtein distance automata} to find the right tags for a text.
-The overall tagging concept is to calculate for every word from the text an automata and read all words from the \emph{STW Thesaurus for Economics} into each automata.
-If a word from the \emph{STW Thesaurus for Economics} ends in a final state it is used as a tag for the text. 
-A possible optimization would be to calculate once all the automata's for the complete \emph{STW Thesaurus for Economics} and to store it with an efficient data structure in a database.
-Currently the \emph{STW Thesaurus for Economics} is stored in a triple store because it can easily be updated with the standard files from the website.
-A triple store is special database that stores data in the form of triples.
+To get back to the original problem this paragraph explains the application of a levenshtein distance automata to find the right tags for a text.
+The overall tagging concept is to calculate for every word from the text an automata and read all words from the STW into each automata.
+If a word from the STW ends in a final state it is used as a tag for the text. 
+A possible optimization would be to calculate all the automata once for the complete STW and to store it with an efficient data structure in a database.
+Currently the STW is stored in a triple store because it can easily be updated with the standard files from the website.
+A triple store is a special database that stores data in the form of triples.
 The triple store technology is described in more detail in subsection 3.1.2.
 
 \newpage
@@ -995,24 +1015,24 @@ The triple store technology is described in more detail in subsection 3.1.2.
 %description of item based recommendation, how do I use item based recommendations
 %description of collaborative filtering, description of svd, how do I use this sort of recommendations
 \section{Recommendation}
-A recommendation system is a system that creates personalized item recommendations based on information about the items or the relationships between items and users.
+A recommendation system is a system that creates personalized item recommendations based on information about the items or the relation between items and users.
 These recommendations can be created by different types of recommendation systems that exploit different information about the users or items.
 \subsection{Different types of recommendation systems}
 %\todo{Describe different informations that are needed.}
-The book \emph{Recommender Systems An Introduction} by \citet{recommender2011} distinguishes between the following four different kind of recommendation systems.
+The book \emph{Recommender Systems An Introduction} by \citet{recommender2011} distinguishes between the following four different kinds of recommendation systems.
 %These recommendation systems that are described below exploit either the relationship between the users 
 \subsubsection{Collaborative recommendation}
 Collaborative recommendations are recommendations based on similar interests of users.
-So, if user A and user B are interested in similar items and user A shows interest in item I that is unknown to user B, than item I might be interesting for user B as well.
+So, if user A and user B are interested in similar items and user A shows interest in item I that is unknown to user B than item I might be interesting for user B as well.
 Due to the fact that this technique filters all items based on implicit collaboration of the users it is also known as \emph{collaborative filtering}.
 For using the collaborative filtering approach no other information are needed than the relationship between users and items. 
-Depending on the number of items in the system and the activity of the users of the system the process of collecting information about the relationship between the users and the items they are interested in might be needing some time.
-Although it needs to collect initial data it is a good approach if the items that need to be recommended are unknown or additional information for the items would be hard to maintain.%\todo{read a second time more explanations needed?}
+Depending on the number of items in the system and the activity of the users of the system the process of collecting information about the relation between the users and the items they are interested in might be needing some time.
+Although it needs some time to collect initial data in the beginning it generally is a good approach if the items that need to be recommended are unknown or additional information for the items would be hard to maintain.%\todo{read a second time more explanations needed?}
 \subsubsection{Content-based recommendation}
 In content-based recommendations the items are usually documents that should be recommended based on the content.
 Thus, the content of the document is described by tags.
 These tags can have an indicator that expresses the importance of the tag.
-Therefore the documents can be filtered by the tags of the documents and ranked by the importance of the tags.
+Therefore the documents can be filtered by the tags of the documents and ranked by the importance of those tags.
 These tags can be maintained explicitly by the users of the systems or by tagging algorithms.
 One advantage of content-based recommendation systems is that they do not require a large user base to achieve good recommendations for users.
 A second advantage is that new items can be recommended to users immediately after the content has a description.
@@ -1022,13 +1042,13 @@ All in all, content-based systems are a good choice if the system has to provide
 As long as the documents have a description for the system.
 
 \subsubsection{Knowledge-based recommendation}
-The basic idea behind knowledge-based recommendation system is a system that has enough information about the items and the needs of the user and as such can recommend items based on matching the needs of the user and the features of the items.
+The basic idea behind knowledge-based recommendation systems is a system that has enough information about the items and the needs of the user and as such can recommend items based on matching the needs of the user and the features of the items.
 Moreover the system has to use individual user requirements in order to create personalized recommendations. 
 For example if a user would like to buy a new jacket for a summer camping trip in England the knowledge based system has to use the specific context in order to recommend a thin light rain jacket with the right size and price for the user.
 These information are usually manually provided by the user and the maintainer of the system.
 Furthermore not only the system needs to correctly interpret the information but the user needs to have the domain knowledge in order to provide the system with the correct information.
-So, knowledge-based recommendation is a good approach if the system has to recommend items that are not frequently requested and no user history is available.
-It is especially suited for applications in which items are not frequently bought such as expensive digital goods or cars. 
+Consequently, knowledge-based recommendation is a good approach if the system has to recommend items that are not frequently requested and no user history is available.
+It is especially suited for applications in which items are not frequently rated such as expensive digital goods or cars. 
 
 % \subsubsection{Hybrid approaches}
 % All recommendation system approaches have advantages and disadvantages, therefore a combinations of the different approaches which are mentioned above could improve the user recommendations as long as the system has enough information about the items or users.
@@ -1042,15 +1062,15 @@ It is especially suited for applications in which items are not frequently bough
 %use top rated items for the subject
 %if no items 
 %use top rated items
-All of the described recommendation approaches have advantages and disadvantages.
-Knowledge based systems require too much domain knowledge that is not accessible for user generated questions and answers, therefore knowledge based systems are not feasible for the system.
-Collaborative recommendation systems need an initial amount of user item relationship data in order to present good recommendations. 
+All of the described recommendation approaches have advantages and usually disadvantages.
+Knowledge based systems require too much domain knowledge that is not accessible for user generated questions and answers and therefore knowledge based systems are not feasible for the system.
+On the other hand collaborative recommendation systems need an initial amount of user item relationship data in order to present good recommendations. 
 Additionally, they have no information about the subject of the items and this might lead to a situation were a collaborative filtering system might recommend inappropriate items to the current context. 
 Nonetheless collaborative filtering is the only approach that takes the interest of similar users into account. 
 As such it is the only technique that is able to recommend items that are approved by similar users. 
-Moreover the content-based systems have the disadvantage that they do not make use of the information whether or not a user likes a document.
+Besides the content-based systems have the disadvantage that they do not make use of the information whether or not a user likes a document.
 Yet, they do not need to collect additional relationship information in order to recommend items.
-Because of the reason that the user generated content is not moderated and therefore the system has no information about the quality of the content the implemented system uses a collaborative filtering technique with pre filtered content based on the tags for each item.
+Due to the fact that the user generated content is not moderated and therefore the system has no information about the quality of the content the implemented system uses a collaborative filtering technique with pre filtered content based on the tags for each item.
 This approach should yield the best possible recommendations for a user of the system.
 
 %%definitions Users, items, ratings, predictions
@@ -1131,7 +1151,7 @@ According to \emph{Sarwar et al} a sample of the 25 most similar items is needed
 Thus the on time calculation needs to find the top 25 most similar users in the similarity table and has to calculate the recommendations with these users instead of using all similar users.
 Moreover, it is a tested concept for instance amazon.com uses item based recommendations for their product recommendations [\citet{amazon2003}]. 
 To get back to the overall concept, the item based predictions are used in order to decrease the rating sparsity of the user-item table. 
-So, more information about the user interest is available before the actual recommendations can be calculated.
+So, more information about the user's interest is available before the actual recommendations can be calculated.
 In real world recommendation systems the user item ratings tend to be very sparse because most users only rate few items [\citet{recommender2011}].
 
 \subsubsection{Example for Item-Based Recommendations}
@@ -1205,7 +1225,7 @@ It is possible to obtain an optimal rank k approximation from matrix A, with $k 
 By setting all $\sigma_{i,i}$ with $i > k$ to zero [\citet{matrixAlgorithms}].
 Thus $A_k = U_k \times \Sigma_k \times V_k^t$ yields the optimal rank k approximation.
 As a result all column vectors $u_i$, with $i > k$, of matrix U will be multiplied by a zero vector from matrix $\Sigma_k$.
-Due to the fact that matrix U represents the columns of matrix A and that the last rows of matrix U will be removed in order to generate the optimal rank k approximation of matrix A, it is possible to generate a good approximation of the user interests by removing the last rows of matrix U.\footnote{A user from the system is represented by a column in the matrix A}
+Due to the fact that matrix U represents the columns of matrix A and that the last rows of matrix U will be removed in order to generate the optimal rank k approximation of matrix A, it is possible to generate a good approximation of the user's interests by removing the last rows of matrix U.\footnote{A user from the system is represented by a column in the matrix A}
 The two dimensional matrix $U_2$ is created by removing all rows of matrix U up to the first two rows.
 This matrix $U_2$ can be seen as a value table that can be represented by a graph.
 Therefore, it enables a graphical presentation of the user similarities.
@@ -2421,8 +2441,8 @@ They explain this hypothesis with the reason that users tend to provide inconsis
 %verdeutliche den teil den du selbst gemach hast und stelle die ergebnisse dar
   The focus of this thesis is the development of a recommendation system for user generated content.
   These recommendations should match the user interest and the context of the website on which they are included.
-  For this focus it is important to analyze the user generated content for quality and to identify the subject of the content automatically.
-  Hence, user interactions that can occur on a website are evaluated to be able to tell if a user is interested in the content.
+  For this it is important to analyze the user generated content quality and to be able to identify the subject of the content automatically.
+  Hence, user interactions that can occur on a website are evaluated to be able to tell if a user might be interested in the content.
   Based on the research of \citet{claypool2001} the time a user spends on a website and the time a user scrolls on a website are chosen for generating implicit user ratings.
   These two user interactions correspond about 70\% of the time with the explicit ratings of a user.
   The times of each of these interactions are used separately for creating a scale that expresses user ratings by these times.
@@ -2433,17 +2453,18 @@ They explain this hypothesis with the reason that users tend to provide inconsis
   However for this part of the thesis a field test in the future would be a good idea to adjust the formula according to the use case.
   %unterschiedliche concepte zum approximativen string matchen wurden discussed 
   %die idee des levenshtein automata wurde aufgegriffen und in das gesamt concept integriert hierfuer wurden maximale word distancen selectiert in abhaengigkeit der wortlaenge
-  The identification of the subject of the user generated content is based on matching the words of the content with words from a thesaurus.
+  For the categorization of the user generated content the words of the content are matched with words from a thesaurus.
   For this task different error allowing string matching methods are evaluated. 
-  The chosen concept is the \emph{levenshtein automata} which is a special automata for approximate string matching.
-  Based on the work of \citet{schulz2002} the algorithm for a deterministic levenshtein automata is integrated into the overall concept.
-  Besides, a concept for finding the maximum \emph{levenshtein distance} for a word depending on its length is introduced in this thesis.
+  The chosen concept is the \emph{Levenshtein automata} which is a special automata for approximate string matching.
+  Based on the work of \citet{schulz2002} the algorithm for a deterministic Levenshtein automata is integrated into the overall concept.
+  Besides, a concept for finding the maximum \emph{Levenshtein distance} for a word depending on its length is introduced in this thesis.
   This is important because a word with a small word size can not be handled the same way as a word with a long size.
-  The smaller word needs a smaller distance otherwise it would generate too many false matches.
+  The smaller word need a smaller distance otherwise it would generate too many false matches.
   This word match algorithm is used to find the keywords of a text and to use them as tags.
   This enables the system to presort the content by the keywords before recommending it on a website. 
   The tagging process is evaluated by using texts with a different amount of words.
-  Each of those texts has 30\% words that should match with the words in the thesaurus however most of the words are in a different form or spelling mistakes are inserted.
+  Each of those texts has 30\% words that should match with the words in the thesaurus.
+  However most of the words are in a different form or spelling mistakes are inserted.
   So, the evaluation process checks how many words are found and how long does the algorithm need.
   In three of four tests more words were returned than the algorithm should have matched.
   This is mostly due to the reason that most words in the thesaurus are included in the German and English language and that some of those words are quite similar.
@@ -2453,14 +2474,14 @@ They explain this hypothesis with the reason that users tend to provide inconsis
   Another possible future work is to decide whether the text is in the German or English language and to use only the words from the corresponding language as a tagging base.
   In addition, different types of recommender systems are discussed.
   The conclusion of this discussion is that for the use case of recommending user generated content a collaborative recommendation system would be the best approach.
-  Two existing collaborative recommendation techniques are explained namely the \emph{item based} technique and a recommendation technique based on \emph{singular value decomposition}.
+  Two existing collaborative recommendation techniques are explained namely the item based technique and a recommendation technique based on singular value decomposition.
   These techniques are combined into a new recommendation concept which is introduced in this thesis.
-  This concept uses the \emph{item based} approach for decreasing the scarcity of the rating matrix which is used for the calculation of the \emph{singular value decomposition}.
-  This recommendation system uses the ratings that are generated with the user interactions on the website and the tags that are generated with the help of the \emph{levenshtein automata} to recommend user individual matching content that is interesting for the current user.
+  This concept uses the item based approach for decreasing the scarcity of the rating matrix which is used for the calculation of the singular value decomposition.
+  This recommendation system uses the ratings that are generated with the user interactions on the website and the tags that are generated with the help of the Levenshtein automata to recommend individual content to users that is interesting for the current user and matches the current subject of the website.
   The evaluation of the recommendation system showed that the new recommendation concept creates better prediction than the two techniques on their own.
-  Though, the calculation time increased drastically and the prediction was slightly better than a prediction that uses average ratings for decreasing the sparsity of the rating matrix for the singular value decomposition.
-  Consequently future works with the goal of improving the recommendation system should use the \emph{singular value decomposition} that uses average ratings and concentrate on the prediction calculation for improvements.
-  Moreover the evaluation showed that the method of using only average ratings for recommendation can create good rating predictions.
+  Though, the calculation time increased drastically and the prediction was only slightly better than a prediction that uses average ratings for decreasing the sparsity of the rating matrix for the singular value decomposition.
+  Consequently future works with the goal of improving the recommendation system should use the singular value decomposition that uses average ratings and concentrate on the prediction calculation for improvements.
+  Moreover the evaluation showed that the method of using only average ratings for prediction calculation can create good rating predictions.
   Thus, systems that do not have a need for using highly optimized recommendations could use this method for creating recommendations.
 
 \section{Future Work}
@@ -2471,14 +2492,14 @@ The following subsections are suggestions on how the system might be enhanced in
 The evaluation of the rating system denotes that the implicit ratings should approximately mirror the real user interest.
 However due to the shortness of time it was not possible to conduct a field experiment to test the assumptions.
 Such a field experiment would be desirable and might lead to further improvements.
-One possible improvement that could be tested would be to to weight the two single ratings that result out of the time a user spends on a website and the time a user scrolls on a website during the average calculation phase by the difference of their times to the truncated mean time.
+%One possible improvement that could be tested would be to weight the two single ratings that result out of the time a user spends on a website and the time a user scrolls on a website during the average calculation phase by the difference of their times to the truncated mean time.
 \subsection{Tagging Service}
 The evaluation of the tagging service suggests that the process can be improved by decreasing the tagging base.
 This might be done by automatically detecting the language of the content and only using the words of that language for generating tags.
 % Direct implementation of the deterministic levenshtein automata, table based approach.
 % Save levenshtein automatas from all \emph{STW Standard Thesaurus Economic} words with an appropriate datastructure.
 \subsection{Recommendation System}
-The evaluation of the recommendation techniques yield that the best recommendation approach of the implemented recommendation systems for a productive system is the \emph{singular value decomposition} with the use of average ratings for the empty entries in the rating matrix.
+The evaluation of the recommendation techniques yield that the best recommendation approach of the implemented recommendation systems for a productive system is the singular value decomposition with the use of average ratings for the empty entries in the rating matrix.
 Furthermore the evaluation suggests to concentrate future improvements on the calculation of the rating predictions instead of the calculation of the user similarities.
 Thus, it might improve the prediction calculation by weighting the ratings for the calculation based on the difference to the average rating.
 This should on the one hand reduce the importance of ratings on which most user agree upon and on the other hand should increase the importance of the items that are more diverse.

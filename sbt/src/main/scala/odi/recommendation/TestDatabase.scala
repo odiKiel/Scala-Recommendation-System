@@ -9,11 +9,11 @@ object TestDatabase {
     Tags.deleteAll
     Items.deleteAll
     Users.deleteAll
-    val item1 = Items.create(Item(None, "Item1", 0.0, "http://www.item1.de", 1, 5.0, 2.0, 11))
-    val item2 = Items.create(Item(None, "Item2", 0.0, "http://www.item2.de", 2, 5.0, 2.0, 11))
-    val item3 = Items.create(Item(None, "Item3", 0.0, "http://www.item3.de", 3, 5.0, 2.0, 11))
-    val item4 = Items.create(Item(None, "Item4", 0.0, "http://www.item4.de", 4, 5.0, 2.0, 11))
-    val item5 = Items.create(Item(None, "Item5", 0.0, "http://www.item5.de", 5, 5.0, 2.0, 11))
+    val item1 = Items.create(Item(None, "Verweildauer des Managements", 0.0, "http://localhost:9000/question/6/verweildauer-des-managements/", 6, 20000.0, 5000.0, 11))
+    val item2 = Items.create(Item(None, "Management-Methoden", 0.0, "http://localhost:9000/question/8/management-methoden/", 8, 20000.0, 5000.0, 11))
+    val item3 = Items.create(Item(None, "Obsolescence Management", 0.0, "http://localhost:9000/question/10/obsolescence-management/", 10, 20000.0, 5000.0, 11))
+    val item4 = Items.create(Item(None, "Order Penetration Point", 0.0, "http://localhost:9000/question/12/order-penetration-point/", 12, 20000.0, 5000.0, 11))
+    val item5 = Items.create(Item(None, "Phasenmodell", 0.0, "http://localhost:9000/question/14/phasenmodell/", 14, 20000.0, 5000.0, 11))
 
     val user1 = Users.create(User(None, "User1", 0.0, 1))
     val user2 = Users.create(User(None, "User2", 0.0, 2))
@@ -21,14 +21,15 @@ object TestDatabase {
     val user4 = Users.create(User(None, "User4", 0.0, 4))
     val user5 = Users.create(User(None, "User5", 0.0, 5))
 
-    val tag1 = Tags.create(Tag(None, "14888-0")) //Stoff
-    val tag2 = Tags.create(Tag(None, "19024-5")) //Zwiebel
+    val tag1 = Tags.create(Tag(None, "12085-6")) //Management
+    val tag2 = Tags.create(Tag(None, "12766-3")) //Marketing
 
     ItemTags.create(ItemTag(None, item1.id.get, tag1.id.get))
     ItemTags.create(ItemTag(None, item2.id.get, tag1.id.get))
     ItemTags.create(ItemTag(None, item3.id.get, tag1.id.get))
     ItemTags.create(ItemTag(None, item4.id.get, tag1.id.get))
     ItemTags.create(ItemTag(None, item5.id.get, tag2.id.get))
+    ItemTags.create(ItemTag(None, item5.id.get, tag1.id.get))
 
     Ratings.create(Rating(None, item1.id.get, user1.id.get, 5, false))
     Ratings.create(Rating(None, item1.id.get, user2.id.get, 3, false))
