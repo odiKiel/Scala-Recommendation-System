@@ -259,8 +259,8 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 The focus of this thesis is the development of a recommendation system for user generated content.
 The purpose of this system is to utilize the unused content that is contributed by users.
 %use this content sinnvoll auf bestehenden seiten unterbringt kann dies den user nutzen erhoehen 
-If this content is added in a meaningful way on existing websites it can increase the benefit of the website for its users.
-Meaningful way means, that the content matches the current context of the website and is interesting for the current user.
+If this content is added in a meaningful way on existing websites, it can increase the benefit of the website for its users.
+Meaningful way means that the content matches the current context of the website and is interesting for the current user.
 This process involves three different types of research areas.
 
 First, the generation of implicit user ratings by analyzing user interactions on a website.
@@ -270,14 +270,13 @@ For the two times a scale is created that enables the transformation of user int
 
 The second research area is approximate string matching which is the matching of strings even if the words are slightly different.
 This technology is used for categorizing the user generated content by its keywords.
-This part of the thesis involves the analysis of different techniques that can be used for such a process.
-The technique of the \emph{levenshtein automaton} is explained in more detail.
+For this process the technique of the \emph{levenshtein automaton} is used and explained in more detail.
 Besides, a range is created that expresses how diverse words are allowed to be in order to be accepted as a match.
 
 The last research area is the field of recommendation systems.% generating implicit user ratings, developing a recommendation system
 The different types of recommendation systems are discussed in this part.
-Moreover a new technique is introduced that combines two well known recommendation techniques to improve the rating predictions.
-This system is implemented with a service oriented architecture so, that every component of the system can be exchanged with different alternatives.
+Moreover, a new technique is introduced that combines two well known recommendation techniques to improve the rating predictions.
+This system is implemented with a service oriented architecture so that every component of the system can be exchanged with different alternatives.
 Furthermore services can be used to extend existing systems.
 This leads to a considerable amount of flexibility and expandability.
 
@@ -514,13 +513,13 @@ This process takes time so that the user stays on the website longer and most of
 \begin{figure}[h]
   \centering
   \includegraphics[width=7.5cm]{image/scroll.png}
-  \caption{Time spent scrolling (source: \citet{claypool2001}})
+  \caption{Time spent scrolling source: \citet{claypool2001}}
   \label{pic:scrolltime}
 \end{figure}
 \begin{figure}[h]
   \centering
   \includegraphics[width=7.5cm]{image/time.png}
-  \caption{Time spent on a page (source: \citet{claypool2001}})
+  \caption{Time spent on a page source: \citet{claypool2001}}
   \label{pic:time}
 \end{figure}
 
@@ -607,7 +606,8 @@ So, the word \emph{libraries} would be transformed to \emph{library}.
 Thus, it is important that the stemming algorithm has all necessary rules for each supported language.\\
 Another challenge for using the stemming algorithm is that all words in the basis for the tagging process must be in the stem form. 
 Otherwise the algorithm might reduce a word to its stem that would actually match already in its original form.
-Due to these maintenance problems it was decided that the stemming algorithm is not suitable for the developed system.
+Additionally a stemming algorithm cannot find words if they have spelling mistakes.
+Because of these maintenance problems it was decided that the stemming algorithm is not suitable for the developed system.
 Another possible solution for the problem is to calculate the number of changes that have to be done in order to transform the word from the text to the word from the basis for the tagging process.
 %Another possible solution for the problem is to calculate the differences between the words from the text and the words from the basis for the tagging process.
 This number can be used as an indicator whether the words are similar or not.
@@ -616,7 +616,7 @@ This creates the need for a metric that indicates the difference or distance bet
 A well known metric for such a task is the \emph{levenshtein distance} which will be used in the system and will be explained in the following section.
 \subsection{Levenshtein Distance}
 
-The \emph{levenshtein distance} calculates the minimum numbers of substitutions, insertions and deletions that are needed to change one word into another.
+The \emph{levenshtein distance} calculates the minimum numbers of substitutions, insertions and deletions that are needed to change one word into another[\citet{wiki:levenshteinDistance}].
 The following example explains the levenshtein distance for the words \emph{library} and \emph{libraries}.
 The algorithm has to perform two deletions and one substitution in order to create the word \emph{library} out of the word \emph{libraries}.
 If it creates the word \emph{libraries} out of the word \emph{library} it has to perform a substitution and two insertions.
@@ -890,39 +890,39 @@ Therefore the new deterministic levenshtein automaton is (Q', $\Sigma$, $q_0'$, 
      \node[state] (2_0-2_1-1_1-3_1) [below left=of 1_0-1_1-0_1-2_1] {$\begin{matrix} 2^0 & 2^1\\ 1^1 & 3^1 \end{matrix}$}; 
      \node[state, accepting] (3_0-3_1-2_1-4_1) [below left=of 2_0-2_1-1_1-3_1] {$\begin{matrix} 3^0 & 3^1\\ 2^1 & 4^1 \end{matrix}$}; 
 
-     \node[state, accepting] (4_0-4_1-3_1) [below left=of 3_0-3_1-2_1-4_1] {$\begin{matrix} 4^0 & 4^1\\ 3^1 \end{matrix}$}; 
+     \node[state, accepting] (4_0-4_1-3_1) [below left=of 3_0-3_1-2_1-4_1, yshift=-0.5cm] {$\begin{matrix} 4^0 & 4^1\\ 3^1 \end{matrix}$}; 
 
      %first not t,e
-     \node[state] (0_1-1_1) [below right=of 0_0-1_1] {$\begin{matrix} 0^1 & 1^1\end{matrix}$}; 
+     \node[state] (0_1-1_1) [below right=of 0_0-1_1, xshift=-0.5cm] {$\begin{matrix} 0^1 & 1^1\end{matrix}$}; 
 
      %first e
      \node[state] (0_1-1_1-2_1) [right=of 0_1-1_1] {$\begin{matrix} 0^1 & 1^1\\ 2^1 \end{matrix}$}; 
 
       %q1 edges
      \node[state] (1_1-2_1) [below right=of 1_0-1_1-0_1-2_1] {$\begin{matrix} 1^1 & 2^1 \end{matrix}$}; 
-     \node[state] (1_1-2_1-3_1) [below =of 1_1-2_1] {$\begin{matrix} 1^1 & 2^1 \\ 3^1 \end{matrix}$}; 
+     \node[state] (1_1-2_1-3_1) [below =of 1_1-2_1, xshift=-0.1cm] {$\begin{matrix} 1^1 & 2^1 \\ 3^1 \end{matrix}$}; 
 
      %elementar
-     \node[state] (1_1) [below left=of 0_1-1_1-2_1] {$1^1$}; 
-     \node[state] (2_1) [below right=8em of 1_1-2_1-3_1] {$2^1$}; 
-     \node[state] (3_1) [below =of 2_1] {$3^1$}; 
+     \node[state] (1_1) [below left=of 0_1-1_1-2_1, xshift=0.5cm] {$1^1$}; 
+     \node[state] (2_1) [below right=8em of 1_1-2_1-3_1, yshift=2cm] {$2^1$}; 
+     \node[state] (3_1) [below =of 2_1, yshift=-2cm] {$3^1$}; 
 
 
 
      \node[state, accepting] (3_1-4_1) [below =of 3_0-3_1-2_1-4_1] {$\begin{matrix} 3^1 & 4^1 \end{matrix}$}; 
 
-     \node[state] (2_1-3_1) [below =of 1_1-2_1-3_1] {$\begin{matrix} 2^1 & 3^1 \end{matrix}$}; 
-     \node[state, accepting] (2_1-3_1-4_1) [below left=of 2_1-3_1] {$\begin{matrix} 2^1 & 3^1\\ 4^1 \end{matrix}$}; 
-     \node[state, accepting, minimum size=4.5em] (4_1) [below =of 2_1-3_1-4_1] {$4^1$}; 
+     \node[state] (2_1-3_1) [below =of 1_1-2_1-3_1, xshift=0.1cm] {$\begin{matrix} 2^1 & 3^1 \end{matrix}$}; 
+     \node[state, accepting] (2_1-3_1-4_1) [below left=of 2_1-3_1, xshift=-0.5cm, yshift=1.5cm] {$\begin{matrix} 2^1 & 3^1\\ 4^1 \end{matrix}$}; 
+     \node[state, accepting, minimum size=4.5em] (4_1) [below =of 2_1-3_1-4_1, xshift=1.0cm, yshift=-0.5] {$4^1$}; 
      \path[->]
      (0_0-1_1) edge node {$\neg t \wedge \neg e$} (0_1-1_1)
-     (2_0-2_1-1_1-3_1) edge node {$\neg s \land \neg t$} (2_1-3_1)
+     (2_0-2_1-1_1-3_1) edge[bend right=15] node {$\neg s \land \neg t$} (2_1-3_1)
      (2_0-2_1-1_1-3_1) edge node {t} (2_1-3_1-4_1)
-     (0_0-1_1) edge node {e} (0_1-1_1-2_1)
+     (0_0-1_1) edge[bend left=15] node {e} (0_1-1_1-2_1)
      (1_0-1_1-0_1-2_1) edge node {$\neg e \wedge \neg s$} (1_1-2_1)
      (1_0-1_1-0_1-2_1) edge node {s} (1_1-2_1-3_1)
      (0_1-1_1) edge  node {t} (1_1)
-     (0_1-1_1) edge  node {e} (2_1)
+     (0_1-1_1) edge  node[bend right=15] {e} (2_1)
      (1_1) edge  node {e} (2_1)
      (2_1) edge  node {s} (3_1)
      (3_1) edge  node {t} (4_1)
@@ -940,10 +940,10 @@ Therefore the new deterministic levenshtein automaton is (Q', $\Sigma$, $q_0'$, 
      (2_1-3_1) edge  node {t} (4_1)
      (0_1-1_1-2_1) edge  node {t} (1_1)
      (0_1-1_1-2_1) edge  node {e} (2_1)
-     (0_1-1_1-2_1) edge[bend left=30]  node {s} (3_1)
+     (0_1-1_1-2_1) edge[bend left=15]  node {s} (3_1)
      (1_1-2_1-3_1) edge  node {e} (2_1)
      (1_1-2_1-3_1) edge  node {s} (3_1)
-     (1_1-2_1-3_1) edge  node {t} (4_1)
+     (1_1-2_1-3_1) edge[bend right=10] node {t} (4_1)
      (4_0-4_1-3_1) edge  node  {$\Sigma$} (4_1);
 
 
@@ -988,12 +988,30 @@ This deterministic finite automaton with degree $n \in \mathbb{N}$ for a word $W
   \end{algorithmic}
 \end{algorithm}
 
+%Jetzt koennen fuer all woerter in einem item ein solcher deterministischen automaten erstellt werden.
+%Allerdings kann nich fuer jeden automaten die gleiche degree verwendet werden, da ansonsten fuer ein kurzes word mit drei buchstaben eine distance von drei gewaehlt wird und somit alle woerter mit drei buchstaben matchen wuerden.
+With this concept for each word in an item a deterministic Levenshtein automaton can be generated.
+With the Levenshtein automaton it is decidable if a word is in a specific distance.
+However, it is not a good approach to use the same distance for all words if for example the standard distance would be three then each word that has three or less letters would match with every other word of the same size yielding a lot of false matches.
+Therefore there is a need for creating ranges for the degree of a Levenshtein automaton in dependence to the length of the word which is introduced in this thesis.
+The most occurring change of a noun is the plural form.
+The book \emph{German Noun Plural reconsidered} by \citet{thiessen2009pluralbildung} describes different forms of plural creation in the German language.
+According to \citet{thiessen2009pluralbildung} the maximum number of letters that are appended as a suffix during the plural creation process for nouns is two.
+These suffixes are \emph{-er} and \emph{en}.
+However there are word forms that change the vowel into an umlaut during the plural creation process.
+Therefore the maximum Levenshtein distance between a noun and its plural form is three.
+
 The maximum distance for a given word $W \in \Sigma^*$ depends on the length n of W.
 %\todo{try to find the nouns of the content cause these are the keywords of the text}
 %todo the word W is the plural form therefore it should be if n > 7 degree 3 is used otherwise 1
-A word with a length of $n\leq3$ in the STW is usually an abbreviation and therefore is only used as a direct match.
-A word with a length of $n>3$ is used with a maximum distance of one due to the reason that most of the plural forms for short words involve the appending of a letter.
-A word with a length of $n\geq6$ is used with a maximum distance of three considering that composing the plural form of a word involves a maximum of three changes (substitution, insertion and deletion) in the German language. \todo{add source Die Pluralbildung im Deutschen: Eine Untersuchung an Hand der Optimalitätstheorie: "German Noun Plural reconsidered" von Dieter Wunderlich explain that there are 15 different plural forms \dots}
+A word with a length of $n\leq 3$ in the STW is usually an abbreviation and therefore is only used as a direct match.
+A word with a length of $3<n\leq 5$ is used with a maximum distance of one.
+Therefore all noun plural forms that are created with the appending of one suffix are matched as well as spelling mistakes with a distance of one but the cases with a distance of more than one character are not matched.
+This choice is made because a distance of more than one would yield too many false matches for such short words.
+A word with a length of $6\leq n$ is used with a maximum distance of three.
+Thus, all plural forms that are created for a word with five or more letters are matched.
+If the stem of a word has five letters a plural form would add at least one additional letter and therefore the word would have at least six letters.
+This would create a deterministic Levenshtein automaton with a degree of three for this word which would match all plural forms.
 %Maskulina und Neutra mit er-Plural 3 aenderungen Wurm Wuermer
 %substantive mit er plural beisplie Fass Faesser
 
@@ -1068,14 +1086,75 @@ On the other hand collaborative recommendation systems need an initial amount of
 Additionally, they have no information about the subject of the items and this might lead to a situation were a collaborative filtering system might recommend inappropriate items to the current context. 
 Nonetheless collaborative filtering is the only approach that takes the interest of similar users into account. 
 As such it is the only technique that is able to recommend items that are approved by similar users. 
-Besides the content-based systems have the disadvantage that they do not make use of the information whether or not a user likes a document.
-Yet, they do not need to collect additional relationship information in order to recommend items.
+Besides the content-based systems have the disadvantage that they do not make use of the information whether or not a user is interested in a document.
+Thus they can only recommend items based on the context and are not able to recommend items that were interesting to other users in the past.
+Therefore it is possible that a content-based system recommends user generated content of poor quality which is not desirable.
 Due to the fact that the user generated content is not moderated and therefore the system has no information about the quality of the content the implemented system uses a collaborative filtering technique with pre filtered content based on the tags for each item.
 This approach should yield the best possible recommendations for a user of the system.
 
 %%definitions Users, items, ratings, predictions
 \subsection{Collaborative recommendation system}
+The following definitions are based on \citet{recommender2011}
+\begin{definition}[User]
+  $U = \{u_1, u_2, u_3, \dots, u_n\}$ is a set with $u_i$ being users from the recommendation system in which $n, i \in \mathbb{N}$ and $i \leq n$.
+\end{definition}
+
+\begin{definition}[Item]
+  $I = \{i_1, i_2, i_3, \dots, i_n\}$ is a set with $i_j$ being items from the recommendation system in which $n, j \in \mathbb{N}$ and $j \leq n$.
+\end{definition}
+
+\begin{definition}[Rating]
+  R is an $n \times m$ matrix with $n = |I|$ and $m = |U|$. 
+  Furthermore $r_{n,m}$ is a rating for item $n \in I$ and user $m \in U$ with $r_{n,m}$ being an entry in R and $r_{n,m} \in \{1, 2, 3, 4, 5\}$.
+  If a user $k \in U$ has not rated an item $l \in I$ the entry $r_{l, k}$ remains empty.
+  $\hat{I_u}$ is a set with all items $i \in I$ in which $r_{i, u}$ is empty and $\tilde{I_u}$ is a set with all items i and $r_{i, u}$ is not empty.
+\end{definition}
+
+\begin{definition}[Prediction]
+  A prediction is a rating $r_{i,u}$ for item $i \in I$ and user $u \in U$ with $r_{i,v}$ being an empty entry in $R$.
+\end{definition}
+
+\begin{definition}[Recommendation]
+  Let $n \in \mathbb{N}$ and $u \in U$.
+  A recommendation is a set of n predictions for a user u ordered by the values of the predictions.
+\end{definition}
+
+
 As mentioned above a collaborative recommendation system recommends items to users based on the interest of similar users.
+All of the collaborative recommendation techniques can be divided into two different stages of calculations.
+The first calculation stage is called \emph{offline calculation} in this thesis these include all calculations that are used to calculate the similarity between items or users.
+The second calculation stage is called \emph{prediction calculation} in this thesis this stage includes all calculations that are used to calculate the rating predictions for a user-item pair.
+The book \emph{Recommender Systems An Introduction} by \citet{recommender2011} differentiates between a number of different collaborative filtering techniques which are outlined below.
+\subsubsection{User Based Nearest Neighbour Recommendations}
+The user based nearest neighbour recommendation technique is one of the earliest collaborative recommendation methods.
+It recommends items based on the similarity between users.
+Therefore the similarity between each user is computed and the prediction for a user-item pair is calculated by using the most similar users that rated the item and multiplying the similarity of the users with the rating the result is normalized by the sum of all similarities of the users that were used.
+%pearson found by harlocker to be the best formula to calculate the similarities between users
+\subsubsection{Item Based Recommendations}
+The item based recommendation method calculates rating predictions based on the similarity between the items.
+Thus, it is similar to the user based nearest neighbour recommendation technique but it uses the similarity between the items instead of the similarity between the users to calculate the rating predictions.
+\subsubsection{Matrix Factorization Recommendations}
+The matrix factorization recommendation technique can be used to derive a set of latent factors from the user-item rating matrix.
+These latent factors can be used as vectors which can characterize users or items.
+In the movie domain such a latent factor can correspond to obvious aspects of a movie such as the genre of the movie but it can also be uninterpretable.
+The vectors of latent factors can be used for calculating the similarities between users.
+Finally, these user similarities can be used for calculating the prediction for a user-item pair in the same manner that is used for the user based nearest neighbour recommendation technique.
+\subsubsection{Probabilistic Recommendations}
+The probabilistic recommendation technique creates groups of users and calculates the probability of group membership for each user.
+If a prediction has to be calculated for an user $u \in U$ and an item $i \in I$ the probability that the group in which user u belongs is used to decide whether u likes item i or not.
+However, the number of user groups and the maximum size of each group have to be evaluated for each use case depending on the prediction quality.
+
+\subsubsection{Thesis Recommendation Approach}
+The recommendation approach that is developed in this thesis is a combination of item based and matrix factorization recommendations.
+In productive recommendation systems the user-item rating table is usually very sparse [\citet{recommender2011}].
+That means that most users only rate a low number of items.
+Thus, the rating matrix that is used for calculating the matrix factorization has a lot of empty entries.
+The idea behind the approach in this thesis is to predict the missing entries of the rating matrix with the item based recommendation approach.
+Therefore, the matrix factorization can be calculated with a matrix that provides more rating data.
+Hence, the latent factors that are derived by the matrix factorization should be more distinctive and should result in better user similarities. 
+For the part of the matrix factorization this thesis uses the \emph{singular value decomposition} which is a well known matrix factorization technique.
+The following pages explain the item based recommendation technique and the recommendation technique based on the singular value decomposition in more detail.
+
 % -different collaborative recommendation techniques
 % -user based nearest neighbor recommendations
 % --Memory based approach best similarity measure pearson correlation 
@@ -1084,78 +1163,62 @@ As mentioned above a collaborative recommendation system recommends items to use
 % -matrix factorization techniques
 % --uses matrix factorization techniques to get latent data that is hidden in the user item matrix this data is used to create recommendations
 % -probabilistic recommendation
-% --Uses techniques from the probabilistic theory one of the main approaches of these techniques are to create groups of similar users, at runtime the probability for a user is calculated in which group he belongs and whether the group likes an item or not. Performance depends on the number of groups and the group size
-The following definitions are based on \citet{recommender2011}
-\begin{definition}[User]
-  $U = \{u_1, u_2, u_3, \dots, u_n\}$ is a set with $u_i$ users from the recommendation system. With $n, i \in \mathbb{N}$ and $i \leq n$.
-\end{definition}
-
-\begin{definition}[Item]
-  $I = \{i_1, i_2, i_3, \dots, i_n\}$ is a set with $i_j$ items from the recommendation system. With $n, j \in \mathbb{N}$ and $j \leq n$.
-\end{definition}
-
-\begin{definition}[Rating]
-  R is an $n \times m$ matrix with $n = |I|$ and $m = |U|$. 
-  Furthermore is $r_{n,m}$ a rating for item $n \in I$ and user $m \in U$ with $r_{n,m}$ entry in R and $r_{n,m} \in \{1, 2, 3, 4, 5\}$.
-  If a user $k \in U$ has not rated an item $l \in I$ the entry $r_{l, k}$ remains empty.
-  $\hat{I_u}$ is a set with all items $i \in I$ where $r_{i, u}$ is empty, $\tilde{I_u}$ is a set with all items i and $r_{i, u}$ is not empty.
-\end{definition}
-
-\begin{definition}[Prediction]
-  A prediction is a rating $r_{i,u}$ for item $i \in I$ and user $u \in U$ with $r_{i,v}$ empty entry in $R$.
-\end{definition}
-
-\begin{definition}[Recommendation]
-  Let $n \in \mathbb{N}$ and $u \in U$.
-  A recommendation is a set of n predictions for a user u ordered by the values of the predictions.
-\end{definition}
-
+% --
+% kombinieren von itembased und svd based recommendations to improve the rating matrix that is needed for the svd and thus generate better latent semantic factors that are used for calculating the similarity between the users
 %There are different types of collaborative recommendation techniques.
 %\todo{explain probabilistic and slope one and why you didn't choose them}
 
 \subsubsection{Item-Based Recommendation}
 The concept of item-based recommendation was introduced by \citet{sarwar2001}.
-The idea behind this concept is that recommendations can be calculated based on similar items of the items that a user likes.
-If $i, \in \hat{I_u}$ and $u \in U$, then the prediction for i can be calculated with the similarity between i and all items $j \in \tilde{I_u}$.
-One method for calculating the similarity between two items is the cosine similarity.
+The idea behind this concept is that recommendations can be calculated based on similar items of the items that a user rated.
+If $i \in \hat{I_u}$ and $u \in U$, then the prediction for i can be calculated using the similarity between i and all items $j \in \tilde{I_u}$.
+Researches made by \citet{sarwar2001} show that the \emph{adjusted cosine similarity} has the best performance with attention to prediction accuracy compared to all other similarity measures for item based algorithms. 
+The adjusted cosine similarity is a special form of the \emph{cosine similarity} which is explained in the following definition which is based on \citet{recommender2011}.
 %However, \citet{sarwar2001} found out that the similarity calculation with the best performance is \emph{adjusted cosine similarity} which is an optimized form of the \emph{cosine similarity}.
 \begin{definition}[Cosine Similarity]
-  With i, j $\in \mathbb{N}^n$, n $\in \mathbb{N}$.
+  \label{cosineSimilarity}
+  One has i, j $\in \mathbb{N}^n$, n $\in \mathbb{N}$ so that
   \begin{equation}
-    cos(\overrightarrow{i}, \overrightarrow{j}) = \frac{\overrightarrow{i} \cdot \overrightarrow{j}}{||\overrightarrow{i}||_2 \cdot ||\overrightarrow{i}||_2}
+    cos(\overrightarrow{i}, \overrightarrow{j}) = \frac{\overrightarrow{i} \cdot \overrightarrow{j}}{||\overrightarrow{i}||_2 \cdot ||\overrightarrow{i}||_2} = \frac{\sum_{i = 1}^{n}\overrightarrow{a_i}\overrightarrow{b_i}}{\sqrt{\sum_{i = 1}^n \overrightarrow{a_i}^2} \sqrt{\sum_{i = 1}^n\overrightarrow{b_i}^2 }}
   \end{equation}
-\end{definition}
-If $\overrightarrow{i}, \overrightarrow{j}$ are rating vectors, the individual rating behaviour of a user needs to be taken into account to get better predictions with the similarities of $\overrightarrow{i}$ and $\overrightarrow{j}$.
-Due to the fact that different users have different average ratings.
-This results in the \emph{adjusted cosine similarity}.
+\end{definition}.
+In general the results of the cosine similarity vary between -1 and 1.
+However, the values of the vectors in the use case of the recommendation system are in the range of 1 to 5.
+Therefore the vectors do not include negative values and the cosine similarity in the domain of the recommendation systems vary between 0 and 1.
+According to \citet{recommender2011} results of the cosine similarity near to 1 mean strong similarity between the items.
+If $\overrightarrow{i}$ and $\overrightarrow{j}$ are rating vectors, the individual rating behaviour of a user needs to be taken into account to improve the similarities between $\overrightarrow{i}$ and $\overrightarrow{j}$.
+Due to the fact that some users tend to rate items in general higher or lower than other users.
+Yielding different average ratings for different users.
+This results in the adjusted cosine similarity.
 \begin{definition}[Adjusted Cosine Similarity]
-  Let $i,j \in Items$ and $\overline{r_u}$ be the average rating from user u.
+  \label{adjustedCosine}
+  Let $i,j \in I$(Items) and $\overline{r_u}$ be the average rating from user u.
   The cosine similarity can be transformed to the adjusted cosine similarity by subtracting the average user rating from the current rating.
+  Let $\tilde{U}$ be all users that rated item i and item j.
   \begin{equation}
-    sim(i, j) = \frac{\sum_{u \in U}{(r_{u, i} - \overline{r_u})(r_{u, j} - \overline{r_u})}}{\sqrt{\sum_{u \in U}(r_{u,i} - \overline{r_u})^2} \sqrt{\sum_{u \in U}(r_{u,j} - \overline{r_u})^2}}
+    sim(i, j) = \frac{\sum_{u \in \tilde{U}}{(r_{u, i} - \overline{r_u})(r_{u, j} - \overline{r_u})}}{\sqrt{\sum_{u \in \tilde{U}}(r_{u,i} - \overline{r_u})^2} \sqrt{\sum_{u \in \tilde{U}}(r_{u,j} - \overline{r_u})^2}}
   \end{equation}
 \end{definition}
-Researches made by \citet{sarwar2001} show that the \emph{adjusted cosine similarity} has the best performance with attention to prediction accuracy compared to all other similarity measures for item based algorithms. 
-The results of the cosine similarity are between -1 and 1 with 1 meaning identical, 0 meaning indifferent and -1 meaning opposite [\citet{wikiCosineSimilarity}].
-Although the results vary between -1 and 1 those items that have a \emph{cosine similarity} of $\leq 0$ are too different and thus are not used for further calculations.
-The user item predictions can be generated with the similarities by using the following formula.
+The results of the adjusted cosine similarity are between -1 and 1 with 1 meaning identical, 0 meaning indifferent and -1 meaning opposite [\citet{recommender2011}].
+The user item predictions can be generated with the similarities by using the following formula which is based on \citet{recommender2011}.
 \begin{definition}[Item Based Prediction]
+  \label{itemPrediction}
   \begin{equation}
     pred(u, p) = \frac{\sum_{i \in \tilde{I_u}}{sim(i, p) \cdot r_{u, i}}}{\sum_{i \in \tilde{I_u}}{ sim(i, p)}}
   \end{equation}
 \end{definition}
 The item similarity calculations can be calculated offline on a regular basis - every day or weekly - depending on the activeness of the users and the amount of item changes.
 So, the item based technique is a good choice for websites that need fast scalable recommendations because only the item predictions are calculated on time.
-Furthermore the team of \emph{Sarwar et al} found out that the system only needs a subset of all items.
-According to \emph{Sarwar et al} a sample of the 25 most similar items is needed to generate good recommendations.
+Furthermore the team of \citet{sarwar2001} found out that the system only needs a subset of all items.
+According to \citet{sarwar2001} a sample of the 25 most similar items is needed to generate good recommendations.
 Thus the on time calculation needs to find the top 25 most similar users in the similarity table and has to calculate the recommendations with these users instead of using all similar users.
 Moreover, it is a tested concept for instance amazon.com uses item based recommendations for their product recommendations [\citet{amazon2003}]. 
 To get back to the overall concept, the item based predictions are used in order to decrease the rating sparsity of the user-item table. 
-So, more information about the user's interest is available before the actual recommendations can be calculated.
+Consequently, more information about the user's interest is available before the actual user similarities are calculated with the \emph{singular value decomposition} which is explained in the following section.
 In real world recommendation systems the user item ratings tend to be very sparse because most users only rate few items [\citet{recommender2011}].
 
 \subsubsection{Example for Item-Based Recommendations}
-The table in figure ~\ref{itemBasedTable} represents a user item relationship.\\
+The table in figure~\ref{itemBasedTable} represents a user item relationship.\\
 
 \begin{figure}[H]
   \centering
@@ -1171,75 +1234,122 @@ The table in figure ~\ref{itemBasedTable} represents a user item relationship.\\
   \label{itemBasedTable}
 \end{figure}
 
-  This example calculates the item based prediction for User1 and Item5
+  This example calculates the item based prediction for User1 and Item5.
+  For the adjusted cosine formula the average ratings for all users are needed.
   \begin{displaymath}
-   sim(Item5,Item1) = {{3\cdot3 + 5\cdot4 + 4\cdot3 + 1\cdot1} \over {\sqrt{3^2 + 5^2 + 4^2 + 1^2} \cdot \sqrt{3^2 + 4^2 + 3^2 + 1^2}}} = 0.99
+    \overline{r}_{User1} = \frac{\sum\limits_{i \in \tilde{I}_{User1}}{r_{User1, i}}}{\sum\limits_{i \in \tilde{I}_{User1}} 1} = \frac{5 + 3 + 4 + 4}{4} = 4.0
   \end{displaymath}
-  sim(Item5, Item1) = 0.99\\
-  sim(Item5, Item2) = 0.74\\
-  sim(Item5, Item3) = 0.72\\
-  sim(Item5, Item4) = 0.94\\
-  With these similarities the following prediction can be calculated.
+  The following average ratings are calculated analog.\\
+  $\overline{r}_{User2} = 2.4$ \\
+  $\overline{r}_{User3} = 3.8$ \\
+  $\overline{r}_{User4} = 3.2$ \\
+  $\overline{r}_{User5} = 2.8$ \\
+  The following formula calculates the adjusted cosine similarity from definition~\ref{adjustedCosine} between Item5 and Item1.
+
+  \footnotesize
   \begin{displaymath}
-    pred(User1, Item5) = {{0.99 \cdot 5 + 0.74 \cdot 3 + 0.72 \cdot 4 + 0.94 \cdot 4} \over {0.99 + 0.74 + 0.72 + 0.94}} = 4.07
+   sim(Item5,Item1) =
+ \end{displaymath}
+  \begin{displaymath}
+    {{(3-2.4)\cdot(3-2.4) + (5-3.8)\cdot(4-3.8) + (4-3.2)\cdot(3-3.2) + (1-2.8)\cdot(1-2.8)} \over {\sqrt{(3-2.4)^2 + (5-3.8)^2 + (4-3.2)^2 + (1-2.8)^2} \cdot \sqrt{(3-2.4)^2 + (4-3.8)^2 + (3-3.2)^2 + (1-2.8)^2}}} = 0.8040 
+  \end{displaymath}
+  \normalsize
+  Similar to this calculation one computes the degree of similarity between Item5 and Item2, Item3 as well as Item4. 
+  The results are shown below.\\
+  sim(Item5, Item2) = -0.9082\\
+  sim(Item5, Item3) = -0.7635\\
+  sim(Item5, Item4) = 0.4330\\
+  With these similarities the following prediction can be calculated using the item based prediction formula of definition~\ref{itemPrediction}.
+  \begin{displaymath}
+    pred(User1, Item5) = {{0.8040 \cdot 5 + (-0.9082) \cdot 3 + (-0.7635) \cdot 4 + 0.4330 \cdot 4} \over {0.8040 + (-0.9082) + (-0.7635) + 0.4330}} = 4.6501
   \end{displaymath}
 
-  As a result User1 would most likely rate Item5 with 4.07.
+  As a result User1 would most likely rate Item5 with 4.6501.
 
 \subsubsection{Singular Value Decomposition}
 The singular value decomposition is a matrix factorization technique that can be used to find latent factors in the rating patterns.
 With these factors it is possible to find similar users and items.
 The singular value decomposition was found in the late 1800 to early 1900 [\citet{historyOfSVD}].
 Besides one of the main areas of application of the singular value decomposition today is information retrieval.
-The basic idea behind the singular value decomposition based information retrieval is to match user queries to documents.
-This is done by decomposing a term by document matrix and using the item vectors of the decomposition to find documents based on queries that are decomposed into term vectors [\citet{deerwester1990}].
-\begin{definition}[Vector]
-\end{definition}
-\begin{definition}[Matrix]
-\end{definition}
+The basic idea behind the singular value decomposition based information retrieval is to match user queries to documents [\citet{deerwester1990}].
+%This is done by decomposing a term by document matrix and using the item vectors of the decomposition to find documents based on queries that are decomposed into term vectors .
 \begin{definition}[Linear Dependent, Linear Independent]
-\end{definition}
-\begin{definition}[Rank of a Matrix]
-\end{definition}
-\begin{definition}[Matrix Multiplication]
-\end{definition}
-\begin{definition}[Orthogonal Matrix]
-\end{definition}
-\begin{definition}[Eigenvalue of a Matrix]
+  Let $v_1, v_2, \dots, v_n$ be a list of vectors in $\mathbb{R}^k$ whereby $k \in \mathbb{N}$.
+  This list of vectors is called linear independent if the only possible solution of $a_1, a_2, a_3, \dots, a_m \in \mathbb{R}$ that makes $a_1v_1 + a_2v_2 + \dots + a_nv_n$ equal to 0 is $a_1 = \dots = a_n = 0$.
+  A list of vectors is called linear dependent if they are not linear independent.
+  In other words if at least one element of $a_1, a_2, a_3, \dots, a_m$ is not null such that $a_1v_1 + \dots + a_nv_n$
 \end{definition}
 
-The singular value decomposition of an $m \times n$ matrix with rank r is a factorization of the form:
-\begin{equation}
+\begin{definition}[Rank of a Matrix]
+  $https://en.wikipedia.org/wiki/Rank_(linear_algebra)$
+  The rank of a matrix A is the maximum number of linearly independent column vectors of A.
+  Due to the fact that the rank of the linearly independent column vectors is always equal to the number of linearly independent row vectors it is also correct that the rank of matrix A is the maximum number of linearly independent row vectors of A.
+\end{definition}
+\begin{definition}[Unit Vector]
+  A unit vector is a vector with length 1.
+  Let $v \in \mathbb{R}^k$, $k \in \mathbb{N}$ and v is a unit vector then the following equation becomes true.
+  \begin{displaymath}
+    ||v|| = \sqrt{\sum_{i=1}^k{v_i^2}} = 1
+  \end{displaymath}
+\end{definition}
+\begin{definition}[Orthogonal Vector]
+  Two vectors are orthogonal if the dot product of those vectors is 0.
+  Let $v, w \in \mathbb{R}^k$, $k\in \mathbb{N}$ and $v, w$ are orthogonal to each other then the following equation becomes true.
+  \begin{displaymath}
+    v \cdot w = \sum_{i = 1}^k v_i \cdot w_i = 0
+  \end{displaymath}
+\end{definition}
+\begin{definition}[Orthogonal Matrix]
+  An orthogonal matrix $A\in\mathbb{R}^k$ whereby $k\in\mathbb{N}$ is a quadratic, real matrix whose column and row vectors are pairwise orthonormal together.
+  Furthermore is the inverse of the matrix equal to the transpose of the matrix.
+  \begin{displaymath}
+    A^{-1} = A^t
+  \end{displaymath}
+  Additionally the product of an orthogonal matrix with its transpose results the identity matrix.
+  \begin{displaymath}
+    AA^t = I
+  \end{displaymath}
+\end{definition}
+\begin{definition}[Eigenvalue of a Matrix]
+  An eigenvector of a square matrix A is a non-zero vector v that, when multiplied by A, yields the original vector multiplied by a single number $\lambda$; that is:
+  \begin{displaymath}
+    Av = \lambda v
+  \end{displaymath}
+  The number $\lambda$ is called the eigenvalue of A corresponding to v.
+\end{definition}
+
+The singular value decomposition of an $m \times n$ matrix M with rank r is a factorization of the form:
+\begin{displaymath}
   SVD(M) = U \Sigma V^t
-\end{equation}
-U and V are orthogonal matrices with dimension $m \times r$ and $r \times n$. 
+\end{displaymath}
+U and V are orthogonal matrices with dimension $m \times r$ and $r \times n$ respectively. 
 Furthermore $\Sigma$ is a rectangular diagonal matrix with dimension $r \times r$.
 The diagonal values $\sigma_{i,i} \in \Sigma$ with $i \in \mathbb{N}$ have by convention the property $\sigma_{i,i} \geq \sigma_{i+1,i+1} > 0$.
-The $\sigma_{i,i}$ are the none negative square roots of the eigenvalues of $AA^t$ and $A^tA$ \footnote{Due to the fact that $AA^t$ and $A^tA$ share the same eigenvalues.} [\citet{numericalLinearAlgebra}]. 
+The $\sigma_{i,i}$ are the none negative square roots of the eigenvalues of $AA^t$ and $A^tA$ [\citet{numericalLinearAlgebra}]\footnote{$AA^t$ and $A^tA$ share the same eigenvalues.}. 
 The columns of U are the corresponding eigenvectors to the eigenvalues of $AA^t$.
-On the other hand are the columns of the Matrix V the corresponding eigenvectors to the eigenvalues of $A^tA$ \footnote{The eigenvalues are the squares of $\sigma_{i,i}$} [\citet{numericalLinearAlgebra}].
-So, $AA^t \cdot u_i = \sigma_{i,i}^2 * u_i$.\\ %\todo{is this a reason why this spans the columns of the original matrix A?}
-%\todo{U spans column space V spans row space}\\
-To sum this up, the matrix U corresponds to the columns of the matrix A and the matrix V corresponds to the rows of the matrix A.
-It is possible to obtain an optimal rank k approximation from matrix A, with $k \leq r$.
-By setting all $\sigma_{i,i}$ with $i > k$ to zero [\citet{matrixAlgorithms}].
-Thus $A_k = U_k \times \Sigma_k \times V_k^t$ yields the optimal rank k approximation.
-As a result all column vectors $u_i$, with $i > k$, of matrix U will be multiplied by a zero vector from matrix $\Sigma_k$.
-Due to the fact that matrix U represents the columns of matrix A and that the last rows of matrix U will be removed in order to generate the optimal rank k approximation of matrix A, it is possible to generate a good approximation of the user's interests by removing the last rows of matrix U.\footnote{A user from the system is represented by a column in the matrix A}
+On the other hand the columns of the Matrix V are the corresponding eigenvectors to the eigenvalues of $A^tA$ [\citet{numericalLinearAlgebra}]\footnote{The eigenvalues are the squares of $\sigma_{i,i}$}.
+This results in: $AA^t \cdot u_i = \sigma_{i,i}^2 \cdot u_i$ and $A^tA \cdot v_i = \sigma_{i,i}^2 \cdot v_i$.\\ 
+To sum this up, the matrix U corresponds to the columns of the matrix A and the matrix V corresponds to the rows of the matrix A[\citet{Sarwar02incrementalsingular}].
+It is possible to obtain an optimal rank k approximation from matrix A with $k \leq r$ by setting all $\sigma_{i,i}$ with $i > k$ to zero [\citet{matrixAlgorithms}].
+Thus $A_k = U_k \Sigma_k V_k^t$ yields the optimal rank k approximation.
+As a result, all column vectors $u_i$ with $i > k$, of matrix U will be multiplied by a zero vector from matrix $\Sigma_k$.
+Due to the fact that matrix U represents the columns of matrix A and that the last rows of matrix U will be removed in order to generate the optimal rank k approximation of matrix A, it is possible to generate a good approximation of the user's interests by removing the last rows of matrix U\footnote{A user from the system is represented by a column in the matrix A}.
 The two dimensional matrix $U_2$ is created by removing all rows of matrix U up to the first two rows.
 This matrix $U_2$ can be seen as a value table that can be represented by a graph.
 Therefore, it enables a graphical presentation of the user similarities.
-Furthermore the user similarities can be calculated by using the cosine similarity between the columns of $U_k$.\\
+Furthermore, the user similarities can be computed by using the cosine similarity between the columns of $U_k$.\\
 After calculating the similarities for each user, the recommendations for $user_a \in U$ are calculated.
-For this task the algorithm takes all similar users $U_{sim}$ for $user_a$.\\
-Afterwards it uses the top rated items from all $user_b \in U_{sim}$ that are not rated by $user_a$ this is denoted by $I'_{user_a, user_b}$.
-$\overline{r_a}$ denotes the average rating of user a.
-Finally for each item $i \in I'_{user_a, user_B}$ the prediction is calculated.
+The following prediction calculation process is based on \citet{recommender2011}.
+The prediction calculation algorithm takes all similar users $U_{sim}$ for $user_a$ and uses the top rated items from all $user_b \in U_{sim}$ that are not rated by $user_a$.
+This is denoted by $I'_{user_a, user_b}$.
+$\overline{r_a}$ which constitutes the average rating of user a.
+Finally for each item $i \in I'_{user_a, user_b}$ the prediction is calculated.
 %todo if no user is logged in the default user is used to generate recommendations this user should have ratings for the items that most users are interested in.
 
-\begin{displaymath}
+\begin{equation}
+  \label{predictionSVD}
   pred_{a, i} = \overline{r_a} + \frac{\sum_{b \in U_{sim}}{(r_{i, b} - \overline{r_b}) * similarity_{a, b}}}{\sum_{b \in U_{sim}}{similarity_{a, b}}}
-\end{displaymath}
+\end{equation}
 
 % def getCalculateUserPredictions(userId: Int, path: Array[String]): Future[HttpResponse] = {
 %   val predictions = collection.mutable.HashMap[Int, List[(Int, Int, Double)]]()
@@ -1271,12 +1381,11 @@ Finally for each item $i \in I'_{user_a, user_B}$ the prediction is calculated.
 % }
 
 %\todo{how to calculate predictions with these tables}
-\newpage
-Example for a singular value based recommendation\\
+\subsubsection{Example for a singular value based recommendation}
 \begin{displaymath}
   \begin{tabular}{c c c c c c}
      &Item1 & Item2 & Item3 & Item4 & Item5 \\ 
-     User1 & 5 & 3 & 4 & 4 &  \\  
+     User1 & 5 & 3 & 4 & 4 & ? \\  
     User2 & 3 & 1 & 2 & 3 & 3\\ 
     User3 & 4 & 3 & 4 & 3 & 5\\ 
     User4 & 3 & 3 & 1 & 5 & 4\\ 
@@ -1286,8 +1395,9 @@ Example for a singular value based recommendation\\
 
 The following example calculates the rating prediction for \emph{User1} and \emph{Item5}.
 A singular value decomposition for a user item relationship table is created in figure ~\ref{svdexample}.
-The first two rows of matrix U are used to create a value table for a graph that represents the user similarities this is displayed in figure ~\ref{svdgraph}.
-The \emph{cosine similarity} is used to calculate the following similarities.
+The first two rows of matrix U are used to create a value table for a graph that represents the user similarities.
+This is displayed in figure ~\ref{svdgraph}.
+The cosine similarity from definition~\ref{cosineSimilarity} is used to calculate the following similarities.
 \begin{displaymath}
   %User5: 0.402286&0.716108
   %User4: 0.455479&-0.486113
@@ -1296,21 +1406,32 @@ The \emph{cosine similarity} is used to calculate the following similarities.
   %User1: 0.475467&0.325691
    sim(User1,User2) = {{0.475467\cdot0.342950 + 0.325691\cdot-0.316949} \over {\sqrt{0.475467^2 + 0.325691^2} \cdot \sqrt{0.342950^2 + (-0.316949)^2}}} = 0.222322
 \end{displaymath}
+In an analogous manner the other similarities are achieved:
 \begin{itemize}
   \item sim(User1, User2) = 0.222322
   \item sim(User1, User3) = 0.561072
   \item sim(User1, User4) = 0.151704
   \item sim(User1, User5) = 0.896770
 \end{itemize}
-The following itemization contains the average user ratings.
-\begin{itemize}
-  \item $\overline{r_{User2}} = 2.4$
-  \item $\overline{r_{User3}} = 3.8$
-  \item $\overline{r_{User4}} = 3.2$
-  \item $\overline{r_{User5}} = 2.8$
-\end{itemize}
-  With these similarities and average ratings the following prediction can be calculated.
-  $pred(User1, Item5) =$\\ $4 + \frac{(3 - 2.4) \cdot 0.222322 + (5 - 3.8) \cdot 0.561072 + (4 - 3.2) \cdot 0.151704 + (1 - 2.8) \cdot 0.896770}{0.222322 + 0.561072 + 0.151704 + 0.896770} = 3.6254$\\
+The following equation calculates the average rating for User1.
+\begin{displaymath}
+  \overline{r}_{User1} = \frac{\sum\limits_{i \in \tilde{I}_{User1}}{r_{User1, i}}}{\sum\limits_{i \in \tilde{I}_{User1}} 1} = \frac{5 + 3 + 4 + 4}{4} = 4.0
+  \end{displaymath}
+  The following average ratings are calculated analog.\\
+  $\overline{r}_{User2} = 2.4$ \\
+  $\overline{r}_{User3} = 3.8$ \\
+  $\overline{r}_{User4} = 3.2$ \\
+  $\overline{r}_{User5} = 2.8$ \\
+
+With these similarities and average ratings the following prediction which is defined in equation~\ref{predictionSVD} can be calculated.
+  \footnotesize
+  \begin{displaymath}
+    pred(User1, Item5) =
+  \end{displaymath}
+  \begin{displaymath}
+    4 + \frac{(3 - 2.4) \cdot 0.222322 + (5 - 3.8) \cdot 0.561072 + (4 - 3.2) \cdot 0.151704 + (1 - 2.8) \cdot 0.896770}{0.222322 + 0.561072 + 0.151704 + 0.896770} = 3.6254
+  \end{displaymath}
+\normalsize
   As a result User1 would most likely rate Item5 with 3.6254.
   %todo This example underlines the need of removing the sparsity of a rating table because every empty entry \dots
 \begin{figure}[h]
@@ -1323,6 +1444,10 @@ The following itemization contains the average user ratings.
     User4 & 3 & 3 & 1 & 5 & 4\\ 
     User5 & 1 & 5 & 5 & 2 & 1\\ 
   \end{tabular} = 
+\end{math}\\
+
+
+\begin{displaymath}
 
   \begin{pmatrix}
     0.475467&0.325691&0.798636&-0.053513&-0.164835\\0.342950&-0.316949&0.082532&-0.250224&0.844099\\0.535742&-0.210593&-0.362530&-0.589189&-0.435955\\0.455479&-0.486113&-0.054206&0.729352&-0.146077\\0.402286&0.716108&-0.470107&0.235423&0.221199
@@ -1333,20 +1458,25 @@ The following itemization contains the average user ratings.
   \begin{pmatrix} 
     0.46825&0.432206&0.46056&0.487586&0.379564\\-0.177671&0.42127&0.572180&-0.250389&-0.633148\\0.609379&-0.316926&-0.139853&0.322858&-0.635938\\-0.392214&0.489216&-0.480126&0.571026&-0.224148\\-0.473276&-0.544015&0.458702&0.518898&-0.019831
   \end{pmatrix}
-\end{math}
+\end{displaymath}
 \caption{Singular Value Decomposition of the User Item Relationship Table}
 \label{svdexample}
 \end{figure}
 
 \begin{figure}
-\begin{minipage}{0.3\textwidth}
-\begin{math}
+\begin{displaymath}
     \begin{pmatrix}
+    User1  \\ User2  \\ User3 \\ User4  \\ User5 
+  \end{pmatrix} 
+   =
+  \begin{pmatrix}
     0.475467&0.325691  \\ 0.342950&-0.316949  \\ 0.535742&-0.210593 \\ 0.455479&-0.486113  \\ 0.402286&0.716108 
   \end{pmatrix} 
-\end{math}
-\end{minipage}
-\begin{minipage}{0.7\textwidth}
+\end{displaymath}\\
+
+
+
+\begin{center}
 \begin{tikzpicture}[scale=3.0]
  \begin{scope}[thin,black,dot/.style={fill=blue,circle,inner sep=0pt,minimum size=3pt}]
    %x-y-Koordinatensystem
@@ -1365,23 +1495,23 @@ The following itemization contains the average user ratings.
 
 
    \coordinate (user1) at (0.475467, 0.325691); 
-   \node[dot] at (user1);
+   \node[dot] at (user1){};
    \node [anchor=west] at (user1) {$User1$};
 
    \coordinate (user2) at (0.342950, -0.316949); 
-   \node[dot] at (user2);
+   \node[dot] at (user2){};
    \node [anchor=west] at (user2) {$User2$};
 
    \coordinate (user3) at (0.535742, -0.210593); 
-   \node[dot] at (user3);
+   \node[dot] at (user3){};
    \node [anchor=south west] at (user3) {$User3$};
 
    \coordinate (user4) at (0.455479, -0.486113); 
-   \node[dot] at (user4);
+   \node[dot] at (user4){};
    \node [anchor=west] at (user4) {$User4$};
 
    \coordinate (user5) at (0.402286, 0.716108); 
-   \node[dot] at (user5);
+   \node[dot] at (user5){};
    \node [anchor=west] at (user5) {$User5$};
 
    
@@ -1389,55 +1519,60 @@ The following itemization contains the average user ratings.
    
  \end{scope}
 \end{tikzpicture}
+\end{center}
 \caption{Similar Users based on Singular Value Decomposition}
 \label{svdgraph}
-\end{minipage}
 \end{figure}
 
 \newpage
 \subsection{The recommendation process}
+The last section describes the concept of the item based and SVD based recommendations.
+This section explains the combination of these two concepts to create a new recommendation system that is evaluated in this thesis.
 The sparsity of the user item table is decreased by using item based predictions for user-item pairs that are not rated.
 For this process the system uses the similarities between rated and not rated user-item pairs.
-Therefore for each user (u) the rating for a not rated item (i) is predicted by using the similarity of i and items that are rated by u.
+For each user (u) the rating for a not rated item (i) is predicted by using the similarity of i and items that are rated by u.
 This improved user item table is decomposed into three matrices $U$, $\Sigma$ and $V^t$. 
-The matrix U represents the user interests and is reduced by k rows in order to improve the execution time of the recommendation process.%\todo{improve noise}
+The matrix U represents the user interests and is reduced by k rows in order to improve the execution time of the recommendation process.
 The cosine similarity is calculated between the columns of the matrix $U_k$.
+Consequently, the column vectors have less entries due to the approximation and the cosine similarity calculation is faster than with the original matrix $U$.
 With these similarity information the recommendations are generated by finding the top rated items of the most similar users that are unknown for the current user.
-If the current user of the system is not registered the system uses the default user to calculate the recommendations.
+If the current user of the system is not registered, the system uses the default user to calculate the recommendations.
 This default user is the first user of the system who should be generated by the system administrator.
-Besides the default user should have the average ratings for the items that most of the system users agree up on with their ratings.
+%Besides the default user should have the average ratings for the items that most of the system users agree up on with their ratings.
 \subsection{Different Recommendation approaches}
-The explained techniques that where used in the recommendation process can be used for other recommendation processes.
+The explained techniques that are used in the recommendation process can also be used for other recommendation processes which are presented below.
 \subsubsection{Only Item-Based Recommendations}
-The recommendation system concept uses item-based recommendations to decrease the sparsity of the rating table.
+This recommendation system concept uses item-based recommendations to decrease the sparsity of the rating table.
 Thus the item-based method calculates similarities between items and with these similarities the empty user-item ratings are predicted if enough similar items are found.
-However the item similarities can be used to directly generate recommendations for users.
+However, the item similarities can be used to directly generate recommendations for users.
 Yielding a functional recommendation system which will be compared with the main recommendation system in section 4.3.
 \subsubsection{Only SVD-Based Recommendations}
 %svd based ist teil des gesamten recommendation concepts und berechnet die recommendations nachdem item based die tabelle erweitert hat.
 %svd kann alleine verwendet werden um recommendations zu erstellen die performance zwischen nur svd und dem gesamten werd in sectien 4.3 evaluiert
-The svd-based recommendation system is part of the recommendation concept that is introduced in this thesis.
-This svd-based recommendation system calculates the user-item recommendations after the item-based system decreased the sparsity of the rating table.
-Consequently the svd-based recommendation system can be used as a standalone recommendation system.
-However rating matrix that results out of the rating table does not have empty entries otherwise the singular value decomposition can not be calculated for that matrix.
+The SVD-based recommendation system is part of the recommendation concept that is introduced in this thesis.
+This SVD-based recommendation system calculates the user-item recommendations after the item-based system decreased the sparsity of the rating table.
+Consequently, the SVD-based recommendation system can be used as a standalone recommendation system.
+However, a rating matrix that is used by the singular value decomposition must not have empty entries in the matrix otherwise the singular value decomposition can not be calculated for this matrix.
 Hence the empty entries of the rating matrix must be filled with values before calculating the singular value decomposition.
 For this process two different approaches are tested in the evaluation process.
-The first one fills the empty entries with the average value of the 1 to 5 rating scale which is the 3.
+The first one fills the empty entries with the average value of the 1 to 5 rating scale namely the 3.
+This approach is called \emph{SVD Three} in the evaluation chapter.
 The second one uses the average item ratings for the missing entries.
+This approach is called \emph{SVD Average} in the evaluation chapter.
 The runtime and performance of these systems is compared with the recommendation system of this thesis in section 4.3.
 %\subsubsection{Use Item Similarities of the V Matrix}
-\section{Concept Relationships}
-The last sections described the different concepts that are used in this thesis.
-This section emphasizes the relationship between the different ideas.
+\section{Concept Relations}
+The last sections describe the different concepts that are used in this thesis.
+This section emphasizes on the relations between these different ideas.
 The \emph{question and answer} system enables users of a website to create questions and answers.
 These questions and answers are the \emph{items} that are used as recommendations on sites that have the same subject.
 For this process the items need to have a rating that indicates the interest that a user has for this item.
-These ratings are generated with the implicit rating concept that is introducted in this thesis.
-Additionally the ratings are used by the recommendation system concept for calculating the rating predictions.
+These ratings are generated by the implicit rating concept that is introduced in this thesis.
+Additionally, the ratings are used by the recommendation system concept for calculating the rating predictions.
 Besides the items need a tag that describes the content of the item for filtering the recommendations before they are used on the website.
 These tags are generated with the explained tagging concept.
-The final outcome is a question and answer recommendation list that is ordered by the predicted interest for an user.
-Moreover the recommendation list matches the current subject of the website.
+The final outcome is a question and answer recommendation list that is ordered by the predicted interest for a user.
+Moreover, the recommendation list matches the current subject of the website.
 %todo maybe use this at the beginning of the chapter
 
 
@@ -1447,75 +1582,85 @@ Moreover the recommendation list matches the current subject of the website.
 % Create on time recommendations.
 \chapter{Implementation}
 \label{chapter:implementation}
-This chapter begins with a discussion about the technology choices for the different system parts.
-Afterwards, the service oriented software architecture and the different interfaces to those services are explained.
+This chapter begins with a discussion about the choices of technology for the different system parts.
+Afterwards the service oriented software architecture and the different interfaces to those services are presented and explained.
 \section{Technologies}
-This system combines five different concepts namely the \emph{question and answer system}, the \emph{rating system}, the \emph{tagging system}, the \emph{rating system} and the \emph{recommendation system}.
-For such a variety of techniques with different requirements there is the need for different technologies.
+The developed system combines five different concepts namely the question and answer system, the rating system, the tagging system and the rating system as well as the recommendation system.
+For such a variety of techniques with different requirements there is the need for different technologies which are outlined in the following paragraphs.
 \subsection{Programming Language}
-The requirements for the programming language are that it should be object oriented for good programming code encapsulation and that the software should work on a number of different operating systems due to the reason that the development takes place on a mac operating system and the final software has to run on a linux server.
+First of all one requirement for the programming language is that it should be object oriented for good programming code encapsulation.
+Besides the software should work on a number of different operating systems due to the fact that the development takes place on a mac operating system and the final software has to run on a linux server.
 Moreover it needs to generate fast and reliable software programs as well as it should bring libraries for fast linear algebra calculations.
-The linear algebra libraries are needed for the \emph{singular value decomposition}.
-The different matrix calculations that one needs to have for the \emph{singular value decomposition} must be implemented the way that they are able to calculate the results as fast as possible otherwise the whole recommendation process would be too slow to be used on a productive system.
+The linear algebra libraries are needed for the singular value decomposition.
+For the singular value decomposition different matrix calculations are necessary.
+Those must be implemented the way that they are able to calculate the results as fast as possible because otherwise the whole recommendation process would be too slow to be used on a productive system.
 Such a fast execution time can only be achieved by using different tricks that utilize specific programming language features.
 This implementation process would be too time consuming for a six month thesis.
-A programming language that meets these requirements is the scala programming language.
+Fortunately a programming language that meets these requirements is the Scala programming language.
 \subsubsection{Scala Programming Language}
+The first version of the Scala programming language was released in the year 2003 the current version is 2.10.2 at time of writing.
+According to \citet{wiki:scala} many large companies such as Twitter, Siemens, SAP, eBay, Tumblr, IBM and Amazon.com are using the programming language in production mode.
+So, Scala has been developed for 10 years and has reached a maturity where it is safe to use it as a programming language for a system that should run in production mode.
+
 The Scala programming language is an object oriented and functional programming language.
-Meaning that it is possible to write code with a functional programming paradigm together with an object oriented programming paradigm.
-Moreover every value in Scala is an object and every function is a value.
-The advantage of a functional programming paradigm is that it enables a more mathematical programming approach due to the reason that functions can be passed as parameters and can be used as return values.
+Meaning that it is possible to write source code with a functional programming paradigm together with an object oriented programming paradigm.
+In addition every value in Scala is an object and every function is a value.
+The advantage of a functional programming paradigm is that it enables a more mathematical programming approach due to the fact that functions can be passed as parameters and can be used as return values.
 This is helpful for designing complex algorithms.
-Additionally Scala offers the functionality to mark all operations on collections as parallel. 
+Additionally, Scala offers the functionality to mark all operations on collections as parallel. 
 Consequently the language supports developers to write programs that can utilize multicore computer systems. 
-The Scala programming language compiles to the Java byte code therefore it runs in the \emph{Java runtime environment}.
-Thus it is possible to use applications that are developed with the Scala programming language on any system that is able to run the \emph{Java runtime environment} which is almost any operating system.
+The Scala programming language compiles to the Java byte code and therefore runs in the \emph{Java runtime environment}.
+Thus, it is possible to use applications that are developed with the Scala programming language on any system that is able to run the \emph{Java runtime environment} which is almost any operating system.
 Likewise an application that is developed with the Scala programming language can use any Java library.
 Moreover \citet{codeBenchmark} analyzed four different programming languages namely C++, Go, Java and Scala. 
 He implemented the same algorithm in each of these programming languages and analyzed the outcome on their individual performance, code size, binary size and complexity.
 The Scala implementation of this algorithm has the fastest execution time and the lowest number of lines of code of all non optimized implementations.
-The only implementation that achieved a shorter execution time is a highly optimized C++ version that utilizes optimized non standard C++ data structures.
+The only implementation that achieves a shorter execution time is a highly optimized C++ version that utilizes optimized non standard C++ data structures.
 For these reasons the Scala programming language is used as the server side programming language.
 However the part of the rating systems that collects the user activities needs to run on the client side inside the web browser.
 This is currently only possible with the JavaScript programming language.
-Out of that reason JavaScript is used as a second programming language for the development of the system which is explained in more detail in the next subsection.
+For that reason JavaScript is used as a second programming language for the development of the system which is explained in more detail in the next subsection.
 \subsubsection{JavaScript}
 As mentioned in the last section the JavaScript programming language has to be used to create client side browser applications which is needed for the part of the rating system that collects the user activities.
 %javascript ist functional und object orientiert allerdings verwendet es andere paradigmen fuer die oo programmierung als die meisten anderen sprachen 
 %serverseitige javascript programmierung ist inzwischen moeglich aber noch nicht so ausgereift siehe node.js 
-JavaScript is a scripting language as a consequence it can be interpreted and executed without being compiled first.
+JavaScript is a scripting language.
+As a consequence, it can be interpreted and executed without being compiled first.
 The language is supported by almost every web browser and therefore is used by web pages to interact with the user and to dynamically load and change the website.
-As of the \emph{W3C Document Object Model Events} specification which is a web standard and therefore implemented by almost all web browsers the browser has to provide events for detecting scroll and focus events.
-Callback functions such as activity timers can be attached to these callback functions. 
-These callback functions are called if the event fires.
+As of the \emph{W3C Document Object Model Events} specification the browser has to provide events for detecting scroll and focus events.
+The \emph{W3C Document Object Model Events} specification is a web standard and therefore implemented by almost all web browsers.
+Callback functions such as activity timers can be attached to the callback functions of the scroll and focus events. 
+These callback functions are called if the event is activated.
 This enables the rating system to detect the user activities that it needs to calculate the user ratings.
 Therefore all technical requirements for the programming language are fulfilled with the use of the Scala programming language in combination with the JavaScript programming language.
 
 \subsection{Databases}
-The system uses two different databases one for the main system and a second database for the \emph{STW Thesaurus for Economics}.
-This architectural choice was made in order to use the original \emph{STW Thesaurus for Economics} database files from the website.
+The system uses two different databases one for the main system and a second database for the \emph{STW Thesaurus for Economics}(STW).
+This architectural choice was made in order to use the original STW database files from the website.
 The first database that will be discussed is the \emph{PostgreSQL} database.
 \subsubsection{PostgreSQL}
 The main database is a \emph{PostgreSQL} database that is in use by the \emph{askbot question and answer system} as well as the implemented system.
-The \emph{PostgreSQL} database is an open source free to use relational database that is to the greatest possible extend conform with the SQL standard \emph{ANSI-SQL 2008}.
-Thus the main functionality from this standard is available and works as expected.
+The PostgreSQL database is an open source relational database which is free to use.
+Moreover it is to the greatest possible extend conform with the SQL standard \emph{ANSI-SQL 2008}.
+Thereby the main functionality from this standard is available and works as expected.
 \subsubsection{4Store Triple Store}
-As mentioned at the beginning of the database section the triple store is used in order to be able to directly import the \emph{resource description framework }(RDF) files from the \emph{STW Thesaurus for Economics}.
+As mentioned at the beginning of this database section the triple store is used in order to be able to directly import the \emph{resource description framework }(RDF) files from the STW.
 A triple store is a database that is optimized for storing and retrieving triples.
 Such a triple is a data entity composed of subject-predicate-object.
 Whereas the subjects and the predicates are resources the object might be a value or a resource as well.
-The subject is described by the predicate with the object.
+The subject is described by the predicate with the help of the object.
 For example the subject can be an identifier for a person the predicate can be a resource for a name and the object is the name itself.\\
 ID:5462, name, 'John Doe'\\
 The triples can be retrieved via a query-language which is called \emph{SPARQL}.
 %todo explain sparql in comparison to sql
 The triple store that is used in the implemented system is \emph{4store} which is a free to use triple store developed and maintained by \emph{Garlik}.
-The \emph{4store} can be used as a service that uses the http protocol for querying the database this goes with the service oriented system architecture that is used in this thesis.
-Furthermore an important aspect for the use case of the triple store in this thesis is the retrieving of ordered lists of objects.
+The 4store can be used as a service that uses the HTTP protocol for querying the database.
+This fits the service oriented system architecture that is used in this thesis.
+Furthermore, an important aspect for the use case of the triple store in this thesis is the retrieving of ordered lists of objects.
 These order function is needed for dividing all words that are stored in the triple store into parts of 1000 words per request by using the ordered by, limit and offset command.
 This is used for processing 1000 words at once for the tagging algorithm.
-The triple store performance benchmark of \citet{benchmark2010} tested five triple store implementations for the average response time of different queries.
-This benchmark shows that the \emph{4Store} is the fastest triple store for the task of responding to requests which uses \emph{ordered by} and that it has in comparison with the other triple store implementations an overall good performance result.
+The triple store performance benchmark of \citet{benchmark2010} tests five triple store implementations for the average response time of different queries.
+This benchmark shows that the 4Store is the fastest triple store for the task of responding to requests which uses \emph{ordered by} and that it has in comparison with the other triple store implementations an overall good performance result.
 
 
 %explain why im using 4store
@@ -1524,16 +1669,15 @@ This benchmark shows that the \emph{4Store} is the fastest triple store for the 
 %
 \subsection{Network Communication}
 The implemented system uses the \emph{Hypertext Transfer Protocol (HTTP)} as a network communication protocol.
-The network communication for this system is handled by the \emph{finagle} open source framework that is developed and maintained by \emph{Twitter}.
+The network communication for this system is handled by the \emph{finagle} open source framework\footnote{http://twitter.github.io/finagle/} that is developed and maintained by \emph{Twitter}.
 \subsubsection{Hypertext Transfer Protocol (HTTP)}
 %wichtig path, methods 
 %todo http
 HTTP is a stateless network protocol that is used by web browsers to access content in the world wide web.
 This protocol specifies how clients request data and how servers respond to those requests.
 The HTTP protocol is used in combination with the Uniform Resource Locator (URL).
-This URL is a combination of a host, a port and a path.
-http://host[:port][path]
-The host specifies the server address that provides the requested service and the port is an optional number for further specifications.
+This URL is a combination of a host, a port and a path in the following form: http://host[:port][path]\\
+The host specifies the server address that provides the requested service while the port is an optional number for further specifications.
 The path describes a specific resource that the client can access on the server.
 The implemented system uses the port for selecting the service.
 Consequently each service is accessible with a specific port.
@@ -1542,24 +1686,25 @@ For example http://localhost:10000/recommendation/5/3/marketing/unternehmen call
 This method generates three item recommendations for the user with id 5 that are tagged with \emph{Marketing} and \emph{Unternehmen}.
 The implemented system uses four different HTTP request methods that are defined by the HTTP 1.1 standard\footnote{http://www.w3.org/Protocols/}.
 These requests are the HTTP Get request, the HTTP Post request, the HTTP Put request and the HTTP Delete request.
-The HTTP Get request can access resources but cannot provide additional data than the data that it specifies in the URL.
-The HTTP Post request can access resources and can specify additional data to the path in the body of the request that should be added to the resource.
+The HTTP Get request can access resources but cannot provide additional data other than the data that it specifies in the URL.
+The HTTP Post request can also access resources and can specify additional data to the path in the body of the request that should be added to the resource.
 The HTTP Put request is used for requesting that the specified data is stored or updated on the specific URL.
 The HTTP Delete request is used for requesting that the specific resource on the URL is deleted.
 
 %todo advantages disadvantages reasoning alternatives
 \subsubsection{Finagle Framework}
-The \emph{finagle} framework\footnote{http://twitter.github.io/finagle/} is an extensible remote procedure call system with the purpose of creating high performance and concurrent servers.
+The \emph{finagle} framework is an extensible remote procedure call system with the purpose of creating high performance and concurrent servers.
 On the one hand it provides interfaces for creating services that can be bound to a combination of a network address and a protocol for the network communication.
-Yielding a server that waits for a connection on the specific network address in order to execute the implemented service.
-On the other hand it provides interfaces for creating clients that must specify one ore more server addresses together with the protocol and the connection limit.
-Thus it creates a client that can execute methods on a pool of servers and handles simple load balancing with the connection limit on its own.
+As such a server that waits for a connection on the specific network address in order to execute the implemented service.
+On the other hand it provides interfaces for creating clients that must specify one or more server addresses together with the protocol and the connection limit.
+Thus, it creates a client that can execute methods on a pool of servers and handles simple load balancing with the connection limit on its own.
 Furthermore it uses its own data structure \emph{Future} as asynchronous return values.
-A \emph{Future} is a data structure that is returned as a value before the server finishes its execution.
+Future is a data structure that is returned as a value before the server finishes its execution.
 Consequently the client gets the future as a return value and can continue with its operation until it needs the result from the server.
-In that case the future can either provide the value from the server directly or it has to block until the server finishes the operation.
+In that case the Future can either provide the value from the server directly or it has to block until the server finishes the operation.
 However the client and the server should be build in such a way that the server is able to return a value before the client actually needs the return value.
-As an additional feature the framework offers the possibility to bind functions on futures thus the functions will be executed if the server returns the value to the future.
+As an additional feature the framework offers the possibility to bind functions on Future objects.
+Thus the functions will be executed if the server returns the value to the Future object.
 This yields a non blocking service architecture.
 
 \subsection{Testing}
@@ -1593,14 +1738,14 @@ The server has to provide interfaces for the \emph{backbone.js} framework that a
 
 \section{Architecture}
 The system uses a service oriented architecture. %\todo{add database schema}
-Thus the main components of the system namely the tagging process, the rating system and the different recommendation techniques are encapsulated in different services.
+Thus, the main components of the system namely the tagging process, the rating system and the different recommendation techniques are encapsulated in different services.
 One advantage of that architectural choice is that the system can be spread on different servers.
-This not just opens the possibility to run services that have high hardware requirements on different servers but also enables the choice to duplicate services.
+This does not only open the possibility to run services that have high hardware requirements on different servers but also enables the choice to duplicate services.
 The duplication of services can improve service downtimes and can decrease service respond times if the service is under high load.
 A disadvantage of a service oriented architecture is that it is more complex to debug system errors because each service must be debugged on its own as well as the network communication between those services.
 However one requirement for this system is that the single system components should be usable separately.
 With a service oriented architecture each service can be used individually over a network communication.
-The network communication protocol that is necessary for communicating with the services is the http protocol which is explained in subsection 3.1.3.
+The network communication protocol that is necessary for communicating with the services is the HTTP protocol which is explained in subsection 3.1.3.
 The next sections describe the single services and the methods that they provide.
 
 
@@ -1693,19 +1838,20 @@ Consequently the services are accessible on their specific port with HTTP Post a
   The \emph{/calculateSimilatities} method starts the item similarity calculation of the \emph{ItemBasedService}.
   After the calculation finishes the \emph{RecommendationService} starts the svd based similar user calculation of the \emph{SVDBasedService}.
   These similarity values are stored in the database by the individual service for future rating predictions.
-  The \emph{/calculateUserPredictions} method takes an user id and an item id as parameters.
-  If the item id is empty the prediction for all items are calculated if enough similar item ratings exist.
+  The \emph{/calculateUserPredictions} method takes a user id and an item id as parameters.
+  If the item id is empty, the prediction for all items are calculated as long as enough similar item ratings exist.
   The final prediction calculation is handled by the \emph{SVDBasedService}. 
-  The \emph{/generateRecommendations} method takes an user id, an amount of predictions that should be returned and a list of tags as parameters.
-  This method forwards the parameters to the \emph{SVDBasedService} and returns the list of item rating pairs to the caller method.
+  The \emph{/generateRecommendations} method takes a user id, an amount of predictions that should be returned and a list of tags as parameters.
+  This method forwards the parameters to the \emph{SVDBasedService} and returns the list of item rating pairs to the client that send the request.
 
 
 
 \subsection{ItemBasedService}
 %der item based service ist verantwortlich fuer die item based recommendation berechnungen dh er berechnet die item similarities und kann 
   The \emph{ItemBasedService} is a service that is responsible for calculating the item similarities and to predict user ratings to decrease the sparsity of the user-item table.
-  It is the implemented item based recommendation concept and therefore can be used as a part of the complete recommendation concept that is introduced in this thesis but it is a full functional recommendation system on its own.
-  In the evaluation chapter section 4.3 the \emph{ItemBasedService} is used as a standalone recommendation system and the results are compared with the complete recommendation concept.
+  It is the implemented item based recommendation concept and therefore can be used as a part of the complete recommendation concept that is introduced in this thesis.
+  But at the same time it is a full functional recommendation system on its own.
+  In the evaluation chapter (section 4.3) the \emph{ItemBasedService} is used as a standalone recommendation system and the results are compared with the complete recommendation concept.
   \begin{center}
     \begin{tabular}{| l | l | l |}
        %&Low Scroll Time and Low Time Spend & Low Scroll Time and Medium Time Spend & Item3 & Item4 & Item5 \\ 
@@ -1726,7 +1872,6 @@ Consequently the services are accessible on their specific port with HTTP Post a
 
   The \emph{/calculateSimilarItems} method calculates the similarity between all items.
   The idea behind the similarity calculation is that the algorithm only considers to calculate the item similarity of items if they are rated together with other items by the same user.
-  The algorithm ~\ref{alg:itemSim} is based on the work of \citet{amazon2003}.
   \begin{algorithm}
     \caption{Item Similarity Calculation}\label{alg:itemSim}
     \begin{algorithmic}[1]
@@ -1749,21 +1894,22 @@ Consequently the services are accessible on their specific port with HTTP Post a
       \EndProcedure
     \end{algorithmic}
   \end{algorithm}
+  The algorithm ~\ref{alg:itemSim} is based on the work of \citet{amazon2003}.
   Let N be the number of items in the system and M be the number of users who rated that item.
   Then as \citet{amazon2003} stated the worst case runtime of algorithm ~\ref{alg:itemSim} is $O(N^2M)$ but due to the reason that most rating tables are very sparse the runtime on a productive system is closer to $O(NM)$.
-  The \emph{/calculateUserPrediction} method takes an user id and an item id as parameters.
+  The \emph{/calculateUserPrediction} method takes a user id and an item id as parameters.
   It calculates the rating prediction for the user-item pair and returns it as a list with one element.
-  If the item id is empty it calculates the user predictions for all not rated items for the specific user and returns it as a list.
+  If the item id is empty it calculates the user predictions for all unrated items for the specific user and returns it as a list.
   %similarity calculation where too slow on own implementation for that reason a library is used.
 
 \subsection{SVDBasedService}
   The \emph{SVDBasedService} implements the concept of the \emph{singular value decomposition} based recommendation system.
   This concept states that a user-item matrix can be decomposed into three matrices.
-  Where the columns of one matrix responds to the user interest of the original user-item matrix.
+  One of these matrices has the property that the columns of this matrix respond to the user interest of the original user-item matrix.
   With these columns the similarity between the users is calculated and with the user similarities the recommendations are generated.
   The whole concept of the singular value decomposition based recommendation is explained in more detail in subsection 2.4.2.
-  The \emph{SVDBasedService} service is responsible for calculating the recommendations after the item based service has decreased the sparsity of the rating table.
-  However this service can be used as a stand alone recommendation system which is evaluated and compared with the complete recommendation system in section 4.3.
+  The \emph{SVDBasedService} service is responsible for computing the recommendations after the item based service has decreased the sparsity of the rating table.
+  However this service can be used as a stand-alone recommendation system which is evaluated and compared with the complete recommendation system in section 4.3.
 
   \begin{center}
     \begin{tabular}{| l | l | l |}
@@ -1788,7 +1934,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   The \emph{/calculateSimilarUsers} method executes the calculation of the similar user values.
   This process is split into four steps.
   At first the user-item matrix is created out of the rating table.
-  After that the method calculates the singular value decomposition of the matrix.
+  After that the method computes the singular value decomposition of the matrix.
   For this task the \emph{Apache commons-math} library is used.
   This library is a general math library with strong linear algebra algorithms developed and maintained by \emph{The Apache Software Foundation}.
   %todo why am i using this library
@@ -1804,13 +1950,13 @@ Consequently the services are accessible on their specific port with HTTP Post a
   These predictions are returned as a list of user-item tupel.
   The \emph{/generateRecommendations} method calculates the item recommendations for the current user.
   This user is the first parameter that is passed to the function.
-  If the user is unknown because he is not logged in a value of zero is passed.
+  If the user is unknown because he is not logged in, a value of zero is passed.
   This zero user is the default user that has ratings for the most popular items.
   The second parameter specifies the amount of recommendations that the system should return.
-  The third parameter that is passed inside the request body as a post parameter is a Json string that represents a list of tags.
+  The third parameter that is passed to the service inside the request body as a post parameter is a JSON string that represents a list of tags.
   The recommendations that the system generates correlate with these tags.
   The whole recommendation process is split into four steps.
-  At first the tags are converted into the corresponding descriptor from the \emph{STW Standard Thesaurus Economics}.\todo{describe stw and descriptor}
+  At first the tags are converted into the corresponding descriptor from the \emph{STW Standard Thesaurus Economics}(STW). %\todo{describe stw and descriptor}
   Afterwards the system generates a list of the most similar users for the current user.
   For each of these similar users a list is generated that contains the top rated items from this user that are unknown to the current user.
   Besides, the top rated items match the tags that are specified at the beginning of the request.
@@ -1822,7 +1968,8 @@ Consequently the services are accessible on their specific port with HTTP Post a
   The \emph{TaggerService} is the implementation of the tagging concept.
   This concept describes the process of finding the right tags for a text.
   For this process the system creates a deterministic levenshtein automata for each word in a text.
-  Every one of these deterministic levenshtein automata reads the complete \emph{STW Standard Thesaurus Economics} if a word from the \emph{STW} ends in a final state the word is used as a tag for the text.
+  Every one of these deterministic levenshtein automata reads the complete (STW).
+  If a word from the STW ends in a final state the word is used as a tag for the text.
   More details about the tagging concept can be found in section 2.3.
   \begin{center}
     \begin{tabular}{| l | l | l |}
@@ -1849,22 +1996,24 @@ Consequently the services are accessible on their specific port with HTTP Post a
   For this process the service creates a finite automaton for each word with a specific degree.
   A degree states the maximum allowed levenshtein distance between the word for which the automaton is generated and the word that the automaton can read.
   This degree depends on the word size.
-  For a word with more than five letters a degree of three is used otherwise a degree of one is used.%todo this has to match the concept
-  The states are written as tupel of the form (c, d) where c denotes the current position in the word and d denotes the current levenshtein distance between the prefix of the original word and the word that the automaton reads.
+  For a word with more than five letters a degree of three is used.
+  Otherwise a degree of one is used.%todo this has to match the concept
+  The states are written as tupel of the form (c, d).
+  Thereby c denotes the current position in the word and d denotes the current levenshtein distance between the prefix of the original word and the word that the automaton reads.
   For each letter in a word W with a length of n four transitions are created if the levenshtein distance of the current state is smaller than n.
   These four transitions represent reading a correct letter, deleting a letter, inserting a letter and substituting a letter.
-  The last states that are reached thru the last letter do not get any transitions by this process.
+  The last states that are reached through the last letter do not get any transitions by this process.
   Consequently the next step is to insert the missing insertion transitions for these last states where the current position in the word is the size of the word.
   These insertions are needed because the word that is read might be longer than the original word and therefore letters must be added to the original word up to the maximum degree.
-  The last step for creating this finite automaton is to mark all of the last states where the current position in the word is the size of the word as final states.
+  The last step for creating this finite automaton is to mark all of the last states in which the current position in the word is the size of the word as final states.
   This finite levenshtein automaton is transformed into a deterministic finite levenshtein automaton. 
   %\todo{add transformation algorithm}
   This transformation process replaces every deletion transition which represents an $\epsilon$ transition by one or more new transitions.
-  These new transition start at the beginning of the $\epsilon$ transition and end at a destination of a transition that starts at the end of the $\epsilon$ transition.
-  This operation has to be performed due to the reason that $\epsilon$ transitions are not allowed in deterministic automata.
+  These new transitions start at the beginning of the $\epsilon$ transition and end at a destination of a transition that starts at the end of the $\epsilon$ transition.
+  This operation has to be performed due to the fact that $\epsilon$ transitions are not allowed in deterministic automata.
   Furthermore the substitution and insertion transitions are transformed in the way that they only accept labels that are not used by any other transition from the current source.
-  This process yields a deterministic Levenshtein automata.
-  Finally, all words from the \emph{STW} are loaded and read into the deterministic Levenshtein automaton
+  This process yields a deterministic Levenshtein automaton.
+  Finally, all words from the \emph{STW} are loaded and read into the deterministic Levenshtein automaton.
   Each word that ends in a final state is added to the list of tags that is returned to the caller.
   The \emph{/descriptorsForText} method generates a list of labels for a text.
   This method is implemented the same way as the \emph{tagText} method.
@@ -1901,7 +2050,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   Another method that the service provides is the \emph{/runQuery} method.
   This method takes a query that should be executed on the triple store as a parameter and returns the response from the triple store.
   The last method that this service provides is the \emph{/descriptorsForTags} method.
-  Which takes a list of tags as a parameter and returns the corresponding list of descriptors.
+  This method takes a list of tags as a parameter and returns the corresponding list of descriptors.
 
 
 \subsection{RatingService}
@@ -1936,13 +2085,15 @@ Consequently the services are accessible on their specific port with HTTP Post a
     \end{tabular} 
   \end{center}
 
-  An in the item-page included JavaScript code calls the \emph{/currentItem} method every time a user visits an item-page.
+  The \emph{/currentItem} method is called every time a user visits an item-page by a JavaScript code that is included in the item-page.
   This JavaScript code sends the item id, the item title, the item text and the user id to the \emph{WebService} which forwards these data to the rating service.
   The \emph{/currentItem} method creates a new item if the current item does not exist.
-  In addition it sends the item text to the \emph{taggerService} to get the tags for the item if it does not exist.
-  Moreover it creates a new user if the current user is unknown to the system.
-  The same JavaScript code is responsible for sending every two seconds the current time that the user has stayed on the page (CT) as well as the time that the user has scrolled on the page (ST) together with the user id and the item id to the \emph{WebService} which forwards the data to the \emph{/calculateRating} method. 
-  The design choice of sending the data periodically every two seconds to the server is made for the reason that sending the complete data set if the user leaves the website is not reliable enough and can lead to the loss of these rating information.
+  In addition, it sends the item text to the \emph{taggerService} to get the tags for the item if the item does not exist.
+  Moreover, it creates a new user if the current user is unknown to the system.
+  The same JavaScript code is responsible for sending every two seconds a request to the WebService.
+  This request includes the current time that the user has stayed on the page (CT), the time a user has scrolled on the page (ST), the user id and the item id.
+  Then the WebService forwards the data to the \emph{calculateRating} method.
+  The design choice of sending the data periodically every two seconds to the server has been made for the reason that sending the complete data set if the user leaves the website is not reliable enough and can lead to the loss of these rating information.
   After the \emph{/calculateRating} method receives the CT and ST times it adds these times to the previously received times or creates a new table entry with the times for that user.
   With these new times the method calculates the new rating for that item and stores it in the database.
 
@@ -1977,18 +2128,21 @@ Consequently the services are accessible on their specific port with HTTP Post a
     \end{tabular} 
   \end{center}
 
-  The \emph{/} and the \emph{/tagger} methods are both returning specific static HTML files from the file system these methods should be deactivated for the production mode.
-  The \emph{/} methods returns the index.html file which is the main page for the recommendation test website.
+  The \emph{/} and the \emph{/tagger} methods are both returning specific static HTML files from the file system.
+  These methods should be deactivated for the production mode.
+  The \emph{/} method returns the index.html file which is the main page for the recommendation test website.
   Additionally the \emph{/tagger} method returns the tagger.html website which is a website for testing the \emph{taggerService}.
   The \emph{/calculate} method forwards the calculation requests that can be specified by a provided type parameter to the \emph{RecommendationService}.
-  For the types the client can use \emph{similarities}, \emph{recommendations} and \emph{recommendationsItemBased}.
-  If a client sends a request for similarities to the WebService the service starts the calculations for similar users and items on the RecommendationService the user id is not necessary for this request.
-  By sending the \emph{recommendations} type together with an user id to the \emph{/calculate} method the service sends a request to the RecommendationService for calculating all predictions for the items that the user has not yet rated.
-  The \emph{recommendationsItemBased} type has the same effect as the \emph{recommendations} type the only difference is that the predictions are calculated with the item based approach instead of the standard SVD based approach.
+  For the provided type parameter the client can use \emph{similarities}, \emph{recommendations} and \emph{recommendationsItemBased}.
+  If a client sends a request for similarities to the WebService, the service starts the calculations for similar users and items on the RecommendationService.
+  A user id is not necessary for this request.
+  By sending the \emph{recommendations} type together with a user id to the \emph{/calculate} method the service sends a request to the RecommendationService for calculating all predictions for the items that the user has not yet rated.
+  The \emph{recommendationsItemBased} type has the same effect as the \emph{recommendations} type.
+  The only difference is that the predictions are calculated with the item based approach instead of the standard SVD based approach.
   The \emph{/recommendation} method is usually called by an HTML website that expects a JavaScript code that is embedded into the page.
-  The method takes an user id, an amount and a list of tags as a parameter.
+  The method takes a user id, the amount of recommendations and a list of tags as a parameter.
   These data is forwarded to the recommendation system.
-  However the returned list of item recommendations is transformed into a HTML link for each recommendation.
+  However, the returned list of item recommendations is transformed into a HTML link for each recommendation.
   These HTML links are embedded into a JavaScript code that is returned by the service.
   This JavaScript code inserts all item links into a specified HTML Div container.
   There are three \emph{/data} methods that are interfaces for reading, creating, updating and deleting entries in the database.
@@ -1996,32 +2150,36 @@ Consequently the services are accessible on their specific port with HTTP Post a
   The first method that is called via a post request updates existing entries in the database or creates new entries for the provided parameter.  
   The second method which is called via a get request reads data from the database.
   The type that is provided as a parameter represents the database table from where the data should be read.
-  If an id is provided as a parameter the service returns the specific entry otherwise the service returns all entries from the database table.
+  If an id is provided as a parameter, the service returns the specific entry.
+  Otherwise the service returns all entries from the database table.
   The third method is accessible via a http delete method and must provide a type and an id.
   The specific entry with the corresponding id from the database table that is specified by the type is deleted by the service.
-  The \emph{/rating} method forwards all request to the \emph{RatingService}.
+  The \emph{/rating} method forwards all requests to the \emph{RatingService}.
 
-  \section{Service Relationships}
-  This section explains the relationships between the services.
+  \section{Service Relations}
+  This section explains the relations between the services.
   The whole system can be separated into three use cases.
-  The first use case is the situation when a user visits an item page this situation is illustrated by a sequence diagram in figure ~\ref{seq:userVisits}.
-  The second use case is the situation when a user visits a website that recommends items to users this situation is described by the sequence diagram in figure ~\ref{seq:rec}.
-  The third use case is the situation when the system starts the calculation of the user and item similarities.
-  This situation is described by the sequence diagram in ~\ref{seq:calc}.
+  The first use case is the situation when a user visits an item page.
+  This situation is illustrated by a sequence diagram in figure ~\ref{seq:userVisits}.
+  When a user visits a website that recommends items to users it belongs to the second use case.
+  The sequence diagram figure~\ref{seq:userVisits} describes this situation.
+  The third use case is the situation in which the system starts the calculation of the user and item similarities.
+  It is presented in the sequence diagram in figure~\ref{seq:calc}.
 
   \subsection{User Visits Item Page}
   The use case that occurs if a user visits an item page is illustrated in the sequence diagram in figure ~\ref{seq:rec}.
   The web browser that executes the JavaScript code that is embedded in each item page sends the current information about the item and the user to the WebService.
-  However the web browser does not expect a response.
+  However, the web browser does not expect a response.
   The WebService checks if the data is complete and forwards the request to the RatingService.
   The sequence diagram from figure~\ref{seq:rec} represents the situation when the item and the user are unknown to the system.
   Therefore the RatingService creates a new item and a new user.
   Besides, the RatingService sends the text of the item together with its title to the TaggingService.
   The TaggingService creates a Levenshtein distance automaton for each word in the text and requests all words that are included in the STW from the QuerySTWService.
-  These words are tested with the Levenshtein automatas each word that ends in a final state is returned in a list of tags.
-  Finally the returned tags are added to the newly created item.
+  The words from the STW are tested with the Levenshtein automata.
+  Each word that ends in a final state is returned in a list of tags.
+  Finally, the returned tags are added to the newly created item.
 
-  Additionally the web browser sends periodically the time that the user spends on the website together with the time that the user has scrolled on the website to the WebService.
+  Additionally, the web browser sends periodically the time that the user spends on the website together with the time that the user scrolls on the website to the WebService.
   This data is needed to calculate the implicit user rating for the item.
   The WebService forwards the request to the RatingService which updates the times in the database and calculates the new rating.
 
@@ -2067,21 +2225,21 @@ Consequently the services are accessible on their specific port with HTTP Post a
 
   \subsection{User Visits Recommendation Website}
   This subsection describes the network communication between the services if a user visits a website that recommends items.
-  The sequence diagram in figure \~ref{rec} represents the network communication between the involved services.
+  The sequence diagram in figure~\ref{seq:rec} represents the network communication between the involved services.
   The website that has to display the recommendations communicates with the system by including a JavaScript file from the system.
   The path for this JavaScript file includes optional parameters namely the user id, the amount of recommendations and tags.
-  If the current user is not registered the system uses a standard user for generating recommendations.
+  If the current user is not registered, the system uses a standard user for generating recommendations.
   The tags are used for filtering the items so that the recommended items match the subject of the website.
-  The web browser requests the JavaScript file from the WebService.
-  Which is basically the interface for external clients for the internal services.
-  Thus the WebService forwards the request to the RecommendationService.
-  This RecommendationService requests the recommendation calculation on the currently activated recommendation system which is in the sequence diagram the SVDBasedService.
+  The web browser requests the JavaScript file from the WebService, which is basically the interface for external clients for the internal services.
+  Thus, the WebService forwards the request to the RecommendationService.
+  This RecommendationService requests the recommendation calculation on the currently activated recommendation system.
+  The latter is the SVDBasedService in the sequence diagram. 
   Another option would be the ItemBasedService.
   The SVDBasedService passes the tags to the TaggerService which translates them to the corresponding descriptors by communicating with the triple store via the QuerySTWService.
   The latter returns the descriptors to the TaggerService which passes the returned descriptor list on to the SVDBasedService.
   This SVDBasedService generates the item list which includes the items with the highest rating prediction for the current user that match the subject of the tags.
   This item list is returned to the RecommendationService.
-  The RecommendationService hands the item list to the Webservice.
+  The RecommendationService hands the item list to the WebService.
   The WebService creates html links for each of the items in the list and embeds these links into the requested JavaScript file.
   The web browser executes the JavaScript file and thus inserts the recommended item links into the website.
 
@@ -2169,20 +2327,19 @@ Finally different recommendation techniques are compared by the run time and the
 \section{Rating}
 The evaluation for the rating system refers to the rating concept from subsection 2.2.5.
 This concept is build upon the researches from \citet{claypool2001} who evaluated different user interactions and compared those with explicit user ratings.
-The two user interactions that performed the best with an accuracy of about 70\% to the user ratings are the time a user spend on a website and the time a user scrolls.
-Each of the measured times of the user interactions are split into segments depending on the truncated mean time of all user times.
-Yielding a scale that enables the system to calculate ratings based on the user interactions.
+The two user interactions that performed the best with an accuracy of approximately 70\% to the user ratings are the time a user spends on a website and the time a user scrolls.
+Each of these measured times of the user interactions are split into segments depending on the truncated mean time of all user times, yielding a scale that enables the system to calculate ratings based on the user interactions.
 Based on this scale the ratings are calculated separately and are combined to the total rating by calculating the average of both ratings.
 This total rating is evaluated with the research data from \citet{claypool2001} in this section.
 For the rating evaluation an item test website is created.
 This test website is a standard html website with a high of 2000px.
-Consequently there is the possibility to scroll on a standard screen resolution.
-Additionally the item test website has a truncated mean time for the time a user spends on the website and another truncated mean time for the time a user scrolls on the website.
+Consequently, there is the possibility to scroll on a standard screen resolution.
+Additionally, the item test website has a truncated mean time for the time a user spends on the website and another truncated mean time for the time a user scrolls on the website.
 For these truncated mean times the average times from all user ratings of the field test from \citet{claypool2001} are used.
 These average times are 5.339 seconds for the time a user scrolls and 20.763 seconds for the time a user spends on a website.
-Finally users who visits the website are simulated.
+Finally, users who visit the website are simulated.
 Those users are interacting with the website according to the times of \citet{claypool2001} field experiment.
-Therefore the ratings that the simulated users generate can be compared to the data from the team of \citet{claypool2001}.
+Therefore, the ratings that the simulated users generate can be compared to the data from the team of \citet{claypool2001}.
 
   \begin{center}
     \begin{tabular}{| l | l | l | l | l | }
@@ -2202,39 +2359,40 @@ Therefore the ratings that the simulated users generate can be compared to the d
     \end{tabular} 
   \end{center}
 
-  The table represents the result of the rating algorithm evaluation.
-  The \emph{Scroll Time} represents the time that a user scrolls on the page and the \emph{Scroll Rating} represents the rating that results out of that scrolling behavior.
-  Additionally the \emph{Time Spend} represents the time that a user spends on the web page and the \emph{Time Rating} represents the rating that the system generates for that behavior.
+  The table represents the results of the rating algorithm evaluation.
+  The \emph{Scroll Time} represents the time that a user scrolls on the page and the \emph{Scroll Rating} represents the rating that results out of that scrolling behaviour.
+  Additionally, the \emph{Time Spend} represents the time that a user spends on the web page and the \emph{Time Rating} represents the rating that the system generates for that behaviour.
   The total rating is the implicit rating that the system uses as the rating of that user for the specific item.
   These total ratings are integer values and are therefore rounded.
-  The values of the \emph{Scroll Time} nearly match the average times that were found out as rating indicators in the field experiment from \citet{claypool2001}.
+  The values of the \emph{Scroll Time} nearly match the average times that were found as rating indicators in the field experiment from \citet{claypool2001}.
   These average times that a user scrolls on a web page and rates the site with an explicit rating are 3.485 seconds for an explicit rating of 1, 4.079 seconds for an explicit rating of 2, 5.267 seconds for an explicit rating of 3, 6.444 seconds for an explicit rating of 4 and 7427 seconds for an explicit rating of 5.
   All generated \emph{Scroll Ratings} reflect the expected ratings from the field test of \citet{claypool2001}.
   The same is true for the generated \emph{Time Ratings}.
   The \emph{Time Spend} values nearly match the average times for the specific ratings from the \citet{claypool2001} field experiment.
   These average times are 13.414 for a rating of 1, 18.017 for a rating of 2, 21.217 for a rating of 3, 24.372 for a rating of 4 and 26.797 for a rating of 5.
-  However the rating of five could not be achieved by spending time on the web page this rating is only attainable by performing a pre defined user interaction such as clicking on a specific button.
+  However, the rating of five could not be achieved by spending time on the web page because this rating is only attainable by performing a pre defined user interaction such as clicking on a specific button.
   All other \emph{Time Ratings} reflect the expected ratings from the field experiment of \citet{claypool2001}.
-  The \emph{Total Rating} which is introduced in this thesis correlate with the combined user interest of the \emph{Scroll Rating} and the \emph{Time Rating} and therefore represent the expected result.
-  Moreover the total rating is derived from the data of \citet{claypool2001} and it would have been desirable to conduct a field experiment but unfortunately due to the lack of time this was not possible and should be considered for future works.
+  The \emph{Total Rating} which is introduced in this thesis correlates with the combined user interest of the \emph{Scroll Rating} and the \emph{Time Rating} and therefore represents the expected result.
+  Moreover, the total rating is derived from the data of \citet{claypool2001} and it would have been desirable to conduct a field experiment but unfortunately due to the lack of time this was not possible and should be considered for future works.
 
 
 %%daher wurde getestet ob unterschiedliche surfverhalten unterschiedliche ratings hervorbringen. und ob diese mit den in chapter 2 section 2.2 subsubsection 2.2.5 vorgestellten theorien uebereinstimmen
 \section{Tagging}
 This section evaluates the tagging process that was introduced in subsection 2.3.2.
-The concept behind the tagging process is to create a \emph{levenshtein automata} for every word in an item and read each word from the \emph{STW Standard Thesaurus Economics} into the automata.
+The concept behind the tagging process is to create a \emph{levenshtein automaton} for every word in an item and read each word from the \emph{STW Standard Thesaurus Economics}(STW) into the automaton.
 If the word ends in a final state it is used as a tag for the item.
-Such a \emph{levenshtein automata} is a deterministic finite automata that can decide in linear time if a word has a \emph{levenshtein distance} smaller than a desired $n\in\mathbb{N}$.
+Such a levenshtein automaton is a deterministic finite automata that can decide in linear time if a word has a levenshtein distance smaller than a desired $n\in\mathbb{N}$.
 Four different texts are created for the evaluation process. 
 In each of these four texts 70\% of the words are from a placeholder text that is called \emph{Lorem ipsum}.
-The \emph{Lorem ipsum} text is according to \cite{wiki:lorem} typically based on a Latin text from Cicero with words altered added and removed thus it is not a proper Latin text any more.
-These words are chosen based on the fact that they do not match with the words from the \emph{STW Standard Thesaurus Economics}.
-Consequently they do not create false matches during the evaluation process.
-The other 30\% of the words in the evaluation texts are from the \emph{STW Standard Thesaurus Economics}.
-However, not all of the words are in the same form as they are found in the \emph{STW Standard Thesaurus Economics}.
-Thus the tagging algorithm has to match the words from the item with the correct words from the STW.
+The Lorem ipsum text is according to \cite{wiki:lorem} typically based on a Latin text from Cicero with words altered, added and removed.
+Thus it is not a proper Latin text any more.
+These words are chosen based on the fact that they do not match with the words from the STW.
+Consequently, they do not create false matches during the evaluation process.
+The other 30\% of the words in the evaluation texts are from the STW.
+However, not all of the words are in the same form as they are found in the STW.
+Therefore, the tagging algorithm has to match the words from the item with the correct words from the STW.
 After each test the matched words are compared to the words that should have matched.
-Moreover, the time that the algorithm needed for creating the Levenshtein automata and the total time in seconds is evaluated.
+Besides, the time that the algorithm needed for creating all Levenshtein automata and the total time in seconds is evaluated.
 The computer that is used for testing this tagging algorithm is a \emph{Macbook Air} with a 1.86 \emph{GHz Intel Core 2 Duo} precessor and 4 GB DDR3 memory.
 
   \begin{center}
@@ -2251,47 +2409,48 @@ The computer that is used for testing this tagging algorithm is a \emph{Macbook 
   \end{center}
 
   At first the word \emph{tests} is used with the tagging algorithm.
-  This evaluation results two matches from the \emph{STW} namely \emph{test} once for the English and once for the German language.
-  The time that is needed for creating the Levenshtein automata is approximately a tenth of a second.
+  This evaluation results two matches from the STW namely \emph{test} once for the English and once for the German language.
+  The time that is needed for creating the Levenshtein automaton is approximately a tenth of a second.
   For this complicated generation process this is a good performance.
-  However the total computation time is 14.481 seconds which involves the loading of the 31.682 words from the \emph{STW} and the reading of all of these words into the Levenshtein automata.
+  However the total computation time is 14.481 seconds which involves the loading of the 31.682 words from the STW and the reading of all of these words into the Levenshtein automaton.
 
-  For the second evaluation ten words are used with 7 non matching words and three words from the \emph{STW}.
-  Two of the three words are modified therefore they are not in the same form as they appear in the \emph{STW}.
+  For the second evaluation ten words are used with seven non matching words and three words from the STW.
+  Two of the three words are modified. 
+  Hence, they are not in the same form as they appear in the STW.
   All three of these words are matched by the tagging algorithm.
-  The creation time of the Levenshtein automata is 0.2843 seconds which is approximately three times as high as the Levenshtein automata computation time for the one word creation.
+  The creation time of all Levenshtein automata is 0.2843 seconds which is approximately three times as high as the Levenshtein automaton computation time for the one word creation.
   The total computation time of 20.348 seconds is 1.5 times higher than the total computation time for the one word tagging process.
 
-  The 100 words evaluation consist of 30 words from the \emph{STW} with spelling mistakes and different forms.
-  The other 70 words are non matching words from the \emph{Lorem ipsum} placeholder text. 
-  The algorithm returns 54 words as matches from the \emph{STW}.
+  The 100 words evaluation consist of 30 words from the STW with spelling mistakes and different forms.
+  The other 70 words are non matching words from the Lorem ipsum placeholder text. 
+  The algorithm returns 54 words as matches from the STW.
   These 54 words include all 30 words that were included in the original 100 words plus 24 words that are similar spelled or use the same words in English and German.
-  The computation time for the 100 Levenshtein automata is 0.4751 and in total the computation needs 79.9616 seconds.
+  The computation time for all 100 Levenshtein automata is 0.4751 and in total the computation needs 79.9616 seconds.
 
-  For the final tagging algorithm test a text with 1000 words is used.
-  This text contains 300 words from the \emph{STW} with approximately 150 words in different forms or with spelling mistakes.
-  The other 700 words are words from the \emph{Lorem ipsum} placeholder text and thus are non matching.
-  The algorithm returns 470 words almost all of the original words were included.
+  The last tagging algorithm evaluation uses a text with 1000 words.
+  This text contains 300 words from the STW with approximately 150 words in different forms or with spelling mistakes.
+  The other 700 words are words from the Lorem ipsum placeholder text and, thus, are non matching.
+  The algorithm returns 470 words whereby almost all of the original words were included.
   The words that did not match are the words that had more than three changes resulting from changing the singular form to its plural form and adding spelling mistakes.
   The computation time for the Levenshtein automata is five times higher than the corresponding time for the 100 word test.
-  However the total computation time is nearly ten times higher than the total time for the 100 word test.
+  Anyhow, the total computation time is nearly ten times higher than the total time for the 100 word test.
 
   %fazit man sollte seine aufmerksamkeit nicht auf beschleunigung des erstellungs prozesses des levenshtein automatas legen sondern auf die korrekte auswahl der tagging base 
   A conclusion of this evaluation is that the largest part of the total time is the reading of the words from the tagging base into the Levenshtein automata and not the time that the algorithm needs to create these automata.
-  Therefore the main focus in future works should not be to improve the performance of the creation process of the Levenshtein automata but to decrease the number of words in the tagging base.
+  Consequently, the main focus in future works should not be to improve the performance of the creation process of the Levenshtein automata but to decrease the number of words in the tagging base.
 
 \section{Recommendation}
 %\todo{state that each recommendation technique used almost the same prediction calculations}
 This section evaluates the different recommendation approaches that are explained in subsection 2.4.4.
 These different approaches are the item-based recommendation, the different singular valued decomposition (SVD) based recommendations, and the approach that is described in this thesis that uses item-based predictions to decrease the sparsity of the rating table and the SVD-based approach for recommendations.
 The evaluation process of the recommendation system contains two parts.
-First the evaluation of the performance of the different approaches by using the wall clock time.
-Second the comparison of the accuracy of the different concepts.
+Firstly, the evaluation of the performance of the different approaches by using the wall clock time.
+Secondly, the comparison of the accuracy of the different concepts.
 For this task the \emph{MovieLens} database is used.
-The \emph{MovieLens} database includes 100.000 ratings from 943 users for 1682 movies.
+The MovieLens database includes 100.000 ratings from 943 users for 1682 movies.
 This data is collected with the movielens.org website that is part of the \emph{GroupLens} research project from the University of Minnesota.
 The website is a recommendation website for movies.
-Each user of the website can rate movies on a scale of 1 to 5 and is afterwards presented with movies that might be interesting for him.
+Each user of the website can rate movies on a scale from 1 to 5 and is afterwards presented with movies that might be interesting for him/her.
 To compare the accuracy of the recommendation systems the \emph{Mean Absolute Error} (MAE) is used.
 
 \begin{definition}[Mean Absolute Error]
@@ -2304,11 +2463,13 @@ To compare the accuracy of the recommendation systems the \emph{Mean Absolute Er
 
 This metric is according to \citet{sarwar2001} most commonly used for evaluating recommendation systems.
 The MAE is a statistical metric that compares the calculated user-item ratings from the recommendation system with real user-item ratings. 
-For this process the recommendation system is trained with a percentage p of a test rating database and afterwards the remaining 1-p percent are used to check if the recommendations are correct a ratio of 80\% training data and 20\% prediction data is used.
+For this process the recommendation system is trained with a percentage p of a test rating database and afterwards the remaining 1-p percent are used to check if the recommendations are correct.
+A ratio of 80\% training data and 20\% prediction data is used.
 
-The team of \citet{Herlocker04evaluatingcollaborative} noticed that many collaborative recommendation systems in the movie domain reach a mean absolute error of up to 0.73 on a rating scale of 1 to 5.
-Out of this realisation \citet{Herlocker04evaluatingcollaborative} created the hypothesis that collaborative recommendation systems that are tuned to its optimum can not get much more accurate than a mean absolute error of 0.73.
-They explain this hypothesis with the reason that users tend to provide inconsistent ratings when they are asked to rate the same movie at different times and therefore an algorithm cannot be more accurate than the users rating variance for the same item.
+The team of \citet{Herlocker04evaluatingcollaborative} noticed that many collaborative recommendation systems in the movie domain reach a mean absolute error of up to 0.73 on a rating scale from 1 to 5.
+Out of this realisation \citet{Herlocker04evaluatingcollaborative} created the hypothesis that collaborative recommendation systems which are tuned to its optimum cannot get much more accurate than a mean absolute error of 0.73.
+They explain this hypothesis by reasoning that users tend to provide inconsistent ratings when they are asked to rate the same movie at different times.
+Hence, an algorithm cannot be more accurate than the users rating variance for the same item.
 
   \begin{center}
     \begin{tabular}{| l | l | l | l |}
@@ -2325,109 +2486,112 @@ They explain this hypothesis with the reason that users tend to provide inconsis
     \end{tabular} 
   \end{center}
 
-  The table \dots represents the evaluation of the recommendation systems.
+  The recommendation comparison table represents the evaluation of the recommendation systems.
   The computer that is used for testing the different recommendation techniques is a \emph{Macbook Air} with a 1.86 \emph{GHz Intel Core 2 Duo} precessor and 4 GB DDR3 memory.
-  Consequently all computation times that are measured in this evaluation are based on this hardware system and can be faster on a productive server.
-  However the computation times can be used to compare the speed of the different recommendation systems.
+  Consequently, all computation times that are measured in this evaluation are based on this hardware system and can be faster on a productive server.
+  However, the computation times can be used to compare the speed of the different recommendation systems.
   The evaluation contains three different metrics the mean absolute error, the offline computation time and the prediction time.
   The mean absolute error is, as explained before, a statistical metric that declares the average distance between the predicted user-item rating and the real user-item rating.
   The offline computation time represents the time that the system needs to generate the data that is needed for the prediction of the items.
-  Thus this computation must not be calculated for every recommendation but every 24 hours to once a week depending on the frequency that new items are added to the system and the activeness of the users to ensure the correctness of the user and item similarities.
+  Hence, this computation must not be calculated for every recommendation but every 24 hours to once a week depending on the frequency that new items are added to the system and the activeness of the users in order to ensure the correctness of the user and item similarities.
   The prediction time is the time that the system needs to calculate the predictions for all 20.000 ratings.
-  Therefore this time divided by 20.000 approximately represents the time that the system needs to calculate one prediction for the recommendations that are presented to the user on a website.
+  Therefore, this time divided by 20.000 represents approximately the time that the system needs to calculate one prediction for the recommendations that are presented to the user on a website.
 
   The \emph{Item Based} technology is the implementation of the item based recommendation approach that is part of the overall recommendation concept of this thesis.
   It has a mean absolute error of 0.83187 which is the second poorest mean absolute error of all tested technologies.
-  This is a surprising \todo{can I write this?} outcome of the evaluation it was expected that this technology would be more similar to the mean absolute error of the SVD based technologies. %\todo{any reasons?}
+  This is a surprising outcome of the evaluation because it was expected that this technology would be more similar to the mean absolute error of the SVD based technologies. %\todo{any reasons?}
   The offline computation time in this implementation consists of finding items that were rated by the same users and calculating the adjusted cosine similarity between those items.
   The adjusted cosine similarity is a special form of the cosine similarity.
   The cosine similarity for two items is calculated by applying the dot product between the rating vectors of the items and dividing the result by the Euclidean length of the rating vectors.
   The adjusted cosine similarity uses the same computation but normalizes the ratings in the rating vectors before calculating the cosine similarity.
-  This normalization consists of subtracting the average user rating from the rating to remove the individual rating behavior of the user.
-  This process is explained in more detail in subsection 2.4.2
+  This normalization consists of subtracting the average user rating from the rating to remove the individual rating behaviour of the user.
+  This process is explained in more detail in subsection 2.4.2.
   The calculation of the adjusted cosine similarity between all items takes the largest part of the computation time.
   At last the item similarities are stored in the database.
 
-  The prediction time for an user-item pair involves the finding of similar items that the user has rated and calculating the sum of the product of the similarity and the rating and dividing the result by the sum of the similarities.
-  So, all in all the implemented \emph{Item Based} technique has the second slowest offline calculation time and with an average distance of 0.83 between the predicted rating and the actual rating one of the poorest mean absolute errors of the implemented methods.
+  The prediction time for a user-item pair involves the finding of similar items that the user has rated and calculating the sum of the product of the similarity and the rating and dividing the result by the sum of the similarities.
+  So, all in all the implemented Item Based technique has the second slowest offline calculation time and with an average distance of 0.83 between the predicted rating and the actual rating one of the poorest mean absolute errors of the implemented methods.
 
   The \emph{SVD Concept} technology represents the recommendation system that is introduced in this thesis.
-  Therefore it uses item based rating predictions to fill empty rating entries in the user-item rating matrix with predictions.
-  The mean absolute error of this technology is the best of all the implementations that were tested.
-  In terms of the other \emph{SVD} based implementations this can be explained by the fact that the rating matrix has the most accurate entries of all.
-  However the \emph{SVD Concept} has a very high offline computation time.
+  Therefore, it uses item based rating predictions to fill empty rating entries in the user-item rating matrix with predictions.
+  The mean absolute error of this technology is the best of all implementations that were tested.
+  In terms of the other SVD based implementations this can be explained by the fact that the rating matrix has the most accurate entries of all.
+  However, the SVD Concept has a very high offline computation time.
   The offline computation time of this system contains the following calculations.
   At first the average user rating is calculated which is needed to remove the individual rating behaviour from the user ratings before calculating the predictions.
-  Thereafter the item based cosine similarity is calculated which contains the same parts that where explained for the offline computation time of the \emph{Item Based} technology.
+  Thereafter the item based cosine similarity is calculated which contains the same parts that where explained for the offline computation time of the Item Based technology.
   After that for each user the rating prediction of the missing user-item entries in the rating table is calculated which is responsible for the largest part of the total computation time.
   The computation time for each user is approximately 30 seconds and the test database consists of 943 users.
   This can be explained by the fact that each user has only rated a fraction of all items and therefore many predictions must be calculated.
   Afterwards the rating matrix is generated from the rating table.
-  The entries of the matrix represent a rating for an user-item pair.
+  The entries of the matrix represent a rating for a user-item pair.
   The previously generated rating predictions are used for empty entries in the rating matrix.
   For this rating matrix a singular value decomposition is generated.
   This process decomposes the rating matrix into three matrices namely U, V and $\Sigma$.
   The matrix U has the property that each column of the matrix represents the interest of a user.
-  More details to the singular value decomposition and the features of the three matrices are described in subsection 2.4.2 
+  More details to the singular value decomposition and the features of the three matrices are described in subsection 2.4.2.
   In addition, the matrix U is reduced to the two dimensional approximation to decrease the following computation time.
   This computation time is the calculation of the cosine similarity between the columns of the two dimensional approximation of the matrix U.
   These similarities are used to created the final rating predictions for the item recommendations when a user visits a website.
-  Finally the user similarities are stored in the database.
+  Finally, the user similarities are stored in the database.
 
   The prediction time consists of finding similar users that rated a specific item and calculating the prediction with the similarity of the users and their ratings.
   Overall this technique has the best mean absolute error but it has by far the poorest offline computation time. 
 
   The \emph{SVD Three} technology represents a singular value based recommendation system that uses a rating of three to fill in the missing user-item ratings in the rating matrix.
   The rating of three is used because it represents the middle of the rating scale of 1 to 5 and therefore it should have the least distance between all ratings if the ratings are uniformly distributed.
-  The mean absolute error of this implementation is 0.79545 which is the poorest of the SVD based approaches this is expected because it generates the singular value decomposition with a rating matrix that uses static values for the missing entries.
-  This matrix should have the highest difference to the matrix that would represent the real user interest and therefore should generate the poorest user similarities.
+  The mean absolute error of this implementation is 0.79545 which is the poorest of the SVD based approaches.
+  This is expected because it generates the singular value decomposition with a rating matrix that uses static values for the missing entries.
+  This matrix should have the highest difference to the matrix that would represent the real user interest and hence should generate the poorest user similarities.
   The offline computation time of this system consist mostly of the same parts as the \emph{SVD Concept}.
-  Namely by calculating the average user rating for each user, creating the rating matrix from the database, calculating the singular value decomposition, creating the approximation of the matrix U that is part of the singular value decomposition, calculating the cosine similarity between the columns of the matrix U approximation and storing this user similarities in the database.
+  These parts are calculating the average user rating for each user, creating the rating matrix from the database and calculating the singular value decomposition as well as creating the approximation of the matrix U that is part of the singular value decomposition.
+  Besides the offlise calculation includes the calculation of the cosine similarity between the columns of the matrix U approximation and the storing of these user similarities in the database.
   The calculations that are created during the prediction time are the same as the calculations that were used in the \emph{SVD Concept} approach namely the finding of similar users that rated a specific item and the calculation of the predictions.
-  This system is evaluated to compare the impact of the values that are used to fill in the missing ratings in the rating matrix.
+  This system is evaluated in order to compare the impact of the values that are used to fill in the missing ratings in the rating matrix.
   This evaluation demonstrates that the more accurate these values are the better is the quality of the predictions.
-  However the difference of the mean absolute error of this approach and the other two SVD based approaches is smaller than expected.
-  Therefore further developments that should improve the prediction accuracy should be concentrated on the prediction calculation and not on the improvement of the similarity calculations.
+  However, the difference of the mean absolute error of this approach and the other two SVD based approaches is smaller than expected.
+  Therefore, further developments that should improve the prediction accuracy should be concentrated on the prediction calculation and not on the improvement of the similarity calculations.
   Altogether this technique has the fastest offline calculation time of all tested more advanced recommendation systems and a good mean absolute error.
 
   The \emph{SVD Average} technology is the implementation of the SVD based approach but it uses the average item ratings to fill in the missing entries of the rating matrix.
-  Therefore it is a solution without complex calculations to create dynamic rating predictions for the missing entries in the rating matrix that mirror the overall user interest.
-  The mean absolute error is 0.78622 and thus it is has the second best mean absolute error of all testet systems.
-  The offline calculation time consists of calculating the average user ratings, calculating the average item rating, creating the rating matrix from the database, calculating the singular value decomposition, creating the approximation of the matrix U which is part of the singular value decomposition, calculating the cosine similarity between the columns of the matrix U approximation and storing this user similarities in the database.
-  These calculations are the offline calculation time processes for the \emph{SVD Three} approach plus the calculation of the average item ratings.
-  These average item ratings are needed to fill in the missing entries in the rating matrix.
-  The prediction time of 4226.31 seconds includes the same calculations that were used for the other two SVD based approaches which are the the finding of similar users that rated a specific item and the calculation of the predictions.
-  Therefore it has almost the same prediction time as the other SVD based approaches that were tested in this evaluation.
-  To sum up this technique has the second best mean absolute error and moreover it has one of the fastest offline computation times of the tested more advance recommendation systems.
-  Thus this system has a fast computation time and a very good mean absolute error and for this reasons it should be used for further developments if the quality of the recommendations is more important that the computation time.
+  Therefore, it is a solution without complex calculations to create dynamic rating predictions for the missing entries in the rating matrix that mirror the overall user interest.
+  The mean absolute error is 0.78622 and, thus, it has the second best mean absolute error of all tested systems.
+  The offline calculation time consists of calculating the average user ratings and calculating the average item rating as well as all other calculations that are needed in the SVD Three approach.
+  The singular value decomposition works in the same manner as the one in the SVD Three approach with one difference it uses the average ratings of the items to fill the missing entries in the rating matrix.
+  The prediction time of 4226.31 seconds includes the same calculations that were used for the other two SVD based approaches which are the finding of similar users that rated a specific item and the calculation of the predictions.
+  Hence, it has almost the same prediction time as the other SVD based approaches that were tested in this evaluation.
+  To sum this up this technique has the second best mean absolute error and moreover it has one of the fastest offline computation times of the tested more advance recommendation systems.
+  Thus, this system has a fast computation time and a very good mean absolute error and for this reasons it should be used for further developments if the quality of the recommendations is more important than the computation time.
 
-  The last two systems are added to the evaluation to compare the results of the more advanced recommendation systems with naive approaches.
+  The last two systems are added to the evaluation to compare the results of the more advanced recommendation systems with less advanced approaches.
   The \emph{Three} technique uses a rating of three for all predictions.
   The three was chosen because it represents the middle of the five point rating scale. 
-  Therefore it has the smallest mean absolute error of 1.2 of all static ratings if the user ratings are evenly distributed.
+  Therefore, it has the smallest mean absolute error of 1.2 of all static ratings if the user ratings are evenly distributed.
   This technique does not require any offline computations and the mean absolute error calculation consists of subtracting the real rating from three.
   This approach yields a MAE of 1.03333.
-  Consequently the ratings are less common on the outer boundaries of the rating scale which is a common user rating behaviour.
+  Consequently, the ratings are less common on the outer boundaries of the rating scale which is a common user rating behaviour.
   The MAE of 1.03333 can be seen as a lower boundary.
-  If any of the recommendation techniques is below this MAE it is an indicator that the recommendation technique does not work properly. 
+  If any of the recommendation techniques is below this MAE, it is an indicator that the recommendation technique does not work properly. 
 
   The \emph{Average} technique uses the average item rating as a rating prediction.
-  Thus it is the least complex method which generates dynamical rating predictions that represent the interest of all users.
+  Thus, it is the least complex method which generates dynamical rating predictions that represent the interest of all users.
   The difference from its MAE of 0.82714 to the lower boundary of 1.03333 is 0.20619 which is a good result.
-  Additionally it has nearly the same mean absolute error as the item based approach.
-  Therefore it can be concluded that the interests of the individual users from the \emph{MovieLens} database does not vary widely.
-  However this technique has to calculate the average user ratings of all users which is very fast and needs to load only one value from the database to instead of calculating a prediction.
+  Additionally, it has nearly the same mean absolute error as the item based approach.
+  Hence, it can be concluded that the interests of the individual users from the \emph{MovieLens} database does not vary widely.
+  This technique only has to calculate the average user ratings of all users for the offline computation time which is very fast.
+  Besides it only needs to load one value from the database for the prediction calculation instead of calculating a prediction.
   As a result the \emph{Average} technique is a good choice if the user interest of the system does not vary widely and if the system needs a fast solution.
 
   In conclusion the evaluation of the recommendation techniques revealed that the SVD based approach that was introduced in this thesis has the best mean absolute error of the implemented approaches.
-  However it does not vary widely from the MAE of the \emph{SVD Average} technique and the offline computation time of the \emph{SVD Concept} approach is by far the slowest.
+  Anyway, it does not vary widely from the MAE of the \emph{SVD Average} technique whereby the offline computation time of the \emph{SVD Concept} approach is by far the slowest.
   The item based approach has a slow computation time and the MAE is nearly the same as the \emph{Average} approach.
-  The research teams of \citet{sarwar2001} showed that this method can yield an MAE of up to 0.73 by improving the prediction calculation but these improvements should have the same effect for the SVD based approaches and therefore the SVD based techniques should be the better choice for collaborative recommendation systems.
-  The evaluation of the \emph{SVD Three} technique indicates that SVD based recommendation systems result generally good predictions.
-  Moreover it showed that improvements for the missing entries for the rating matrix yield improvements of the predictions but that these optimizations only improve the MAE by approximately 0.2 points.
-  Therefore future works with the goal of optimizing collaborative recommendations should concentrate on the improvement of the prediction calculations.
-  Finally the evaluation revealed that using the average user rating as a rating prediction can yield good and fast predictions if the user interest does not vary widely.
-  Consequently this can be used for calculating rating predictions as part of recommendation systems if the use case of the system does not require highly optimized recommendations.
+  The research team of \citet{sarwar2001} showed that this method can yield a MAE of up to 0.73 by improving the prediction calculation.
+  However these improvements should have the same effect for the SVD based approaches and therefore the SVD based techniques should be the better choice for collaborative recommendation systems.
+  The evaluation of the \emph{SVD Three} technique indicates that SVD based recommendation systems generally result in good predictions.
+  Moreover, it showed that improvements for the missing entries for the rating matrix yield improvements of the predictions but that these optimizations only improve the MAE by approximately 0.2 points.
+  Therefore, future works with the goal of optimizing collaborative recommendations should concentrate on the improvement of the prediction calculations.
+  Finally, the evaluation revealed that using the average user rating as a rating prediction can yield good and fast predictions if the user interest does not vary widely.
+  Consequently, this can be used for calculating rating predictions as part of recommendation systems if the use case of the system does not require highly optimized recommendations.
   This evaluation should be repeated when the system is in productive usage and has collected the same amount of data that was used for this evaluation to check if the data for the specific use case of recommending questions and answers reveal the same findings as this evaluation.
 
 
