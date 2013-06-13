@@ -19,6 +19,7 @@
 \usepackage[latin1]{inputenc} %% unter Linux/Unix "ansinew" evtl. durch "latin1" ersetzen
 \usepackage{amsthm}
 \usepackage{amsfonts}
+\usepackage{longtable}
 \newtheorem{definition}{Definition}
 %%\usepackage{ngerman}
 %%\usepackage{url}
@@ -55,8 +56,6 @@
   \hypersetup{%
     a4paper,
     pdftitle = {A Contribution to Rating and Recommendation Systems: Concepts, Development and Evaluation},
-    pdfsubject = {** Hier eine Beschreibung eintragen **},
-    pdfkeywords = {** Hier Schlagwörter eintragen **},
     pdfauthor = {Oliver Diestel},
     % pdfpagemode = None, UseThumbs, UseOutlines, FullScreen,
     % pdfstartpage = ,
@@ -132,13 +131,13 @@ angefertigt von:             & {\bf Oliver Diestel} \\
 betreuender Hochschullehrer: & Prof. Dr. Klaus Tochtermann \\%
 %                              z.B. Prof. Dr. rer. nat. habil. Bernhard Thalheim 
 %                              oder Prof. Dr. rer. nat. habil. Hans-Joachim Klein
-Betreuer:                    & Arne Martin Klemenz 
+Betreuer:                    & M.Sc. Arne Martin Klemenz 
 \end{tabular}
 
 \vspace{1cm}
 
 \begin{center}
-Kiel, ** Datum der Abgabe **
+Kiel, 14.06.2013
 \end{center}
 
 
@@ -193,7 +192,7 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 
 \vspace{2cm}
 ............................................................... \\
-** eigener Name **
+Oliver Diestel
 
 \thispagestyle{plain}
 \cleardoublepage
@@ -234,9 +233,9 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 %%                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\listofalgorithms
+% \listofalgorithms
 
-\cleardoublepage
+% \cleardoublepage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                              %%
@@ -244,7 +243,28 @@ Ich erkläre hiermit, dass ich die vorliegende Arbeit selbstständig und nur unter
 %%                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter*{Abkürzungen}
+\chapter*{Abbreviations}
+\begin{tabular}{ll}
+
+CT & Time a user spends on a website \\
+HTML & Hypertext Markup Language \\
+HTTP & Hypertext Transfer Protocol \\
+MAE & Mean Absolute Error \\
+RDF & Resource Description Framework \\
+SPARQL & SPARQL Protocol And RDF Query Language \\
+ST & Time a user scrolls on a website \\
+STW & STW Thesaurus for Economics \\
+SVD & Singular Value Decomposition \\
+SQL & Structured Query Language \\
+TM & Truncated Mean \\
+URL & Uniform Resource Locator \\
+\multirow{2}{*}{ZBW} & Deutsche Zentralbibliothek für Wirtschaftswissenschaften\\
+& Leibniz-Informationszentrum Wirtschaft
+
+
+
+\end{tabular}
+
 
 
 \cleardoublepage
@@ -296,9 +316,9 @@ This leads to a considerable amount of flexibility and expandability.
 %user generated content is important and the systems should involve it more in their pages ka 
   %Herausforderungen/Ziele
   Since the creation of the term \emph{Web 2.0} the internet is full of user generated content and communities.
-  More and more website operators are adding methods to their sites which have the goal to increase the user engagement by allowing users to actively contribute to the content of the website.
+  More and more website operators are adding methods to their sites with the goal of increasing the user engagement by allowing users to actively contribute to the content of the website.
   However, as more and more content is produced most of the user contributed content will remain unseen.
-  The value of a website is the benefit that it brings to its users.
+  The value of a website is the benefit that it provides for its users.
   Therefore, every content that includes valuable information must be presented to users that might be interested in it. 
   %The information of this content can be of high value for other users\dots the value of a website is the information / benefit that it brings to the user therefore every content that is not efficient used is equivalent to geld liegen lassen.
   %This user generated content can be used for enriching the moderated websites by adding user generated content on these sites.
@@ -376,7 +396,7 @@ The same authors wrote a paper about a \emph{universal Levenshtein automaton} - 
   This rating generation should work by automatically analysing the user interactions on the website that presents the content.
   Therefore, the user experience of the website is not disturbed by explicitly asking for the users opinion.
   Another challenge is to use the rating and keyword information to generate content recommendations for users based on their interest.
-  This concept should be implemented into a system that can be used as an ad on for existing systems.
+  This concept should be implemented into a system that can be used as an add-on for existing systems.
   Moreover, each component should be usable as a stand-alone system to extend existing technologies.
   
   
@@ -446,16 +466,14 @@ However, they use different technologies and some are more mature than others.
 The open source variant that has been decided to be used for the implemented system is askbot.com.
 It is build with the \emph{django web framework} and actively maintained since 2011.
 Though, the system is implemented the way that every other question and answer site can be used as well.
-%\todo{why did I choose askbot some screenshots}
 
 %explain the function and idea of a qa system, explain askbot, explain why you choosed askbot and how to integrate it.
-Henceforth, for better understanding, the term \emph{item} will be used instead of question and answer. 
 \newpage
 \section{Rating System}
-%todo gewichtung integrieren, die probleme relativiert wie zb nur kurze seite daher scrollt niemand am anfang ist ein werbebanner alle scrollen usw.
+Henceforth, for better understanding, the term \emph{item} will be used instead of question and answer. 
 In order to be able to recommend items to users it is important to understand what items a user likes.
 For the purpose of such a task a rating scale ranging from 1, strongly disliked, to 5, strongly liked, is used.
-This is a common rating scale for websites and, thus, the results of this thesis can be compared with other works in the same field. %\todo{check sentence}
+This is a common rating scale for websites and, thus, the results of this thesis can be compared with other works in the same field. 
 There are two possible forms for retrieving ratings namely implicit ratings and explicit ratings. 
 The latter are those in which a user is explicitly asked for his opinion on a specific item.
 Implicit ratings are those in which a system generates a rating according to the actions of a user.
@@ -495,7 +513,7 @@ Thus, in order to reflect the users interest more properly other ways to measure
 \subsection{The number of mouse clicks}
 Another method of collecting user interactions that might correlate with the explicit rating of a user is the number of mouse clicks on a website.
 The research team of \citet{claypool2001} thought that a high number of mouse clicks would be a sign that the website has links to interesting websites or objects and as such would be valuable to the users.
-The collected data, however, showed that the number of mouse clicks on a website does not significantly differ even if the user rated it with the highest or lowest rating. %\todo{check this sentence}
+The collected data, however, showed that the number of mouse clicks on a website does not significantly differ even if the user rated it with the highest or lowest rating. 
 So, this method does not seem to be a good indicator for the users' interest.
 
 \subsection{The time a user scrolls}
@@ -504,7 +522,7 @@ This is an important activity indicator because a user usually has to scroll in 
 The web browser that the team of \citet{claypool2001} developed measured the time a user scrolls a website by keys and by mouse.
 They used this method in a field experiment in which over 80 people took part.
 Then they compared their findings with the explicit user ratings.
-Due to this data they found out that both the measurement of user scrolls by keys and by mouse are on their own poor indicators of interest whereas a combination of both methods is found to be a good indicator of interest.
+Because of this data they found out that both the measurement of user scrolls by keys and by mouse are on their own poor indicators of interest whereas a combination of both methods is found to be a good indicator of interest.
 This is explainable by the fact that some users prefer to scroll by using the mouse while others prefer the keyboard for such a task.
 For this reason the time a user scrolls by mouse and by key is used in this thesis as an activity indicator.
 
@@ -518,13 +536,13 @@ This process takes time so that the user stays on the website longer and most of
 \begin{figure}[h]
   \centering
   \includegraphics[width=7.5cm]{image/scrollgrey.jpg}
-  \caption{Time spent scrolling source: \citet{claypool2001}}
+  \caption{Time spent scrolling, source: \citet{claypool2001}}
   \label{pic:scrolltime}
 \end{figure}
 \begin{figure}[h]
   \centering
   \includegraphics[width=7.5cm]{image/timegrey.jpg}
-  \caption{Time spent on a page source: \citet{claypool2001}}
+  \caption{Time spent on a page, source: \citet{claypool2001}}
   \label{pic:time}
 \end{figure}
 
@@ -556,7 +574,6 @@ This filtered data can now be used in order to calculate the average time of all
 For this thesis the time differences between the average times of each rating which can be seen in figure~\ref{pic:scrolltime} and figure~\ref{pic:time} are assumed as a range for implicit ratings.
 These ranges are expressed as percentages in dependence to the general average time of all users in the following two enumerations. 
 %zeitliche abstaende zwischen den average ratings wurden als bereich fuer ein explicites rating angenommen und dieses wurde in abhaengigkeit zur gesamten average time prozentual ausgedrueckt
-%\todo{Add diagrams, maybe write the itemization as a text}
 \begin{itemize}
   \item If the user spends up to 76.5\% of the truncated mean time on the item page it is used as a rating of 1.
   \item If the user spends between 76.5\% and 94.3\% of the truncated mean time on the website it is used as a rating of 2.
@@ -579,21 +596,20 @@ A similar scale is chosen for determining the rating of a user by the time a use
   \item If the user scrolls between 108\% and 129\% of the the truncated mean time on the website it is used as a rating of 4.
   \item If the user scrolls longer than 129\% of the truncated mean time on the website it is used as a rating of 5
 \end{itemize}
-Due to the fact that scrolling is an active process and the user has to be in front of the computer a rating of 5 is achievable in this method.\\
+Scrolling is an active process and the user has to be in front of the computer to be able to scroll therefore a rating of 5 is achievable in this method.\\
 In these two enumerations it is noticeable that the largest percentage area is at the rating of one.
 This can be explained by the fact that the user examines the overall website before he starts to evaluate the content of the website.
 Therefore the area of the rating of one contains the time that the user needs to make himself familiar with the website as well as the time he needs to evaluate the content.
 For the calculation of the complete rating both implicit ratings - the time a user spends on a website and the time a user scrolls - are determined separately.
 Afterwards the average of both ratings is calculated and used as the complete rating.
-%todo add weighting factor
 \begin{displaymath}
   complete Rating = \frac{rating_{time} + rating_{scroll}}{2}
 \end{displaymath}
-%\todo{add this to evaluation}The concept is build upon measurements of a field experiment of 75 students by \citet{claypool2001}, though due to the lack of time it wasn't possible to test this concept on a large user base.
 If a user returns to an item site the time that the user spends on the page and the time the user scrolls on the page is added to the previous times.
 The sum of both sessions is used to calculate the new rating.
 Consequently, a website which a user visits frequently generates a high rating.
 
+\newpage
 As mentioned above the research group of \citet{claypool2001} bases its results on a field experiment of over 80 people browsing over 2500 web pages.
 The complete rating concept is strongly build upon these results.
 It would have been desirable to conduct a field experiment for the newly developed concept of the complete rating but unfortunately due to the lack of time it was not possible.
@@ -605,7 +621,7 @@ It would have been desirable to conduct a field experiment for the newly develop
 \newpage
 \section{Tagging}
 In order to recommend items with a matching subject on a website, the newly developed system needs to be able to filter the items based on their content.
-Therefore the keywords of the item content are used as tags in order to reflect the subject of the items. %\todo{improve}
+Therefore the keywords of the item content are used as tags in order to reflect the subject of the items. 
 %The content can be described with the use of tags, these tags are the keywords of the content.
 In the context of economics the \emph{Deutsche Zentralbibliothek für Wirtschaftswissenschaften Leibniz-Informationszentrum Wirtschaft} (ZBW) provides the \emph{STW Thesaurus for Economics} (STW).
 The STW provides vocabulary on any economic subject and includes about 19000 terms and 6000 standardized keywords which can be used to match words from a text.\footnote{STW Thesaurus for Economics url: http://zbw.eu/stw/versions/latest/about}
@@ -645,7 +661,6 @@ If it creates the word \emph{libraries} out of the word \emph{library} it has to
 Both processes result in a Levenshtein distance of three.
 So, the Levenshtein distance is zero if the words are equal and adds one to the result if it has to perform a substitution, an insertion or a deletion of a letter. 
 For a more detailed description compare algorithm~\ref{alg:levDist}.
-% \todo{find better solution to move 'if'}
 %   $levDist_{a,b}(i,j) = $
 %   \begin{cases}
 %     max(i,j) \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \text{if min(i,j) = 0} \\
@@ -716,7 +731,6 @@ The following definitions are based on the book \emph{Introduction to automata t
   The function $\beta(\pi)$ maps a path $\pi$ to a word $\omega \in \Sigma^*$.
   The length of $\pi$ is n and the label for $\beta(\pi)$ is $a_1 a_2 a_3 \dots a_n$.
 \end{definition}
-%\todo{$\beta$ explanation}
 \begin{definition}[Path shortwriting]
   $\mathcal{A}: p \xrightarrow[]{\omega} q$ with $\omega \in \Sigma^*$ states that a path $\pi$ for $\mathcal{A}$ from p to q with label $\beta(\pi) = \omega$ exists.
 \end{definition}
@@ -886,7 +900,7 @@ For example if the automaton reads the word \emph{tex} it can use the transition
 The next letter \emph{e} can change the state from $1^0$ to $2^0$.
 The following letter \emph{x} from the word \emph{tex} can substitute the letter \emph{s} from the original word \emph{test} by using the transition with the label \emph{$\Sigma$} from $2^0$ to $3^1$.
 Finally, the last letter from the original word \emph{test} is deleted without reading a letter by using the $\epsilon$ transition from state $3^1$ to state $4^2$.
-The state $4^2$ is a final state and, thus, the word \emph{tex} is accepted by this Levenshtein automaton.\\
+The state $4^2$ is a final state and, thus, the word \emph{tex} is accepted by this Levenshtein automaton.
 In the following description the Levenshtein automaton represents the word $W \in \Sigma^*$ and $\sigma \in \Sigma$ is the currently read letter.
 $\Sigma$ indicates that any element from $\Sigma$ is accepted on this path.
 The initial state $0^0$ is in the bottom left corner.
@@ -992,7 +1006,7 @@ Therefore the new deterministic Levenshtein automaton is (Q', $\Sigma$, $q_0'$, 
 %   \item $\Sigma$ is the complete alphabet
 %   \item Each state in Q denotes for an insert word $\omega \in \Sigma^*$ the number of matching letters together with $d_L(\omega,W)$
 %   \item The initial state $q_0$ is the state with insert count 0 and \emph{levenshtein distance} 0
-%   \item The function $\delta$ is the known function $\delta : Q \times \Sigma \rightarrow Q$. \todo{definiere delta}
+%   \item The function $\delta$ is the known function $\delta : Q \times \Sigma \rightarrow Q$. 
 %   \item The set of final states F contains all states where the correct letter count is equal to the size of the original word W.
 % \end{itemize}
 
@@ -1052,7 +1066,6 @@ This would create a deterministic Levenshtein automaton with a degree of three f
 
 %Lemma 6 For any fixed number n, given two words W and V of length w and v respectively, it is decidable in time O(max(w, v)) if the Levenshtein distance between W and V is <= n.
 
-%\todo{add more explanation how the levenshtein automata is integrated into the system}
 To get back to the original problem this paragraph explains the application of a Levenshtein distance automata to find the right tags for a text.
 The overall tagging concept is to calculate for every word from the text an automaton based on the length of the word and read all words from the STW into each automata.
 If a word from the STW ends in a final state it is used as a tag for the text. 
@@ -1069,16 +1082,15 @@ The triple store technology is described in more detail in subsection 3.1.2.
 A recommendation system is a system that creates personalized item recommendations based on information about the items or the relation between items and users.
 These recommendations can be created by different types of recommendation systems that exploit different information about the users or items.
 \subsection{Different types of recommendation systems}
-%\todo{Describe different informations that are needed.}
 The book \emph{Recommender Systems An Introduction} by \citet{recommender2011} distinguishes between the following four different kinds of recommendation systems.
 %These recommendation systems that are described below exploit either the relationship between the users 
 \subsubsection{Collaborative recommendation}
 Collaborative recommendations are recommendations based on similar interests of users.
 So, if user A and user B are interested in similar items and user A shows interest in item I that is unknown to user B than item I might be interesting for user B as well.
-Due to the fact that this technique filters all items based on implicit collaboration of the users it is also known as \emph{collaborative filtering}.
+Because this technique filters all items based on implicit collaboration of the users it is also known as \emph{collaborative filtering}.
 For using the collaborative filtering approach no other information are needed than the relationship between users and items. 
 Depending on the number of items in the system and the activity of the users of the system the process of collecting information about the relation between the users and the items they are interested in might be needing some time.
-Although it needs some time to collect initial data in the beginning it generally is a good approach if the items that need to be recommended are unknown or additional information for the items would be hard to maintain.%\todo{read a second time more explanations needed?}
+Although it needs some time to collect initial data in the beginning it generally is a good approach if the items that need to be recommended are unknown or additional information for the items would be hard to maintain.
 \subsubsection{Content-based recommendation}
 In content-based recommendations the items are usually documents that should be recommended based on the content.
 Thus, the content of the document is described by tags.
@@ -1104,7 +1116,6 @@ It is especially suited for applications in which items are not frequently rated
 % All recommendation system approaches have advantages and disadvantages, therefore a combinations of the different approaches which are mentioned above could improve the user recommendations as long as the system has enough information about the items or users.
 
 \subsubsection{Conclusion}
-%\todo{improve this}
 %not enough information for knowledge based system
 %use tags to filter collaborative recommendations
 %fall back for cold start problem
@@ -1121,10 +1132,12 @@ As such it is the only technique that is able to recommend items that are approv
 Besides the content-based systems have the disadvantage that they do not make use of the information whether or not a user is interested in a document.
 Thus they can only recommend items based on the context and are not able to recommend items that were interesting to other users in the past.
 Therefore it is possible that a content-based system recommends user generated content of poor quality which is not desirable.
-Due to the fact that the user generated content is not moderated and therefore the system has no information about the quality of the content the implemented system uses a collaborative filtering technique with pre filtered content based on the tags for each item.
+The user generated content of the implemented system is not moderated and therefore the system has no information about the quality of the content.
+For that reason the implemented system uses a collaborative filtering technique with pre filtered content based on the tags for each item.
 This approach should yield the best possible recommendations for a user of the system.
 
 %%definitions Users, items, ratings, predictions
+\newpage
 \subsection{Collaborative recommendation system}
 The following definitions are based on \citet{recommender2011}
 \begin{definition}[User]
@@ -1197,7 +1210,6 @@ The following pages explain the item based recommendation technique and the reco
 % --
 % kombinieren von itembased und svd based recommendations to improve the rating matrix that is needed for the svd and thus generate better latent semantic factors that are used for calculating the similarity between the users
 %There are different types of collaborative recommendation techniques.
-%\todo{explain probabilistic and slope one and why you didn't choose them}
 
 \subsubsection{Item-Based Recommendation}
 The concept of item-based recommendation was introduced by \citet{sarwar2001}.
@@ -1252,7 +1264,7 @@ In real world recommendation systems the user item ratings tend to be very spars
 \subsubsection{Example for Item-Based Recommendations}
 The table in figure~\ref{itemBasedTable} represents a user item relationship.\\
 
-\begin{figure}[H]
+\begin{table}[H]
   \centering
   \begin{tabular}{c c c c c c}
    &Item1 & Item2 & Item3 & Item4 & Item5 \\ 
@@ -1264,7 +1276,7 @@ The table in figure~\ref{itemBasedTable} represents a user item relationship.\\
   \end{tabular}
   \caption{User Item Relationship Table}
   \label{itemBasedTable}
-\end{figure}
+\end{table}
 
   This example calculates the item based prediction for User1 and Item5.
   For the adjusted cosine formula the average ratings for all users are needed.
@@ -1317,9 +1329,8 @@ The following definitions are based on the book \emph{Linear Algebra Done Right}
 \end{definition}
 
 \begin{definition}[Rank of a Matrix]
-  $https://en.wikipedia.org/wiki/Rank_(linear_algebra)$
   The rank of a matrix A is the maximum number of linearly independent column vectors of A.
-  Due to the fact that the rank of the linearly independent column vectors is always equal to the number of linearly independent row vectors it is also correct that the rank of matrix A is the maximum number of linearly independent row vectors of A.
+  For the reason that the rank of the linearly independent column vectors is always equal to the number of linearly independent row vectors it is also correct that the rank of matrix A is the maximum number of linearly independent row vectors of A.
 \end{definition}
 \begin{definition}[Unit Vector]
   A unit vector is a vector with length 1.
@@ -1369,7 +1380,7 @@ So, the matrix U corresponds to the columns of the matrix A and the matrix V cor
 It is possible to obtain an optimal rank k approximation from matrix A with $k \leq r$ by setting all $\sigma_{i,i}$ with $i > k$ to zero [\citet{matrixAlgorithms}].
 Thus $A_k = U_k \Sigma_k V_k^t$ yields the optimal rank k approximation.
 As a result, all column vectors $u_i$ with $i > k$, of matrix U will be multiplied by a zero vector from matrix $\Sigma_k$.
-Due to the fact that matrix U represents the columns of matrix A and that the last rows of matrix U will be removed in order to generate the optimal rank k approximation of matrix A, it is possible to generate a good approximation of the user's interests by removing the last rows of matrix U\footnote{A user from the system is represented by a column in the matrix A}.
+The matrix U represents the columns of matrix A and the last rows of matrix U will be removed in order to generate the optimal rank k approximation of matrix A, therefore it is possible to generate a good approximation of the user's interests by removing the last rows of matrix U\footnote{A user from the system is represented by a column in the matrix A}.
 The two dimensional matrix $U_2$ is created by removing all rows of matrix U up to the first two rows.
 This matrix $U_2$ can be seen as a value table that can be represented by a graph.
 Therefore, it enables a graphical presentation of the user similarities.
@@ -1380,7 +1391,6 @@ The prediction calculation algorithm takes all similar users $U_{sim}$ for $user
 This is denoted by $I'_{user_a, user_b}$.
 The average rating of user a is denoted by $\overline{r_a}$.
 Finally for each item $i \in I'_{user_a, user_b}$ the prediction is calculated by using the following formula.
-%todo if no user is logged in the default user is used to generate recommendations this user should have ratings for the items that most users are interested in.
 
 \begin{equation}
   \label{predictionSVD}
@@ -1416,9 +1426,9 @@ Finally for each item $i \in I'_{user_a, user_b}$ the prediction is calculated b
 %   else 0
 % }
 
-%\todo{how to calculate predictions with these tables}
 \subsubsection{Example for a singular value based recommendation}
-\begin{displaymath}
+\begin{table}
+  \begin{center}
   \begin{tabular}{c c c c c c}
      &Item1 & Item2 & Item3 & Item4 & Item5 \\ 
      User1 & 5 & 3 & 4 & 4 & ? \\  
@@ -1427,10 +1437,13 @@ Finally for each item $i \in I'_{user_a, user_b}$ the prediction is calculated b
     User4 & 3 & 3 & 1 & 5 & 4\\ 
     User5 & 1 & 5 & 5 & 2 & 1\\ 
   \end{tabular} 
-\end{displaymath}
+\end{center}
+  \caption{Table for SVD example}
+  \label{table:svd}
+\end{table}
 
-The following example calculates the rating prediction for \emph{User1} and \emph{Item5}.
-A singular value decomposition for a user item relationship table is created in figure~\ref{svdexample}.
+The following example calculates the rating prediction for \emph{User1} and \emph{Item5} of table~\ref{table:svd}.
+A singular value decomposition for the user item relationship table~\ref{table:svd} is created in figure~\ref{svdexample}.
 The first two rows of matrix U are used to create a value table for a graph that represents the user similarities.
 This is displayed in figure~\ref{svdgraph}.
 The cosine similarity from definition~\ref{cosineSimilarity} is used to calculate the following similarities by using the values from figure~\ref{svdgraph}.
@@ -1469,8 +1482,8 @@ With these similarities and average ratings the following prediction which is de
   \end{displaymath}
 \normalsize
   As a result User1 would most likely rate Item5 with 3.6254.
-  %todo This example underlines the need of removing the sparsity of a rating table because every empty entry \dots
 \begin{figure}[h]
+  \begin{center}
 \begin{math}
   \begin{tabular}{c c c c c c}
      &Item1 & Item2 & Item3 & Item4 & Item5 \\ 
@@ -1485,6 +1498,7 @@ With these similarities and average ratings the following prediction which is de
 
 \begin{displaymath}
 
+
   \begin{pmatrix}
     0.475467&0.325691&0.798636&-0.053513&-0.164835\\0.342950&-0.316949&0.082532&-0.250224&0.844099\\0.535742&-0.210593&-0.362530&-0.589189&-0.435955\\0.455479&-0.486113&-0.054206&0.729352&-0.146077\\0.402286&0.716108&-0.470107&0.235423&0.221199
   \end{pmatrix} \cdot \\
@@ -1495,6 +1509,7 @@ With these similarities and average ratings the following prediction which is de
     0.46825&0.432206&0.46056&0.487586&0.379564\\-0.177671&0.42127&0.572180&-0.250389&-0.633148\\0.609379&-0.316926&-0.139853&0.322858&-0.635938\\-0.392214&0.489216&-0.480126&0.571026&-0.224148\\-0.473276&-0.544015&0.458702&0.518898&-0.019831
   \end{pmatrix}
 \end{displaymath}
+\end{center}
 \caption{Singular Value Decomposition of the User Item Relationship Table}
 \label{svdexample}
 \end{figure}
@@ -1610,7 +1625,6 @@ Besides the items need a tag that describes the content of the item for filterin
 These tags are generated with the explained tagging concept.
 The final outcome is a question and answer recommendation list that is ordered by the predicted interest for a user.
 Moreover, the recommendation list matches the current subject of the website.
-%todo maybe use this at the beginning of the chapter
 
 
 % Rate items by the user activity on the webpages.
@@ -1688,7 +1702,6 @@ The subject is described by the predicate with the help of the object.
 For example the subject can be an identifier for a person the predicate can be a resource for a name and the object is the name itself.\\
 ID:5462, name, 'John Doe'\\
 The triples can be retrieved via a query-language which is called \emph{SPARQL}.
-%todo explain sparql in comparison to sql
 The triple store that is used in the implemented system is \emph{4store} which is a free to use triple store developed and maintained by \emph{Garlik}.
 The 4store can be used as a service that uses the HTTP protocol for querying the database.
 This fits the service oriented system architecture that is used in this thesis.
@@ -1708,7 +1721,6 @@ The implemented system uses the \emph{Hypertext Transfer Protocol (HTTP)} as a n
 The network communication for this system is handled by the \emph{finagle} open source framework\footnote{http://twitter.github.io/finagle/} that is developed and maintained by \emph{Twitter}.
 \subsubsection{Hypertext Transfer Protocol (HTTP)}
 %wichtig path, methods 
-%todo http
 HTTP is a stateless network protocol that is used by web browsers to access content in the world wide web.
 This protocol specifies how clients request data and how servers respond to those requests.
 The HTTP protocol is used in combination with the Uniform Resource Locator (URL).
@@ -1727,7 +1739,6 @@ The HTTP Post request can also access resources and can specify additional data 
 The HTTP Put request is used for requesting that the specified data is stored or updated on the specific URL.
 The HTTP Delete request is used for requesting that the specific resource on the URL is deleted.
 
-%todo advantages disadvantages reasoning alternatives
 \subsubsection{Finagle Framework}
 The \emph{finagle} framework is an extensible remote procedure call system with the purpose of creating high performance and concurrent servers.
 On the one hand it provides interfaces for creating services that can be bound to a combination of a network address and a protocol for the network communication.
@@ -1760,6 +1771,11 @@ The figure~\ref{pic:recommendationGui} displays the recommendation test website.
 On the top of the page the user can define the user ratings for the items.
 Depending on these entries the user and item similarities are calculated which is displayed by the diagram and the two tables underneath the diagram.
 Additionally the recommendation test website can calculate rating predictions for the users that have empty rating entries in the table.
+
+The user interface is implemented with the \emph{backbone.js} framework. 
+This framework supports the development of client side applications that communicate with the database.
+Therefore the framework provides objects that represent the data from the database and sends request to the server if data is modified added or deleted.
+The server has to provide interfaces for the backbone.js framework that are based on HTTP Get, Post, Put and Delete methods for reading, updating, deleting and storing data in the database.
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.75\textwidth]{image/recommendationGui.png}
@@ -1767,13 +1783,8 @@ Additionally the recommendation test website can calculate rating predictions fo
   \label{pic:recommendationGui}
 \end{figure}
 
-The user interface is implemented with the \emph{backbone.js} framework. 
-This framework supports the development of client side applications that communicate with the database.
-Therefore the framework provides objects that represent the data from the database and sends request to the server if data is modified added or deleted.
-The server has to provide interfaces for the backbone.js framework that are based on HTTP Get, Post, Put and Delete methods for reading, updating, deleting and storing data in the database.
-
 \section{Architecture}
-The system uses a service oriented architecture. %\todo{add database schema}
+The system uses a service oriented architecture. 
 Thus, the main components of the system namely the tagging process, the rating system and the different recommendation techniques are encapsulated in different services.
 One advantage of that architectural choice is that the system can be spread on different servers.
 This does not only open the possibility to run services that have high hardware requirements on different servers but also enables the choice to duplicate services.
@@ -1844,10 +1855,10 @@ Thus the services implement the service specific logic and provide methods for a
 These methods are accessible for the router that is inherited by the HttpServer and provide a HTTP path for each method in form of a string.
 Consequently the services are accessible on their specific port with HTTP Post and HTTP Get requests that correspond to the HTTP path.
 \subsection{RecommendationService}
-  %todo describe pipeline architecture
   The recommendation service controls the item based service and the svd based service.
   Therefore the single recommendation techniques can be regulated by editing the recommendation service. 
   This opens the possibility to use different recommendation approaches without much programming effort.
+  \begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l |}
        %&Low Scroll Time and Low Time Spend & Low Scroll Time and Medium Time Spend & Item3 & Item4 & Item5 \\ 
@@ -1868,6 +1879,9 @@ Consequently the services are accessible on their specific port with HTTP Post a
       & amount: Integer & \\ \hline
     \end{tabular} 
   \end{center}
+  \caption{RecommendationService}
+  \label{table:recommService}
+\end{table}
   The /calculateSimilatities method starts the item similarity calculation of the ItemBasedService.
   After the calculation finishes the RecommendationService starts the svd based similar user calculation of the SVDBasedService.
   These similarity values are stored in the database by the individual service for future rating predictions.
@@ -1885,6 +1899,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   It is the implemented item based recommendation concept and therefore can be used as a part of the complete recommendation concept that is introduced in this thesis.
   But at the same time it is a full functional recommendation system on its own.
   In the evaluation chapter (section 4.3) the ItemBasedService is used as a standalone recommendation system and the results are compared with the complete recommendation concept.
+  \begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l |}
        %&Low Scroll Time and Low Time Spend & Low Scroll Time and Medium Time Spend & Item3 & Item4 & Item5 \\ 
@@ -1902,6 +1917,8 @@ Consequently the services are accessible on their specific port with HTTP Post a
       - & - & -\\ \hline
     \end{tabular} 
   \end{center}
+  \caption{ItemBasedService}
+\end{table}
 
   The /calculateSimilarItems method calculates the similarity between all items.
   The idea behind the similarity calculation is that the algorithm only considers to calculate the item similarity of items if they are rated together with other items by the same user.
@@ -1944,6 +1961,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   The SVDBasedService is responsible for computing the recommendations after the item based service has decreased the sparsity of the rating table.
   However this service can be used as a stand-alone recommendation system which is evaluated and compared with the complete recommendation system in section 4.3.
 
+  \begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l |}
        %&Low Scroll Time and Low Time Spend & Low Scroll Time and Medium Time Spend & Item3 & Item4 & Item5 \\ 
@@ -1963,6 +1981,8 @@ Consequently the services are accessible on their specific port with HTTP Post a
       & tags: List[String] & \\ \hline
     \end{tabular} 
   \end{center}
+  \caption{SVDBasedService}
+\end{table}
 
   The /calculateSimilarUsers method executes the calculation of the similar user values.
   This process is split into four steps.
@@ -1970,7 +1990,6 @@ Consequently the services are accessible on their specific port with HTTP Post a
   After that the method computes the singular value decomposition of the matrix.
   For this task the \emph{Apache commons-math} library is used.
   This library is a general math library with strong linear algebra algorithms developed and maintained by \emph{The Apache Software Foundation}.
-  %todo why am i using this library
   The third step is the approximation of the U matrix that is one of the resulting matrices from the singular value decomposition.
   Finally the similar users are generated by calculating the cosine similarity between all columns of the U matrix.
   This method does not have a return value. 
@@ -1989,7 +2008,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   The third parameter that is passed to the service inside the request body as a post parameter is a string that represents a list of tags.
   The recommendations that the system generates correlate with these tags.
   The whole recommendation process is split into four steps.
-  At first the tags are converted into the corresponding descriptor from the \emph{STW Standard Thesaurus Economics}(STW). %\todo{describe stw and descriptor}
+  At first the tags are converted into the corresponding descriptor from the \emph{STW Standard Thesaurus Economics}(STW). 
   Afterwards the system generates a list of the most similar users for the current user.
   For each of these similar users a list is generated that contains the top rated items from this user that are unknown to the current user.
   Besides, the top rated items match the tags that are specified at the beginning of the request.
@@ -2004,6 +2023,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   Every one of these deterministic Levenshtein automata reads the complete (STW).
   If a word from the STW ends in a final state the word is used as a tag for the text.
   More details about the tagging concept can be found in section 2.3.
+  \begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l |}
        %&Low Scroll Time and Low Time Spend & Low Scroll Time and Medium Time Spend & Item3 & Item4 & Item5 \\ 
@@ -2022,6 +2042,8 @@ Consequently the services are accessible on their specific port with HTTP Post a
       /descriptorsForTags & tags: List[String] & list of STW descriptors \\ \hline
     \end{tabular} 
   \end{center}
+  \caption{TaggingService}
+\end{table}
 
   The /tagText method takes a text as parameter. 
   The single words of the text are extracted into a list.
@@ -2063,6 +2085,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   This service encapsulates the triple store communication.
   Hence, it enables an integration into existing systems that use different triple store technologies by replacing only the provided methods of this service.
 
+  \begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l |}
       \hline
@@ -2078,6 +2101,8 @@ Consequently the services are accessible on their specific port with HTTP Post a
       /descriptorsForTags & tags: List[String] & list of descriptors \\ \hline
     \end{tabular} 
   \end{center}
+  \caption{QuerySTWService}
+\end{table}
 
   The /descriptor method takes a word from the STW as a parameter and returns the descriptor of the preferred label.
   Another method that the service provides is the /runQuery method.
@@ -2094,6 +2119,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
 %load javascript add user id item id to the page as js
 %if item is unknown return javascript that reads the question and returns it to the rating service this service sends it to the tagging service
 %with the tagging information it creates a new item
+  \begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l |}
       \hline
@@ -2117,6 +2143,8 @@ Consequently the services are accessible on their specific port with HTTP Post a
       & user interaction: Boolean &  \\ \hline
     \end{tabular} 
   \end{center}
+  \caption{RatingService}
+\end{table}
 
   The /currentItem method is called every time a user visits an item-page by a JavaScript code that is included in the item-page.
   This JavaScript code sends the item id, the item title, the item text and the user id to the \emph{WebService} which forwards these data to the rating service.
@@ -2136,6 +2164,7 @@ Consequently the services are accessible on their specific port with HTTP Post a
   This service forwards external enquiries and processes data before it sends the data back to the client.
   Furthermore it provides an interface for accessing the database objects for the \emph{backbone.js} application that represents the \emph{recommendation test website} as well as an interface for accessing static files like JavaScript and HTML files.
 
+  \begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l |}
       \hline
@@ -2161,6 +2190,8 @@ Consequently the services are accessible on their specific port with HTTP Post a
 
     \end{tabular} 
   \end{center}
+  \caption{WebService}
+\end{table}
 
   The / and the /tagger methods are both returning specific static HTML files from the file system.
   These methods should be deactivated for the production mode.
@@ -2373,6 +2404,7 @@ Finally, users who visit the website are simulated.
 Those users are interacting with the website according to the times of \citet{claypool2001} field experiment.
 Therefore, the ratings that the simulated users generate can be compared to the data from the team of \citet{claypool2001}.
 
+\begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l | l | l | }
       \hline
@@ -2390,8 +2422,11 @@ Therefore, the ratings that the simulated users generate can be compared to the 
       7.431 & 5 & 24.797 & 4 & 5 \\ \hline
     \end{tabular} 
   \end{center}
+  \caption{Rating Algorithm Evaluation}
+  \label{table:ratingEv}
+\end{table}
 
-  The table represents the results of the rating algorithm evaluation.
+Table~\ref{table:ratingEv} represents the results of the rating algorithm evaluation.
   The \emph{Scroll Time} represents the time that a user scrolls on the page and the \emph{Scroll Rating} represents the rating that results out of that scrolling behaviour.
   Additionally, the \emph{Time Spend} represents the time that a user spends on the web page and the \emph{Time Rating} represents the rating that the system generates for that behaviour.
   The complete rating is the implicit rating that the system uses as the rating of that user for the specific item.
@@ -2425,8 +2460,10 @@ However, not all of the words are in the same form as they are found in the STW.
 Therefore, the tagging algorithm has to match the words from the item with the correct words from the STW.
 After each test the matched words are compared to the words that should have matched.
 Besides, the time that the algorithm needed for creating all Levenshtein automata and the total time in seconds is evaluated.
+The results of this evaluation can be seen in table~\ref{table:taggingEv}.
 The computer that is used for testing this tagging algorithm is a \emph{Macbook Air} with a 1.86 \emph{GHz Intel Core 2 Duo} precessor and 4 GB DDR3 memory.
 
+\begin{table}[H]
   \begin{center}
     \begin{tabular}{| l | l | l | l | l | l |}
       \hline
@@ -2439,6 +2476,9 @@ The computer that is used for testing this tagging algorithm is a \emph{Macbook 
       1000 & 300 & 700 & 470 & 2.5606 & 777.4643\\ \hline
     \end{tabular} 
   \end{center}
+  \caption{Tagging Algorithm Evaluation}
+  \label{table:taggingEv}
+\end{table}
 
   At first the word \emph{tests} is used with the tagging algorithm.
   This evaluation results two matches from the STW namely \emph{test} once for the English and once for the German language.
@@ -2472,7 +2512,6 @@ The computer that is used for testing this tagging algorithm is a \emph{Macbook 
   Consequently, the main focus in future works should not be to improve the performance of the creation process of the Levenshtein automata but to decrease the number of words in the tagging base.
 
 \section{Recommendation}
-%\todo{state that each recommendation technique used almost the same prediction calculations}
 This section evaluates the different recommendation approaches that are explained in subsection 2.4.4.
 These different approaches are the item-based recommendation, the different singular valued decomposition (SVD) based recommendations, and the approach that is described in this thesis that uses item-based predictions to decrease the sparsity of the rating table and the SVD-based approach for recommendations.
 The evaluation process of the recommendation system contains two parts.
@@ -2482,7 +2521,7 @@ For this task the \emph{MovieLens} database is used.
 The MovieLens database includes 100.000 ratings from 943 users for 1682 movies.
 This data is collected with the movielens.org website that is part of the \emph{GroupLens} research project from the University of Minnesota.
 The website is a recommendation website for movies.
-Each user of the website can rate movies on a scale from 1 to 5 and is afterwards presented with movies that might be interesting for him/her.
+Each user of the website can rate movies on a scale from 1 to 5 and is afterwards presented with movies that might be interesting for him.
 To compare the accuracy of the recommendation systems the \emph{Mean Absolute Error} (MAE) is used which is according to \citet{sarwar2001} most commonly used for evaluating recommendation systems.
 
 \begin{definition}[Mean Absolute Error]
@@ -2502,10 +2541,11 @@ Out of this realisation \citet{Herlocker04evaluatingcollaborative} created the h
 They explain this hypothesis by reasoning that users tend to provide inconsistent ratings when they are asked to rate the same movie at different times.
 Hence, an algorithm cannot be more accurate than the users rating variance for the same item.
 
+\begin{table}
   \begin{center}
     \begin{tabular}{| l | l | l | l |}
       \hline
-      \multicolumn{4}{|c|}{Recommendation Comparison 80.000 ratings 20.000 predictions} \\ 
+      \multicolumn{4}{|c|}{Recommendation System Evaluation 80.000 ratings 20.000 predictions} \\ 
       \hline \hline
       Technology & MAE & Offline Computation Time & Prediction Time \\ \hline
       Item Based & 0.83187 & 3187.69 & 4208.49\\ \hline
@@ -2516,8 +2556,11 @@ Hence, an algorithm cannot be more accurate than the users rating variance for t
       Average & 0.82714 & 112.13 & 249.18\\ \hline
     \end{tabular} 
   \end{center}
+  \caption{Recommendation System Evaluation}
+  \label{table:recomEv}
+\end{table}
 
-  The recommendation comparison table represents the evaluation of the recommendation systems.
+The table~\ref{table:recomEv} represents the evaluation of the recommendation systems.
   The computer that is used for testing the different recommendation techniques is a \emph{Macbook Air} with a 1.86 \emph{GHz Intel Core 2 Duo} precessor and 4 GB DDR3 memory.
   Consequently, all computation times that are measured in this evaluation are based on this hardware system and can be faster on a productive server.
   However, the computation times can be used to compare the speed of the different recommendation systems.
@@ -2530,7 +2573,7 @@ Hence, an algorithm cannot be more accurate than the users rating variance for t
 
   The \emph{Item Based} technology is the implementation of the item based recommendation approach that is part of the overall recommendation concept of this thesis.
   It has a mean absolute error of 0.83187 which is the second poorest mean absolute error of all tested technologies.
-  This is a surprising outcome of the evaluation because it was expected that this technology would be more similar to the mean absolute error of the SVD based technologies. %\todo{any reasons?}
+  This is a surprising outcome of the evaluation because it was expected that this technology would be more similar to the mean absolute error of the SVD based technologies. 
   The offline computation time in this implementation consists of finding items that were rated by the same users and calculating the adjusted cosine similarity between those items.
   The adjusted cosine similarity is a special form of the cosine similarity.
   The cosine similarity for two items is calculated by applying the dot product between the rating vectors of the items and dividing the result by the Euclidean length of the rating vectors.
@@ -2661,7 +2704,7 @@ Hence, an algorithm cannot be more accurate than the users rating variance for t
   Each of those texts has 30\% words that should match with the words in the thesaurus.
   However, most of these words are in a different form or spelling mistakes are inserted.
   So, the evaluation process checks how many words are found and how long the algorithm needs.
-  In three of four tests more words were returned than the algorithm should have matched.\todo{neue info?}
+  In three of four tests more words were returned than the algorithm should have matched.
   This is mostly due to the fact that most words in the thesaurus are included in the German and English language and that some of those words are quite similar.
   Consequently the algorithm returns the English and the German word.
   Other false matches occurred because the thesaurus included words that were too similar and thus the algorithm returned both of these words.
@@ -2706,7 +2749,6 @@ Consequently the predictions should be more individual for the single user.
 
   %dieser focus macht es noetig das der content des recommendation system sich selbst verwalten koennen muss
   %dh die qualitaet sollte durch die mach der vielen sicher gestellt werden und der inhalt des contents sollte automatisch erfasst werden koennen.
-\appendix
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                              %%
@@ -2716,5 +2758,56 @@ Consequently the predictions should be more individual for the single user.
 
 \bibliography{bib}       %% statt mybib Name der eigenen .bib-Datei einsetzen 
 \bibliographystyle{plainnat}
+
+
+\appendix
+\begin{appendix}
+  \chapter{Tagging Test Documents}
+  Each of the texts that are used in the tagging algorithm evaluation include 70\% words of the \emph{Lorem Ipsum} placeholder text and 30\% words from the STW Thesaurus for Economics (STW).
+
+  \section{300 STW Thesaurus for Economics Words}
+    The following 300 words from the STW are used for the generation of the tagging texts.\\
+
+Verteilungstheorie, Einkommensteuer, Verrechnungspreis, Fischkonserve, Investitionsklima, Fertighaus, Maschinensteuer, Nickel, Zivildienst, Branche, Bildungsforschung, Abbrecher, Verbraucherpolitik, Produktinnovation, Mikrosystemtechnik, Pflegeberufe, Antarktis, Musikwirtschaft, Energiemanagement, Flugzeug, Euro, Bauwirtschaft, Produktimage, Hochschulpolitik, Freihandelszone, Berufsverband, Techniksoziologie, Kernkompetenz, Recht, Umweltschutzkonferenz, Konditionen, Sicherheitspolitik, Transaktionskosten, Personalauswahl, Telekommunikation, Kunden, Biokost, Transportproblem, Bildungsforschung, Geistliche, Branche, Tauschwirtschaft, Schiffsreparaturindustrie, Organisation, Haushaltskonsolidierung, Metallberufe, Zentralasien, Pferdesport, Demokratisierung, Kapitalstruktur, Verkauf, Immobilienmakler, Emissionshandel, Verdienstausfall, Kran, Tee, Hautpflegemittel, Hochschulreform, Protektionismus, Gerichtsbarkeit, Abfallpolitik, Kunstgegenstand, Zinsstrukturtheorie, Landwirtschaftsberufe, Clubtheorie, Kaffeepolitik, Freiheit, Staatsversagen, Altpapierwirtschaft, Unternehmensversicherung, Informationswissenschaft, Fusion, Merger, Friedensbewegung, Rentenfonds, Elektrostahlwerk, Schweinemarkt, Rundfunkfinanzierung, Arbeitsgruppe, Chemie, Destinationsmanagement, Rohstoffressourcen, Bankenkrise, Schiffbau, Frankreich, Navigationssystem, Textiltechnik, Arbeitslosigkeit, Bagger, Immobilienverwaltung, Vertriebsweg, Fruchtsaft, Rechtsform, Patronage, Haushaltsproduktion, Saisonbereinigung, Metall, Garnindustrie, Unternehmensbewertung, Maschenwaren, Verkehrssicherheit, Allgemeinbildung, Entwicklungspol, Gewohnheitsrecht, Siedlungsstruktur, Krisentheorie, Bestandsmanagement, Arbeitswelt, Suchmaschine, Saatgut, Schnellgastronomie, Luftfahrtversicherung, Effizienzlohn, Postberufe, Standortmarketing, Heizkraftwerk, Normbefolgung, Konjunkturzusammenhang, Heimtextilienindustrie, Anforderungsprofil, Bausanierung, Arbeitsstrafrecht, Wasseraufbereitungsanlage, Griechen, Arbeitsmarktdiskriminierung, Handelsmarketing, Auszubildende, Bergbaustatistik, Finanzrecht, Mittelstandsmanagement, Weltkonjunktur, Hochtechnologiesektor, Informationsmarkt, Chirurgie, Zentralbankautonomie, Wahrnehmung, Finanzierungstheorie, Investitionsrecht, Bankberufe, Wirtschaftskriminalit?t, Mehrwegverpackung, Angebot, Befragung, Arbeitsrechtsprechung, Kauf, Politikwissenschaft, Investmentfonds, Kraftmaschine, Personalkontrolle, Bekleidung, Baumarkt, Versicherungsmarketing, Kinderbetreuungseinrichtung, Schuldenerlass, Kurierdienst, Frieden, Interessenpolitik, Kreislaufwirtschaft, Zeitreihenanalyse, Lateinisch, Wolle, Werbung, Lebenshaltungsindex, Wettbewerbsaufsicht, Schrottwirtschaft, Sondersteuer, Medienwettbewerb, Wirtschaftspolitik, Schwefel, Verkehrsprognose, Wildtierschutz, Tochtergesellschaft, Kernenergiepolitik, Umsatzkostenverfahren, Meer, Forschungskooperation, Investivlohn, Direktwerbung, Dentalprodukt, Luftverbesserer, Kapitalkoeffizient, Maismarkt, Aktienstimmrecht, Klimaanlage, Luxussteuer, Finanzwissen, Lastkraftwagen, Holismus, Lieferantenkredit, Kostenstellenrechnung, Naturfaser, Ministerium, Kundendaten, Ergonomie, Fertigungstechnik, Grenzsteuersatz, Erwachsenenbildung, Geldumlaufgeschwindigkeit, Schattenwirtschaft, Weizenpolitik, Mitarbeiterkapitalbeteiligung, Deutsch, Industriesoziologie, Mittelmeerraum, Basisgesundheitsversorgung, Lebensmitteleinzelhandel, Schwefeldioxid, Gefangenendilemma, Verwaltungskosten, Dienstleistung, Postrecht, Motorrad, Hafer, Arbeitsmarktpolitik, Handwerkspolitik, Brasilianer, Landwirte, Tourismusmanagement, Wasserpolitik, Weltraum, Zeitlohn, Kaufkraft, Auslandsinvestitionsrecht, Zins, Getreidehandel, Hafenanlagen, Grundschule, Steuerreform, Wasserstoffperoxid, Alleinlebende, Kommunikationsmedien, Baustoffhandel, Staatshaftung, Containerschifffahrt, Nahverkehrspolitik, Seerecht, Zeitungsdruckerei, Schiffsantrieb, Mindestrente, Handwerkskammer, Risikoaversion, Unternehmensbesteuerung, Milchmarkt, Akademiker, Pflichtversicherung, Bankenpolitik, Realzins, Regionalluftverkehr, Eigentum, Depositenzertifikat, Fahrradverkehr, Kapitaldeckungsverfahren, Rechtsschutz, Ferienimmobilien, Namensaktie, Sozialprodukt, Fischhandel, Gravitationsmodell, Reforestation, Aufforstung, Marketingpolitik, Saisonschwankung, Nachbarschaftsladen, Lebenszyklus, Anpassungskosten, Kanadisch, Bauinstallation, Kraftfahrzeugteil, Gewerberecht, Massengutfrachter, Versicherungsschutz, Legalisierung, Wechselkurssystem, Tierhaltung, Inferenzstatistik, Lernpsychologie, Kleinstunternehmen, Kautschukgewinnung, Arbeitsmarktungleichgewicht, Globalsteuerung, Freizeitartikel, Erwerbspersonenpotenzial, Generationenbeziehungen, Tierfett, Migranten, Exportbasistheorie, Testbohrung, Altenpolitik, Arbeitssucht, Anlageberatung, Materialismus, Genussmittel, Produkthaftung, Kreditrisiko, Schuhe, Schwermetall, Kunst, Marktanteil, Devisenrecht, Optionsanleihe, Rechtsordnung
+\section{Tagging Text With 10 Words}
+Lorem ipsum dolor sit, glasfasernetze stofe consectetur adipisicing, Einkomensteuer sed.\\
+
+This text includes 10 words three of these words are from the STW. Three words are matched.\\ 
+Automata creation time: 284396000 nano seconds\\
+Total time: 20348044000 nano seconds.\\
+
+Matched words:\\
+"Glasfasernetz", "Stoffe", "Einkommensteuer"\\
+\section{Tagging Text with 100 Words}
+Lorem ipsum dolor sit, consectetur Verteilungstheorien Einkommensteuer Verrechnungspreise adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut Fischkonnserve Investitionsklima Fertighaeuser Maschinensteuer enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis Nickel Zivildienst Branche Bildungsforschungen Abbrecher Verbraucherpoliticker Produktinnovationen Mikrosystemtechniker Pflegeberufe irure dolor in reprehenderit in voluptate velit Antarktis Musikwirtschaft Energiemanagement Flugzeug Euro Bauwirtschaft cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit Produktimage Hochschulpolitik Freihandelszone Berufsverbaende Techniksoziologie Kernkompetenzen Rechte Umweltschutzkonferenzen Konditionen anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et \\
+
+This text includes 100 words 30 of these words are from the STW. 54 words are matched. \\
+Automata creation time: 475114000 nano seconds\\
+Total time: 79961670000 nano seconds\\
+
+Matched words:\\ 
+"Eisbrecher", "Almwirtschaft", "Waldwirtschaft", "Synergiemanagement", "Messewirtschaft", "Verbrecher", "Konditorei", "Feuerzeug", "Brache", "Flugzeugbau", "Fahrzeug", "Gaswirtschaft", "Landwirtschaft", "Autarkie", "Teewirtschaft", "Planwirtschaft", "Arktis", "B\"urowirtschaft", "Abbrecher", "Verbraucherpolitik", "Produktinnovation", "Mikrosystemtechnik", "Pflegeberufe", "Antarctica", "Antarktis", "Musikwirtschaft", "Energiemanagement", "Energy management", "Flugzeug", "Euro", "Euro", "Bauwirtschaft", "Produktimage", "Product image", "Hochschulpolitik", "Freihandelszone", "Berufsverband", "Techniksoziologie", "Kernkompetenz", "Recht", "Umweltschutzkonferenz", "Konditionen", "Bildungsforschung", "Branche", "Zivildienst", "Nickel", "Nickel", "Maschinensteuer", "Fertighaus", "Investitionsklima", "Fischkonserve", "Verrechnungspreis", "Einkommensteuer", "Verteilungstheorie"
+
+
+\section{Tagging Text with 1000 Words}
+Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod Verteilungstheorien Einkomensteuer Verrechnungspreise Fischkonserven Investitionsklimata Fertighaeuser Maschinensteuer Nickel Zivildienst Branche tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et Lorem ipsum dolor sit, consectetur adipisicing, sed Bildungsforschung Abbrecher Verbraucherpoliticker Produktinnovationen Mikrosystemtechniker Pflegeberufe Antarktis Musikwirtschaftn do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis Energiemanagement Flugzeuge Euro Bauwirtschaften Produktimage Hochschulpoliticker Freihandelszonen Berufsverbaende Techniksoziologie irure dolor in Namensaktien Sozialprodukte Fischhandeln Gravitationsmodelle Reforestationen Aufforstungen Marketingpoliticker Saisonschwankungen Nachbarschaftslade Lebenszyklen Anpassungskosten Kanadisch Bauinstallationen Kraftfahrzeugteile reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in Gewerberecht Massengutfrachter Versicherungsschuetzer Legalisierungen Wechselkurssysteme Tierhaltungen Inferenzstatistiken Lernpsychologien Kleinstunternehmer Kautschukgewinnungen Arbeitsmarktungleichgewichte Globalsteuerungen Freizeitartickel culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod Erwerbspersonenpotenziale Generationenbeziehung Tierfette Migranten Exportbasistheorien Testbohrungen Altenpoliticker Arbeitssucht Anlageberatungen Materialismus Genussmittel Produkthaftungen Kreditrisiken Schuhe Schwermetalle Kunst Marktanteile Devisenrecht Optionsanleihen Rechtsordnungen tempor incididunt ut et Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut Kernkompetenzen Recht Umweltschutzkonferenzen Konditionen Sicherheitspoliticker Transaktionskost Personalauswahl Telekommunikation Kunden enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed Biokost Transportprobleme Bildungsforschungen Geistliche Branche Tauschwirtschaft Schiffsreparaturindustrie Organisationen Haushaltskonsolidierung do eiusmod tempor incididunt ut et Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad Metallberufe Zentralasien Pferdesportler Demokratisierung Kapitalstruktur Verkaeufe Immobilienmakler Emissionshandeln Verdienstausfaelle minim veniam, Risikoaversionen Unternehmensbesteuerungen Milchmaerkte Akademicker Pflichtversicherungen Bankenpoliticker Realzinsen Regionalluftverkehr Eigentuemer Depositenzertifikate Fahrradverkehr Kapitaldeckungsverfahren Rechtsschutz Ferienimmobilie quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat Industriesoziologie Mittelmeerraeume Basisgesundheitsversorgungen Lebensmitteleinzelhandel Schwefeldioxide Gefangenendilemma Verwaltungskosten Dienstleistung Postrechter Motorad nulla. Occaecat Landwirtschaftsberufe Clubtheorien Kaffeepoliticker Freiheiten Staatsversagen Altpapierwirtschaft Unternehmensversicherungen cupidatat non, sunt in culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt Kraene Tee Hautpflegemittel Hochschulreformen Protektionismus Gerichtsbarkeit Abfallpoliticker Kunstgegenstaende Zinsstrukturtheorie ut et Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis Navigationssysteme Textiltechniker Arbeitslosigkeit Bagger Immobilienverwaltung Vertriebswege Fruchtsaefte Rechtsformen irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit anim id est. Informationswissenschaftler Fusion Merger Friedensbewegungen Rentenfonds Elektrostahlwerke Schweinemaerkte Lorem ipsum dolor sit, Rundfunkfinanzierungen Arbeitsgruppen Chemie Destinationsmanagement Rohstoffressource Bankenkrisen Schiffbau Frankreich consectetur adipisicing, sed do eiusmod tempor incididunt ut et Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip Patronage Haushaltsproduktionen Saisonbereinigungen Metall Garnindustrien Unternehmensbewertungen Maschenwaren Verkehrssicherheit ex ea Normbefolgung Konjunkturzusammenhaenge Heimtextilienindustrien Anforderungsprofile Bausanierungen commodo Allgemeinbildungen Entwicklungspolize Gewohnheitsrechte Siedlungsstrukturen Krisentheorien Bestandsmanagement Arbeitswelt Suchmaschinen consequat. Duis irure dolor in reprehenderit in voluptate velit Finanzrechte Mittelstandsmanagement Weltkonjunktu Hochtechnologiesektoren Informationsmaerkte Chirurgie Zentralbankautonomie Wahrnehmungen Finanzierungstheorien Investitionsrechte Bankberufe Wirtschaftskriminalitaet Mehrwegverpackungen Angebote Befragungen Arbeitsrechtsprechungen cillum dolore eu fugiat Kauf Politikwissenschaften Investmentfond Kraftmaschinen Personalkontrollen Bekleidungen Baumaerkte Versicherungsmarketing Kinderbetreuungseinrichtungen nulla. Occaecat Schuldenerlaesse Kurierdienste Friede Interessenpoliticker Kreislaufwirtschaft Zeitreihenanalysen Lateinisch Wolle Werbungen Lebenshaltungsindex Wettbewerbsaufsicht Schrottwirtschaften Sondersteuer Medienwettbewerbe Wirtschaftspolitiken cupidatat non, sunt in culpa qui officia mollit anim Schwefel Verkehrsprognosen Wildtierschuetzer Tochtergesellschaften Kernenergiepoliticker Umsatzkostenverfahr Meere Forschungskooperationen Investivloehne Direktwerbungen Dentalprodukte id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et Lorem ipsum dolor sit, consectetur Luftverbesserer Kapitalkoeffizienten Maismaerkte Aktienstimmrechte Klimaanlagen Luxussteuer Finanzwiss Lastkraftwagen Holismus Lieferantenkredite Kostenstellenrechnungen adipisicing, sed do eiusmod tempor Saatgut Schnellgastronomie Luftfahrtversicherungen Effizienzlohn Postberufe Standortmarketing Heizkraftwerke incididunt ut et dolore magna Hafer Arbeitsmarktpoliticker Handwerkspoliticker brasilianerinnen Landwirte Tourismusmanagement Wasserpoliticker Weltraum Zeitloehne Kaufkraft Auslandsinvestitionsrecht Zinsen Getreidehaendler Hafenanlage aliqua. Ut Grundschulen Steuerreformen Wasserstoffperoxide Alleinlebend Kommunikationsmedi Baustoffhandeln Staatshaftung Containerschifffahrten Nahverkehrspoliticker Seerecht Zeitungsdruckereien Schiffsantriebe Mindestrenten Handwerkskammern enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis Naturfaser Ministerium Kundendaten Ergonomi Fertigungstechnicker Grenzsteuersatz Erwachsenenbildungen Geldumlaufgeschwindigkeiten Schattenwirtschaftler Weizenpoliticker Mitarbeiterkapitalbeteiligungen Deutscher irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis Arbeitsstrafrechtler Wasseraufbereitungsanlagen Griechen Arbeitsmarktdiskriminierung Handelsmarketing Auszubildende Bergbaustatistiken irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla. Occaecat cupidatat non, sunt in culpa qui officia mollit anim id est. Lorem ipsum dolor sit, consectetur adipisicing, sed do eiusmod tempor incididunt ut et \\
+
+This text includes 1000 words with 300 words from the STW.
+470 words are matched.\\
+
+Automata creation time: 2560683000 nano seconds\\
+Total time: 777464359000 nano seconds\\
+
+Matched words:\\
+
+"Kleinunternehmen", "Schwule", "Verk\"aufer", "Immobilienvermietung", "Seelachs", "Eisbrecher", "Kandis", "PR-Berufe", "Bodensteuer", "Arbeitsmarktgleichgewicht", "Ergonomen", "Kameralismus", "Arbeitsamt", "Kartonage", "Hecht", "Informationswissenschaftler", "Schere", "Sexismus", "Gletscher", "Fordismus", "Arbeitswert", "Genu\ss{}mittel", "Speech", "Wolfram", "Erwerbspersonenpotential", "Immigranten", "Emigranten", "Deutschmark", "Brasilianerinnen", "Landwirt", "Amtshaftung", "Containerschiffahrt", "Regionalflugverkehr", "Regionaler Luftverkehr", "Synergiemanagement", "Griechinnen", "Gericht", "Schiffsbau", "Schwei\ss{}er", "Serbinnen", "Mergel", "EG-Recht", "Schiefer\"ol", "Bahnindustrie", "Tier\"arzte", "Tankwarte", "Vetorecht", "Organisatorinnen", "Verbrecher", "Schiffer", "Konditorei", "Staatsverm\"ogen",
+"Pa\ss{}recht", "Hundesteuer", "IT-Dienstleistung", "DV-Dienstleistung", "SB-Lebensmitteleinzelhandel", "Werberecht", "Egoismus", "Fachhandel", "Hauswirtschaftsberufe", "Finanzkrise", "Siedlungsforschung", "Kernkraft", "Reiserecht", "Geldrecht", "Arbeitssuche", "Transaktionskasse", "Minister", "Ministerrat", "Tierrechte", "Wohnraum", "Gastwirte", "Brache", "Flugzeugbau", "Vertriebene", "Migration", "Grundschuld", "Jagdberufe", "Taoismus", "Daoismus", "Kraftfahrzeugreifen", "Wehrbudget", "Fahrgastverkehr", "Teichwirtschaft", "Tourismus", "Fischwirtschaft", "Autarkie", "Rauchen", "Personalcontrolling", "Schwein", "Japanisch", "Entwicklungspolitik", "Erbrecht", "Mietrecht", "Arbeitsschutz", "Eigent\"umer", "Greece", "Stadtmarketing", "Kasachisch", "Arbeitsuche", "Kubanisch", "Bergrecht", "Arbeitszeit", "Schule", "Kroatisch", "Arktis", "Schiefer", "Deutsche", "Medienrecht", "B\"uroberufe", "EU-Recht", "Schiff", "Investmentbank", "Freizeit", "Asylrecht", "Arabisch", "Organisatoren", "Landkarte", "Schweden", "Schweiz", "Indisch", "Westlich", "Babypflegemittel", "Bilanzrecht", "Forstberufe", "Steuerrecht", "Landcare", "Kundenkarte", "Zionismus", "Holzberufe", "Arbeitsrecht", "Freihafen", "IT-Recht", "Papierwirtschaft", "Wehrrecht", "Bauberufe", "Economy", "Deforestation",
+"Imperialismus", "Baurecht", "Secrecy", "Schweizer", "Eherecht", "L\"andersteuer", "Arbeitssucht", "Anlageberatung", "Materialismus", "Materialism", "Genussmittel", "Produkthaftung", "Kreditrisiko", "Schuhe", "Schwermetall", "Kunst", "Marktanteil", "Devisenrecht", "Optionsanleihe", "Rechtsordnung", "Haarpflegemittel", "Legalisierung", "Wechselkurssystem", "Tierhaltung", "Inferenzstatistik", "Lernpsychologie", "Kleinstunternehmen", "Kautschukgewinnung", "Arbeitsmarktungleichgewicht", "Globalsteuerung", "Freizeitartikel", "Erwerbspersonenpotenzial", "Generationenbeziehungen", "Tierfett", "Migrants", "Migranten", "Exportbasistheorie", "Testbohrung", "Altenpolitik", "Depositenzertifikat", "Fahrradverkehr", "Kapitaldeckungsverfahren", "Rechtsschutz", "Ferienimmobilien", "Namensaktie", "Sozialprodukt", "Fischhandel", "Gravitationsmodell", "Reforestation", "Aufforstung", "Marketingpolitik", "Saisonschwankung", "Nachbarschaftsladen", "Lebenszyklus", "Anpassungskosten", "Kanadisch", "Bauinstallation", "Kraftfahrzeugteil", "Gewerberecht", "Massengutfrachter", "Versicherungsschutz", "Weizenpolitik", "Mitarbeiterkapitalbeteiligung", "Deutsch", "Industriesoziologie", "Mittelmeerraum", "Basisgesundheitsversorgung", "Lebensmitteleinzelhandel", "Schwefeldioxid", "Gefangenendilemma", "Verwaltungskosten", "Dienstleistung", "Postrecht", "Motorrad", "Hafer", "Arbeitsmarktpolitik", "Handwerkspolitik", "Landwirte", "Tourismusmanagement",
+"Tourism management", "Wasserpolitik", "Weltraum", "Zeitlohn", "Kaufkraft", "Auslandsinvestitionsrecht", "Getreidehandel", "Kurden", "Hafenanlagen", "Grundschule", "Steuerreform", "Wasserstoffperoxid", "Alleinlebende", "Kommunikationsmedien", "Baustoffhandel", "Staatshaftung", "Containerschifffahrt", "Nahverkehrspolitik", "Seerecht", "Zeitungsdruckerei", "Schiffsantrieb", "Mindestrente", "Handwerkskammer", "Risikoaversion", "Unternehmensbesteuerung", "Milchmarkt", "Akademiker", "Pflichtversicherung", "Bankenpolitik", "Realzins", "Regionalluftverkehr", "Eigentum", "Kernenergiepolitik", "Umsatzkostenverfahren", "Meer", "Forschungskooperation", "Investivlohn", "Direktwerbung", "Dentalprodukt", "Dental products", "Luftverbesserer", "Kapitalkoeffizient", "Maismarkt", "Aktienstimmrecht", "Klimaanlage", "Luxussteuer", "Finanzwissen", "Lastkraftwagen", "Holismus", "Lieferantenkredit", "Kostenstellenrechnung", "Naturfaser", "Ministerium", "Kundendaten", "Ergonomics",
+"Ergonomie", "Fertigungstechnik", "Grenzsteuersatz", "Erwachsenenbildung", "Hafen", "Geldumlaufgeschwindigkeit", "Schattenwirtschaft", "Zentralbankautonomie", "Wahrnehmung", "Finanzierungstheorie", "Investitionsrecht", "Bankberufe", "Wirtschaftskriminalit\"at", "Mehrwegverpackung", "Angebot", "Befragung", "Arbeitsrechtsprechung", "Kauf", "Politikwissenschaft", "Investmentfonds", "Investment Fund", "Kraftmaschine", "Personalkontrolle", "Bekleidung", "Baumarkt", "Versicherungsmarketing", "Kinderbetreuungseinrichtung",
+"Schuldenerlass", "Kurierdienst", "Frieden", "Interessenpolitik", "Kreislaufwirtschaft", "Zeitreihenanalyse", "Lateinisch", "Wolle", "Werbung", "Lebenshaltungsindex", "Wettbewerbsaufsicht", "Schrottwirtschaft", "Sondersteuer", "Medienwettbewerb", "Wirtschaftspolitik", "Schwefel", "Verkehrsprognose", "Wildtierschutz", "Tochtergesellschaft", "Maschenwaren", "Verkehrssicherheit", "Allgemeinbildung", "Entwicklungspol", "Gewohnheitsrecht", "Siedlungsstruktur", "Krisentheorie", "Bestandsmanagement", "Arbeitswelt", "Suchmaschine", "Saatgut", "Schnellgastronomie", "Luftfahrtversicherung", "Effizienzlohn",
+"Postberufe", "Standortmarketing", "Heizkraftwerk", "Normbefolgung", "Konjunkturzusammenhang", "Heimtextilienindustrie", "Anforderungsprofil", "Bausanierung", "Arbeitsstrafrecht", "Wasseraufbereitungsanlage", "Griechen", "Arbeitsmarktdiskriminierung", "Handelsmarketing", "Auszubildende", "Bergbaustatistik", "Finanzrecht", "Mittelstandsmanagement", "Weltkonjunktur", "Hochtechnologiesektor", "Informationsmarkt", "Chirurgie", "Protectionism", "Protektionismus", "Gerichtsbarkeit", "Abfallpolitik", "Kunstgegenstand", "Zinsstrukturtheorie", "Landwirtschaftsberufe", "Clubtheorie", "Kaffeepolitik", "Freiheit", "Staatsversagen", "Altpapierwirtschaft", "Unternehmensversicherung", "Informationswissenschaft", "Fusion", "Merger", "Friedensbewegung", "Rentenfonds", "Elektrostahlwerk", "Schweinemarkt", "Rundfunkfinanzierung", "Arbeitsgruppe", "Chemie", "Destination management", "Destinationsmanagement", "Rohstoffressourcen", "Bankenkrise", "Schiffbau", "Frankreich", "Navigation system", "Navigationssystem", "Textiltechnik", "Arbeitslosigkeit", "Bagger", "Immobilienverwaltung", "Vertriebsweg", "Fruchtsaft", "Rechtsform", "Patronage", "Haushaltsproduktion", "Saisonbereinigung", "Metall", "Metal", "Garnindustrie", "Unternehmensbewertung", "Tauschwirtschaft", "Schiffsreparaturindustrie", "Organisation", "Organization", "Haushaltskonsolidierung", "Metallberufe", "Zentralasien", "Pferdesport", "Demokratisierung", "Kapitalstruktur", "Verkauf", "Immobilienmakler", "Emissionshandel", "Verdienstausfall", "Tee", "Hautpflegemittel", "Hochschulreform", "Abbrecher", "Verbraucherpolitik", "Produktinnovation", "Mikrosystemtechnik", "Pflegeberufe", "Antarctica", "Antarktis", "Musikwirtschaft", "Energiemanagement", "Energy management", "Flugzeug", "Euro", "Euro", "Bauwirtschaft", "Produktimage", "Product image", "Hochschulpolitik", "Freihandelszone", "Berufsverband", "Techniksoziologie", "Kernkompetenz", "Recht", "Umweltschutzkonferenz", "Konditionen", "Sicherheitspolitik", "Transaktionskosten", "Personalauswahl", "Telecommunications", "Telekommunikation", "Kunden", "Biokost", "Transportproblem", "Bildungsforschung", "Geistliche", "Branche", "Zivildienst", "Nickel", "Nickel", "Maschinensteuer", "Fertighaus", "Investitionsklima", "Fischkonserve", "Verrechnungspreis", "Einkommensteuer", "Verteilungstheorie"
+
+\end{appendix}
 
 \end{document}

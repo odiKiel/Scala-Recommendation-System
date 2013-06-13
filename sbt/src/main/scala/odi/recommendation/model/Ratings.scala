@@ -8,14 +8,22 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
 
- // Definition of the USER_ITEMS table
- //todo prediction!
+ /** Definition of the Rating table
+   *
+   * @param id this is an optional id if a new rating is created None is used
+   * @param itemId this is the item id that is connected with this rating
+   * @param userId this is the user id that is connected with this rating
+   * @param rating this represents the rating for the user item combination
+   * @param prediction states if this rating is a prediction or not
+   */
 case class Rating(id: Option[Int] = None, itemId: Int, userId: Int, rating: Int, prediction: Boolean) extends ToJson{
   def toJson = {
     val json = ("id"->id.get)~("itemId"->itemId)~("userId"->userId)~("rating"->rating)~("prediction"->prediction)
     compact(render(json))
   }
 }
+
+/** this object represents the rating table of the database */
 object Ratings extends Table[Rating]("ratings") with ModelTrait {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def itemId = column[Int]("item_id") 
@@ -30,16 +38,7 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
   def item = foreignKey("item_fk", itemId, Items)(_.id)
 
 
-                       
-  /*
-                       .withSession {
-
-    Ratings.ddl.create
-
-    Ratings.insert(Rating(None, 1, 1, 4))
-  }
-    */
-
+  /** creates the rating table in the database */
   def createTable = {
     db.withSession {
       Ratings.ddl.create
@@ -47,56 +46,61 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
   }
 
+  /** returns a list of ratings that correspond with the user id
+    * @param uid represents the user id
+    * @return a list of ratings that correspond with the user id
+    */
   def byUserId(uid: Int) : List[Rating] = {
     var result:List[Rating] = List[Rating]()
 
     db withSession {
-        // define the query and what we want as result
     	val query = (for {u <-Ratings if u.userId === uid} yield u.id ~ u.itemId ~ u.userId ~ u.rating ~ u.prediction).sortBy(_._2)
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id, itemId, userId, rating, prediction) => Option(Rating(Option(id), itemId, userId, rating, prediction));
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
       if(inter.list != Nil){
         result = inter.list.flatten
       }
       result
     }
 
-    // return the found bid
     result
   }
 
+  /** returns the ratings for an item id
+    *
+    * @param iid the item id that is used
+    * @return a list of ratings that correspond with the item id
+    */
   def byItemId(iid: Int) : List[Rating] = {
     var result:List[Rating] = List[Rating]()
 
     db withSession {
-        // define the query and what we want as result
     	val query = (for {u <-Ratings if u.itemId === iid} yield u.id ~ u.itemId ~ u.userId ~ u.rating ~ u.prediction).sortBy(_._2)
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id, itemId, userId, rating, prediction) => Option(Rating(Option(id), itemId, userId, rating, prediction));
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
       if(inter.list != Nil){
         result = inter.list.flatten
       }
       result
     }
 
-    // return the found bid
     result
   }
 
 
-  /*
-   find ratings from one user for items that are unknown to another user
-   use only ratings that aren't predictions!
+  /** find ratings from one user for items that are unknown to another user
+   *use only ratings that aren't predictions!
+   *
+   * @param uid1 the user for whom the items of the ratings are unknown
+   * @param uid2 the user that rated these items
+   * @param the amount of ratings that should be returned
+   * @return the list of ratings
    */
   def getUnknownItemsForUserByUser(uid1: Int, uid2: Int, amount: Int): List[Rating] = {
     db withSession {
@@ -109,9 +113,14 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
   }
 
-  /*
-   find ratings from one user for items that are unknown to another user that have the correct tag
-   use only ratings that aren't predictions!
+  /**find ratings from one user for items that are unknown to another user that have the correct tag
+   * use only ratings that aren't predictions!
+   *
+   * @param uid1 the user for whom the items of the ratings are unknown
+   * @param uid2 the user that rated these items
+   * @param amount of ratings that should be returned
+   * @param prefLabel the descriptor that has to correspond with the item
+   * @return the list of ratings
    */
   def getUnknownItemsForUserByUserWithTag(uid1: Int, uid2: Int, amount: Int, prefLabel: String): List[Rating] = {
     db withSession {
@@ -125,19 +134,22 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
   }
 
 
+  /** returns an rating for a specific item user pair
+    *
+    * @param iid the item id for the user item pair
+    * @param uid the user id for the user item pair
+    * @return the rating if it exists
+    */
   def byItemIdUserId(iid: Int, uid: Int) : Option[Rating] = {
     var result:Option[Rating] = None;
 
     db withSession {
-        // define the query and what we want as result
     	val query = for (r <-Ratings if r.userId === uid && r.itemId === iid) yield r.id ~ r.itemId ~ r.userId ~ r.rating ~ r.prediction
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id, itemId, userId, rating, prediction) => Option(Rating(Option(id), itemId, userId, rating, prediction));
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
     	result = inter.list match {
     	  case _ :: tail => inter.first
     	  case Nil => None
@@ -145,35 +157,39 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
     }
 
-    // return the found bid
     result
   }
 
  
+  /** returns the rating for the rating id
+    *
+    * @param rid the id for the rating
+    * @result the rating if it exists
+    */
   def get(rid: Int) : Option[Rating] = {
     var result:Option[Rating] = None;
 
     db withSession {
-        // define the query and what we want as result
     	val query = for (u <-Ratings if u.id === rid) yield u.id ~ u.itemId ~ u.userId ~ u.rating ~ u.prediction
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id, itemId, userId, rating, prediction) => Option(Rating(Option(id), itemId, userId, rating, prediction))
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
     	result = inter.list match {
     	  case _ :: tail => inter.first
     	  case Nil => None
     	}
     }
 
-    // return the found bid
     result
   }
 
-  // return all users with ratings for an item
+  /** return all users with ratings for an item
+    *
+    * @param itemId the item that the rating list should correspond with
+    * @return a list of user rating tupel
+    */
   def userRatingListByItemId(itemId: Int) : List[(Int, Int)] = {
     db withSession {
       val query = for {
@@ -183,27 +199,28 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
 
 
-  /**
-   * Create or update rating if it exists
-   */
+  /** Create or update rating if it exists
+    *
+    * @param rating the rating that should be created or updated
+    * @return the rating that is created or updated
+    */
   def create(rating: Rating): Rating = {
+    //load rating if it exists
     val ratingOption = byItemIdUserId(rating.itemId, rating.userId)
 
     if(ratingOption == None) {
+      //create new rating if it does not exist
       var id: Int = -1;
 
-      // start a db session
       db withSession {
-        // create a new bid
         val res = Ratings.noID insert (rating.itemId.intValue, rating.userId.intValue, rating.rating.intValue, rating.prediction.booleanValue)
-        // get the autogenerated bid
         val idQuery = Query(SimpleFunction.nullary[Int]("LASTVAL"))
         id = idQuery.list().head
       }
-      // create a bid to return
       new Rating(Option(id), rating.itemId, rating.userId, rating.rating, rating.prediction)
     }
     else {
+      //update rating if it exists
       db withSession {
         val query = for (r <-Ratings if r.userId === rating.userId && r.itemId === rating.itemId) yield r.id ~ r.itemId ~ r.userId ~ r.rating ~ r.prediction
         query.update((ratingOption.get.id.get, rating.itemId, rating.userId, rating.rating, rating.prediction))
@@ -212,23 +229,26 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
   }
 
-  /**
-   * Delete a bid
-   */
+  /** Delete a rating
+    * 
+    * @param rid the rating id for the rating that should be deleted
+    * @result the rating that is deleted
+    */
   def delete(rid: Int) : Option[Rating] = {
-    // get the bid we're deleting
     val result = get(rid);
 
-    // delete the bid
     val toDelete = Ratings where (_.id === rid)
     db withSession {
       toDelete.delete
     }
 
-    // return deleted bid
     result
   }
 
+  /** delete a rating by user id
+    *
+    * @param uid the user id that should be removed from all ratings
+    */
   def deleteByUserId(uid: Int) = {
 
     val toDelete = Ratings where (_.userId === uid)
@@ -238,6 +258,10 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
   }
 
+  /** delete a rating by item id
+    *
+    * @param iid the item id that should be removed from all ratings
+    */
   def deleteByItemId(iid: Int) = {
     val toDelete = Ratings where (_.itemId === iid)
     db withSession {
@@ -247,6 +271,7 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     // return deleted bid
   }
 
+  /** delete all ratings */
   def deleteAll = {
     db withSession {
       val q = for { 
@@ -257,6 +282,7 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
   }
 
+  /** return the first rating */
   def first : Option[Rating] = {
     db withSession {
       val q = Ratings.map{ u => u}.take(1)
@@ -264,6 +290,10 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
   }
 
+  /** return all ratings
+    *
+    * @return a list of all ratings
+    */
   def all : List[Rating] = {
     db withSession {
       val q = Ratings.map{u => u}.sortBy(_.itemId).sortBy(_.userId)
@@ -271,15 +301,18 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
   }
 
-  //returns a list of similar items that the user has rated together with the similarity and the rating
-  // (ItemId, Rating, Similarity)
+  /** returns a list of similar items that the user has rated together with the similarity and the rating
+    *
+    * @param uid the user id for the user item pair
+    * @param iid the item id for the user item pair
+    * @return a list of (ItemId, Rating, Similarity)
+    */
 
   def byUserIdItemIdWithSimilarItem(uid: Int, iid: Int) : List[(Int, Int, Double)] = {
 
     val result = db withSession {
       val query = for {
         (rating, similarItem) <- Ratings leftJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (similarItem.itemOneId, similarItem.itemTwoId, rating.rating, similarItem.similarity)
-        //(rating, similarItem) <- Ratings innerJoin SimilarItems on ((r, s) => (r.itemId === s.itemOneId) || (r.itemId === s.itemTwoId)) if(rating.userId === uid && (similarItem.itemOneId === iid || similarItem.itemTwoId === iid))} yield (rating.rating, similarItem.similarity)
 
       query.sortBy(_._2.desc).take(25).list
     }
@@ -291,6 +324,8 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
   }
 
+  /** returns a list of similar users that the user has rated together with the similarity 
+    */
   def byUserIdItemIdWithSimilarUserAverageRating(userId: Int, itemId: Int) : List[(Int, Int, Double, Double)] = {
 
     db withSession {

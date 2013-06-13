@@ -2,7 +2,7 @@ package odi.recommendation
 import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
 
-//this should be a trait that has all the standart model functions
+/** this model trait is responsible for managing the database */
 trait ModelTrait {
   
   /*

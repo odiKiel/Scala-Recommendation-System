@@ -48,12 +48,6 @@ exit
 console
 exit
 console
-exit
-console
-exit
-console
-exit
-console
 scala
 console
 exit
@@ -281,6 +275,12 @@ exit
 test-only odi.recommendation.TaggerServiceSpec
 exit
 test-only odi.recommendation.TaggerServiceSpec
+exit
+console
+exit
+console
+exit
+console
 exit
 console
 exit
