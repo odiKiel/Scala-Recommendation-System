@@ -36,18 +36,6 @@ exit
 console
 exit
 console
-exit
-console
-exit
-console
-exit
-console
-exit
-console
-exit
-console
-exit
-console
 scala
 console
 exit
@@ -496,5 +484,17 @@ console
 exit
 console
 exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+console
+exit
+sbt update
+update
 console
 exit

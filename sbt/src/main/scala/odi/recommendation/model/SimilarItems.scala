@@ -7,7 +7,13 @@ import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
 import org.apache.commons.math3.linear._
 
- // Definition of the USER_ITEMS table
+ /** Definition of the SimilarItem table
+   *
+   * @param id the id of the entry
+   * @param itemOneId the id of the first item
+   * @param itemTwoId the id of the second item
+   * @param similarity a double value that represents the similarity between those items
+   */
 case class SimilarItem(id: Option[Int] = None, itemOneId: Int, itemTwoId: Int, similarity: Double) extends ToJson {
   def toJson = {
     val json = ("id"->id.get)~("itemOneId"->itemOneId)~("itemTwoId"->itemTwoId)~("similarity"->similarity)
@@ -28,6 +34,9 @@ case class SimilarItem(id: Option[Int] = None, itemOneId: Int, itemTwoId: Int, s
     }
   }
 }
+
+
+  /** this object represents the SimilarItem table of the database **/
 object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalculation with ModelTrait {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def itemOneId = column[Int]("item_one_id") 
@@ -42,15 +51,7 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
 
                        
-  /*
-                       .withSession {
-
-    Ratings.ddl.create
-
-    Ratings.insert(Rating(None, 1, 1, 4))
-  }
-    */
-
+  /** create the SimilarItem table on the database **/
   def createTable = {
     db.withSession {
       SimilarItems.ddl.create
@@ -58,11 +59,15 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
   }
  
+  /** returns the SimilarItem for the id
+    *
+    * @param sid the id that represents the SimilarItem
+    * @return None if it does not exist otherwise the SimilarItem
+    */
   def get(sid: Int) : Option[SimilarItem] = {
     var result:Option[SimilarItem] = None;
 
     db withSession {
-        // define the query and what we want as result
     	val query = for (s <-SimilarItems if s.id === sid) yield s.id ~ s.itemOneId ~ s.itemTwoId ~ s.similarity 
 
     	
@@ -70,7 +75,6 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     	  case(id, itemOneId, itemTwoId, similarity) => Option(SimilarItem(Option(id), itemOneId, itemTwoId, similarity))
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
     	result = inter.list match {
     	  case _ :: tail => inter.first
     	  case Nil => None
@@ -81,6 +85,10 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     result
   }
 
+  /** returns the first SimilarItem of the database
+    *
+    * @return None if no SimilarItem exists otherwise the similarItem
+    */
   def first : Option[SimilarItem] = {
     db withSession {
       val q = SimilarItems.map{ u => u}.take(1)
@@ -88,7 +96,12 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     }
   }
 
-  //returns a list of ItemId, Similarity
+ /** returns all similarItems for an item
+   *
+   * this method checks both similarItem entries wether one of them corresponds with the itemId
+   * @param itemId the id of the item that is requested
+   * @return a list of tuples with the itemId of the similar item and the similarity value
+   */
   def byItemId(itemId: Int) : List[(Int, Double)] = {
 
     db withSession {
@@ -113,11 +126,16 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
   }
 
 
+  /** this method returns the similarItem entry by two item ids
+    *
+    * @param item1Id the first item that should match
+    * @param item2Id the second item that should match
+    * @return the SimilarItem if it exists otherwise None
+    */
   def getByItemItem(item1Id: Int, item2Id: Int) : Option[SimilarItem] = {
     var result:Option[SimilarItem] = None;
 
     db withSession {
-        // define the query and what we want as result
     	val query = for (s <-SimilarItems if s.itemOneId === item1Id && s.itemTwoId === item2Id || s.itemOneId === item2Id && s.itemTwoId === item1Id) yield s.id ~ s.itemOneId ~ s.itemTwoId ~ s.similarity 
 
     	
@@ -125,17 +143,19 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     	  case(id, itemOneId, itemTwoId, similarity) => Option(SimilarItem(Option(id), itemOneId, itemTwoId, similarity))
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
     	result = inter.list match {
     	  case _ :: tail => inter.first
     	  case Nil => None
     	}
     }
 
-    // return the found bid
     result
   }
 
+  /** return all SimilarItems 
+    *
+    * @return a list of SimilarItems
+    */
   def all : List[SimilarItem] = {
     db withSession {
       val q = SimilarItems.map{u => u}.sortBy(_.itemTwoId).sortBy(_.itemOneId)
@@ -144,24 +164,21 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
   }
 
 
-  /**
-   * Create similarItem if it doesnt exist or update if it has a new value
-   * todo check if threashold is good
-   */
+  /** Create a similarItem if it doesnt exist or update if it has a new value
+    *
+    * @param similarItem the similarItem that should be created or updated 
+    * @return the newly created or updated similarItem
+    */
   def createOrUpdate(similarItem: SimilarItem): SimilarItem = {
     val oldSimilarItem: Option[SimilarItem] = getByItemItem(similarItem.itemOneId, similarItem.itemTwoId)
     if(oldSimilarItem == None ) {
       var id: Int = -1;
 
-      // start a db session
       db withSession {
-        // create a new bid
         val res = SimilarItems.noID insert (similarItem.itemOneId.intValue, similarItem.itemTwoId.intValue, similarItem.similarity.floatValue)
-        // get the autogenerated bid
         val idQuery = Query(SimpleFunction.nullary[Int]("LASTVAL"))
         id = idQuery.list().head
       }
-      // create a bid to return
       new SimilarItem(Option(id), similarItem.itemOneId, similarItem.itemTwoId, similarItem.similarity)
     }
     else {
@@ -178,6 +195,13 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     }
   }
 
+
+  /** creates all similar items for one specific item
+    *
+    * this method takes an item id and a list of itemId similarity tuples
+    * @param item1 the item id for that the similarities are created
+    * @param item2Similarity a list of itemId and similarity values
+    */
   def createAll(item1: Int, item2Similarity: collection.mutable.ArrayBuffer[(Int, Double)]) = {
     db withSession {
       item2Similarity.foreach{case(item2, similarity) => {
@@ -187,8 +211,10 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
   }
 
-  /**
-   * Delete a bid
+  /** Delete a SimilarItem
+    *
+    * @param sid the id of the SimilarItem that should be created
+    * @return none if the similarItem does not exist or the SimilarItem otherwise
    */
   def delete(sid: Int) : Option[SimilarItem] = {
     // get the bid we're deleting
@@ -204,10 +230,13 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
     result
   }
 
-  def deleteByItemId(iid: Int) = {
-    // get the bid we're deleting
 
-    // delete the bid
+  /** deletes all similarItem entries that include the itemId
+    *
+    * @param iid the item id that should be removed from this table
+    */
+  def deleteByItemId(iid: Int) = {
+
     db withSession {
       val q = for (t <- SimilarItems if t.itemOneId === iid || t.itemTwoId === iid) yield t 
 
@@ -216,62 +245,28 @@ object SimilarItems extends Table[SimilarItem]("similar_items") with VectorCalcu
 
 
   }
+  
 
+  /** calculates the similarity between an item and all other items that are rated together with this item
+    *
+    * @param itemId the item that the similarities are created for
+    * @param itemMapRatingsVector a triples with the other itemId and one rating vector for both items
+    */
   def calculateSimilarity(itemId: Int, itemMapRatingsVector: collection.mutable.HashMap[Int, (RealVector, RealVector)]) = {
     println("calculate similarity for item: "+itemId)
     var i=1
     val itemSimilarity = collection.mutable.ArrayBuffer[(Int, Double)]()
     itemMapRatingsVector.foreach{case(currentItemId: Int, vectors: (RealVector, RealVector)) => 
       i+=1
-//    if(vectors._1.length < 2) {
-//      //not enough ratings => no statement possible => save similarity of 0 (independence)
-//      SimilarItems.createOrUpdate(
-//        SimilarItem(
-//          None,
-//          itemId,
-//          currentItemId,
-//          0
-//        )
-//      )
-//    }
-//    else {
       if(vectors._1.getDimension() > 2) {
-        //vec1 = new ArrayRealVector(vectors._1)
-        //vec2 = new ArrayRealVector(vectors._2)
-        /*
-        SimilarItems.createOrUpdate(
-          SimilarItem(
-            None, 
-            itemId, 
-            currentItemId, 
-            */
-            //cosinusSimilarity(vectors._1, vectors._2)//calculateItemSimilarityUsers(userIdList, itemId, currentItemId)
             itemSimilarity += ((currentItemId, vectors._1.cosine(vectors._2)))
-          //)
-        //)
       }
     }
     createAll(itemId, itemSimilarity)
   }
-/*
-  //calculate the similarity between two items with the users that rated both items
-  def calculateItemSimilarityUsers(userIdList: List[Int], item1Id: Int, item2Id: Int): Double = {
-    cosinusSimilarity(createRatingVector(item1Id, userIdList), createRatingVector(item2Id, userIdList))
-  }
-
-  def createRatingVector(itemId: Int, userIdList: List[Int]): Vector[Double] = {
-    println("create rating vector")
-    val result = userIdList match{
-      case Nil => Vector[Double]()
-      case head::Nil => Vector[Double](Ratings.byItemIdUserId(itemId, head).get.rating.toDouble)
-      case head::tail => Ratings.byItemIdUserId(itemId, head).get.rating.toDouble +: createRatingVector(itemId, tail)
-    }
-    println("done creating rating vector")
-    result
-  }
-  */
 
 
+  /** deletes all itemSimilarities */
   def deleteAll = {
     db withSession {
       val q = for { 

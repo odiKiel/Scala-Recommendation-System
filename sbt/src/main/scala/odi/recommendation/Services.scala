@@ -1,5 +1,6 @@
 package odi.recommendation
 
+/** the standard ports that are used for the services */
 object Services {
   def apply(service: String): String = {
     service match {

@@ -4,45 +4,52 @@ import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
 
 
-//site has rating.js
-//
-/*
- $(".question-body>p").text()
-<script type='text/javascript'>
-var _rating = _rating || [];
-_rating.push(['user', '{{user.id}}']);
-_rating.push(['item', '{{question.id}}']);
-_rating.push(['button', ['#add-answer-btn', '.post-vote']]);
-_rating.push(['information', '.question-body>p');
-_rating.push(['title', ['h1']);
-</script>
-_rating.push(['tags', []]); // nur bei der zu empfehlenen site
-*/ 
+/** this service calculates the user ratings if a user visits a website */ 
 object RatingService extends HttpServer {
 
   val name = "RatingService"
   val taggerService = TaggerService(Services("taggerService").toInt)
   val tagClient = new HttpClient("localhost:"+Services("taggerService"))
 
+  /** start the service
+    * @param port of the service
+    * @return the port that the service runs on
+    */
   def apply(port: Int): Int = {
     super.apply(port, name)
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct post method
+    * @param path the path that the request is send to
+    * @param value the value of the post body
+    * @return it returns a future http request
+    */
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case "currentItem" => postCurrentItem(path.tail, value)
-      //case "curentItemDetails" => postCurrentItemDetail(path.tail, value)
       case "calculateRating" => postCalculateRating(path.tail, value)
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct get method
+    * @param path the path that the request is send to
+    * @return it returns a future http request
+    */
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
 
+  /** an item that a user currently visits
+    *
+    * create item and user if they do not exist 
+    * @param args the path of the request
+    * @param value a json string with the item id, the user id, title and text of the item
+    */
   def postCurrentItem(args: Array[String], value: String): Future[HttpResponse] = {
     println("args: "+args)
     println("value: "+Json.jsonToList(value))
@@ -70,6 +77,12 @@ object RatingService extends HttpServer {
     }
   }
 
+
+  /** calculate the rating for the time a user spends and the time a user scrolls on a website
+    *
+    * @param args the path of the request
+    * @param value a json string that includes the user id the item id the time a user scrolled and spend on the website
+    */
   def postCalculateRating(args: Array[String], value: String): Future[HttpResponse] = {
     println("value: "+value)
     val list = Json.jsonToList(value)
@@ -103,20 +116,6 @@ object RatingService extends HttpServer {
       prefLabels.foreach(prefLabel => item.addTag(prefLabel))
     }
     Future.value(createHttpResponse("Item created"))
-  }
-
-  /** returns a javascript code that reads the current item details 
-    *
-    * not in use it is cross site scripting and not allowed by browsers
-    */
-  def createItemResponse: Future[HttpResponse] = {
-    //read javascript file return it as HttpResponse
-    val source = scala.io.Source.fromFile("public/js/rating/itemdetails.js")
-    val lines = source.getLines mkString "\n"
-    source.close()
-    println(lines)
-    
-    Future.value(createHttpResponse(lines))
   }
 
 }

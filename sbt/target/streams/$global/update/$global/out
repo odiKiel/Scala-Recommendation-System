@@ -1033,36 +1033,13 @@
 [0m[[0mdebug[0m] [0m	using sbt-chain to resolve postgresql#postgresql;9.1-901-1.jdbc4[0m
 [0m[[0minfo[0m] [0mResolving postgresql#postgresql;9.1-901-1.jdbc4 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: postgresql#postgresql;9.1-901-1.jdbc4 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for postgresql#postgresql;9.1-901-1.jdbc4: tried /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for postgresql#postgresql;9.1-901-1.jdbc4: tried /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/postgresql/postgresql/9.1-901-1.jdbc4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/postgresql/postgresql/9.1-901-1.jdbc4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for postgresql#postgresql;9.1-901-1.jdbc4: res=/Users/oliver_diestel/.ivy2/local/postgresql/postgresql/9.1-901-1.jdbc4/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for postgresql#postgresql;9.1-901-1.jdbc4[0m
-[0m[[0mdebug[0m] [0mpublic: no namespace defined: using system[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for postgresql#postgresql;9.1-901-1.jdbc4: tried /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for postgresql#postgresql;9.1-901-1.jdbc4[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom (9.1-901-1.jdbc4)[0m
-[0m[[0mdebug[0m] [0m	parser = sbt.CustomPomParser@2dee4c69[0m
-[0m[[0mdebug[0m] [0m	no ivy file in cache for postgresql#postgresql;9.1-901-1.jdbc4: tried /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml.original.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp8136646418369101550sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] postgresql#postgresql;9.1-901-1.jdbc4!postgresql.pom(pom.original) (216ms)[0m
-[0m[[0mdebug[0m] [0m	 trying /Users/oliver_diestel/.ivy2/local/postgresql/postgresql/9.1-901-1.jdbc4/jars/postgresql.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/oliver_diestel/.ivy2/local/postgresql/postgresql/9.1-901-1.jdbc4/jars/postgresql.jar[0m
-[0m[[0mdebug[0m] [0m	local: resource not reachable for postgresql#postgresql;9.1-901-1.jdbc4: res=/Users/oliver_diestel/.ivy2/local/postgresql/postgresql/9.1-901-1.jdbc4/jars/postgresql.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar[0m
-[0m[[0mdebug[0m] [0mno source artifact found for postgresql#postgresql;9.1-901-1.jdbc4[0m
-[0m[[0mdebug[0m] [0mno javadoc artifact found for postgresql#postgresql;9.1-901-1.jdbc4[0m
-[0m[[0mdebug[0m] [0m	default-cache: parsed downloaded md file for postgresql#postgresql;9.1-901-1.jdbc4; parsed=postgresql#postgresql;9.1-901-1.jdbc4[0m
+[0m[[0mdebug[0m] [0mNo entry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
+[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for postgresql#postgresql;9.1-901-1.jdbc4 (resolved by public): /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: postgresql#postgresql;9.1-901-1.jdbc4[0m
+[0m[[0mdebug[0m] [0mEntry is found in the ModuleDescriptorCache : /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
+[0m[[0mdebug[0m] [0m	found ivy file in cache for postgresql#postgresql;9.1-901-1.jdbc4 (resolved by public): /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: postgresql#postgresql;9.1-901-1.jdbc4[0m
 [0m[[0mdebug[0m] [0m	checking postgresql#postgresql;9.1-901-1.jdbc4 from public against [none][0m
 [0m[[0mdebug[0m] [0m	module revision kept as first found: postgresql#postgresql;9.1-901-1.jdbc4 from public[0m
 [0m[[0mdebug[0m] [0m	found postgresql#postgresql;9.1-901-1.jdbc4 in public[0m
@@ -4602,16 +4579,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.twitter#finagle-http_2.10;6.2.0!finagle-http_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.slick#slick_2.10;1.0.0!slick_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.github.tototoshi#scala-csv_2.10;0.7.0!scala-csv_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	 trying http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar[0m
-[0m[[0mdebug[0m] [0m		to /Users/oliver_diestel/.ivy2/cache/postgresql/postgresql/jars/postgresql-9.1-901-1.jdbc4.jar.part[0m
-[0m[[0mdebug[0m] [0msha1 file found for http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar: checking...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar.sha1[0m
-[0m[[0mdebug[0m] [0m		to /var/folders/lx/dq25ssls7mbdt671646vd7rc0000gn/T/ivytmp3781812378886520582sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] postgresql#postgresql;9.1-901-1.jdbc4!postgresql.jar (1170ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] postgresql#postgresql;9.1-901-1.jdbc4!postgresql.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.ning#async-http-client;1.7.5!async-http-client.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.specs2#specs2_2.10;1.12.3!specs2_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scalap;2.10.0!scalap.jar[0m
@@ -4645,7 +4613,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-codec#commons-codec;1.5!commons-codec.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.6.4!slf4j-api.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] net.sf.opencsv#opencsv;2.3!opencsv.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 4676ms :: artifacts dl 1361ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 4921ms :: artifacts dl 287ms[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 32[0m
 [0m[[0mdebug[0m] [0mSort dependencies of : org.scala-lang#scala-library;2.10.0 / Number of dependencies = 0[0m
 [0m[[0mdebug[0m] [0mSort done for : org.scala-lang#scala-library;2.10.0[0m
@@ -5402,5 +5370,5 @@
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 docs produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/docs-resolved.xml[0m
 [0m[[0mdebug[0m] [0mNbr of module to sort : 0[0m
 [0m[[0mdebug[0m] [0m	report for recommendation#recommendation_2.10;1.0 pom produced in /Users/oliver_diestel/workspace/diplom/diplom/sbt/target/resolution-cache/reports/recommendation-recommendation_2.10/pom-resolved.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (4676ms resolve - 1361ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (4921ms resolve - 287ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

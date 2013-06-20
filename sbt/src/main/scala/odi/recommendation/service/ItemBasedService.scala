@@ -5,19 +5,36 @@ import com.twitter.util.{Promise, Future}
 import org.apache.commons.math3.linear._
 
 
+/** the item based recommendation service */
 object ItemBasedService extends HttpServer with ListOperation {
   val name = "ItemBasedService"
 
+  /** start the item based service on the port
+    *
+    * @param port the port that the service should wait for requests on
+    * @return the port of the service
+    */
   def apply(port: Int): Int = {
     super.apply(port, name)
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct post method
+    * @param path the path that the request is send to
+    * @param value the value of the post body
+    * @return it returns a future http request
+    */
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case _ => Future.value(createHttpResponse("No such method"))
     }
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct get method
+    * @param path the path that the request is send to
+    * @return it returns a future http request
+    */
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     if(path.size < 1) Future.value(createHttpResponse("Not enough parameter for ItemBasedService"))
     else {
@@ -32,18 +49,20 @@ object ItemBasedService extends HttpServer with ListOperation {
     }
   }
 
-  //for each item that is connectet with a user find all items from the user and calculate the similarity with the original item
-  //should work with a futurepool
-  //todo delete all items on each run?
+  /** calculate the item similarities
+    *
+    * for each item that is connectet with a user find all items from the user and
+    * calculate the similarity with the original item
+    * @param path the path of the request this is not used
+    * @return a future httprequest
+    */
   def getCalculateSimilarItems(path: Array[String]): Future[HttpResponse] = {
     val items: List[Int] = Items.allIds
     SimilarItems.deleteAll
     val time = System.nanoTime
     val purchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together by one or more users
 
-    // log for testing
     for(itemId: Int <- items) {
-      //val itemIdUserIdHash = collection.mutable.HashMap[Int, List[Int]]()
       val itemMapRatingsVector = collection.mutable.HashMap[Int, (RealVector, RealVector)]()
       val localPurchasedTogether = collection.mutable.Set[(Int, Int)]() //all items that where purchased together with the current item use this for easy creation of purchasedTogether
       for((userId: Int, userRating: Double) <- Users.userIdsForItemIdWithRatingNormalized(itemId);
@@ -52,7 +71,6 @@ object ItemBasedService extends HttpServer with ListOperation {
         if(itemId != itemUserId && !(purchasedTogether.contains((itemId, itemUserId)) || purchasedTogether.contains((itemUserId, itemId)))) {
           localPurchasedTogether += ((itemId, itemUserId))
           itemMapRatingsVector += itemUserId -> addToVector(itemMapRatingsVector.get(itemUserId), userRating, itemUserRating)
-          //itemIdUserIdHash += itemUserId -> addToList[Int](itemIdUserIdHash.get(itemUserId), userId)
         }
       }
 
@@ -64,6 +82,12 @@ object ItemBasedService extends HttpServer with ListOperation {
     Future.value(createHttpResponse("done"))
   }
 
+  /** adds a new entry to a vector
+    * @param vectors a tuple of vectors
+    * @param userRating the rating that should be added to the vector
+    * @param itemUserRating the itemId that corresponds with the user Rating
+    * @return the new tuple of vectors
+    */
   def addToVector(vectors: Option[(RealVector, RealVector)], userRating: Double, itemUserRating: Double): (RealVector, RealVector) = {
     if(vectors != None) {
       val vec1 = vectors.get._1.append(userRating)
@@ -75,8 +99,15 @@ object ItemBasedService extends HttpServer with ListOperation {
     }
   }
 
-  //if the path contains an item id predict the rating for user and item if not predict the ratings for all items 
+  /** if the path contains an item id predict the rating for user and item
+    * if not predict the ratings for all items 
+    *
+    * @param userId the user id that the prediction is for
+    * @param path the path of the requests if it includes an item id use it for prediction
+    *        otherwise create predictions for all users
+    */
   def getCalculateUserPrediction(userId: Int, path: Array[String]): Future[HttpResponse] = {
+    //calculate prediction for one item?
     if(path.size > 0) {
       val itemId = path.head.toInt
       val ratingsSimilarities = Ratings.byUserIdItemIdWithSimilarItem(userId, itemId)
@@ -91,6 +122,7 @@ object ItemBasedService extends HttpServer with ListOperation {
       Future.value(createHttpResponse(""+result))
     }
 
+    //calculate predictions for all items
     else {
       val time = System.nanoTime
 
@@ -106,13 +138,10 @@ object ItemBasedService extends HttpServer with ListOperation {
 
         }
       }
-      println("done building similarity list")
-      println("similarItems to calculate: "+similarItems.size)
 
       var i = 0
       val recommendations = similarItems.flatMap({case (itemId: Int, similarItemList: List[(Int, Double, Int)]) => {
           i += 1
-          println("calculating item nr: "+i)
           Map(itemId.toString -> calculatePrediction(userId, similarItemList).toString)
         }  
       })
@@ -122,8 +151,11 @@ object ItemBasedService extends HttpServer with ListOperation {
     }
   }
 
-  //calculate the prediction for one item from one User by the items that he already rated
-  //integrate the average rating
+  /** calculate the prediction for one item from one User by the items that he already rated
+    *
+    * @param userId the user that the prediction is for
+    * @param similarItems the items that that the user rated together with the items that he did not rated
+    */
   def calculatePrediction(userId: Int, similarItems: List[(Int, Double, Int)]): Double = {
     similarItems.length match {
       case 0 => 0

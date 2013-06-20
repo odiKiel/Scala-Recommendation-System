@@ -5,17 +5,29 @@ import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
 import org.apache.commons.math3.linear._
 
+/** this service uses singular value decomposition for generating recommendations */
 object SVDBasedService extends HttpServer with ListOperation {
+
 
   TaggerService(Services("taggerService").toInt)
   val tagClient = new HttpClient("localhost:"+Services("taggerService"))
 
   val name = "SVDBasedService"
 
+  /** start the service
+    * @param port of the service
+    * @return the port that the service runs on
+    */
   def apply(port: Int): Int = {
     super.apply(port, name)
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct post method
+    * @param path the path that the request is send to
+    * @param value the value of the post body
+    * @return it returns a future http request
+    */
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case "generateRecommendations" => postGenerateRecommendations(path.tail, value)
@@ -23,6 +35,11 @@ object SVDBasedService extends HttpServer with ListOperation {
     }
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct get method
+    * @param path the path that the request is send to
+    * @return it returns a future http request
+    */
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     if(path.size < 1) Future.value(createHttpResponse("Not enough parameter for ItemBasedService"))
     else {
@@ -51,6 +68,9 @@ object SVDBasedService extends HttpServer with ListOperation {
     }
   }
 
+  /*
+   calculate similar users and save them in SimilarUsers
+   */
   def calculateSimilarUsers: RealMatrix = {
     SimilarUsers.deleteAll
     Users.calculateAverageRating
@@ -185,6 +205,10 @@ object SVDBasedService extends HttpServer with ListOperation {
     }
   }
 
+  /** calculate predictions for a user and the topItems 
+    * @param userAId the user for whom the predictions are calculated
+    * @param topItems a list of userId, rating, similarity that correspond with UserA
+    */
   def calculatePrediction(userAId: Int, topItems: List[(Int, Int, Double)]): Double = {
     if(topItems.length > 1){
       val averageRatingA = Users.get(userAId).get.averageRating
@@ -197,10 +221,11 @@ object SVDBasedService extends HttpServer with ListOperation {
     }
     else 0
   }
-  /*
 
-   Array[Array[Int]](Array[Int](1, 2, 3, 4, 5), Array[Int](2, 3, 4, 5, 5), Array[Int](5, 4, 3, 2, 1), Array[Int](5, 5, 4, 3, 2), Array[Int](3, 3, 3, 3, 3))
-   */
+
+  /** create the user item matrix
+    * @return the user item matrix
+    */
   def createUserItemMatrix: Array[Array[Double]] = {
     //each item each user search for rating if not enter 0 tons of db queries
     val allUsers = Users.all
@@ -216,31 +241,15 @@ object SVDBasedService extends HttpServer with ListOperation {
       matrix(i) ++= allItemsForUser
     }
 
-    /*
-     //not efficient enough
-    for(item <- allItems;
-        (user, i) <- Users.all.zipWithIndex)
-    {  
-      val rating = Ratings.byItemIdUserId(item.id.get, user.id.get)
-      if(rating != None) {
-        matrix(i) += rating.get.rating.toDouble
-      }
-      else {
-        matrix(i) += 0.0
-      }
-    }
-    */
     matrix.map(_.toArray)
   }
 
+  /** create the 2d approximation of the u matrix 
+    * @param the svd
+    * @return the 2d approximation of the u matrix
+    */
   def u2d(svd: SingularValueDecomposition): RealMatrix = {
     val u = svd.getU()
-//  println("u:")
-//  println(u)
-//  println("sigma:")
-//  println(svd.getS())
-//  println("VT:")
-//  println(svd.getVT())
     val uColumnSize = u.getColumn(0).length
     
     u.getSubMatrix(0, uColumnSize-1, 0, 1)

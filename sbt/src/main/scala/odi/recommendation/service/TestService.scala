@@ -13,11 +13,23 @@ import java.nio.charset.Charset
 
 import com.twitter.finagle.Service
 
+/** this is a minimalistic service for testing the network communication */
 object TestService extends HttpServer {
 
+  /** start the service
+    * @param port of the service
+    * @return the port that the service runs on
+    */
   def apply(port: Int): Int = {
     super.apply(port, "testServer")
   }
+
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct post method
+    * @param path the path that the request is send to
+    * @param value the value of the post body
+    * @return it returns a future http request
+    */
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     Future.value(
       path.head match {
@@ -26,6 +38,11 @@ object TestService extends HttpServer {
     )
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct get method
+    * @param path the path that the request is send to
+    * @return it returns a future http request
+    */
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     Future.value(
       path.head match {

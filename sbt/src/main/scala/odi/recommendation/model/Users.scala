@@ -6,16 +6,25 @@ import scala.slick.driver.BasicInvokerComponent
 import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonDSL._
-// Definition of the USERS table
+
+
+/** Definition of the USERS table
+  *
+  * @param id the id of the user entry
+  * @param the name of the user (optional)
+  * @param averageRating the average rating of the user
+  * @param qUserId the user id of the question and answer system
+  */
 case class User(id: Option[Int] = None, name: String, averageRating: Double, qUserId: Int) extends ToJson with ModelTrait{
 
+  /** returns a json interpretation of this user */
   def toJson = {
     val json = ("id"->id.get)~("name"->name)~("qUserId"->qUserId)
     compact(render(json))
   }
 
+  /** calculates the average rating for this user */
   def calculateAverageRating = {
-    println("calculate average rating for User"+id.get)
     val ratings = Ratings.byUserId(id.get)
     val averageRating = if(ratings.length == 0) {
       3.0 //if no ratings for this user use the scale middle
@@ -31,35 +40,39 @@ case class User(id: Option[Int] = None, name: String, averageRating: Double, qUs
   }
 
 }
+
+  /** this object represents the user table of the database */
 object Users extends Table[User]("users") with ModelTrait{
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
   def averageRating = column[Double]("average_rating")
   def qUserId = column[Int]("q_user_id")
-  // Every table needs a * projection with the same type as the table's type parameter
   def * = id.? ~ name ~ averageRating ~ qUserId <> (User, User.unapply _)
   def noID = name ~ averageRating ~ qUserId
 
 
+  /** create a new user table in the database */
   def createTable = {
     db.withSession {
       Users.ddl.create
     } 
   }
 
+  /** return the user for the id
+    *
+    * @param uid the id of the user that should be returned
+    * @return the user if it exists otherwise none
+    */
   def get(uid: Int) : Option[User] = {
     var result:Option[User] = None;
 
     db withSession {
-        // define the query and what we want as result
     	val query = for (u <-Users if u.id === uid) yield u.id ~ u.name ~ u.averageRating ~ u.qUserId
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id, name, averageRating, qUserId) => Option(User(Option(id), name, averageRating, qUserId))
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
     	result = inter.list match {
     	  case _ :: tail => inter.first
     	  case Nil => None
@@ -68,19 +81,22 @@ object Users extends Table[User]("users") with ModelTrait{
     }
   }
 
+
+  /** return the user by its corresponding question and answer user id
+    *
+    * @param qUserId the user id of the question and answer system
+    * @return the user if it exists otherwise none
+    */
   def byQUserId(qUserId: Int) : Option[User] = {
     var result:Option[User] = None;
 
     db withSession {
-        // define the query and what we want as result
     	val query = for (u <-Users if u.qUserId === qUserId) yield u.id ~ u.name ~ u.averageRating ~ u.qUserId
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id, name, averageRating, qUserId) => Option(User(Option(id), name, averageRating, qUserId))
     	}
 
-    	// check if there is one in the list and return it, or None otherwise
     	result = inter.list match {
     	  case _ :: tail => inter.first
     	  case Nil => None
@@ -90,14 +106,16 @@ object Users extends Table[User]("users") with ModelTrait{
   }
 
 
-
+  /** return all users that rated a specific item
+    *
+    * @param itemId the id of the item
+    * @return a list of user ids
+    */
   def userIdsForItemId(itemId: Int) : List[Int] = {
     db withSession {
-        // define the query and what we want as result
     	val query = for (r <-Ratings if r.itemId === itemId;
                        u <- Users if u.id === r.userId) yield u.id 
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id) => id
     	}
@@ -106,13 +124,16 @@ object Users extends Table[User]("users") with ModelTrait{
     }
   }
 
+  /** returns a list of users that rated an item together with tha rating
+    *
+    * @param itemId the id of the item
+    * @return a list of userid, rating tuples
+    */
   def userIdsForItemIdWithRating(itemId: Int) : List[(Int, Int)] = {
     db withSession {
-        // define the query and what we want as result
     	val query = for (r <-Ratings if r.itemId === itemId;
                        u <- Users if u.id === r.userId) yield u.id ~ r.rating 
 
-    	// map the results to a Bid object
     	val inter = query mapResult {
     	  case(id, rating) => (id, rating)
     	}
@@ -121,9 +142,13 @@ object Users extends Table[User]("users") with ModelTrait{
     }
   }
 
+  /** returns a list of user, rating tupels for an item the rating is normalized by the average rating of that user
+    *
+    * @param itemId the id of the item
+    * @return a list of user id normalized rating tuple
+    */
   def userIdsForItemIdWithRatingNormalized(itemId: Int): List[(Int, Double)] = {
     db withSession {
-        // define the query and what we want as result
     	val query = for (r <-Ratings if r.itemId === itemId;
                        u <- Users if u.id === r.userId) yield u.id ~ r.rating ~ u.averageRating
 
@@ -135,30 +160,25 @@ object Users extends Table[User]("users") with ModelTrait{
     }
   }
 
-  /**
-   * Create a bid using scala query. This will always create a new bid
-   */
+  /** Create a new User */
   def create(user: User): User = {
     var id: Int = -1;
 
     println(user.name+" "+user.averageRating+" "+user.qUserId)
 
-    // start a db session
     db withSession {
-      // create a new bid
       val res = Users.noID insert (user.name, 0.0, user.qUserId)
-      // get the autogenerated bid
       val idQuery = Query(SimpleFunction.nullary[Int]("LASTVAL"))
       id = idQuery.list().head
     }
-    // create a bid to return
     new User(Option(id), user.name, 0.0, user.qUserId)
   }
 
 
-  /**
-   * Delete a bid
-   */
+  /** Delete a user
+    *
+    * @param uid the id of the user that should be deleted
+    */
   def delete(uid: Int) = {
     Ratings.deleteByUserId(uid)
     SimilarUsers.deleteByUserId(uid)
@@ -170,6 +190,10 @@ object Users extends Table[User]("users") with ModelTrait{
 
   }
 
+  /** return the first user of the database
+    *
+    * return user if it exists otherwise none
+    */
   def first : Option[User] = {
     db withSession {
       val q = Users.map{ u => u}.sortBy(_.id).take(1)
@@ -179,6 +203,10 @@ object Users extends Table[User]("users") with ModelTrait{
 
 
 
+  /** return all users of the database
+    *
+    * @result a list of all users
+    */
   def all : List[User] = {
     db withSession {
       val q = Users.map({u => u}).sortBy(_.id)
@@ -187,6 +215,7 @@ object Users extends Table[User]("users") with ModelTrait{
   }
 
 
+  /** delete all users of the database */
   def deleteAll = {
     db withSession {
       val q = for { 
@@ -197,6 +226,7 @@ object Users extends Table[User]("users") with ModelTrait{
     }
   }
 
+  /** calculate the average rating of all users */
   def calculateAverageRating = {
     val time = System.nanoTime
     Users.all.foreach((user: User) => user.calculateAverageRating)

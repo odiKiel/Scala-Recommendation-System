@@ -11,6 +11,7 @@ import org.jboss.netty.buffer.ChannelBuffers
 import org.jboss.netty.buffer.ChannelBuffer
 import java.nio.charset.Charset
 
+/** the http client that is used for communicating with the services */
 class HttpClient(hosts: String) {
   val client: Service[HttpRequest, HttpResponse] = ClientBuilder()
      .codec(Http())
@@ -23,6 +24,12 @@ class HttpClient(hosts: String) {
      .build()
      
 
+  /** post a request to a service 
+    * 
+    * @param path the path of the method of the service
+    * @param params the params that should be provided
+    * @return a future promise
+    */
   def post(path: String, params: String): Promise[String] = {
     var httpReq = new DefaultHttpRequest(HttpVersion.HTTP_1_1,HttpMethod.POST,path)
     val cb = ChannelBuffers.copiedBuffer(params,Charset.defaultCharset())
@@ -41,6 +48,11 @@ class HttpClient(hosts: String) {
 
   }
 
+  /** send a get request to a service
+    *
+    * @param path the path for the method of the service
+    * @return a future promise 
+    */
   def get(path: String): Promise[String] = {
     val req = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, path)
     req.setHeader(HttpHeaders.Names.HOST, hosts)

@@ -20,6 +20,10 @@ import scala.reflect._ //beanproperty
 trait HttpServer {
 
 
+  /** returns a finagle service for the server 
+    *
+    * this service defines the http request and http respond and forwards the request to the router
+    */
   def getService(): Service[HttpRequest, HttpResponse] = {
     new Service[HttpRequest, HttpResponse] {
       def apply(request: HttpRequest): Future[HttpResponse] = {
@@ -39,7 +43,7 @@ trait HttpServer {
   }
 
 
-  var cookies = Set[Cookie]()
+  var cookies = Set[Cookie]() // the cookie of the request if it exists
   var portServer = 0
   var running = false
   @BeanProperty // generates getServer() setServer() methods
@@ -49,6 +53,11 @@ trait HttpServer {
     server.close()
   }
 
+  /** start the service
+    *
+    * @param port the port on which the service should wait for a request
+    * @param name the name of the service
+    */
   def apply(port: Int, name: String): Int = {
     if(running) {
       return portServer
@@ -65,8 +74,12 @@ trait HttpServer {
     server = current_server
     port
   }
-  //val hosts = Map("updateService" -> "localhost:11000", "requestService" -> "localhost:12000")
-  //use put like post
+
+
+  /** the routing method this method decomposes the request
+    * additionally it sends the name of the requested method to a post or get method forwarder
+    * these forwarder must be implemented by the service
+    */
   def routing(request: HttpRequest): Future[HttpResponse] = {
     //println("new request: "+request)
     val path = request.getUri().substring(1).split("/") // remove leading / and split
@@ -77,6 +90,11 @@ trait HttpServer {
 
   }
 
+  /** creates a http response for a sting
+    *
+    * @param value the string that should be included in the response
+    * @return the http response 
+    */
   def createHttpResponse(value: String): HttpResponse = {
     val response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
     val cb = ChannelBuffers.copiedBuffer(value,Charset.defaultCharset())
@@ -85,22 +103,15 @@ trait HttpServer {
     response
   }
 
+  /** creates an error http response that expresses that the method does not exist */
   def createErrorHttpResponse: HttpResponse = {
     new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
   }
 
 
+  /** method definitions that must be implemented by the service */
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] 
   def callGetMethod(path: Array[String]): Future[HttpResponse] 
-/*
-  def getService(host: String): Service[HttpRequest, HttpResponse] = {
-    ClientBuilder()
-      .codec(Http())
-      .hosts(host)
-      .hostConnectionLimit(1)
-      .build()
-  }
-  */
 }
 
 

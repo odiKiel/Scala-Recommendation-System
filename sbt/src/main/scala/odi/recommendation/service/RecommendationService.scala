@@ -4,6 +4,7 @@ import org.jboss.netty.handler.codec.http.{HttpResponse}
 import com.twitter.finagle.builder.Server
 import com.twitter.util.{Promise, Future}
 
+/** this service controls the item based and svd based recommendation service **/
 object RecommendationService extends HttpServer {
   val name = "RecommendationService"
   SVDBasedService(Services("svdBasedService").toInt)
@@ -11,10 +12,21 @@ object RecommendationService extends HttpServer {
   ItemBasedService(Services("itemBasedService").toInt)
   val itemClient = new HttpClient("localhost:"+Services("itemBasedService"))
 
+
+  /** start the service
+    * @param port of the service
+    * @return the port that the service runs on
+    */
   def apply(port: Int): Int = {
     super.apply(port, name)
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct post method
+    * @param path the path that the request is send to
+    * @param value the value of the post body
+    * @return it returns a future http request
+    */
   def callPostMethod(path: Array[String], value: String): Future[HttpResponse] = {
     path.head match {
       case "generateRecommendations" => postGenerateRecommendations(path.tail, value)
@@ -22,6 +34,11 @@ object RecommendationService extends HttpServer {
     }
   }
 
+  /** this method is called by the HttpServer router 
+    * and forwards the request to the correct get method
+    * @param path the path that the request is send to
+    * @return it returns a future http request
+    */
   def callGetMethod(path: Array[String]): Future[HttpResponse] = {
     path.head match {
       case "calculateSimilarities" => getCalculateSimilarities(path.tail)
@@ -31,11 +48,10 @@ object RecommendationService extends HttpServer {
     }
   }
 
-  /*
-   run this query every 24h
-   calculate similar users and similar items save them in SimilarUsers and SimilarItems
-   calculate average rating
-   */
+  /** run this query every 24h
+    * calculate similar users and similar items save them in SimilarUsers and SimilarItems
+    * calculate average rating
+    */
   def getCalculateSimilarities(path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
     Users.calculateAverageRating
@@ -49,9 +65,7 @@ object RecommendationService extends HttpServer {
     ret
   }
 
-  /*
-   take all similar users, get their best rated items that are unknown to the user, sort them by rating
-   */
+  /* take all similar users, get their best rated items that are unknown to the user, sort them by rating */
   def getCalculateUserPrediction(userId: Int, path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
     svdClient.get("/calculateUserPrediction/"+userId) onSuccess { v =>
@@ -60,6 +74,7 @@ object RecommendationService extends HttpServer {
     ret
   }
 
+  /** calculate a user prediction with the item based recommendation system */
   def getCalculateUserPredictionItemBased(userId: Int, path: Array[String]): Future[HttpResponse] = {
     val ret = new Promise[HttpResponse]
     itemClient.get("/calculateUserPrediction/"+userId) onSuccess { v =>
@@ -68,6 +83,7 @@ object RecommendationService extends HttpServer {
     ret
   }
 
+  /** generate recommendations for a user with the svd recommendation system */
   def postGenerateRecommendations(args: Array[String], value: String): Future[HttpResponse] = {
     if(args.length > 1) {
       val ret = new Promise[HttpResponse]

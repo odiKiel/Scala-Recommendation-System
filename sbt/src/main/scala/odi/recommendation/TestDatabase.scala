@@ -1,6 +1,7 @@
 package odi.recommendation
 
 object TestDatabase {
+  /** create test databes entries */
   def setup = {
     Ratings.deleteAll
     SimilarItems.deleteAll
@@ -63,11 +64,15 @@ object TestDatabase {
 
   }
 
+  /** create all tables */
   def initialSetup = {
     Users.createTable
     Items.createTable
+    Tags.createTable
+    ItemTags.createTable
     Ratings.createTable
     SimilarItems.createTable
     SimilarUsers.createTable
+
   }
 }

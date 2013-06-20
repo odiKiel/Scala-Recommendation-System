@@ -324,7 +324,12 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
 
   }
 
-  /** returns a list of similar users that the user has rated together with the similarity 
+  /** returns a list of similar users that rated the item 
+    *
+    * @param userId the id of the user for whom the returning users are similar
+    * @param itemId the item id that correspond with the rating
+    * @result a list of a quadrupel which contains the user id of the similar user, 
+    *         the rating, the similarity to the userId and the average rating of the similar user
     */
   def byUserIdItemIdWithSimilarUserAverageRating(userId: Int, itemId: Int) : List[(Int, Int, Double, Double)] = {
 
@@ -337,24 +342,12 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
   }
 
 
-  //return for a user all similar users that rated a specific item with the averageRating
-  /*
-  def byUserIdItemIdWithSimilarUserAverageRating(userId: Int, itemId: Int): List[(Int, Int, Double, Double)] = {
-    db withSession {
-
-      val query = for {
-        r <- Ratings if r.itemId === itemId
-        s <- SimilarUsers if((r.userId === s.userOneId && s.userTwoId === userId) || (r.userId === s.userTwoId && s.userOneId === userId))
-        u <- Users if r.userId === u.id
-      } yield (u.id, r.rating, s.similarity, u.averageRating)
-      
-      query.sortBy(_._3.desc).take(25).list
-    }
-
-  }
-  */
-
-  //returns all user ratings for an item id if the user has not rated the item it returns null 
+  /** returns all user ratings for an item id if the user has not rated the item it returns null 
+    *
+    * this method is used for generating the rating vectors for an item
+    * @param itemId for the item that gets all user ratings
+    * @return a list of triples with the userId, the itemId and the rating if it exists
+    */
   def allUserRatingsForItemId(itemId: Int): List[(Int, Int, Option[Int])] = {
     db withSession{
       val query = for {
@@ -365,7 +358,12 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
     }
   }
 
-  //returns all item ratings for an user id if the user has not rated the item it returns null 
+  /** returns all item ratings for an user id if the user has not rated the item it returns null 
+    *
+    * this method creates a user rating vector
+    * @param userId the user that is used for creating the rating vector
+    * @return a list of quadruples with the userId, rating, and the average rating for that item
+    */
   def allItemRatingsForUserId(userId: Int): List[(Int, Int, Option[Int], Double)] = {
     db withSession{
       val query = for {
@@ -379,6 +377,12 @@ object Ratings extends Table[Rating]("ratings") with ModelTrait {
   /** calculate Rating 
     * 
     * with the time a user spends on the page and the time a user scrolls the page
+    * 
+    * @param item the item that is rated
+    * @param the userId of the user that rated this item
+    * @param timeSpend the time the user spend on the page
+    * @param timeScroll the time the user scrolled on the page
+    * @param userInteraction a boolean that indicates if the user did a specail action on the site
     */
   def calculateRatingByTimes(item: Item, userId: Int, timeSpend: Double, timeScroll: Double, userInteraction: Boolean) = {
     if(userInteraction) { //if userinteraction this user is highly interested

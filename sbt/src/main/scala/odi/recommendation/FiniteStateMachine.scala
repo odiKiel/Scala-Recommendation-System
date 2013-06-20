@@ -3,8 +3,8 @@ import scala.collection.mutable.HashMap
 import scala.collection.mutable.Stack
 
 
+/** this class represents a finite state machine also known as non deterministic automata */
 class FiniteStateMachine {
-  //(startState_: (Int, Int))
   type State = (Int, Int)
   val firstState = (0,0)
 
@@ -12,8 +12,13 @@ class FiniteStateMachine {
   val finalStates = collection.mutable.Set[(Int, Int)]()
   var degree = 0
 
-  //val startState: (Int, Int) = startState_
   
+  /** add a transition to the automata
+    *
+    * @param src the source of the transition
+    * @param input the input character that is used as the label
+    * @param dst the destination of the transition
+    */
   def addTransition(src: State, input: Char, dst: State) = {
     if(transition.contains(src)){
       if(transition(src).contains(input)){
@@ -28,20 +33,37 @@ class FiniteStateMachine {
     }
   }
 
+  /** return the possible input charachters for a state */
   def getInputs(states: Seq[State]): Set[Char] = {
     states.flatMap(state => transition.get(state).getOrElse(HashMap()).keys).toSet
 
   }
 
+  /** mark a state as a final state
+    *
+    * @param state the state that should be marked as final
+    */
   def addFinalState(state: State) = {
     finalStates += state
   }
 
    
+  /** return the next states that can be reached from the current state with the input character
+    *
+    * @param src the state that is requested
+    * @param input the character that the transitions should correspond with
+    * @return a set of states that can be reached
+    */
   def nextState(src: State, input: Char): collection.mutable.Set[State] = {
     expand(collection.mutable.Set(src)).flatMap((state: State) => nextStateExpanded(state, input))
   }
 
+  /** return the next states for an input character as well as all states that can be reached after an
+    * epsilon transition is used with the character
+    * @param src the state that is tested
+    * @param input the character that is tested
+    * @return a set of states that can be reached
+    */
   def nextStateExpanded(src: State, input: Char): collection.mutable.Set[State] = {
     if(transition.contains(src)) {
       val ret = transition(src).get(input).getOrElse(collection.mutable.Set[State]())
@@ -54,11 +76,12 @@ class FiniteStateMachine {
 
   }
 
+  /** check if a state is a final state */
   def isFinal(state: State): Boolean = {
     finalStates(state)
   }
 
-  //get all states that are available thru an epsilon (insertion)
+  //get all states that are available through an epsilon transition (insertion)
   def expand(states: collection.mutable.Set[State]) = {
     val current_states = collection.mutable.Stack[State]() ++ states
     while(current_states.size > 0) {
@@ -113,6 +136,11 @@ class FiniteStateMachine {
   }
 
   //words will be lowercased
+  /** create a non deterministic levenshtein automata for a word and a maximum distance
+    *
+    * @param term the word that is used for creating the levenshtein automata
+    * @param k the maximum allowed levenshtein distance
+    */
   def levenshteinFiniteStateMachine(term: String, k: Int): FiniteStateMachine = {
     val fsm = this
     degree = k
