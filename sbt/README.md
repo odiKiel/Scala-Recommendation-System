@@ -31,8 +31,4 @@ The following lines should be added to the javascript container:
         _rating['button'] = ["#add-answer-btn", ".post-vote"];
         _rating['information'] = ".question-body>p";
         _rating['title'] = "h1";
-
-<script src="localhost:10000/file/js/rating/rating.js"></script>       
-
-
-For more questions please contact odi@informatik.uni-kiel.de.
+       <script src="localhost:10000/file/js/rating/rating.js"></script>       
